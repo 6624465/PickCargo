@@ -5205,3 +5205,45 @@ table.text-center, table.text-center td, table.text-center th {
             white-space: normal !important;
         }
 }
+
+.map-container > div.col-md-3{
+    padding-right:0px;
+}
+.listofvhl {
+margin:0px;
+padding:10px 0px 10px 15px;
+}
+    .listofvhl li {
+    list-style:none;
+    position:relative;
+    border-bottom:1px solid #ddd;
+    margin-bottom:10px;
+      padding-bottom:10px;
+      text-transform:uppercase;
+    }
+.active-dr i{
+    font-size:11px;
+}
+.active-dr {
+position:absolute;
+top:0px;
+right:0px;
+}
+.name-dr {
+
+padding-left:4px;}
+.dr-list {
+    height: 350px;
+    overflow-y:auto;
+    padding-right:15px;
+}
+.map-container .col-md-9 {
+padding-left:0px
+}
+.search-map {
+    padding: 15px;
+      border-bottom:1px solid #ddd;
+}
+.search-map input{
+width:100%;
+}

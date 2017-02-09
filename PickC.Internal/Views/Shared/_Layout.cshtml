@@ -14,7 +14,7 @@
     <script src="@Url.Content("~/Scripts/jquery-2.2.3.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datepicker.js")"></script>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
-    
+
     <style type="text/css">
         input[type=text].error, input[type=password].error, textarea.error, select.error {
             border: 1px solid red;
@@ -24,16 +24,17 @@
             display: none !important;
         }
 
-        .hand{
-            cursor:pointer;
+        .hand {
+            cursor: pointer;
         }
+
         .bootstrap-datetimepicker-widget {
-            border-color:#d2d6de;
+            border-color: #d2d6de;
         }
     </style>
     @RenderSection("seccss", false)
 </head>
-<body class="skin-blue sidebar-mini wysihtml5-supported">    
+<body class="skin-blue sidebar-mini wysihtml5-supported">
     <div class="wrapper">
         @{ Html.RenderPartial("_Header"); }
         @{ Html.RenderPartial("_Sidebar"); }
@@ -41,14 +42,14 @@
             @RenderBody()
         </div>
         @{ Html.RenderPartial("_Footer"); }
-        </div>
-    
+    </div>
+
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.slimscroll.min.js")"></script>
     <script src="@Url.Content("~/Scripts/fastclick.js")"></script>
     <script src="@Url.Content("~/Scripts/app.min.js")"></script>
     <script src="@Url.Content("~/Scripts/demo.js")"></script>
-    
+
     <script type="text/javascript">
         var UrlAddress = '@Url.Content("~/Address")';
     </script>

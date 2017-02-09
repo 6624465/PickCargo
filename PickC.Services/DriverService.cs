@@ -88,18 +88,5 @@ namespace PickC.Services
 
         }
 
-
-        //public async Task<DriverDTO> GetDriversList()
-        //{
-        //    IRestClient client = new RestClient(ApiBaseUrl);
-        //    var request = p_request;
-        //    request.Method = Method.GET;
-        //    request.Resource = "master/driver/getdriverlist";
-
-        //    return await Task.Run(() => {
-        //        return ServiceResponse.
-        //    }
-        //    );
-        //}
     }
 }

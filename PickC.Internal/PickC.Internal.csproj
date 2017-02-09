@@ -214,6 +214,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\gooleicon.jpg" />
+    <Content Include="images\icon.png" />
     <Content Include="images\truck.png" />
     <Content Include="images\user2-160x160.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
