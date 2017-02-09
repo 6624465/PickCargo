@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using Master.Contract;
 using PickC.Services;
-
+//
 namespace PickC.Internal.Areas.Internal.Controllers
 {
     [WebAuthFilter]
