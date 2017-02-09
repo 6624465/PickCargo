@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Account Summary</title>
+    <link href="@Url.Content("~/Css/font-awesome-4.6.2/css/font-awesome.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Css/AdminLTE.min.css")" rel="stylesheet" />
+    <style type="text/css">
+        .marginTop{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="container">
+    <div class="row marginTop">
+        <div class="col-md-12">
+            <div class="box box-default box-solid">
+                <div class="box-header with-border text-center">
+                    <h3 class="box-title">CURRENT BALANCE</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <h4 class="box-title">Current Balance</h4>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default box-solid">
+                <div class="box-header with-border text-center">
+                    <h3 class="box-title">DAILY SUMMARY</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row text-center">
+                        <div class="col-md-6 col-xs-6">
+                            <h3 class="box-title">Today's Summary</h3>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <h3 class="box-title">Bookings</h3>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-12">   
+                            @Html.ActionLink("SHOW BREAKUP", "Breakup", new { area = "DriverWeb" })<br/>
+                            <a href="#">DAY-WISE BREAKUP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default box-solid">
+                <div class="box-header with-border text-center">
+                    <h3 class="box-title">PAYMENT SUMMARY(NEFT)</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row text-center">
+                        <div class="col-md-6 col-xs-6">
+                            <h4 class="box-title">Today's Payment</h4>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <h4 class="box-title">Last Payment</h4>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;2402.00</h3>
+                            <div class="row text-center">
+                                <div class="col-md-12">
+                                    <a href="#">SHOW BREAKUP</a>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12 col-xs-12">
+            <a href="#">PAYMENT HISTORY</a>   
+        </div>
+    </div>
+</body>
+</html>
