@@ -46,7 +46,8 @@ namespace PickCApi.Areas.Master.Controllers
                 driver.CreatedOn = DateTime.Now;
                 driver.ModifiedOn = DateTime.Now;
 
-                driver.AddressList.ForEach(x => {
+                driver.AddressList.ForEach(x =>
+                {
                     x.AddressLinkID = driver.DriverID;
                     x.AddressType = "DRIVER";
                     x.CreatedBy = UTILITY.DEFAULTUSER;
@@ -87,6 +88,27 @@ namespace PickCApi.Areas.Master.Controllers
         }
 
         [HttpGet]
+        [Route("driverbyname/{drivername}")]
+
+        public IHttpActionResult GetDriverByName(string drivername)
+        {
+            try
+            {
+                var result = new DriverBO().GetDriverByName(new Driver { DriverName = drivername });
+                if (result != null)
+                    return Ok(result);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+
+
+        [HttpGet]
         [Route("{driverID}")]
         public IHttpActionResult DriverInfo(string driverID)
         {
@@ -104,6 +126,7 @@ namespace PickCApi.Areas.Master.Controllers
             }
         }
 
+
         [HttpGet]
         [Route("lookupdata")]
         public IHttpActionResult LookUpData()
@@ -115,7 +138,8 @@ namespace PickCApi.Areas.Master.Controllers
                 var genderOptions = lookupList.Where(x => x.LookupCategory == "Gender").ToList();
                 var maritalOptions = lookupList.Where(x => x.LookupCategory == "MaritalStatus").ToList();
 
-                return Ok(new {
+                return Ok(new
+                {
                     genderOptions = genderOptions,
                     maritalOptions = maritalOptions
                 });
@@ -124,7 +148,7 @@ namespace PickCApi.Areas.Master.Controllers
             {
                 return InternalServerError(ex);
             }
-        }        
+        }
 
         [HttpPost]
         [Route("deviceid")]

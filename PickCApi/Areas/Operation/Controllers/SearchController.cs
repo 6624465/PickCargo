@@ -34,5 +34,21 @@ namespace PickCApi.Areas.Operation.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [HttpPost]
+        [Route("bookingbydate")]
+        public IHttpActionResult BookingByDate(DateTime fromDate,DateTime toDate)
+        {
+            try
+            {
+                var bookingresult = new SearchBO().BookingByDate(fromDate, toDate);
+                return Ok(bookingresult);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
     }
 }

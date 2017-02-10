@@ -26,7 +26,8 @@ namespace Operation.DataFactory
 
         }
 
-        public List<Booking> SearchBookings(string bookingNo, DateTime? bookingDate, int vehicleGroup, int vehicleType,string customerName,string vehicleNumber)
+        public List<Booking> SearchBookings(string bookingNo,
+            DateTime? bookingDate, int vehicleGroup, int vehicleType,string customerName,string vehicleNumber)
         {
 
 
@@ -36,6 +37,9 @@ namespace Operation.DataFactory
                                             bookingNo, bookingDate, vehicleGroup, vehicleType, customerName, vehicleNumber).ToList();
         }
 
+        public List<Booking> BookingsByDate(DateTime fromdate,DateTime todate) {
+            return db.ExecuteSprocAccessor("", MapBuilder<Booking>.BuildAllProperties(), fromdate, todate).ToList();
+        }
 
 
     }

@@ -88,5 +88,19 @@ namespace PickC.Services
 
         }
 
+
+        public async Task<List<Driver>> GetDriverByName(string drivername) {
+
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.GET;
+            request.Resource = "master/driver/driverbyname/{drivername}";
+            request.AddParameter("drivername", drivername, ParameterType.UrlSegment);
+
+            return await Task.Run(() =>
+            {
+                return ServiceResponse<List<Driver>>(client.Execute<List<Driver>>(request));
+            });
+        }
     }
 }

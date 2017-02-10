@@ -1,0 +1,96 @@
+﻿@model PickC.Internal.ViewModals.BookingSearchVM
+
+@using PickC.Internal.HtmlHelpers
+@{
+    Layout = "~/Areas/Internal/Views/Shared/_Layout.cshtml";
+    WebGrid grid =
+        new WebGrid(Model.booking, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "grid");
+}
+
+<section class="content">
+    @using (Html.BeginForm("CurrentBookings", "Dashboard", FormMethod.Post))
+    {
+        <div class="row">
+            <ul id="myTab" class="nav nav-tabs">
+                <li>
+                    <a href="#tab1" data-toggle="tab" onclick="redirect();">
+                        Tab1
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#tab2" data-toggle="tab">
+                        Tab2
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab3" data-toggle="tab">
+                        Tab3
+                    </a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div id="tab2" class="tab-pane fade in active">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(x => x.dates.fromDate, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(x => x.dates.toDate, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" id="btnSearch" class="btn btn-primary"><i class="fa fa-search"></i>Search </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        @if (Model != null)
+                        {
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    @grid.Table(
+        tableStyle: "table table-hover",
+        columns: grid.Columns(
+             grid.Column("BookingNo", "Booking No"),
+             grid.Column("BookingDate", "Booking Date"),
+             grid.Column("VehicleNo", "Vehicle Number"),
+             grid.Column("CargoType", "Cargo Type")
+            ),
+         htmlAttributes: new { id = "grid" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">@grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-sm")</div>
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div>
+                                <label>No Data found...</label>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    }
+</section>
+
+
+@section secscripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#frmDate,#toDate').datepicker();
+        });
+
+        function redirect() {
+            window.location = "@Url.Content("~/Internal/Dashboard/GetDriversList")";
+        }
+
+    </script>
+}

@@ -1,4 +1,4 @@
-﻿@model List<Master.Contract.Driver>
+﻿@model PickC.Internal.ViewModals.DriverMonitorVm
 
 @{
     ViewBag.Title = "GetDriversList";
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#ios" data-toggle="tab">Tab2</a>
+                    <a href="#ios" data-toggle="tab" onclick="redirect();">Tab2</a>
                 </li>
 
                 <li>
@@ -42,16 +42,19 @@
 
                         <div class="col-md-3">
                             <div class="search-map">
-                                <input type="text" placeholder="" class="form-control"/>
+                                <input type="text" id="txtDriverName" placeholder="search by name" class="form-control" />
                             </div>
-                            <div class="dr-list">
-                               
+                            <div class="dr-list" id="driverList">
+
                                 <ul class="listofvhl">
-                                    @foreach (var item in Model)
+                                    @foreach (var item in Model.driverList)
                                     {
                                         <li>
-                                            <img src="~/images/icon.png" class="img-circle" alt="drive-image" height="20" style="float:left;">
-                                            <div style="float:left;padding-left:10px;"> <span style="display:block"> @item.DriverName</span><span style="display:block"> @item.VehicleNo </span></div>
+                                            <img src="~/images/icon.png" class="img-circle" alt="driver" height="20" style="float:left;">
+                                            <div style="float:left;padding-left:10px;">
+                                                <span style="display:block"> @item.DriverName</span>
+                                                <span style="display:block"> @item.VehicleNo </span>
+                                            </div>
                                             <div class="clearfix"></div>
                                             <span class="active-dr">
                                                 @if (@item.Status)
@@ -65,9 +68,6 @@
                                             </span>
 
                                         </li>
-
-
-
                                     }
                                 </ul>
                             </div>
@@ -80,28 +80,15 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="ios">
-                    <p>
-                        test2
-                    </p>
-                </div>
-
-                <div class="tab-pane fade" id="tab">
-                    <p>
-                        test3
-                    </p>
-                </div>
             </div>
         </div>
-
-
     }
 
 </section>
 @section secscripts{
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7WVBL9AmhKs1QAr4x7mArA2mKZY-9nUo&v=3.exp&libraries=places&sensor=true"></script>
     <script type="text/javascript">
-        var MapPoints = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))';
+        var MapPoints = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.tripMonitorVmList))';
         var MY_MAPTYPE_ID = 'custom_style';
         var directionsDisplay;
         var directionsService = new google.maps.DirectionsService();
@@ -132,6 +119,7 @@
                 var bounds = new google.maps.LatLngBounds();
 
                 for (i = 0; i < locations.length; i++) {
+
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i].address.lat, locations[i].address.lng),
                         map: map,
@@ -203,6 +191,51 @@
 
         $(function () {
             Looping();
+
+            $('#txtDriverName').keydown(function () {
+                debugger;
+                $.ajax({
+                    url: '@Url.Content("~/Internal/Dashboard/GetDriverByName")',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify({ 'driverName': $('#txtDriverName').val() }),
+                    success: function (data) {
+                        debugger;
+                        $('#driverList').val();
+                        var html = '';
+                        $.each(data, function (key, val) {
+                            html += '<ul class="listofvhl">'
+                            html += '<li><img src="@Url.Content( "~/images/icon.png")" class="img-circle" alt="driver" height="20" style="float:left;">';
+                            html += '<div style="float:left;padding-left:10px;">';
+                            html += '<span style="display:block"> ' + val.DriverName + '</span>';
+                            html += '<span style="display:block"> ' + val.VehicleNo + ' </span> </div>';
+                            html += '<div class="clearfix"></div>';
+                            html += '<span class="active-dr">';
+                            if (val.Status) {
+                                html += '<i class="fa fa-circle text-success"></i>';
+                            }
+                            else {
+                                html += '<i class="fa fa-circle text-danger"></i>';
+                            }
+                            html += '</span></li></ul>';
+
+
+
+                        });
+
+                        $('#driverList').html(html);
+
+
+                    },
+                    error: function (err) {
+                        debugger;
+                    },
+                    failure: function (fail) {
+                        debugger;
+                    }
+                });
+            });
         });
 
         function Looping() {
@@ -234,6 +267,12 @@
                 }
             });
             return def.promise();
+        }
+
+
+
+        function redirect() {
+            window.location = "@Url.Content("~/Internal/Dashboard/CurrentBookings")";
         }
 
     </script>

@@ -27,5 +27,9 @@ namespace Operation.BusinessFactory
                 customerName, vehicleNumber
                 );
         }
+
+        public List<Booking> BookingByDate(DateTime fromdate , DateTime todate) {
+            return searchDAL.BookingsByDate(fromdate,todate);
+        }
     }
 }

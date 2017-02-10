@@ -295,6 +295,7 @@
     <Content Include="Css\help\images\Pick-C Logo%281%29.psd" />
     <Content Include="Css\help\images\road.psd" />
     <Content Include="Areas\Internal\Views\DashBoard\GetDriversList.cshtml" />
+    <Content Include="Areas\Internal\Views\DashBoard\CurrentBookings.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -342,6 +343,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\WebGridExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModals\BookingSearchVM.cs" />
     <Compile Include="ViewModals\DriverVm.cs" />
     <Compile Include="ViewModals\TripMonitorVm.cs" />
   </ItemGroup>

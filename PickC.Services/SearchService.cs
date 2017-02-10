@@ -29,5 +29,13 @@ namespace PickC.Services
                 await client.ExecuteTaskAsync<List<Booking>>(request));
         }
 
+        public async Task<List<Booking>> SearchBookingByDateAsync(DateTime fromDate, DateTime toDate) {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.POST;
+            request.Resource = "operation/search/bookingbydate/{fromDate}/toDate";
+
+            return ServiceResponse(await client.ExecuteTaskAsync<List<Booking>>(request));
+        }
     }
 }

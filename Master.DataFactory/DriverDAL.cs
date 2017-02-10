@@ -86,17 +86,18 @@ namespace Master.DataFactory
                     var newDocumentNo = savecommand.Parameters["@NewDocumentNo"].Value.ToString();
 
                     foreach (var addressItem in driver.AddressList)
-	                {
+                    {
                         addressItem.AddressLinkID = newDocumentNo;
-	                }
+                    }
 
 
-                    driver.AddressList.ForEach(x => {
+                    driver.AddressList.ForEach(x =>
+                    {
                         result = new AddressDAL().Save(x, transaction) == true ? 1 : 0;
                     });
 
-                if (currentTransaction == null)
-                    transaction.Commit();
+                    if (currentTransaction == null)
+                        transaction.Commit();
                 }
             }
             catch (Exception ex)
@@ -169,7 +170,16 @@ namespace Master.DataFactory
             return driverItem;
         }
 
+
         #endregion
+        public List<Driver> GetDriverByName<T>(IContract lookupItem) where T : IContract
+        {
+            var item = ((Driver)lookupItem);
+
+            List<Driver> list = db.ExecuteSprocAccessor(DBRoutine.GETDRIVERBYNAME,
+                                                       MapBuilder<Driver>.BuildAllProperties(), item.DriverName).ToList();
+            return list;
+        }
 
         public bool UpdateDriverDevice(string driverID, string deviceID)
         {
@@ -207,6 +217,8 @@ namespace Master.DataFactory
             return result;
 
         }
+
+
 
 
     }
