@@ -73,25 +73,33 @@ namespace PickC.Internal.Areas.Internal.Controllers
         public async Task<ActionResult> CurrentBookings(BookingDTO search)
         {
             var currentbookings = await new SearchService(AUTHTOKEN, p_mobileNo).SearchCurrentBookingAsync(search);
-            var bookingSearchVM = new BookingSearchVM();
+            var bookingSearchVM = new BookingSearchDTO();
             bookingSearchVM.booking =currentbookings;
 
             return View("CurrentBookings", bookingSearchVM);
         }
 
         [HttpPost]
-        public async Task<ActionResult> CurrentBookings(BookingSearchVM booking)
+        public async Task<ActionResult> CurrentBookings(BookingSearchDTO booking)
         {
-            var currentbooking = await new SearchService(AUTHTOKEN, p_mobileNo).SearchBookingByDateAsync(booking.dates.fromDate, booking.dates.toDate);
-            var BookingSearchVM = new BookingSearchVM();
+            var currentbooking = await new SearchService(AUTHTOKEN, p_mobileNo).SearchBookingByDateAsync(booking);
+            var BookingSearchVM = new BookingSearchDTO();
             return View("CurrentBookings", currentbooking);
 
         }
 
-        public async Task<JsonResult> GetDriverByName(string driverName)
+        public async Task<JsonResult> GetDriverByName(bool status)
         {
-            var driverlist = await new DriverService(AUTHTOKEN, p_mobileNo).GetDriverByName(driverName);
+          
+            var driverlist = await new DriverService(AUTHTOKEN, p_mobileNo).GetDriverByName(status);
             return Json(driverlist, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> GetDriverDetails(string id) {
+            var driverlist = await new DriverService(AUTHTOKEN, p_mobileNo).DriverInfoAsync(id);
+            return Json(driverlist, JsonRequestBehavior.AllowGet);
+        }
+
+       
     }
 }

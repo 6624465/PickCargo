@@ -343,7 +343,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\WebGridExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModals\BookingSearchVM.cs" />
+    <Compile Include="ViewModals\DriverAttachments.cs" />
     <Compile Include="ViewModals\DriverVm.cs" />
     <Compile Include="ViewModals\TripMonitorVm.cs" />
   </ItemGroup>

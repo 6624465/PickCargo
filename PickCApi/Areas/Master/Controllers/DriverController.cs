@@ -88,13 +88,13 @@ namespace PickCApi.Areas.Master.Controllers
         }
 
         [HttpGet]
-        [Route("driverbyname/{drivername}")]
+        [Route("driverbyname/{status}")]
 
-        public IHttpActionResult GetDriverByName(string drivername)
+        public IHttpActionResult GetDriverByName(bool status)
         {
             try
             {
-                var result = new DriverBO().GetDriverByName(new Driver { DriverName = drivername });
+                var result = new DriverBO().GetDriverByName(new Driver { Status = status });
                 if (result != null)
                     return Ok(result);
                 else
@@ -137,11 +137,13 @@ namespace PickCApi.Areas.Master.Controllers
 
                 var genderOptions = lookupList.Where(x => x.LookupCategory == "Gender").ToList();
                 var maritalOptions = lookupList.Where(x => x.LookupCategory == "MaritalStatus").ToList();
+                var attachments = lookupList.Where(x => x.LookupCategory == "DriverAttachments").ToList();
 
                 return Ok(new
                 {
                     genderOptions = genderOptions,
-                    maritalOptions = maritalOptions
+                    maritalOptions = maritalOptions,
+                    attachments = attachments
                 });
             }
             catch (Exception ex)

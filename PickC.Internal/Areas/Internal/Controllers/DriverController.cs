@@ -9,6 +9,7 @@ using Master.Contract;
 using PickC.Services;
 using PickC.Services.DTO;
 using PickC.Internal.ViewModals;
+using System.IO;
 
 namespace PickC.Internal.Areas.Internal.Controllers
 {
@@ -57,6 +58,32 @@ namespace PickC.Internal.Areas.Internal.Controllers
         {
             var result = await new DriverService(AUTHTOKEN, p_mobileNo).SaveDriverAsync(driver);
             return RedirectToAction("Driver", "Driver");
+        }
+
+        public async Task<JsonResult> GetAttachmentData()
+        {
+            var driverLookupDTO = await new DriverService(AUTHTOKEN, p_mobileNo).LookUpDataAsync();
+            return Json(driverLookupDTO, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> AddAttachment(DriverAttachments attachment)
+        {
+            var driverLookupDTO = await new DriverService(AUTHTOKEN, p_mobileNo).LookUpDataAsync();
+            try
+            {
+                string mapPath = Server.MapPath("~/Attachments");
+                if (!Directory.Exists(mapPath))
+                {
+                    Directory.CreateDirectory(mapPath);
+                }
+                attachment.imagePath.SaveAs(mapPath + Path.GetFileName(attachment.imagePath.FileName));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 }

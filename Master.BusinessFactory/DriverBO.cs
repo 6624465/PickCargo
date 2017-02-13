@@ -39,9 +39,9 @@ namespace Master.BusinessFactory
             return driverDAL.UpdateDriverDevice(driverID, deviceID);
         }
 
-        public List<Driver> GetDriverByName(Driver drivername)
+        public List<Driver> GetDriverByName(Driver status)
         {
-            return (List<Driver>)driverDAL.GetDriverByName<Driver>(drivername);
+            return (List<Driver>)driverDAL.GetDriverByName<Driver>(status);
         }
     }
 }

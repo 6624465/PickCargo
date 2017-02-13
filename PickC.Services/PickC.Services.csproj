@@ -52,6 +52,7 @@
     <Compile Include="CustomerService.cs" />
     <Compile Include="DriverService.cs" />
     <Compile Include="DTO\BookingDTO.cs" />
+    <Compile Include="DTO\BookingSearchDTO.cs" />
     <Compile Include="DTO\CustomerDTO.cs" />
     <Compile Include="DTO\DriverDTO.cs" />
     <Compile Include="DTO\DriverLookup.cs" />

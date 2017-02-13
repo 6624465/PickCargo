@@ -8,7 +8,7 @@
 @section seccss{
     <style type="text/css">
         #map {
-            height: 380px;
+            height: 530px;
             width: 100%;
             margin: 0px;
             padding: 0px;
@@ -42,15 +42,20 @@
 
                         <div class="col-md-3">
                             <div class="search-map">
-                                <input type="text" id="txtDriverName" placeholder="search by name" class="form-control" />
+                                @*<input type="text" id="txtDriverName" placeholder="search by name" class="form-control" />*@
+                                <select id="ddlSearchByStatus" class="form-control">
+                                    <option value="3">All</option>
+                                    <option value="true">Active</option>
+                                    <option value="false">In-Active</option>
+                                </select>
                             </div>
                             <div class="dr-list" id="driverList">
 
                                 <ul class="listofvhl">
                                     @foreach (var item in Model.driverList)
                                     {
-                                        <li>
-                                            <img src="~/images/icon.png" class="img-circle" alt="driver" height="20" style="float:left;">
+                                        <li onclick="getDriverDetails(this)" id="@item.DriverID">
+                                            <img src="~/images/icon.png" class="img-circle" alt="driver" height="20" style="float:left;" />
                                             <div style="float:left;padding-left:10px;">
                                                 <span style="display:block"> @item.DriverName</span>
                                                 <span style="display:block"> @item.VehicleNo </span>
@@ -81,6 +86,32 @@
                 </div>
 
             </div>
+            <div id="driverDetailsModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Driver Details</h4>
+                        </div>
+                        <div class="modal-body" id="driverData">
+
+
+                            <img id="driverImage" src="" alt="driver" height="40" />
+                            <label>Driver Name</label>
+                            <div id="driverName"></div>
+                            <label>LicenseNumber</label>
+                            <div id="licenseNumber"></div>
+                            <label>
+                                Vehicle Number
+                            </label>
+                            <div id="vehicleNumber"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     }
 
@@ -94,9 +125,9 @@
         var directionsService = new google.maps.DirectionsService();
         var map;
 
-        var hyd = new google.maps.LatLng(17.23, 78.27);
+        var hyd = new google.maps.LatLng(17.24, 78.27);
         var mapOptions = {
-            zoom: 15,
+            zoom: 10,
             center: hyd,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -108,10 +139,8 @@
 
                 var locations = jQuery.parseJSON(MapPoints);
 
-                map = new google.maps.Map(document.getElementById('map'), {
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    scrollwheel: false
-                });
+                map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
                 directionsDisplay.setMap(mapOptions);
 
                 var infowindow = new google.maps.InfoWindow();
@@ -119,8 +148,9 @@
                 var bounds = new google.maps.LatLngBounds();
 
                 for (i = 0; i < locations.length; i++) {
-
+                    debugger;
                     marker = new google.maps.Marker({
+
                         position: new google.maps.LatLng(locations[i].address.lat, locations[i].address.lng),
                         map: map,
                         icon: '@Url.Content("~/images/truck.png")'
@@ -186,27 +216,28 @@
             });
         }
         */
-        google.maps.event.addDomListener(window, 'load', initialize);
-
+        // google.maps.event.addDomListener(window, 'load', initialize);
+        map = new google.maps.Map(document.getElementById('map'), mapOptions)
 
         $(function () {
             Looping();
 
-            $('#txtDriverName').keydown(function () {
+
+            $('#ddlSearchByStatus').on("change", function () {
                 debugger;
                 $.ajax({
                     url: '@Url.Content("~/Internal/Dashboard/GetDriverByName")',
                     method: 'POST',
                     contentType: 'application/json',
                     dataType: 'json',
-                    data: JSON.stringify({ 'driverName': $('#txtDriverName').val() }),
+                    data: JSON.stringify({ 'status': $('#ddlSearchByStatus').val() }),
                     success: function (data) {
                         debugger;
                         $('#driverList').val();
                         var html = '';
                         $.each(data, function (key, val) {
                             html += '<ul class="listofvhl">'
-                            html += '<li><img src="@Url.Content( "~/images/icon.png")" class="img-circle" alt="driver" height="20" style="float:left;">';
+                            html += '<li onclick="getDriverDetails(this)" id=' + val.DriverID + '><img src="@Url.Content( "~/images/icon.png")" class="img-circle" alt="driver" height="20" style="float:left;">';
                             html += '<div style="float:left;padding-left:10px;">';
                             html += '<span style="display:block"> ' + val.DriverName + '</span>';
                             html += '<span style="display:block"> ' + val.VehicleNo + ' </span> </div>';
@@ -269,6 +300,31 @@
             return def.promise();
         }
 
+
+        function getDriverDetails(obj) {
+            debugger;
+            $.ajax({
+                url: '@Url.Content("~/Internal/Dashboard/GetDriverDetails")',
+                method: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({ 'id': obj.id }),
+                success: function (res) {
+                    $('#driverDetailsModal').modal('show');
+
+                    var source = '@Url.Content("~/images/icon.png")';
+                    $("#driverImage").attr('src', source);
+
+                    $("#driverName").text(res.DriverName);
+                    $("#licenseNumber").text(res.LicenseNo);
+                    $("#vehicleNumber").text(res.VehicleNo);
+                    //debugger;
+                },
+                error: function (err) {
+                    // debugger;
+                }
+            });
+        }
 
 
         function redirect() {

@@ -82,6 +82,8 @@ namespace Master.Contract
 
         public List<Address> AddressList { get; set; }
 
+  
+
 
     }
 }

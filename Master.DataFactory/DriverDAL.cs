@@ -177,7 +177,7 @@ namespace Master.DataFactory
             var item = ((Driver)lookupItem);
 
             List<Driver> list = db.ExecuteSprocAccessor(DBRoutine.GETDRIVERBYNAME,
-                                                       MapBuilder<Driver>.BuildAllProperties(), item.DriverName).ToList();
+                                                       MapBuilder<Driver>.BuildAllProperties(), item.Status).ToList();
             return list;
         }
 
