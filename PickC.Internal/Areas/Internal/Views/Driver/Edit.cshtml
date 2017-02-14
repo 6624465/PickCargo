@@ -9,7 +9,7 @@
 <section class="content-header">
     <h1>Driver Details</h1>
 </section>
-@using (Html.BeginForm("SaveDriver", "Driver", FormMethod.Post, new { id = "frmDriverAdd", name = "frmDriverAdd" , enctype = "multipart/form-data" }))
+@using (Html.BeginForm("SaveDriver", "Driver", FormMethod.Post, new { id = "frmDriverAdd", name = "frmDriverAdd", enctype = "multipart/form-data" }))
 {
     <section class="content">
         <div class="row">
@@ -353,18 +353,26 @@
 
         function saveAttachment() {
             debugger;
-           
-            var obj = {
-                driverId: $('#driver_DriverID').val(),
-                lookupCode: $('#ddlAttachment').val(),
-                imagePath: $('#fileAttachment').val()
-            };
+            var formData = new FormData();
+            var totalFiles = document.getElementById("fileAttachment").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("fileAttachment").files[i];
+                var driverId=$('#driver_DriverID').val();
+                var lookupCode=$('#ddlAttachment').val();
+
+                formData.append("imageUploadForm", file);
+                formData.append("driverId", driverId);
+                formData.append("lookupCode", lookupCode);
+            }
+
+
             $.ajax({
                 url: '@Url.Content("~/Internal/Driver/AddAttachment")',
                 type: 'POST',
-                contentType: 'application/json',
+                processData: false,
+                contentType: false,
                 dataType: 'json',
-                data: JSON.stringify({ attachment: obj }),
+                data: formData, //JSON.stringify({ attachment: obj }),
                 success: function (data) {
                     debugger;
                 },

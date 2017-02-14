@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Master.Contract;
 using Master.DataFactory;
+using PickC.Services.DTO;
 
 namespace Master.BusinessFactory
 {
@@ -39,9 +40,14 @@ namespace Master.BusinessFactory
             return driverDAL.UpdateDriverDevice(driverID, deviceID);
         }
 
-        public List<Driver> GetDriverByName(Driver status)
+        public List<Driver> GetDriverBySearch(bool? status)
         {
-            return (List<Driver>)driverDAL.GetDriverByName<Driver>(status);
+            return (List<Driver>)driverDAL.GetDriverBySearch(status);
+        }
+
+        public bool SaveAttachment(DriverAttachmentsDTO attachment)
+        {
+            return driverDAL.SaveAttachment(attachment);
         }
     }
 }

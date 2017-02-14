@@ -88,10 +88,10 @@ namespace PickC.Internal.Areas.Internal.Controllers
 
         }
 
-        public async Task<JsonResult> GetDriverByName(bool status)
+        public async Task<JsonResult> GetDriverBySearch(bool? status=null)
         {
           
-            var driverlist = await new DriverService(AUTHTOKEN, p_mobileNo).GetDriverByName(status);
+            var driverlist = await new DriverService(AUTHTOKEN, p_mobileNo).GetDriverBySearch(status);
             return Json(driverlist, JsonRequestBehavior.AllowGet);
         }
 
@@ -99,7 +99,5 @@ namespace PickC.Internal.Areas.Internal.Controllers
             var driverlist = await new DriverService(AUTHTOKEN, p_mobileNo).DriverInfoAsync(id);
             return Json(driverlist, JsonRequestBehavior.AllowGet);
         }
-
-       
     }
 }

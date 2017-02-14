@@ -177,6 +177,7 @@
     <Compile Include="Areas\Master\Controllers\CargoTypeController.cs" />
     <Compile Include="Areas\Master\Controllers\DriverController.cs" />
     <Compile Include="Areas\Master\Controllers\LoadingUnLoadingController.cs" />
+    <Compile Include="Areas\Master\Controllers\ManufacturerController.cs" />
     <Compile Include="Areas\Master\Controllers\RateCardController.cs" />
     <Compile Include="Areas\Master\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Master\Controllers\VehicleConfigController.cs" />

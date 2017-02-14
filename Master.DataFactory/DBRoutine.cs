@@ -78,6 +78,9 @@ namespace Master.DataFactory
         public const string SAVEDRIVER = "[Master].[usp_DriverSave]";
         public const string DELETEDRIVER = "[Master].[usp_DriverDelete]";
         public const string DRIVERUPDATEDEVICEID = "[Master].[usp_UpdateDriverDeviceID]";
-        public const string GETDRIVERBYNAME = "[Master].[usp_GetDriverByStatus]";
+        public const string GETDRIVERBYSTATUS = "[Master].[usp_GetDriverByStatus]";
+        public const string SAVEATTACHMENTS = "[Master].[usp_AttachmentsSave]";
+        public const string SAVEMANUFACTURER = "[Master].[usp_SaveVehicleManufacturer]";
+
     }
 }

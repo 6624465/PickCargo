@@ -9,6 +9,7 @@ using Master.Contract;
 using Master.BusinessFactory;
 using PickCApi.Core;
 using PickCApi.Areas.Master.DTO;
+using PickC.Services.DTO;
 
 namespace PickCApi.Areas.Master.Controllers
 {
@@ -88,13 +89,13 @@ namespace PickCApi.Areas.Master.Controllers
         }
 
         [HttpGet]
-        [Route("driverbyname/{status}")]
+        [Route("list/driverbyname/{status?}")]
 
-        public IHttpActionResult GetDriverByName(bool status)
+        public IHttpActionResult GetDriverBySearch(bool? status=null)
         {
             try
             {
-                var result = new DriverBO().GetDriverByName(new Driver { Status = status });
+                var result = new DriverBO().GetDriverBySearch( status);
                 if (result != null)
                     return Ok(result);
                 else
@@ -170,6 +171,24 @@ namespace PickCApi.Areas.Master.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("saveattachment")]
+
+        public IHttpActionResult SaveAttachment(DriverAttachmentsDTO attachments) {
+            try
+            {
+                var result = new DriverBO().SaveAttachment(attachments);
+                if (result)
+                    return Ok(UTILITY.SUCCESSMSG);
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
 
     }
 }

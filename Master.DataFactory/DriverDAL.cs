@@ -9,6 +9,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Master.Contract;
 using Master.DataFactory;
+using PickC.Services.DTO;
 
 namespace Master.DataFactory
 {
@@ -133,7 +134,6 @@ namespace Master.DataFactory
                 var deleteCommand = db.GetStoredProcCommand(DBRoutine.DELETEDRIVER);
                 db.AddInParameter(deleteCommand, "DriverID", System.Data.DbType.String, driver.DriverID);
 
-
                 result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
 
                 transaction.Commit();
@@ -171,16 +171,50 @@ namespace Master.DataFactory
         }
 
 
-        #endregion
-        public List<Driver> GetDriverByName<T>(IContract lookupItem) where T : IContract
-        {
-            var item = ((Driver)lookupItem);
+        public List<Driver> GetDriverBySearch(bool? status) 
+        {           
 
-            List<Driver> list = db.ExecuteSprocAccessor(DBRoutine.GETDRIVERBYNAME,
-                                                       MapBuilder<Driver>.BuildAllProperties(), item.Status).ToList();
+            List<Driver> list = db.ExecuteSprocAccessor(DBRoutine.GETDRIVERBYSTATUS,
+                                                       MapBuilder<Driver>.BuildAllProperties(), status).ToList();
             return list;
         }
 
+        #endregion
+        //public List<Driver> GetDriverByName<T>(IContract lookupItem) where T : IContract
+        //{
+        //    var item = ((Driver)lookupItem);
+
+        //    List<Driver> list = db.ExecuteSprocAccessor(DBRoutine.GETDRIVERBYNAME,
+        //                                               MapBuilder<Driver>.BuildAllProperties(), item.Status).ToList();
+        //    return list;
+        //}
+
+        public bool SaveAttachment(DriverAttachmentsDTO attachment)
+        {
+            var result = false;
+            var connection = db.CreateConnection();
+            connection.Open();
+
+            var transaction = connection.BeginTransaction();
+            try
+            {
+                var saveCommand = db.GetStoredProcCommand(DBRoutine.SAVEATTACHMENTS);
+                db.AddInParameter(saveCommand, "AttachmentId", System.Data.DbType.String, attachment.attachmentId);
+                db.AddInParameter(saveCommand, "DrvierID",System.Data.DbType.String, attachment.driverId);
+                db.AddInParameter(saveCommand, "LookupCode",System.Data.DbType.String,attachment.lookupCode);
+                db.AddInParameter(saveCommand, "ImagePath",System.Data.DbType.String,attachment.imagePath);
+
+                result = Convert.ToBoolean(db.ExecuteNonQuery(saveCommand, transaction));
+
+                transaction.Commit();
+            }
+            catch (Exception ex )
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            return result;
+        }
         public bool UpdateDriverDevice(string driverID, string deviceID)
         {
             var result = false;
@@ -218,7 +252,7 @@ namespace Master.DataFactory
 
         }
 
-
+        
 
 
     }

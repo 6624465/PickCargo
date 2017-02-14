@@ -89,18 +89,42 @@ namespace PickC.Services
         }
 
 
-        public async Task<List<Driver>> GetDriverByName(bool status) {
+        public async Task<List<Driver>> GetDriverBySearch(bool? status) {
 
             IRestClient client = new RestClient(ApiBaseUrl);
             var request = p_request;
             request.Method = Method.GET;
-            request.Resource = "master/driver/driverbyname/{status}";
-            request.AddParameter("status", status, ParameterType.UrlSegment);
+
+            if (status.HasValue)
+            {
+                request.Resource = "master/driver/list/driverbyname/{status}";
+                request.AddParameter("status", status, ParameterType.UrlSegment);
+            }
+            else
+            {
+                request.Resource = "master/driver/list/driverbyname/";
+            }
 
             return await Task.Run(() =>
             {
                 return ServiceResponse<List<Driver>>(client.Execute<List<Driver>>(request));
             });
+        }
+
+        public async Task<string> SaveDriverAttachmentAsync(DriverAttachmentsDTO attachment) {
+
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.POST;
+            request.Resource = "master/driver/saveattachment";
+            request.AddJsonBody(attachment);
+
+            return await Task.Run(()=>
+
+            {
+                return ServiceResponse(client.Execute(request));
+            });
+            
         }
     }
 }

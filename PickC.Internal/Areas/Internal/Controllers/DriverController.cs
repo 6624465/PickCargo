@@ -66,24 +66,42 @@ namespace PickC.Internal.Areas.Internal.Controllers
             return Json(driverLookupDTO, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> AddAttachment(DriverAttachments attachment)
+        public async Task<JsonResult> AddAttachment()
         {
-            var driverLookupDTO = await new DriverService(AUTHTOKEN, p_mobileNo).LookUpDataAsync();
+            var result = "";
+            //var driverLookupDTO = await new DriverService(AUTHTOKEN, p_mobileNo).LookUpDataAsync();
             try
             {
-                string mapPath = Server.MapPath("~/Attachments");
-                if (!Directory.Exists(mapPath))
+                foreach (string file in Request.Files)
                 {
-                    Directory.CreateDirectory(mapPath);
+                    var fileContent = Request.Files[file];
+                    var driverId = Request.Form[0];
+                    var lookupCode = Request.Form[1];
+                    string mapPath = Server.MapPath("~/Attachments/");
+                    if (!Directory.Exists(mapPath))
+                    {
+                        Directory.CreateDirectory(mapPath);
+                    }
+                    fileContent.SaveAs(mapPath + fileContent.FileName);
+
+                    DriverAttachmentsDTO atttachment = new DriverAttachmentsDTO()
+                    {
+                        attachmentId = driverId + lookupCode,
+                        driverId = driverId,
+                        imagePath = fileContent.FileName,
+                        lookupCode = lookupCode
+                    };
+
+
+                    result = await new DriverService(AUTHTOKEN, p_mobileNo).SaveDriverAttachmentAsync(atttachment);
                 }
-                attachment.imagePath.SaveAs(mapPath + Path.GetFileName(attachment.imagePath.FileName));
             }
             catch (Exception ex)
             {
                 throw;
             }
 
-            return Json("", JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

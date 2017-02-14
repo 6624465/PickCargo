@@ -52,6 +52,7 @@
     <Compile Include="DBRoutine.cs" />
     <Compile Include="DriverDAL.cs" />
     <Compile Include="LookUpDAL.cs" />
+    <Compile Include="ManufacturerDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RateCardDAL.cs" />
     <Compile Include="VehicleConfigDAL.cs" />
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\Master.Contract\Master.Contract.csproj">
       <Project>{b9e20a20-01c6-480a-a49a-647df7c89463}</Project>
       <Name>Master.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PickC.Services\PickC.Services.csproj">
+      <Project>{A3CEF276-F503-45B0-8E74-0211475D2B09}</Project>
+      <Name>PickC.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
