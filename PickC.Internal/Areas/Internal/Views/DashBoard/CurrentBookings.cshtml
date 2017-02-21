@@ -31,8 +31,12 @@
             <div id="myTabContent" class="tab-content">
                 <div id="tab2" class="tab-pane fade in active">
                     <div class="row">
+
                         <div class="col-md-2">
                             @Html.TextBoxFor(x => x.dates.fromDate, new { @class = "form-control" })
+                            @*<span class="input-group-btn">
+                                <button type="button" class="btn btn-default"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                            </span>*@
                         </div>
                         <div class="col-md-2">
                             @Html.TextBoxFor(x => x.dates.toDate, new { @class = "form-control" })
@@ -85,7 +89,8 @@
 @section secscripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#frmDate,#toDate').datepicker();
+            $('#dates_fromDate,#dates_toDate').datepicker();
+            
         });
 
         function redirect() {

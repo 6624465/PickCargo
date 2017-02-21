@@ -118,6 +118,14 @@
                                     @Html.TextBoxFor(x => x.driver.PhoneNo, new { @class = "form-control", placeholder = "Phone No" })
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <label>Nationality</label>
+                                <div class="form-group">
+                                    <select id="ddlNationality" class="form-control">
+                                        <option value="Indian">Indian</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -207,16 +215,33 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Attachments</h3>
                         <div class="box-tools">
-                            <button class="btn btn-box-tool" type="button" data-target="#attachmentModal" onclick="AddAttachments()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button class="btn btn-box-tool" type="button" onclick="AddAttachments()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <div class="box-body">
 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Bank Details</h3>
+                        <div class="box-tools">
+                            <button class="btn btn-box-tool" type="button" onclick="bankDetails()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -323,6 +348,45 @@
         </form>
     </div>
 </div>
+<div class="modal" id="bankDetailsModal">
+    <div class="modal-dialog modal-md">
+        <form id="frmBank" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Bank Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Bank Name</label>
+                            <input type="text" id="txtBankName" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Branch</label>
+                            <input type="text" id="txtBranch" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Account Number</label>
+                            <input type="text" id="txtAccNumber" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Account Type</label>
+                            <input type="text" id="txtAccType" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnSave" type="button" class="btn btn-primary">Save</button>
+                </div> 
+            </div>
+        </form>
+    </div>
+</div>
 
 @section secscripts{
     <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
@@ -330,8 +394,14 @@
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
     <script src="@Url.Content("~/Scripts/Js/Driver/DriverAddress.js")"></script>
     <script type="text/javascript">
+        function AddAddress() {
+            $('#addressModal').modal('show');
+        }
+        function bankDetails() {
+            $('#bankDetailsModal').modal('show');
+        }
         function AddAttachments() {
-
+            //debugger;
             $('#attachmentModal').modal('show');
             $.ajax({
                 url: '@Url.Content("~/Internal/Driver/GetAttachmentData")',
@@ -339,9 +409,10 @@
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (data) {
+                    //  debugger;
                     var html = '';
                     $.each(data.attachments, function (key, val) {
-                        html += "<option value='" + val.LookupCode + "'>" + val.LookupDescription + "</option>";
+                        html += "<option value='" + val.LookupID + "'>" + val.LookupDescription + "</option>";
                     });
 
                     $('#ddlAttachment').html(html);
@@ -357,8 +428,8 @@
             var totalFiles = document.getElementById("fileAttachment").files.length;
             for (var i = 0; i < totalFiles; i++) {
                 var file = document.getElementById("fileAttachment").files[i];
-                var driverId=$('#driver_DriverID').val();
-                var lookupCode=$('#ddlAttachment').val();
+                var driverId = $('#driver_DriverID').val();
+                var lookupCode = $('#ddlAttachment').val();
 
                 formData.append("imageUploadForm", file);
                 formData.append("driverId", driverId);

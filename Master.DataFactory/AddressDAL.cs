@@ -95,11 +95,11 @@ namespace Master.DataFactory
 
                 throw;
             }
-            finally
-            {
-                transaction.Dispose();
-                connection.Close();
-            }
+            //finally
+            //{
+            //    transaction.Dispose();
+            //    connection.Close();
+            //}
 
             return (result > 0 ? true : false);
 

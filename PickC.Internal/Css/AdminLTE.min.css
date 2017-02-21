@@ -1673,14 +1673,12 @@ a {
             background: rgba(0,0,0,0.1);
         }
 
-        .box.box-solid.box-default {
-            border: 1px solid #d2d6de;
-        }
+        
 
             .box.box-solid.box-default > .box-header {
                 color: #444;
-                background: #d2d6de;
-                background-color: #d2d6de;
+
+                background-color: rgba(255,252,0,0.5);
             }
 
                 .box.box-solid.box-default > .box-header a, .box.box-solid.box-default > .box-header .btn {
@@ -4625,9 +4623,7 @@ table.text-center, table.text-center td, table.text-center th {
     background-color: #111 !important;
 }
 
-.bg-red, .callout.callout-danger, .alert-danger, .alert-error, .label-danger, .modal-danger .modal-body {
-    background-color: #e6aba4 !important;
-}
+
 
 .bg-yellow, .callout.callout-warning, .alert-warning, .label-warning, .modal-warning .modal-body {
     background-color: #f39c12 !important;
@@ -5247,3 +5243,199 @@ padding-left:0px
 .search-map input{
 width:100%;
 }
+ .box-header {
+        /* Background Gradient for Monochromatic Colors */
+        background-color: #FFFF73;
+        /* For WebKit (Safari, Chrome, etc) */
+        background: #FFFF73 -webkit-gradient(linear, left top, left bottom, from(#D9D900), to(#FFFF73)) no-repeat;
+        /* Mozilla,Firefox/Gecko */
+        background: #FFFF73 -moz-linear-gradient(top, #D9D900, #FFFF73) no-repeat;
+        /* IE 5.5 - 7 */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9D900, endColorstr=#FFFF73) no-repeat;
+        /* IE 8 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9D900, endColorstr=#D9D900)" no-repeat;
+        box-shadow: 0 1px 1px 0 rgba(0,0,0,0.06),0 0 2px 0px rgba(0,0,0,0.08);
+    }  .box-default {
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);
+        transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    }.box-body {
+        padding-bottom: 0px;
+        overflow: hidden;
+        border-radius: 2px;
+    }
+        .box-default:hover {
+            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.02),0 0 0 1px rgba(0,0,0,0.08);
+            transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+         .breakup ul li.active a, .breakup ul li.active a:hover, .breakup ul li.active a:active, .breakup ul li.active a:focus, .breakup ul li a:hover {
+            background-color: rgba(210,214,222,0.5) !important;
+            border-radius: 0px;
+        }
+
+        .breakup ul li a, .breakup ul li a.active {
+            border: 0px solid #fff !important;
+            color: #333;
+        }
+
+    .breakup h3 {
+        margin: 0px;
+    }
+
+    .top-details {
+       /* Background Gradient for Monochromatic Colors */
+        background-color: #FFFF73;
+        /* For WebKit (Safari, Chrome, etc) */
+        background: #FFFF73 -webkit-gradient(linear, left top, left bottom, from(#D9D900), to(#FFFF73)) no-repeat;
+        /* Mozilla,Firefox/Gecko */
+        background: #FFFF73 -moz-linear-gradient(top, #D9D900, #FFFF73) no-repeat;
+        /* IE 5.5 - 7 */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9D900, endColorstr=#FFFF73) no-repeat;
+        /* IE 8 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9D900, endColorstr=#D9D900)" no-repeat;
+        margin-bottom: 20px;
+       
+        box-shadow: 0 3px 8px 0 rgba(0,0,0,0.02),0 0 0 1px rgba(0,0,0,0.08);
+        transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+@media only screen and (max-width: 500px) {
+    h3 {
+        font-size: 14px;
+    }
+
+    h4 {
+        font-size: 14px;
+    }
+
+    a {
+        font-size: 12px;
+    }
+
+    .summary-link div {
+        background-color: rgba(210,214,222,0.6);
+    }
+
+        .summary-link div:hover {
+            background-color: rgba(210,214,222,1);
+        }
+
+        .summary-link div + div {
+            border-left: 1px solid rgba(210,214,222,1);
+        }
+
+        .summary-link div a {
+            display: block;
+            line-height: 28px;
+            font-size: 11px;
+            color: #333;
+        }
+
+        .summary-link div a {
+            color: #333;
+        }
+
+    .box-header > h3 {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .box-header .box-title {
+        margin: 0px 0px 0px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .summary-page h3, .box-header .breakup h3 {
+        margin: 10px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    
+  
+
+     
+
+   
+
+    .breakup ul li {
+        width: 50%;
+    }
+
+       
+    th {
+        font-size: 10px ;
+        font-weight: bold;
+    }
+
+    td {
+        font-size: 10px !important;
+    }
+
+    .reverify a {
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .reverify-main span {
+        color: rgb(76,76,76);
+        line-height: 12px;
+        font-size: 12px;
+    }
+
+    .reverify-main label {
+        margin: 0px 12px 0px 8px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .top-details h4 {
+        margin: 0px;
+        padding: 10px 0px 10px 0px;
+     
+        color:#333;
+    }
+
+    .amount-re h2 {
+        margin: 5px 0px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+.amount-re div div {background-color: #f1f1f1; text-align:center;
+                    padding:10px 0px;
+box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important
+}
+    .amount-re h5 {
+        font-size: 12px;
+    }
+
+    .amount-table h4 {
+    border-bottom:1px solid #ccc;
+    padding-bottom:10px;
+    margin-bottom:20px;
+    }
+    .payment-table th,.payment-table td h5 {
+         font-size: 11px ;
+    }
+    .incentive-table {
+    margin-top:15px;
+    }
+    .conditions {
+    margin-bottom:20px;
+    }
+    .conditions div div {
+         border:1px solid #eee;
+    }
+.conditions h5{
+    padding-left:5px;
+    padding-bottom:7px;
+    border-bottom:1px solid #eee;
+
+}
+    .conditions ul {
+    padding-left:10px;
+    }
+    .conditions ul li {
+        list-style:none;
+    }
+    }

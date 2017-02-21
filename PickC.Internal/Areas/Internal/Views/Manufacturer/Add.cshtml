@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-md-1">
                             <div class="form-group">
-                                <button type="button" class="btn btn-default">Cancel</button>
+                                <button type="button" class="btn btn-default" onclick="redirect()">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -81,6 +81,8 @@
                 }
             });
         });
-        
+        function redirect() {
+            window.location = '@Url.Content("~/Internal/Manufacturer/Add")';
+        }
     </script>
 }

@@ -82,9 +82,9 @@ namespace Master.Contract
 
         public List<Address> AddressList { get; set; }
 
-  
+        public string Nationality { get; set; }
 
-
+        public List<BankDetails> BankDetails { get; set; }
     }
 }
 

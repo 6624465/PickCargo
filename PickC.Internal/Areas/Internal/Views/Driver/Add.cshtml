@@ -9,6 +9,9 @@
 
     var addressList = new List<Master.Contract.Address>();
     Model.driver.AddressList = addressList;
+
+    var bankDetails = new List<Master.Contract.BankDetails>();
+    Model.driver.BankDetails = bankDetails;
 }
 @section seccss{
     <link href="@Url.Content("~/Css/bootstrap-datetimepicker.css")" rel="stylesheet" />
@@ -125,6 +128,15 @@
                                     @Html.TextBoxFor(x => x.driver.PhoneNo, new { @class = "form-control", placeholder = "Phone No" })
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <label>Nationality</label>
+                                <div class="form-group">
+                                    <select id="ddlNationality" class="form-control">
+                                        <option value="Indian">Indian</option>
+                                    </select>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,7 +179,7 @@
                     <div class="box-header">
                         <h3 class="box-title">Address Info</h3>
                         <div class="box-tools">
-                            <button class="btn btn-box-tool" type="button" onclick="AddAddress('-1')"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button class="btn btn-box-tool" type="button" onclick="AddAddress()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <div class="box-body">
@@ -212,7 +224,90 @@
                 </div>
             </div>
         </div>
-       
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Bank Details</h3>
+                        <div class="box-tools">
+                            <button class="btn btn-box-tool" type="button" onclick="bankDetails()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Account Number</th>
+                                        <th>Account Type</th>
+                                        <th>#Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trBankBody">
+                                    @for (var i = 0; i < Model.driver.BankDetails.Count; i++)
+                                    {
+                                        <tr id="trBankRow_@i" class="trRowCss">
+                                            <td>
+                                                <span id="Bank1_span_@i">
+                                                    @Model.driver.BankDetails[i].BankName
+                                                </span>
+                                                @Html.HiddenFor(x=>Model.driver.BankDetails[i].BankName)
+                                            </td>
+                                            
+                                            <td>
+                                                <span id="Bank2_span_@i">
+                                                    @Model.driver.BankDetails[i].AccountType
+                                                </span>
+                                                @Html.HiddenFor(x=>Model.driver.BankDetails[i].AccountType)
+                                            </td>
+                                            <td>
+                                                @Html.HiddenFor(x => Model.driver.BankDetails[i].AccountNumber)
+                                                @Html.HiddenFor(x => Model.driver.BankDetails[i].Branch)
+                                               
+                                                <a class="hand" onclick="EditBank('@i')">Edit</a>&nbsp;|&nbsp;
+                                                <a class="hand" onclick="DeleteBank('@i')">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Attachments</h3>
+                        <div class="box-tools">
+                            <button class="btn btn-box-tool" type="button" onclick="AddAttachments()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Bank Details</h3>
+                        <div class="box-tools">
+                            <button class="btn btn-box-tool" type="button" onclick="bankDetails()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
@@ -287,12 +382,139 @@
         </form>
     </div>
 </div>
+
+<div class="modal" id="attachmentModal">
+    <div class="modal-dialog modal-md">
+        <form id="frmAttachments" name="frmAttachments" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Attachment</h4>
+                </div>
+                <div class="modal-body" id="attachment">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select id="ddlAttachment" name="ddlAttachment" class="form-control"></select>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="file" id="fileAttachment" name="fileAttachment" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnSave" class="btn btn-primary" type="button" onclick="saveAttachment()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal" id="bankDetailsModal">
+    <div class="modal-dialog modal-md">
+        <form id="frmBank" name="frmBank" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Bank Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Bank Name</label>
+                            <input type="text" id="txtBankName" name="txtBankName" class="form-control" value=""/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Branch</label>
+                            <input type="text" id="txtBranch" name="txtBranch" class="form-control" value=""/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Account Number</label>
+                            <input type="text" id="txtAccNumber" name="txtAccNumber" class="form-control" value=""/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Account Type</label>
+                            <input type="text" id="txtAccType" name="txtAccType" class="form-control" value=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnSave" type="button" class="btn btn-primary" onclick="saveBankDetails()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @section secscripts{
     <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
     <script src="@Url.Content("~/Scripts/moment.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
-    <script src="@Url.Content("~/Scripts/Js/Driver/DriverAddress.js")"></script>
+    <script src="@Url.Content("~/Scripts/Internal/DriverAddress.js")"></script>
+    <script src="@Url.Content("~/Scripts/Internal/DriverBankDetails.js")"></script>
     <script type="text/javascript">
+
+        function bankDetails() {
+            $('#bankDetailsModal').modal('show');
+        }
+        function AddAttachments() {
+
+            $('#attachmentModal').modal('show');
+            $.ajax({
+                url: '@Url.Content("~/Internal/Driver/GetAttachmentData")',
+                type: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    var html = '';
+                    $.each(data.attachments, function (key, val) {
+                        html += "<option value='" + val.LookupCode + "'>" + val.LookupDescription + "</option>";
+                    });
+
+                    $('#ddlAttachment').html(html);
+                },
+                error: function (err) {
+                }
+            })
+        }
+
+        function saveAttachment() {
+            if (!$('#frmAttachments').valid()) {
+                return;
+            }
+
+            var formData = new FormData();
+            var totalFiles = document.getElementById("fileAttachment").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("fileAttachment").files[i];
+                var driverId = $('#driver_DriverID').val();
+                var lookupCode = $('#ddlAttachment').val();
+
+                formData.append("imageUploadForm", file);
+                formData.append("driverId", driverId);
+                formData.append("lookupCode", lookupCode);
+            }
+
+
+            $.ajax({
+                url: '@Url.Content("~/Internal/Driver/AddAttachment")',
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                data: formData, //JSON.stringify({ attachment: obj }),
+                success: function (data) {
+                    debugger;
+                },
+                error: function (err) {
+                    debugger;
+                }
+            });
+        }
+
         $(function () {
             $('#frmDriverAdd').validate({
                 rules: {

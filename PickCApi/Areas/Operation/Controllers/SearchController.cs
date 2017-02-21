@@ -37,11 +37,11 @@ namespace PickCApi.Areas.Operation.Controllers
 
         [HttpPost]
         [Route("bookingbydate")]
-        public IHttpActionResult BookingByDate(DateTime fromDate,DateTime toDate)
+        public IHttpActionResult BookingByDate(BookingSearchDTO booking)
         {
             try
             {
-                var bookingresult = new SearchBO().BookingByDate(fromDate, toDate);
+                var bookingresult = new SearchBO().BookingByDate(booking.dates.fromDate,booking.dates.toDate);
                 return Ok(bookingresult);
             }
             catch (Exception ex)

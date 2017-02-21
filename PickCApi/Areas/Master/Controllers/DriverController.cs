@@ -47,17 +47,19 @@ namespace PickCApi.Areas.Master.Controllers
                 driver.CreatedOn = DateTime.Now;
                 driver.ModifiedOn = DateTime.Now;
 
-                driver.AddressList.ForEach(x =>
+                if (driver.AddressList!=null && driver.AddressList.Count > 0)
                 {
-                    x.AddressLinkID = driver.DriverID;
-                    x.AddressType = "DRIVER";
-                    x.CreatedBy = UTILITY.DEFAULTUSER;
-                    x.CreatedOn = DateTime.Now;
-                    x.ModifiedBy = UTILITY.DEFAULTUSER;
-                    x.ModifiedOn = DateTime.Now;
-                    x.IsActive = true;
-                });
-
+                    driver.AddressList.ForEach(x =>
+                    {
+                        x.AddressLinkID = driver.DriverID;
+                        x.AddressType = "DRIVER";
+                        x.CreatedBy = UTILITY.DEFAULTUSER;
+                        x.CreatedOn = DateTime.Now;
+                        x.ModifiedBy = UTILITY.DEFAULTUSER;
+                        x.ModifiedOn = DateTime.Now;
+                        x.IsActive = true;
+                    });
+                }
                 var result = new DriverBO().SaveDriver(driver);
                 if (result)
                     return Ok(UTILITY.SUCCESSMSG);

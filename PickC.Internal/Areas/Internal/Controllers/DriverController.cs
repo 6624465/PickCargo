@@ -69,14 +69,14 @@ namespace PickC.Internal.Areas.Internal.Controllers
         public async Task<JsonResult> AddAttachment()
         {
             var result = "";
-            //var driverLookupDTO = await new DriverService(AUTHTOKEN, p_mobileNo).LookUpDataAsync();
+      
             try
             {
                 foreach (string file in Request.Files)
                 {
                     var fileContent = Request.Files[file];
                     var driverId = Request.Form[0];
-                    var lookupCode = Request.Form[1];
+                    var lookupId = Request.Form[1];
                     string mapPath = Server.MapPath("~/Attachments/");
                     if (!Directory.Exists(mapPath))
                     {
@@ -86,10 +86,10 @@ namespace PickC.Internal.Areas.Internal.Controllers
 
                     DriverAttachmentsDTO atttachment = new DriverAttachmentsDTO()
                     {
-                        attachmentId = driverId + lookupCode,
+                        attachmentId = driverId + lookupId,
                         driverId = driverId,
                         imagePath = fileContent.FileName,
-                        lookupCode = lookupCode
+                        lookupCode = lookupId
                     };
 
 

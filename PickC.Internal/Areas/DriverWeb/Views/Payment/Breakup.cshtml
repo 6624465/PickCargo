@@ -20,26 +20,26 @@
         }
     </style>
 </head>
-<body class="container">
-    <div class="row">
+<body class="container breakup">
+    <div class="row top-details">
         <div class="col-md-6 col-xs-6 text-center">
             <h4 class="box-title">Today's Summary</h4>
-            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3><br />
         </div>
-        <div class="col-md-6 col-xs-6 text-center"">
+        <div class="col-md-6 col-xs-6 text-center">
             <h4 class="box-title">Bookings</h4>
-            <h3>0</h3>
+            <h3>0</h3><br />
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 col-xs-12">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#breakUpTab">BREAKUP</a></li>
-                <li><a data-toggle="tab" href="#rideTab">RIDES</a></li>                
+                <li><a data-toggle="tab" href="#rideTab">RIDES</a></li>
             </ul>
             <div class="tab-content">
                 <div id="breakUpTab" class="tab-pane fade in active">
-                    <table class="table">
+                    <table class="table table-hover">
                         <tr>
                             <td><h5>Operator Bill</h5></td>
                             <td><h5><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h5></td>
@@ -56,7 +56,7 @@
                             <td><h5>Tolls/Parkings</h5></td>
                             <td><h5><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h5></td>
                         </tr>
-                    </table>                    
+                    </table>
                 </div>
                 <div id="rideTab" class="tab-pane fade">
                     <div class="row marginTop">
@@ -67,40 +67,47 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="row">
-                                        <div class="col-md-12 col-xs-12">
-                                            <h5>Share Ride - 2 Bookings (DDD) <i class="fa fa-car" aria-hidden="true"></i>&nbsp; Share</h5>
-                                        </div>                                        
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3 col-xs-3">
-                                            <h5>Distance Travelled</h5><br />
-                                            <span>km</span>
-                                        </div>
-                                        <div class="col-md-3 col-xs-3">
-                                            <h5>Ride Time</h5><br />
-                                            <span>min</span>
-                                        </div>
-                                        <div class="col-md-3 col-xs-3">
-                                            <h5>Operator Bill</h5><br />
-                                            <span></span>
-                                        </div>
-                                        <div class="col-md-3 col-xs-3">
-                                            <h5>Ride Earnings</h5><br />
-                                            <span></span>
+                                        <div class="col-xs-12" style="text-align:center; margin-bottom:10px;">
+                                            <h5 class="label label-danger">Share Ride - 2 Bookings (DDD)&nbsp; <i class="fa fa-truck" aria-hidden="true"></i>&nbsp; Share</h5>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 col-xs-12">
-                                            <h5>ride cancelled <span class="pull-right">                                                
-                                                @Html.ActionLink("REVERIFY", "Reverify", "Payment", null, null)
-                                                </span></h5>                                            
+                                        <div class="col-xs-12">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Distance Travelled(km)</th>
+                                                        <th>Ride Time(min)</th>
+                                                        <th>Operator Bill</th>
+                                                        <th>Ride Earnings</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2 km</td>
+                                                        <td>25 min</td>
+                                                        <td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;250</td>
+                                                        <td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;100</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                </div>                                
+
+                                    <div class="row reverify">
+                                        <div class="col-xs-12">
+
+
+                                            @Html.ActionLink("REVERIFY", "Reverify", "Payment", null, null)
+
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>

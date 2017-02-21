@@ -76,27 +76,30 @@ namespace Master.DataFactory
                 //db.AddInParameter(savecommand, "Status", System.Data.DbType.Boolean, driver.Status);
                 db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, driver.CreatedBy);
                 db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, driver.ModifiedBy);
+                db.AddInParameter(savecommand, "Nationality", System.Data.DbType.String, driver.Nationality);
                 //db.AddInParameter(savecommand, "DeviceID", System.Data.DbType.String, driver.DeviceID);
-                db.AddInParameter(savecommand, "NewDocumentNo", System.Data.DbType.String, 50);
+                db.AddInParameter(savecommand, "NewDocumentNo", System.Data.DbType.String,0);
 
 
                 result = db.ExecuteNonQuery(savecommand, transaction);
-
+                
                 if (result > 0)
                 {
                     var newDocumentNo = savecommand.Parameters["@NewDocumentNo"].Value.ToString();
-
-                    foreach (var addressItem in driver.AddressList)
+                   // var newDocumentNo = db.GetParameterValue(savecommand, "NewDocumentNo").ToString();
+                    if (driver.AddressList != null && driver.AddressList.Count > 0)
                     {
-                        addressItem.AddressLinkID = newDocumentNo;
+                        foreach (var addressItem in driver.AddressList)
+                        {
+                            addressItem.AddressLinkID = newDocumentNo;
+                        }
+
+
+                        driver.AddressList.ForEach(x =>
+                        {
+                            result = new AddressDAL().Save(x, transaction) == true ? 1 : 0;
+                        });
                     }
-
-
-                    driver.AddressList.ForEach(x =>
-                    {
-                        result = new AddressDAL().Save(x, transaction) == true ? 1 : 0;
-                    });
-
                     if (currentTransaction == null)
                         transaction.Commit();
                 }
@@ -171,8 +174,8 @@ namespace Master.DataFactory
         }
 
 
-        public List<Driver> GetDriverBySearch(bool? status) 
-        {           
+        public List<Driver> GetDriverBySearch(bool? status)
+        {
 
             List<Driver> list = db.ExecuteSprocAccessor(DBRoutine.GETDRIVERBYSTATUS,
                                                        MapBuilder<Driver>.BuildAllProperties(), status).ToList();
@@ -200,15 +203,15 @@ namespace Master.DataFactory
             {
                 var saveCommand = db.GetStoredProcCommand(DBRoutine.SAVEATTACHMENTS);
                 db.AddInParameter(saveCommand, "AttachmentId", System.Data.DbType.String, attachment.attachmentId);
-                db.AddInParameter(saveCommand, "DrvierID",System.Data.DbType.String, attachment.driverId);
-                db.AddInParameter(saveCommand, "LookupCode",System.Data.DbType.String,attachment.lookupCode);
-                db.AddInParameter(saveCommand, "ImagePath",System.Data.DbType.String,attachment.imagePath);
+                db.AddInParameter(saveCommand, "DrvierID", System.Data.DbType.String, attachment.driverId);
+                db.AddInParameter(saveCommand, "LookupCode", System.Data.DbType.String, attachment.lookupCode);
+                db.AddInParameter(saveCommand, "ImagePath", System.Data.DbType.String, attachment.imagePath);
 
                 result = Convert.ToBoolean(db.ExecuteNonQuery(saveCommand, transaction));
 
                 transaction.Commit();
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
                 transaction.Rollback();
                 throw ex;
@@ -252,7 +255,7 @@ namespace Master.DataFactory
 
         }
 
-        
+
 
 
     }

@@ -22,7 +22,7 @@ namespace PickC.Internal.Areas.Internal.Controllers
         public async Task<ActionResult> Add(DriverManufacturerDTO manufactur)
         {
             var result = await new ManufacturerService(AUTHTOKEN, p_mobileNo).Save(manufactur);
-            return View();
+            return View("Add");
         }
     }
 }

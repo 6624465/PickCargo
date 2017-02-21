@@ -46,9 +46,6 @@
     <Reference Include="Master.BusinessFactory">
       <HintPath>D:\PickC 01312017\dlls\Master.BusinessFactory.dll</HintPath>
     </Reference>
-    <Reference Include="Master.Contract">
-      <HintPath>D:\PickC 01312017\dlls\Master.Contract.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -301,6 +298,9 @@
     <Content Include="Areas\Internal\Views\DashBoard\CurrentBookings.cshtml" />
     <Content Include="Areas\Internal\Views\Manufacturer\Add.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Internal\DriverAddress.js" />
+    <Content Include="Scripts\Internal\DriverAttachment.js" />
+    <Content Include="Scripts\Internal\DriverBankDetails.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -380,6 +380,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Master.Contract\Master.Contract.csproj">
+      <Project>{b9e20a20-01c6-480a-a49a-647df7c89463}</Project>
+      <Name>Master.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PickC.Services\PickC.Services.csproj">
       <Project>{a3cef276-f503-45b0-8e74-0211475d2b09}</Project>
       <Name>PickC.Services</Name>

@@ -83,8 +83,10 @@ namespace PickC.Internal.Areas.Internal.Controllers
         public async Task<ActionResult> CurrentBookings(BookingSearchDTO booking)
         {
             var currentbooking = await new SearchService(AUTHTOKEN, p_mobileNo).SearchBookingByDateAsync(booking);
-            var BookingSearchVM = new BookingSearchDTO();
-            return View("CurrentBookings", currentbooking);
+            var bookingSearchVM = new BookingSearchDTO();
+            bookingSearchVM.booking = currentbooking;
+
+            return View("CurrentBookings", bookingSearchVM);
 
         }
 

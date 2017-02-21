@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="BankDetails.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerPassword.cs" />
     <Compile Include="Driver.cs" />

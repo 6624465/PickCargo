@@ -38,7 +38,7 @@ namespace Operation.DataFactory
         }
 
         public List<Booking> BookingsByDate(DateTime fromdate,DateTime todate) {
-            return db.ExecuteSprocAccessor("", MapBuilder<Booking>.BuildAllProperties(), fromdate, todate).ToList();
+            return db.ExecuteSprocAccessor(DBRoutine.BOOKINGBYDATES, MapBuilder<Booking>.BuildAllProperties(), fromdate, todate).ToList();
         }
 
 
