@@ -1,4 +1,4 @@
-﻿
+﻿@model PickC.Services.DTO.SummaryDTO
 @{
     Layout = null;
 }
@@ -29,7 +29,7 @@
                     <div class="row text-center">
                         <div class="col-md-12">
                             <h4 class="box-title">Current Balance</h4>
-                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;@Model.CurrentBalance</h3>
                         </div>
                     </div>
                 </div>
@@ -46,16 +46,16 @@
                     <div class="row text-center">
                         <div class="col-md-6 col-xs-6">
                             <h4 class="box-title">Today's Summary</h4>
-                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;@Model.TodaySummary</h3>
                         </div>
                         <div class="col-md-6 col-xs-6">
                             <h4 class="box-title">Bookings</h4>
-                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;@Model.TodayBookings</h3>
                         </div>
                     </div>
                     <div class="row text-center summary-link">
                         <div class="col-xs-6">   
-                            @Html.ActionLink("SHOW BREAKUP", "Breakup", new { area = "DriverWeb" })</div><div class="col-xs-6">
+                            @Html.ActionLink("SHOW BREAKUP", "Breakup", new { area = "DriverWeb" , driverID = Model.driverId })</div><div class="col-xs-6">
     <a href="#">DAY-WISE BREAKUP</a>
 </div>
                     </div>
@@ -73,11 +73,11 @@
                     <div class="row text-center">
                         <div class="col-md-6 col-xs-6">
                             <h4 class="box-title">Today's Payment</h4>
-                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;@Model.TodayPayment</h3>
                         </div>
                         <div class="col-md-6 col-xs-6">
                             <h4 class="box-title">Last Payment</h4>
-                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;2402.00</h3>
+                            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;@Model.LastPayment</h3>
                             
                         </div>
                         <div class="row text-center summary-link">

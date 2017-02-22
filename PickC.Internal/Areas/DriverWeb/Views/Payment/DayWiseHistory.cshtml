@@ -30,10 +30,17 @@
         <div class="col-md-12 col-xs-12">
 
             <div class="list-group">
-                <a href="#" class="list-group-item"><b>Tue, 20 Sep</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;0.00</span></a>
-                <a href="#" class="list-group-item"><b>Mon, 19 Sep</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;0.00</span></a>
-                <a href="#" class="list-group-item"><b>Sun, 18 Sep</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;0.00</span></a>
-                <a href="#" class="list-group-item"><b>Sat, 17 Sep</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;0.00</span></a>
+                @if (Model != null) { 
+                    foreach (var item in Model)
+                    {
+                        <a href="#" class="list-group-item"><b>@item.CreatedOn</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;@item.PaidAmount</span></a>
+                    }
+                
+                }
+                @*<a href="#" class="list-group-item"><b>Tue, 20 Sep</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;0.00</span></a>
+                    <a href="#" class="list-group-item"><b>Mon, 19 Sep</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;0.00</span></a>
+                    <a href="#" class="list-group-item"><b>Sun, 18 Sep</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;0.00</span></a>
+                    <a href="#" class="list-group-item"><b>Sat, 17 Sep</b> <span class="pull-right"><i class="fa fa-rupee"></i>&nbsp;0.00</span></a>*@
             </div>
         </div>
     </div>

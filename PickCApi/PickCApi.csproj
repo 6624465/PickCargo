@@ -191,6 +191,7 @@
     <Compile Include="Areas\Operation\Controllers\InvoiceController.cs" />
     <Compile Include="Areas\Operation\Controllers\OTPController.cs" />
     <Compile Include="Areas\Operation\Controllers\SearchController.cs" />
+    <Compile Include="Areas\Operation\Controllers\PaymentController.cs" />
     <Compile Include="Areas\Operation\Controllers\TripController.cs" />
     <Compile Include="Areas\Operation\Controllers\TripMonitorController.cs" />
     <Compile Include="Areas\Operation\DTO\BookingCancelDTO.cs" />

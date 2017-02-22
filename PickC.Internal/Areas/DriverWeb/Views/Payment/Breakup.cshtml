@@ -1,4 +1,4 @@
-﻿
+﻿@model PickC.Services.DTO.SummaryDTO
 @{
     Layout = null;
 }
@@ -24,11 +24,11 @@
     <div class="row top-details">
         <div class="col-md-6 col-xs-6 text-center">
             <h4 class="box-title">Today's Summary</h4>
-            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h3><br />
+            <h3><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;@Model.TodaySummary</h3><br />
         </div>
         <div class="col-md-6 col-xs-6 text-center">
             <h4 class="box-title">Bookings</h4>
-            <h3>0</h3><br />
+            <h3>@Model.TodayBookings</h3><br />
         </div>
     </div>
     <div class="row">
@@ -45,17 +45,17 @@
                             <td><h5><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h5></td>
                         </tr>
                         <tr>
-                            <td><h5>OLA Fees</h5></td>
-                            <td><h5><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h5></td>
+                            <td><h5>PickC Commission </h5></td>
+                            <td><h5><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;@Model.pickcCommission</h5></td>
                         </tr>
                         <tr>
                             <td><h5>TDS</h5></td>
                             <td><h5><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h5></td>
                         </tr>
-                        <tr>
+                        @*<tr>
                             <td><h5>Tolls/Parkings</h5></td>
                             <td><h5><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;0.00</h5></td>
-                        </tr>
+                        </tr>*@
                     </table>
                 </div>
                 <div id="rideTab" class="tab-pane fade">

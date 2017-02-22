@@ -51,6 +51,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="CustomerService.cs" />
     <Compile Include="DriverService.cs" />
+    <Compile Include="DriverSummaryService.cs" />
     <Compile Include="DTO\BookingDTO.cs" />
     <Compile Include="DTO\BookingSearchDTO.cs" />
     <Compile Include="DTO\CustomerDTO.cs" />
@@ -58,8 +59,10 @@
     <Compile Include="DTO\DriverDTO.cs" />
     <Compile Include="DTO\DriverLookup.cs" />
     <Compile Include="DTO\DriverManufacturerDTO.cs" />
+    <Compile Include="DTO\DriverPaymentsDTO.cs" />
     <Compile Include="DTO\LoginDTO.cs" />
     <Compile Include="DTO\SaveBookingDTO.cs" />
+    <Compile Include="DTO\SummaryDTO.cs" />
     <Compile Include="ManufacturerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RateCardService.cs" />

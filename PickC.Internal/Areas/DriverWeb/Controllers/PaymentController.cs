@@ -1,21 +1,29 @@
-﻿using System;
+﻿using PickC.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace PickC.Internal.Areas.DriverWeb.Controllers
 {
-    public class PaymentController : Controller
+    public class PaymentController : BaseController
     {        
-        public ActionResult Summary()
+        public async  Task<ActionResult> Summary(string driverID)
         {
-            return View();
+            driverID = "DR161100001";
+            var result = await new DriverSummaryService("C636A9C5-C4C5-400E-8381-5884EE1CDC24", "1234554321").GetDriverSummary(driverID);
+            result.driverId = driverID;
+            return View(result);
         }
 
-        public ActionResult Breakup()
+        public async Task<ActionResult> Breakup(string driverID)
         {
-            return View();
+            var result = await new DriverSummaryService("C636A9C5-C4C5-400E-8381-5884EE1CDC24", "1234554321").GetDriverSummary(driverID);
+            result.pickcCommission = (result.TodaySummary / 100) * 10;
+            result.driverId = driverID;
+            return View(result);
         }
 
         public ActionResult Reverify()
@@ -23,18 +31,23 @@ namespace PickC.Internal.Areas.DriverWeb.Controllers
             return View();
         }
 
-        public ActionResult DayWiseHistory()
+        public async Task<ActionResult> DayWiseHistory(string driverID)
         {
-            return View();
+            var result = await new DriverSummaryService("C636A9C5-C4C5-400E-8381-5884EE1CDC24", "1234554321").GetPayment(driverID);
+
+            return View(result);
         }
 
-        public ActionResult Payments()
+        public async Task<ActionResult> Payments(string driverID)
         {
-            return View();
+            var result = await new DriverSummaryService("C636A9C5-C4C5-400E-8381-5884EE1CDC24", "1234554321").GetPayment(driverID);
+
+            return View(result);
         }
 
-        public ActionResult PaymentDetails()
+        public async Task<ActionResult> PaymentDetails(string driverID)
         {
+            var result = await new DriverSummaryService("C636A9C5-C4C5-400E-8381-5884EE1CDC24", "1234554321").GetPaymentDetails(driverID);
             return View();
         }
 

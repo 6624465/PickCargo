@@ -34,7 +34,7 @@ namespace Operation.DataFactory
         public const string DELETEINVOICE = "[Operation].[usp_InvoiceDelete]";
         public const string SELECTINVOICEBYBOOKINGNO = "[Operation].[usp_InvoiceSelectByBookingNo]";
 
-        
+
 
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Operation.DataFactory
         public const string SAVEBOOKING = "[Operation].[usp_BookingSave]";
         public const string DELETEBOOKING = "[Operation].[usp_BookingDelete]";
         public const string LISTOFBOOKINGBYMOBILENO = "[Operation].[usp_BookingListByMobileNo]";
-		public const string LISTNEARBOOKINGSFORDRIVER = "[Operation].[usp_NearBookingsForDriver]";
+        public const string LISTNEARBOOKINGSFORDRIVER = "[Operation].[usp_NearBookingsForDriver]";
 
         public const string SAVEPICKUPREACHDATETIME = "[Operation].[usp_SavePickupReachDateTime]";
         public const string SAVEDESTINATIONREACHDATETIME = "[Operation].[usp_SaveDestinationReachDateTime]";
@@ -89,7 +89,7 @@ namespace Operation.DataFactory
         public const string LISTNEARTRUCKSINRANGE = "[Operation].[usp_NearTrucksInRange]";
         public const string BOOKINGCANCELLEDBYDRIVER = "[Operation].[usp_BookingCancelledByDriver]";
 
-         
+
 
         public const string BOOKINGCONFIRMBYDRIVER = "[Operation].[usp_BookingConfirmByDriver]";
         public const string ISBOOKINGALREADYCONFIRMED = "[Operation].[usp_IsBookingAlreadyConfirmed]";
@@ -102,6 +102,11 @@ namespace Operation.DataFactory
         public const string BOOKINGSEARCH = "[Operation].[usp_GetCurrentBookings]";
         public const string BOOKINGBYDATES = "[Operation].[usp_BookingSearchByDate]";
 
+
+        //Driver Summary
+
+        public const string DRIVERSUMMARY = "[Operation].[usp_GetDriverSummary]";
+        public const string DRIVERPAYMENTS="[Operation].[usp_GetDriverPayments]";
 
     }
 }
