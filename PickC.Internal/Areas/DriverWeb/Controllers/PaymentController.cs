@@ -45,9 +45,9 @@ namespace PickC.Internal.Areas.DriverWeb.Controllers
             return View(result);
         }
 
-        public async Task<ActionResult> PaymentDetails(string driverID)
+        public ActionResult PaymentDetails(string driverID)
         {
-            var result = await new DriverSummaryService("C636A9C5-C4C5-400E-8381-5884EE1CDC24", "1234554321").GetPaymentDetails(driverID);
+           // var result = await new DriverSummaryService("C636A9C5-C4C5-400E-8381-5884EE1CDC24", "1234554321").GetPaymentDetails(driverID);
             return View();
         }
 

@@ -46,14 +46,14 @@ namespace PickC.Services
             });
         }
 
-        public async Task<string> GetPaymentDetails(string driverID)
-        {
-            IRestClient client = new RestClient(ApiBaseUrl);
-            var request = p_request;
-            request.Method = Method.GET;
-            request.Resource = "opearation/payment/payments/{driverID}";
+        //public async Task<string> GetPaymentDetails(string driverID)
+        //{
+        //    IRestClient client = new RestClient(ApiBaseUrl);
+        //    var request = p_request;
+        //    request.Method = Method.GET;
+        //    request.Resource = "opearation/payment/payments/{driverID}";
             
 
-        }
+        //}
     }
 }
