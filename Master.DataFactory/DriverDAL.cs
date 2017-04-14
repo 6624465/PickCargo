@@ -162,7 +162,9 @@ namespace Master.DataFactory
             var item = ((Driver)lookupItem);
 
             var driverItem = db.ExecuteSprocAccessor(DBRoutine.SELECTDRIVER,
-                                                    MapBuilder<Driver>.BuildAllProperties(),
+                                                    MapBuilder<Driver>
+                                                    .MapAllProperties()
+                                                    .DoNotMap(x => x.Nationality).Build(),
                                                     item.DriverID).FirstOrDefault();
 
             if (driverItem == null) return null;

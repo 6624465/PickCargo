@@ -217,6 +217,7 @@
     <Content Include="images\icon.png" />
     <Content Include="images\truck.png" />
     <Content Include="images\user2-160x160.jpg" />
+    <Content Include="images\user_male2-512.png" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -297,6 +298,7 @@
     <Content Include="Areas\Internal\Views\DashBoard\GetDriversList.cshtml" />
     <Content Include="Areas\Internal\Views\DashBoard\CurrentBookings.cshtml" />
     <Content Include="Areas\Internal\Views\Manufacturer\Add.cshtml" />
+    <None Include="Properties\PublishProfiles\PickCInternal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Internal\DriverAddress.js" />
     <Content Include="Scripts\Internal\DriverAttachment.js" />
