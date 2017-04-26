@@ -8,35 +8,35 @@
 }
 
 <section class="content">
-    @using (Html.BeginForm("CurrentBookings", "Dashboard", FormMethod.Post))
+    @using (Html.BeginForm("CurrentBookings", "Dashboard", FormMethod.Post, new { id = "frmCurrentBookings"}))
     {
         <div class="row">
             <ul id="myTab" class="nav nav-tabs">
                 <li>
                     <a href="#tab1" data-toggle="tab" onclick="redirect();">
-                        Tab1
+                        Drivers List
                     </a>
                 </li>
                 <li class="active">
                     <a href="#tab2" data-toggle="tab">
-                        Tab2
+                        Current Bookings
                     </a>
                 </li>
-                <li>
+                @*<li>
                     <a href="#tab3" data-toggle="tab">
                         Tab3
                     </a>
-                </li>
+                </li>*@
             </ul>
             <div id="myTabContent" class="tab-content">
                 <div id="tab2" class="tab-pane fade in active">
-                    <div class="row">
+                    <div class="row" style="margin:10px 0 0 10px;">
 
                         <div class="col-md-2">
                             @Html.TextBoxFor(x => x.dates.fromDate, new { @class = "form-control" })
                             @*<span class="input-group-btn">
-                                <button type="button" class="btn btn-default"><i class="fa fa-calendar" aria-hidden="true"></i></button>
-                            </span>*@
+                                    <button type="button" class="btn btn-default"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                </span>*@
                         </div>
                         <div class="col-md-2">
                             @Html.TextBoxFor(x => x.dates.toDate, new { @class = "form-control" })
@@ -87,10 +87,20 @@
 
 
 @section secscripts{
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#dates_fromDate,#dates_toDate').datepicker();
-            
+            $('#frmCurrentBookings').validate({
+                rules: {
+                    'dates.fromDate': {
+                        required: true
+                    },
+                    'dates.toDate': {
+                        required: true
+                    }
+                }
+            });
         });
 
         function redirect() {

@@ -23,18 +23,18 @@
             <ul id="myTab" class="nav nav-tabs">
                 <li class="active">
                     <a href="#home" data-toggle="tab">
-                        Tab1
+                       Drivers List
                     </a>
                 </li>
                 <li>
-                    <a href="#ios" data-toggle="tab" onclick="redirect();">Tab2</a>
+                    <a href="#ios" data-toggle="tab" onclick="redirect();">Current Bookings</a>
                 </li>
 
-                <li>
+                @*<li>
                     <a href="#tab" data-toggle="tab">
                         Tab3
                     </a>
-                </li>
+                </li>*@
             </ul>
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade in active" id="home">
@@ -148,7 +148,7 @@
                 var bounds = new google.maps.LatLngBounds();
 
                 for (i = 0; i < locations.length; i++) {
-                    debugger;
+                   
                     marker = new google.maps.Marker({
 
                         position: new google.maps.LatLng(locations[i].address.lat, locations[i].address.lng),
@@ -224,7 +224,7 @@
 
 
             $('#ddlSearchByStatus').on("change", function () {
-                debugger;
+               
                 $.ajax({
                     url: '@Url.Content("~/Internal/Dashboard/GetDriverBySearch")',
                     method: 'POST',
@@ -232,7 +232,7 @@
                     dataType: 'json',
                     data: JSON.stringify({ 'status': $('#ddlSearchByStatus').val() }),
                     success: function (data) {
-                        debugger;
+                       
                         $('#driverList').val();
                         var html = '';
                         $.each(data, function (key, val) {
@@ -260,10 +260,10 @@
 
                     },
                     error: function (err) {
-                        debugger;
+                       
                     },
                     failure: function (fail) {
-                        debugger;
+                       
                     }
                 });
             });
@@ -302,7 +302,7 @@
 
 
         function getDriverDetails(obj) {
-            debugger;
+           
             $.ajax({
                 url: '@Url.Content("~/Internal/Dashboard/GetDriverDetails")',
                 method: 'POST',
@@ -321,7 +321,7 @@
                     //debugger;
                 },
                 error: function (err) {
-                    // debugger;
+                    //
                 }
             });
         }

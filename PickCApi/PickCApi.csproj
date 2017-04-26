@@ -199,6 +199,7 @@
     <Compile Include="Areas\Operation\DTO\DriverLoginDTO.cs" />
     <Compile Include="Areas\Operation\DTO\PickupReachDateTimeDTO.cs" />
     <Compile Include="Areas\Operation\DTO\TripEndDTO.cs" />
+    <Compile Include="Areas\Operation\DTO\TripEstimateDTO.cs" />
     <Compile Include="Areas\Operation\DTO\TrucksInRangeDTO.cs" />
     <Compile Include="Areas\Operation\OperationAreaRegistration.cs" />
     <Compile Include="Controllers\MasterController.cs" />

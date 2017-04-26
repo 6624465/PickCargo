@@ -12,6 +12,8 @@ using System.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using PickCApi.Areas.Operation.DTO;
+
 namespace PickCApi
 {
     public class ApiBase : ApiController
@@ -157,23 +159,23 @@ namespace PickCApi
             return new smsGenerator().ConfigSms(To, string.Format(UTILITY.SmsConfirmBooking, "BK160800001"));
         }
 
-        public decimal GetTravelTimeBetweenTwoLocations(string frmLatLong, string toLatLong)
+        public TripEstimateResponse GetTravelTimeBetweenTwoLocations(string frmLatLong, string toLatLong)
         {
             string API_KEY = ConfigurationManager.AppSettings["googleAPIKEY"];
             string API_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" 
                 + frmLatLong + "&destinations=" + toLatLong + "&key=" + API_KEY;
 
-            var response = GoogleWebApi(API_URL);
-
-            return 0.00M;
+            return GoogleWebApi(API_URL);
         }
 
-        public decimal GoogleWebApi(string Url)
+        public TripEstimateResponse GoogleWebApi(string Url)
         {
             WebRequest request = WebRequest.Create(Url);
+            TripEstimateResponse _response = new TripEstimateResponse();
             using (WebResponse response = request.GetResponse())
             {
                 decimal distance = 0.00M;
+                decimal duration = 0.00M;
                 using (var sr = new StreamReader(response.GetResponseStream()))
                 {
                     var obj = JsonConvert.DeserializeObject<GoogleApiResponse>(sr.ReadToEnd());
@@ -185,10 +187,19 @@ namespace PickCApi
                             {
                                 distance = (obj.rows[0].elements[0].distance.value / 1000);
                             }
+
+                            if (obj.rows[0].elements[0].duration != null)
+                            {
+                                duration = (obj.rows[0].elements[0].duration.value / 60);
+                            }
                         }
                     }
                 }
-                return distance;
+
+                _response.amount = 0.00M;
+                _response.distance = distance;
+                _response.duration = duration;
+                return _response;
             }
         }
     }

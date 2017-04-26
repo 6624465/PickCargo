@@ -284,6 +284,17 @@ namespace PickCApi.Areas.Operation.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("tripestimate")]
+        public IHttpActionResult GetTripEstimate(TripEstimateDTO tripEstimate)
+        {
+            var obj = GetTravelTimeBetweenTwoLocations(
+                tripEstimate.frmLat.ToString() + "," + tripEstimate.frmLog.ToString(),
+                tripEstimate.toLat.ToString() + "," + tripEstimate.toLog.ToString());
+
+            return Ok(obj);
+        }
+
        
     }
 }

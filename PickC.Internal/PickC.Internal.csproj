@@ -217,6 +217,7 @@
     <Content Include="images\icon.png" />
     <Content Include="images\truck.png" />
     <Content Include="images\user2-160x160.jpg" />
+    <Content Include="images\user_male2-512.png" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

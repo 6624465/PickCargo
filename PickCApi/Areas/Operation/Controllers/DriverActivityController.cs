@@ -9,6 +9,9 @@ using System.Configuration;
 using Operation.Contract;
 using Operation.BusinessFactory;
 
+using Master.Contract;
+using Master.BusinessFactory;
+
 using PickCApi.Areas.Operation.DTO;
 using PickCApi.Core;
 using RestSharp;
@@ -127,7 +130,7 @@ namespace PickCApi.Areas.Operation.Controllers
 
                     var frmLatLong = driverActivityObj.CurrentLat.ToString() + "," + driverActivityObj.CurrentLong.ToString();
                     var toLatLong = driverActivity.Latitude + "," + driverActivity.Longitude;
-                    var distance = GetTravelTimeBetweenTwoLocations(frmLatLong, toLatLong);
+                    var distance = GetTravelTimeBetweenTwoLocations(frmLatLong, toLatLong).distance;
 
                     new TripBO().TripUpdateTravelledDistance(tripID, distance);
                     
@@ -174,36 +177,49 @@ namespace PickCApi.Areas.Operation.Controllers
         {
             try
             {
-                var result = new BookingBO().BookingConfirmByDriver(HeaderValueByKey("DRIVERID"), HeaderValueByKey("AUTH_TOKEN"), vehicleNo, BookingNo);
-                if (result)
+                var bookingObj = new BookingBO().GetBooking(new Booking { BookingNo = BookingNo });
+                if (!bookingObj.IsCancel)
                 {
-                    PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(BookingNo), BookingNo, UTILITY.NotifySuccess);
-
-                    var booking = new BookingBO().GetBooking(new Booking
+                    var result = new BookingBO().BookingConfirmByDriver(HeaderValueByKey("DRIVERID"), HeaderValueByKey("AUTH_TOKEN"), vehicleNo, BookingNo);
+                    if (result)
                     {
-                        BookingNo = BookingNo
-                    });
-                    var driverList = new BookingBO().GetNearTrucksDeviceID(booking.BookingNo,
-                        UTILITY.radius,
-                        booking.VehicleType,
-                        booking.VehicleGroup,
-                        booking.Latitude,
-                        booking.Longitude);                   
+                        PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(BookingNo), BookingNo, UTILITY.NotifySuccess);
 
-                    if (driverList.Count > 0)
-                    {
-                        var driverItem = driverList.Where(x => x.VehicleNo == vehicleNo).FirstOrDefault();
-                        if (driverItem != null)
-                            driverList.Remove(driverItem);
+                        var booking = new BookingBO().GetBooking(new Booking
+                        {
+                            BookingNo = BookingNo
+                        });
+                        var driverList = new BookingBO().GetNearTrucksDeviceID(booking.BookingNo,
+                            UTILITY.radius,
+                            booking.VehicleType,
+                            booking.VehicleGroup,
+                            booking.Latitude,
+                            booking.Longitude);
 
-                        PushNotification(driverList.Select(x => x.DeviceID).ToList<string>(),
-                            booking.BookingNo, UTILITY.NotifyBookingAcceptedByOtherDriver);
+                        if (driverList.Count > 0)
+                        {
+                            var driverItem = driverList.Where(x => x.VehicleNo == vehicleNo).FirstOrDefault();
+                            if (driverItem != null)
+                                driverList.Remove(driverItem);
+
+                            PushNotification(driverList.Select(x => x.DeviceID).ToList<string>(),
+                                booking.BookingNo, UTILITY.NotifyBookingAcceptedByOtherDriver);
+                        }
                     }
-                }
 
-                return Ok(new {
-                    status = result
-                });
+                    return Ok(new
+                    {
+                        status = result
+                    });
+                }
+                else
+                {
+                    var driver = new DriverBO().GetDriver(new Driver { DriverID = HeaderValueByKey("DRIVERID") });
+                    PushNotification(driver.DeviceID,
+                                BookingNo, UTILITY.NotifyBookingCancelledByUser);
+
+                    return Ok(UTILITY.NotifyBookingCancelledByUser);
+                }
             }
             catch (Exception ex)
             {
