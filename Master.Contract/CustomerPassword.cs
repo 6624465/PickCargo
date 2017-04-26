@@ -19,4 +19,13 @@ namespace Master.Contract
         public DateTime OTPVerifiedDate { get; set; }
 
     }
+
+    public class ForgotPasswordDTO
+    {
+        public string MobileNo { get; set; }
+
+        public string NewPassword { get; set; }
+
+        public string OTP { get; set; }
+    }
 }

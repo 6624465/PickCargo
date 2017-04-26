@@ -31,8 +31,8 @@ namespace Master.Contract
 
         public string OTP { get; set; }
         public bool IsOTPVerified { get; set; }
-        public DateTime OTPSendDate { get; set; }
-        public DateTime OTPVerifiedDate { get; set; }
+        public DateTime? OTPSendDate { get; set; }
+        public DateTime? OTPVerifiedDate { get; set; }
 
 
     }

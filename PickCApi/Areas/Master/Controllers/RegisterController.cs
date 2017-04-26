@@ -16,7 +16,7 @@ using PickCApi.Areas.Master.DTO;
 namespace PickCApi.Areas.Master.Controllers
 {
     [RoutePrefix("api/master/customer")]
-    public class RegisterController : ApiController
+    public class RegisterController : ApiBase
     {
         [HttpPost]
         [Route("save")]
@@ -24,9 +24,17 @@ namespace PickCApi.Areas.Master.Controllers
         {
             try
             {
+                customer.OTP = GenerateOTP();
+                customer.IsOTPVerified = false;
+                customer.OTPSendDate = DateTime.Now;
+                customer.OTPVerifiedDate = null;
+
                 var result = new CustomerBO().SaveCustomer(customer);
                 if (result)
+                {
+                    SendOTP(customer.MobileNo, customer.OTP);
                     return Ok(UTILITY.SUCCESSMSG);
+                }
                 else
                     return BadRequest();
             }
@@ -35,6 +43,24 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
             
+        }
+
+        [HttpPut]
+        [Route("verifyotp/{mobile}/{otp}")]
+        public IHttpActionResult VerifyOTP(string mobile, string otp)
+        {
+            var customer = new CustomerBO().GetCustomer(new Customer { MobileNo = mobile });
+            if(customer.OTP == otp)
+            {
+                customer.IsOTPVerified = true;
+                customer.OTPVerifiedDate = DateTime.UtcNow;
+                new CustomerBO().SaveCustomer(customer);
+                return Ok("OTP Verified...!");
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]
@@ -164,13 +190,21 @@ namespace PickCApi.Areas.Master.Controllers
         public IHttpActionResult Login(Customer customer)
         {
             try
-            {
+            {                
                 var token = new CustomerLogInBO().CustomerLogIn(customer.MobileNo, customer.Password);
-
+                
                 if (!string.IsNullOrWhiteSpace(token))
-                    return Ok(new {
-                        token= token
-                    });
+                {
+                    var _customer = new CustomerBO().GetCustomer(new Customer { MobileNo = customer.MobileNo });
+                    if (_customer.IsOTPVerified)
+                        return Ok(new
+                        {
+                            token = token
+                        });
+                    else
+                        return Ok("OTP not Verified...!");
+                }
+                    
                 else
                     return NotFound();
             }
@@ -194,6 +228,39 @@ namespace PickCApi.Areas.Master.Controllers
             {
                 return Ok(false);
             }
+        }
+
+        [HttpGet]
+        [Route("forgotpassword/{mobile}")]
+        public IHttpActionResult Forgotpassword(string mobile)
+        {
+            var customer = new CustomerBO().GetCustomer(new Customer { MobileNo = mobile });
+            if (customer != null)
+            {
+                customer.OTP = GenerateOTP();
+                new CustomerBO().SaveCustomer(customer);
+                SendOTP(customer.MobileNo, customer.OTP);
+                return Ok("OTP Generated...!");
+            }
+            else
+                return NotFound();            
+
+        }
+
+        [HttpPost]
+        [Route("forgotpassword")]
+        public IHttpActionResult Forgotpassword(ForgotPasswordDTO dto)
+        {
+            var customer = new CustomerBO().GetCustomer(new Customer { MobileNo = dto.MobileNo });
+            if (customer != null && customer.OTP == dto.OTP)
+            {
+                customer.Password = dto.NewPassword;
+                new CustomerBO().SaveCustomer(customer);
+
+                return Ok("Password updated...!");
+            }
+            else
+                return NotFound();
         }
 
         [HttpGet]

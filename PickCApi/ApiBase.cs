@@ -146,6 +146,11 @@ namespace PickCApi
             return password;
         }
 
+        public bool SendOTP(string To, string OTP)
+        {
+            return new smsGenerator().ConfigSms(To, string.Format(UTILITY.SmsOTP, OTP));
+        }
+
         public bool SendOTP(string To)
         {
            return new smsGenerator().ConfigSms(To,string.Format(UTILITY.SmsOTP, GenerateOTP()));
