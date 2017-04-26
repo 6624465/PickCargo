@@ -14,5 +14,9 @@ namespace Master.Contract
 
         public string NewPassword { get; set; }
 
+        public string OTP { get; set; }
+
+        public DateTime OTPVerifiedDate { get; set; }
+
     }
 }

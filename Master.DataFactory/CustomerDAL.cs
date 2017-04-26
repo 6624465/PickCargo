@@ -62,6 +62,11 @@ namespace Master.DataFactory
                 db.AddInParameter(savecommand, "Password", System.Data.DbType.String, customer.Password);
                 db.AddInParameter(savecommand, "Name", System.Data.DbType.String, customer.Name);
                 db.AddInParameter(savecommand, "EmailID", System.Data.DbType.String, customer.EmailID);
+                db.AddInParameter(savecommand, "OTP", System.Data.DbType.String, customer.OTP);
+                db.AddInParameter(savecommand, "IsOTPVerified", System.Data.DbType.Boolean, customer.IsOTPVerified);
+                db.AddInParameter(savecommand, "OTPSendDate", System.Data.DbType.DateTime, customer.OTPSendDate);
+                db.AddInParameter(savecommand, "OTPVerifiedDate", System.Data.DbType.DateTime, customer.OTPVerifiedDate);
+
                 //db.AddInParameter(savecommand, "DeviceID", System.Data.DbType.String, customer.DeviceID);
 
 
@@ -194,6 +199,8 @@ namespace Master.DataFactory
                 db.AddInParameter(deleteCommand, "MobileNo", System.Data.DbType.String, customerpassword.MobileNo);
                 db.AddInParameter(deleteCommand, "Password", System.Data.DbType.String, customerpassword.Password);
                 db.AddInParameter(deleteCommand, "NewPassword", System.Data.DbType.String, customerpassword.NewPassword);
+                db.AddInParameter(deleteCommand, "OTP", System.Data.DbType.String, customerpassword.OTP);
+                db.AddInParameter(deleteCommand, "OTPVerifiedDate", System.Data.DbType.String, customerpassword.OTPVerifiedDate);
 
 
                 result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
