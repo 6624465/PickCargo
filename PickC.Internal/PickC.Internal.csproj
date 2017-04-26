@@ -298,6 +298,7 @@
     <Content Include="Areas\Internal\Views\DashBoard\GetDriversList.cshtml" />
     <Content Include="Areas\Internal\Views\DashBoard\CurrentBookings.cshtml" />
     <Content Include="Areas\Internal\Views\Manufacturer\Add.cshtml" />
+    <None Include="Properties\PublishProfiles\PickCInternal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Internal\DriverAddress.js" />
     <Content Include="Scripts\Internal\DriverAttachment.js" />
