@@ -40,7 +40,21 @@ namespace Operation.DataFactory
         public List<Booking> BookingsByDate(DateTime fromdate,DateTime todate) {
             return db.ExecuteSprocAccessor(DBRoutine.BOOKINGBYDATES, MapBuilder<Booking>.BuildAllProperties(), fromdate, todate).ToList();
         }
-
-
+        public List<Booking> CurrentBookingsByStatus(int? Status)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.LISTOFBOOKINGBYSTATUS, MapBuilder<Booking>.BuildAllProperties(),Status).ToList();
+        }
+        public List<Booking> GetList()
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.LISTOFCURRENTBOOKING, MapBuilder<Booking>.BuildAllProperties()).ToList();
+        }
+        public List<BookingHistory> SearchBookingsHistory(string bookingNo, string CustomerMobileNo
+          ,DateTime? bookingFrom, DateTime? bookingTo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.BOOKINGHISTORYSEARCH,
+                                             MapBuilder<BookingHistory>
+                                             .BuildAllProperties(),
+                                             bookingNo, CustomerMobileNo, bookingFrom, bookingTo).ToList();
+        }
     }
 }

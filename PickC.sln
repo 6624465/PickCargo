@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickC.Services", "PickC.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickC.Internal", "PickC.Internal\PickC.Internal.csproj", "{F4B03C2A-CD62-48D5-885A-5D8CBAFE9F34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickC.Web", "..\PickC.Web\PickC.Web\PickC.Web.csproj", "{7A54A10E-5FA5-418E-BDB2-A8197EBB6B6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickC.Internal2", "PickCInternal2\PickC.Internal2.csproj", "{5EEBC5AF-3626-45C7-AC3D-B451FC679FD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,10 +65,10 @@ Global
 		{F4B03C2A-CD62-48D5-885A-5D8CBAFE9F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4B03C2A-CD62-48D5-885A-5D8CBAFE9F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4B03C2A-CD62-48D5-885A-5D8CBAFE9F34}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A54A10E-5FA5-418E-BDB2-A8197EBB6B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A54A10E-5FA5-418E-BDB2-A8197EBB6B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A54A10E-5FA5-418E-BDB2-A8197EBB6B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A54A10E-5FA5-418E-BDB2-A8197EBB6B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EEBC5AF-3626-45C7-AC3D-B451FC679FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EEBC5AF-3626-45C7-AC3D-B451FC679FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EEBC5AF-3626-45C7-AC3D-B451FC679FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EEBC5AF-3626-45C7-AC3D-B451FC679FD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

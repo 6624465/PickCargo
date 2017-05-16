@@ -82,9 +82,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:\PickC 01312017\PickC 01312017\PickC\PickC.Internal\PickC.Internal\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Operation.Contract">
-      <HintPath>D:\PickC 01312017\dlls\Operation.Contract.dll</HintPath>
-    </Reference>
     <Reference Include="RestSharp">
       <HintPath>D:\PickC 01312017\PickC 01312017\PickC\PickC.Internal\PickC.Internal\bin\RestSharp.dll</HintPath>
     </Reference>
@@ -141,10 +138,6 @@
     <Content Include="Css\bootstrap-rating.css" />
     <Content Include="Css\bootstrap.min.css" />
     <Content Include="Css\dynamic.css" />
-    <Content Include="Css\font-awesome-4.6.2\css\font-awesome.css" />
-    <Content Include="Css\font-awesome-4.6.2\css\font-awesome.min.css" />
-    <Content Include="Css\font-awesome-4.6.2\fonts\fontawesome-webfont.svg" />
-    <Content Include="Css\font-awesome-4.6.2\HELP-US-OUT.txt" />
     <Content Include="Css\help\css\AjaxLoader.html" />
     <Content Include="Css\help\css\animate.css" />
     <Content Include="Css\help\css\bootstrap-select.min.css" />
@@ -253,39 +246,6 @@
     <Content Include="Areas\Internal\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Internal\Views\Search\CurrentBookingSearch.cshtml" />
     <Content Include="Areas\Internal\Views\Search\CurrentBookingSearchData.cshtml" />
-    <Content Include="Css\font-awesome-4.6.2\fonts\fontawesome-webfont.eot" />
-    <Content Include="Css\font-awesome-4.6.2\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Css\font-awesome-4.6.2\fonts\fontawesome-webfont.woff" />
-    <Content Include="Css\font-awesome-4.6.2\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Css\font-awesome-4.6.2\fonts\FontAwesome.otf" />
-    <Content Include="Css\font-awesome-4.6.2\less\animated.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\bordered-pulled.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\core.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\fixed-width.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\font-awesome.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\icons.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\larger.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\list.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\mixins.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\path.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\rotated-flipped.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\screen-reader.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\stacked.less" />
-    <Content Include="Css\font-awesome-4.6.2\less\variables.less" />
-    <Content Include="Css\font-awesome-4.6.2\scss\font-awesome.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_animated.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_bordered-pulled.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_core.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_fixed-width.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_icons.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_larger.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_list.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_mixins.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_path.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_rotated-flipped.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_screen-reader.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_stacked.scss" />
-    <Content Include="Css\font-awesome-4.6.2\scss\_variables.scss" />
     <Content Include="Css\help\css\extra.css.map" />
     <Content Include="Css\help\css\extra.scss" />
     <Content Include="Css\help\fonts\fontawesome-webfont93e3.eot" />
@@ -298,7 +258,14 @@
     <Content Include="Areas\Internal\Views\DashBoard\GetDriversList.cshtml" />
     <Content Include="Areas\Internal\Views\DashBoard\CurrentBookings.cshtml" />
     <Content Include="Areas\Internal\Views\Manufacturer\Add.cshtml" />
-    <None Include="Properties\PublishProfiles\PickCInternal.pubxml" />
+    <Content Include="Areas\Internal\Views\DashBoard\UserApp.cshtml" />
+    <Content Include="Areas\Internal\Views\DashBoard\PaymentHistory.cshtml" />
+    <Content Include="Areas\Internal\Views\DashBoard\PendingAmount.cshtml" />
+    <Content Include="Areas\Internal\Views\Driver\DriverDetails.cshtml" />
+    <Content Include="Areas\Internal\Views\Driver\TotalDriverList.cshtml" />
+    <Content Include="Areas\Internal\Views\DashBoard\BookingHistory.cshtml" />
+    <Content Include="Areas\Internal\Views\Shared\DashboardMenuList.cshtml" />
+    <Content Include="Areas\Internal\Views\OperatorVehicleList\OperatorVehicleList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Internal\DriverAddress.js" />
     <Content Include="Scripts\Internal\DriverAttachment.js" />
@@ -343,6 +310,8 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Areas\Internal\Controllers\OperatorVehicleListController.cs" />
+    <Compile Include="Controllers\OperatorVehicleListController.cs" />
     <Compile Include="Core\PickCEx.cs" />
     <Compile Include="Core\WebAuthFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -366,6 +335,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\OperatorVehicleList\OperatorVehicleList.cshtml" />
+    <Content Include="Views\Dashboard\BookingHistory.cshtml" />
+    <Content Include="Views\Dashboard\CurrentBookings.cshtml" />
+    <Content Include="Views\Dashboard\GetDriversList.cshtml" />
+    <Content Include="Views\Dashboard\PaymentHistory.cshtml" />
+    <Content Include="Views\Dashboard\PendingAmount.cshtml" />
+    <Content Include="Views\Dashboard\UserApp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -379,12 +355,21 @@
     <Folder Include="Areas\DriverWeb\Views\Shared\" />
     <Folder Include="Areas\Internal\Models\" />
     <Folder Include="Areas\OperatorWeb\Models\" />
+    <Folder Include="Css\font-awesome-4.7.0\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Master.Contract\Master.Contract.csproj">
       <Project>{b9e20a20-01c6-480a-a49a-647df7c89463}</Project>
       <Name>Master.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Operation.BusinessFactory\Operation.BusinessFactory.csproj">
+      <Project>{A3636D65-64D3-4F1A-B560-910EC5031EB7}</Project>
+      <Name>Operation.BusinessFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Operation.Contract\Operation.Contract.csproj">
+      <Project>{ef1065e7-b862-4409-88c4-bfd4a1a83ab5}</Project>
+      <Name>Operation.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\PickC.Services\PickC.Services.csproj">
       <Project>{a3cef276-f503-45b0-8e74-0211475d2b09}</Project>

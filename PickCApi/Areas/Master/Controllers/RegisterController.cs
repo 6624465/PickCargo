@@ -190,9 +190,9 @@ namespace PickCApi.Areas.Master.Controllers
         public IHttpActionResult Login(Customer customer)
         {
             try
-            {                
+            {
                 var token = new CustomerLogInBO().CustomerLogIn(customer.MobileNo, customer.Password);
-                
+
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     var _customer = new CustomerBO().GetCustomer(new Customer { MobileNo = customer.MobileNo });

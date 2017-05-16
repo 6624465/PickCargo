@@ -38,6 +38,25 @@ namespace PickCApi.Areas.Operation.Controllers
                 return InternalServerError(ex);
             }
         }
+        [HttpGet]
+        [Route("list/customerbyname/{status?}")]
+
+        public IHttpActionResult GetDriverBySearch(int? status)
+        {
+            try
+            {
+                var result = new BookingBO().GetCustomerBySearch(status);
+                if (result != null)
+                    return Ok(result);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
 
         [HttpGet]
         [Route("list/{mobileNo}")]
@@ -282,17 +301,6 @@ namespace PickCApi.Areas.Operation.Controllers
             {
                 return InternalServerError(ex);
             }
-        }
-
-        [HttpPost]
-        [Route("tripestimate")]
-        public IHttpActionResult GetTripEstimate(TripEstimateDTO tripEstimate)
-        {
-            var obj = GetTravelTimeBetweenTwoLocations(
-                tripEstimate.frmLat.ToString() + "," + tripEstimate.frmLog.ToString(),
-                tripEstimate.toLat.ToString() + "," + tripEstimate.toLog.ToString());
-
-            return Ok(obj);
         }
 
        

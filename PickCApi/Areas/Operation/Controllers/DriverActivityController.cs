@@ -185,27 +185,27 @@ namespace PickCApi.Areas.Operation.Controllers
                     {
                         PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(BookingNo), BookingNo, UTILITY.NotifySuccess);
 
-                        var booking = new BookingBO().GetBooking(new Booking
-                        {
-                            BookingNo = BookingNo
-                        });
-                        var driverList = new BookingBO().GetNearTrucksDeviceID(booking.BookingNo,
-                            UTILITY.radius,
-                            booking.VehicleType,
-                            booking.VehicleGroup,
-                            booking.Latitude,
-                            booking.Longitude);
+                    var booking = new BookingBO().GetBooking(new Booking
+                    {
+                        BookingNo = BookingNo
+                    });
+                    var driverList = new BookingBO().GetNearTrucksDeviceID(booking.BookingNo,
+                        UTILITY.radius,
+                        booking.VehicleType,
+                        booking.VehicleGroup,
+                        booking.Latitude,
+                        booking.Longitude);                   
 
-                        if (driverList.Count > 0)
-                        {
-                            var driverItem = driverList.Where(x => x.VehicleNo == vehicleNo).FirstOrDefault();
-                            if (driverItem != null)
-                                driverList.Remove(driverItem);
+                    if (driverList.Count > 0)
+                    {
+                        var driverItem = driverList.Where(x => x.VehicleNo == vehicleNo).FirstOrDefault();
+                        if (driverItem != null)
+                            driverList.Remove(driverItem);
 
-                            PushNotification(driverList.Select(x => x.DeviceID).ToList<string>(),
-                                booking.BookingNo, UTILITY.NotifyBookingAcceptedByOtherDriver);
-                        }
+                        PushNotification(driverList.Select(x => x.DeviceID).ToList<string>(),
+                            booking.BookingNo, UTILITY.NotifyBookingAcceptedByOtherDriver);
                     }
+                }
 
                     return Ok(new
                     {

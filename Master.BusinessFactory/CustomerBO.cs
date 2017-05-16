@@ -37,7 +37,7 @@ namespace Master.BusinessFactory
         public Customer GetCustomer(Customer item)
         {
             return (Customer)customerDAL.GetItem<Customer>(item);
-        }        
+        }
 
         public bool UpdateCustomerDevice(string mobileNo, string deviceID)
         {

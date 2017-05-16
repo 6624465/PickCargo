@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Support";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="help">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <h3 class="contact-form-title"><i class="fa fa-envelope"></i> Write to us</h3>
+                <form id="contact-form" action="contact-form.html" method="post" role="form">
+                    <div class="error-container"></div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input class="form-control form-control-name" name="name" id="name" placeholder="" type="text" required>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control form-control-email" name="email" id="email"
+                                       placeholder="" type="email" required>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input class="form-control form-control-subject" name="Mobile" id="subject"
+                                       placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea class="form-control form-control-message" name="message" id="message" placeholder="" rows="10" required></textarea>
+                            </div>
+                            <div class="text-left">
+                                <br>
+                                <button class="btn btn-primary solid blank" type="submit">Send </button>
+                            </div>
+                        </div>
+                        </div>
+                   
+                </form>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                       
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div >
+                                    <div class="col-md-8 col-md-offset-3">
+                                        <div class="support">
+                                            <div class="btn btn-primary solid blank" type="submit">
+                                                <i class="fa fa-phone"></i>&nbsp; +91. 40. 6 5454 222
+                                            </div>
+                                            <div class="btn btn-primary solid blank" type="submit">
+                                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                                &nbsp; www.pickcargo.in
+                                            </div>
+                                            <p>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                     @*<div class="col-md-8 col-md-offset-3">
+
+                                        <div class="contact-info-box-content support">
+
+                                           <p><i class="fa fa-phone"></i>&nbsp; +91. 40. 6 5454 222 </p>
+                                            <p>
+                                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                                &nbsp; www.pickcargo.in
+                                            </p>
+                                        </div>
+                                    </div>*@
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- Widget end -->
+
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <!-- Content col end -->
+
+        </div>
+
+
+        <!-- Content row -->
+    </div>
+    <!-- Conatiner end -->
+</section>
+

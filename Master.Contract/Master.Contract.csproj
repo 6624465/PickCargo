@@ -46,8 +46,15 @@
     <Compile Include="Driver.cs" />
     <Compile Include="IContract.cs" />
     <Compile Include="LookUp.cs" />
+    <Compile Include="Operator.cs" />
+    <Compile Include="OperatorDriver.cs" />
+    <Compile Include="OperatorDriverList.cs" />
+    <Compile Include="OperatorVehicle.cs" />
+    <Compile Include="OperatorVehicles.cs" />
+    <Compile Include="OperatorVehuicleAttachedNo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RateCard.cs" />
+    <Compile Include="TruckList.cs" />
     <Compile Include="VehicleConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

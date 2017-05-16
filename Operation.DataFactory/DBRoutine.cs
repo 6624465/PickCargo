@@ -47,9 +47,22 @@ namespace Operation.DataFactory
         public const string DELETEBOOKING = "[Operation].[usp_BookingDelete]";
         public const string LISTOFBOOKINGBYMOBILENO = "[Operation].[usp_BookingListByMobileNo]";
         public const string LISTNEARBOOKINGSFORDRIVER = "[Operation].[usp_NearBookingsForDriver]";
+        public const string LISTOFBOOKINGBYSTATUS = "[Master].[usp_GetCustomerByStatus]";
+        public const string LISTOFCURRENTBOOKING = "[Operation].[usp_BookingList]";
 
         public const string SAVEPICKUPREACHDATETIME = "[Operation].[usp_SavePickupReachDateTime]";
         public const string SAVEDESTINATIONREACHDATETIME = "[Operation].[usp_SaveDestinationReachDateTime]";
+
+        /// <summary>
+        /// [Operation].[OperatorVehicle]
+        /// </summary>
+
+        public const string SELECTOPERATORVEHICLETYPELIST = "[Master].[usp_OperatorVehicleTypeList]";
+        public const string SELECTOPERATORVEHICLEMODELLIST = "[Master].[usp_OperatorVehicleModelList]";
+        public const string SAVEOPERATORVEHICLELIST = "[Master].[usp_OperatorVehicleSaveList]";
+        public const string SELECTOPERATORVEHICLETOTALLIST = "[Master].[usp_OperatorVehicleList]";
+
+
 
 
         /// <summary>
@@ -62,6 +75,17 @@ namespace Operation.DataFactory
         public const string DELETECUSTOMERLOGIN = "[Operation].[usp_CustomerLoginDelete]";
         public const string AUTHENTICATEUSER = "[Operation].[usp_AUTHENTICATE_USER]";
         public const string CUSTOMERLOGIN = "[Operation].[usp_DoCustomerLogIn]";
+
+        /// <summary>
+        /// [Operation].[OperatorLogin]
+        /// </summary>
+
+        //public const string SELECTCUSTOMERLOGIN = "[Operation].[usp_CustomerLoginSelect]";
+        //public const string LISTCUSTOMERLOGIN = "[Operation].[usp_CustomerLoginList]";
+        //public const string SAVECUSTOMERLOGIN = "[Operation].[usp_CustomerLoginSave]";
+        //public const string DELETECUSTOMERLOGIN = "[Operation].[usp_CustomerLoginDelete]";
+        public const string OPERATORAUTHENTICATEUSER = "[Operation].[usp_OperatorAUTHENTICATE_USER]";
+        public const string OPERATORLOGIN = "[Operation].[usp_DoOperatorLogIn]";
 
 
 
@@ -101,6 +125,8 @@ namespace Operation.DataFactory
 
         public const string BOOKINGSEARCH = "[Operation].[usp_GetCurrentBookings]";
         public const string BOOKINGBYDATES = "[Operation].[usp_BookingSearchByDate]";
+        public const string BOOKINGHISTORYSEARCH = "[Operation].[usp_BookingHistoryList]";
+
 
 
         //Driver Summary

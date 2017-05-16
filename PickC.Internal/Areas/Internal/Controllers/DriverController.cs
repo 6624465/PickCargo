@@ -22,8 +22,13 @@ namespace PickC.Internal.Areas.Internal.Controllers
         {
             var driverList = await new DriverService(AUTHTOKEN, p_mobileNo).DriversListAsync();
             return View(driverList);
-        }
 
+        }
+         [HttpGet]
+        public ActionResult DriverDetails()
+        {
+            return View("DriverDetails");
+        }
         [HttpGet]
         public async Task<ActionResult> Add()
         {

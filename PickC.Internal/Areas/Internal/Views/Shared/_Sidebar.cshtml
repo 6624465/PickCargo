@@ -20,7 +20,7 @@
             </div>
         </form>
         <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
+            @*<li class="header">MAIN NAVIGATION</li>*@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -43,6 +43,8 @@
                 <ul class="treeview-menu">
                     <li>@Html.ActionLink(" Customers", "Index", "Customers", new { Area = "Internal" }, new { @class = "fa fa-users" } )</li>                                        
                     <li>@Html.ActionLink(" Drivers", "Driver", "Driver", new { Area = "Internal" }, new { @class = "fa fa-car" })</li>
+                    <li>@Html.ActionLink(" OperatorList", "Index", "OperatorVehicleList", new { Area = "Internal" }, new { @class = "fa fa-users" })</li>  
+                    
                     @*<li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>*@
                 </ul>

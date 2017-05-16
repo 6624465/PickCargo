@@ -82,5 +82,29 @@ namespace Master.DataFactory
         public const string SAVEATTACHMENTS = "[Master].[usp_AttachmentsSave]";
         public const string SAVEMANUFACTURER = "[Master].[usp_SaveVehicleManufacturer]";
 
+        /// <summary>
+        /// [Master].[Operator]
+        /// </summary>
+
+        public const string SELECTOPERATOR = "[Master].[usp_OperatorSelect]";
+        public const string LISTOPERATOR = "[Master].[usp_OperatorList]";
+        public const string SAVEOPERATOR = "[Master].[usp_OperatorSave]";
+        public const string DELETEPERATOR = "[Master].[usp_OperatorDelete]";    
+        public const string SAVEOPERATORATTACHMENTS = "[Master].[usp_AttachmentsSave]";
+
+        /// <summary>
+        /// [Master].[OperatorDriver]
+        /// </summary>
+
+        public const string SELECTDRIVERDETAILS = "[Master].[usp_DriverListDetails]";
+        public const string SELECTVEHICLENODETAILS = "[Master].[usp_OperatorVehicleNoList]";
+        public const string SAVEOPERATORDRIVERLIST = "[Master].[usp_OperatorDriverSave]";
+        public const string SELECTOPERATORDRIVERTOTALLIST = "[Master].[usp_OperatorDriverSelect]";
+
+        /// <summary>
+        /// [Master].[TruckList]
+        /// </summary>
+        /// 
+        public const string LISTTRUCK = "[Master].[usp_GetTruckList]";
     }
 }

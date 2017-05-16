@@ -20,6 +20,9 @@ namespace Operation.Contract
 
         public string CustomerID { get; set; }
 
+        public string CustomerName { get; set; }
+
+        public int Status { get; set; }
 
         public DateTime RequiredDate { get; set; }
 

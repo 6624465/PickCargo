@@ -27,9 +27,21 @@ namespace Operation.BusinessFactory
                 customerName, vehicleNumber
                 );
         }
-
+        public List<Booking> GetList()
+        {
+            return searchDAL.GetList();
+        }
+        public List<Booking> CurrentBookingByStatus(int? Status)
+        {
+            return searchDAL.CurrentBookingsByStatus(Status);
+        }
         public List<Booking> BookingByDate(DateTime fromdate , DateTime todate) {
             return searchDAL.BookingsByDate(fromdate,todate);
+        }
+        public List<BookingHistory> SearchBookingsHistory(string bookingNo,string CustomerMobileNo, DateTime? bookingFrom,
+           DateTime? bookingTo)
+        {
+            return searchDAL.SearchBookingsHistory(bookingNo,CustomerMobileNo,bookingFrom,bookingTo);
         }
     }
 }

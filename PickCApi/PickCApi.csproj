@@ -43,6 +43,9 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MCPG.CCA.Util">
+      <HintPath>C:\dlls\MCPG.CCA.Util.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -149,7 +152,20 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="getRSA.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\128-Large-closed.png" />
+    <Content Include="Images\128-Large-open.png" />
+    <Content Include="Images\128-Mini-closed.png" />
+    <Content Include="Images\128-Mini-open.png" />
+    <Content Include="Images\128-Small-closed.png" />
+    <Content Include="Images\128-Small-open.png" />
+    <Content Include="Images\64-Large-closed.png" />
+    <Content Include="Images\64-Large-open.png" />
+    <Content Include="Images\64-Mini-closed.png" />
+    <Content Include="Images\64-Mini-open.png" />
+    <Content Include="Images\64-Small-closed.png" />
+    <Content Include="Images\64-Small-open.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Operation\Views\web.config" />
@@ -174,10 +190,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Master\Controllers\AddressController.cs" />
+    <Compile Include="Areas\Master\Controllers\ADdriverlistController.cs" />
+    <Compile Include="Areas\Master\Controllers\ADtruckList.cs" />
     <Compile Include="Areas\Master\Controllers\CargoTypeController.cs" />
     <Compile Include="Areas\Master\Controllers\DriverController.cs" />
     <Compile Include="Areas\Master\Controllers\LoadingUnLoadingController.cs" />
     <Compile Include="Areas\Master\Controllers\ManufacturerController.cs" />
+    <Compile Include="Areas\Master\Controllers\OperatorController.cs" />
+    <Compile Include="Areas\Master\Controllers\OperatorDriversController.cs" />
+    <Compile Include="Areas\Master\Controllers\OperatorRegisterController.cs" />
     <Compile Include="Areas\Master\Controllers\RateCardController.cs" />
     <Compile Include="Areas\Master\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Master\Controllers\VehicleConfigController.cs" />
@@ -189,6 +210,7 @@
     <Compile Include="Areas\Operation\Controllers\BookingController.cs" />
     <Compile Include="Areas\Operation\Controllers\DriverActivityController.cs" />
     <Compile Include="Areas\Operation\Controllers\InvoiceController.cs" />
+    <Compile Include="Areas\Operation\Controllers\OperatorVehicleListController.cs" />
     <Compile Include="Areas\Operation\Controllers\OTPController.cs" />
     <Compile Include="Areas\Operation\Controllers\SearchController.cs" />
     <Compile Include="Areas\Operation\Controllers\PaymentController.cs" />
@@ -205,6 +227,14 @@
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Core\ApiAuthFilter.cs" />
+    <Compile Include="Core\OperatorAPIAuthFilter.cs" />
+    <Compile Include="getRSA.aspx.cs">
+      <DependentUpon>getRSA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="getRSA.aspx.designer.cs">
+      <DependentUpon>getRSA.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,6 +266,7 @@
     <Folder Include="Areas\Master\Views\Driver\" />
     <Folder Include="Areas\Master\Views\Shared\" />
     <Folder Include="Areas\Operation\Models\" />
+    <Folder Include="Areas\Operation\Views\OperatorVehicle\" />
     <Folder Include="Areas\Operation\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>

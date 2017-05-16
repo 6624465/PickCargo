@@ -44,8 +44,11 @@
     <Compile Include="DriverBO.cs" />
     <Compile Include="LookUpBO.cs" />
     <Compile Include="ManufacturerBO.cs" />
+    <Compile Include="OperatorBO.cs" />
+    <Compile Include="OperatorDriverBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RateCardBO.cs" />
+    <Compile Include="TruckBO.cs" />
     <Compile Include="VehicleConfigBO.cs" />
   </ItemGroup>
   <ItemGroup>

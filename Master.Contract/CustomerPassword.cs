@@ -13,11 +13,8 @@ namespace Master.Contract
         public string Password { get; set; }
 
         public string NewPassword { get; set; }
-
-        public string OTP { get; set; }
-
-        public DateTime OTPVerifiedDate { get; set; }
-
+        public object OTP { get; set; }
+        public object OTPVerifiedDate { get; set; }
     }
 
     public class ForgotPasswordDTO

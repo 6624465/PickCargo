@@ -23,7 +23,7 @@ namespace PickC.Services
         public async Task<List<Address>> AddressListAsync(string addressLinkID)
         {
             IRestClient client = new RestClient(ApiBaseUrl);
-            var request = p_request;
+            var request =p_request;
             request.Method = Method.GET;
             request.Resource = "master/address/list/{addressLinkID}";
             request.AddParameter("addressLinkID", addressLinkID, ParameterType.UrlSegment);

@@ -9,6 +9,7 @@ using PickC.Services;
 using PickC.Internal.ViewModals;
 using PickC.Services.DTO;
 using Operation.Contract;
+using Operation.BusinessFactory;
 
 namespace PickC.Internal.Areas.Internal.Controllers
 {
@@ -69,14 +70,27 @@ namespace PickC.Internal.Areas.Internal.Controllers
             return View(driverMonitorVm);
         }
 
-        [HttpGet]
-        public async Task<ActionResult> CurrentBookings(BookingDTO search)
-        {
-            var currentbookings = await new SearchService(AUTHTOKEN, p_mobileNo).SearchCurrentBookingAsync(search);
-            var bookingSearchVM = new BookingSearchDTO();
-            bookingSearchVM.booking =currentbookings;
+        //[HttpGet]
+        //public async Task<ActionResult> CurrentBookings(BookingDTO search)
+        //{
+        //    var currentbookings = await new SearchService(AUTHTOKEN, p_mobileNo).SearchCurrentBookingAsync(search);
+        //    var bookingSearchVM = new BookingSearchDTO();
+        //    bookingSearchVM.booking = currentbookings;
 
-            return View("CurrentBookings", bookingSearchVM);
+        //    return View("CurrentBookings", bookingSearchVM);
+        //}
+        [HttpGet]
+        public async Task<ActionResult> CurrentBookings()
+        {
+            var currentbookings = await new SearchService(AUTHTOKEN, p_mobileNo).BookingListAsync();
+            var bookingSearchVM = new BookingSearchDTO();
+            bookingSearchVM.booking = currentbookings;
+            return View(bookingSearchVM);
+        }
+        public async Task<JsonResult> GetCustomerBySearch(int? status)
+        {
+            var customerlist = await new SearchService(AUTHTOKEN, p_mobileNo).GetCustomerBySearch(status);
+            return Json(customerlist, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -89,7 +103,36 @@ namespace PickC.Internal.Areas.Internal.Controllers
             return View("CurrentBookings", bookingSearchVM);
 
         }
-
+        [HttpGet]
+        public async Task<ActionResult> BookingHistory(BookingHistoryDTO search)
+        {
+            var bookingHistory = await new SearchService(AUTHTOKEN, p_mobileNo).SearchBookingHistoryAsync(search);
+            var bookingSearchVM = new BookingHistoryDTO();
+            bookingSearchVM.bookingHistory = bookingHistory;
+            return View("BookingHistory", bookingSearchVM);
+        }
+        [HttpPost]
+        public async Task<ActionResult> BookingsHistory(BookingHistoryDTO search)
+        {
+            var bookingHistory = await new SearchService(AUTHTOKEN, p_mobileNo).SearchBookingHistoryAsync(search);
+            var bookingSearchVM = new BookingHistoryDTO();
+            bookingSearchVM.bookingHistory = bookingHistory;
+            return View("BookingHistory", bookingSearchVM);
+        }
+        [HttpGet]
+        public ActionResult UserApp()
+        {
+            return View("UserApp");
+        }
+        [HttpGet]
+        public ActionResult PaymentHistory()
+        {
+            return View("PaymentHistory");
+        }
+        public ActionResult PendingAmount()
+        {
+            return View("PendingAmount");
+        }
         public async Task<JsonResult> GetDriverBySearch(bool? status=null)
         {
           

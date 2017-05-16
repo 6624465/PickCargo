@@ -50,5 +50,58 @@ namespace PickCApi.Areas.Operation.Controllers
             }
 
         }
+        [HttpGet]
+        [Route("list")]
+        public IHttpActionResult CurrentBookingList()
+        {
+            try
+            {
+                var BookingList = new SearchBO().GetList();
+
+                if (BookingList != null)
+                    return Ok(BookingList);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        [HttpPost]
+        [Route("list/driverbyname/{status}")]
+        public IHttpActionResult CurrentBookingByStatus(int? status)
+        {
+            try
+            {
+                var bookingresult = new SearchBO().CurrentBookingByStatus(status);
+                return Ok(bookingresult);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+        [HttpPost]
+        [Route("bookingHistory")]
+        public IHttpActionResult BookingHistorySearch(BookingHistoryDTO bookingDTO)
+        {
+            try
+            {
+                var bookingResult = new SearchBO().SearchBookingsHistory(
+                    bookingDTO.BookingNo,
+                    bookingDTO.CustomerMobile,
+                    bookingDTO.Datefrom,
+                    bookingDTO.DateTo);
+
+                return Ok(bookingResult);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
     }
 }

@@ -15,7 +15,7 @@ namespace PickCApi.Areas.Master.Controllers
 {
     [RoutePrefix("api/master/driver")]
     [ApiAuthFilter]
-    public class DriverController : ApiController
+    public class DriverController : ApiBase
     {
         [HttpGet]
         [Route("list")]

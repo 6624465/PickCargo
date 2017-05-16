@@ -1,5 +1,9 @@
-﻿@model List<PickC.Internal.DTO.CustomerDTO>
+﻿@model List<PickC.Services.DTO.CustomerDTO>
 @using PickC.Internal.HtmlHelpers
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 @{
     ViewBag.Title = "Index";
     WebGrid grid = new WebGrid(Model, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "grid");

@@ -33,6 +33,13 @@ namespace Operation.DataFactory
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTBOOKING, MapBuilder<Booking>.BuildAllProperties()).ToList();
         }
+        public List<Booking> GetCustomerBySearch(int? status)
+        {
+
+            List<Booking> list = db.ExecuteSprocAccessor(DBRoutine.LISTOFBOOKINGBYSTATUS,
+                                                       MapBuilder<Booking>.BuildAllProperties(), status).ToList();
+            return list;
+        }
 
         public List<Booking> GetListByMobileNo(string mobileNo)
         {

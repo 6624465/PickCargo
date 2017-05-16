@@ -93,7 +93,7 @@ namespace Master.DataFactory
             return (result > 0 ? true : false);
 
         }
-        
+
 
         public bool Delete<T>(T item) where T : IContract
         {
@@ -145,7 +145,8 @@ namespace Master.DataFactory
 
         #endregion
 
-        public bool UpdateCustomerDevice(string mobileNo, string deviceID) {
+        public bool UpdateCustomerDevice(string mobileNo, string deviceID)
+        {
             var result = false;
 
             var connnection = db.CreateConnection();
@@ -157,8 +158,8 @@ namespace Master.DataFactory
             {
                 var deleteCommand = db.GetStoredProcCommand(DBRoutine.CUSTOMERUPDATEDEVICEID);
                 db.AddInParameter(deleteCommand, "MobileNo", System.Data.DbType.String, mobileNo);
-                db.AddInParameter(deleteCommand, "DeviceID", System.Data.DbType.String, deviceID );
-                
+                db.AddInParameter(deleteCommand, "DeviceID", System.Data.DbType.String, deviceID);
+
 
 
                 result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
@@ -178,7 +179,7 @@ namespace Master.DataFactory
 
             }
             return result;
-        
+
         }
 
 
@@ -217,7 +218,7 @@ namespace Master.DataFactory
             {
                 transaction.Dispose();
                 connnection.Close();
-                
+
             }
             return result;
         }

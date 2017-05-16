@@ -20,6 +20,7 @@ namespace Master.Contract
 
         public string VehicleNo { get; set; }
 
+        public string VehicleType { get; set; }
 
         public string FatherName { get; set; }
 

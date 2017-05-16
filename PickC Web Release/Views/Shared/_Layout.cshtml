@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>PR TECHNO SOLUTIONS Pvt Ltd.</title>
+
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Favicons
+    ================================================== -->
+    <link rel="icon" href="img/favicon/favicon-32x32.html" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/favicon/favicon-144x144.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/favicon/favicon-72x72.html">
+    <link rel="apple-touch-icon-precomposed" href="img/favicon/favicon-54x54.html">
+
+    <!-- CSS
+    ================================================== -->
+    <!-- Bootstrap -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"> 
+    <link href="@Url.Content("~/css/font-awesome-4.6.2/css/font-awesome.css")" rel="stylesheet" />
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.min.css")">
+   <!-- <link href="@Url.Content("~/css/AdminLTE.min.css")" rel="stylesheet" />-->
+    <link href="@Url.Content("~/css/bootstrap-datetimepicker.css")" rel="stylesheet" />
+    <!-- Template styles-->
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
+    <!-- Responsive styles-->
+    <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="@Url.Content("~/css/font-awesome.min.css")">
+    <!-- Animation -->
+    <link rel="stylesheet" href="@Url.Content("~/css/animate.css")">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="@Url.Content("~/css/owl.carousel.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/owl.theme.css")">
+    <!-- Colorbox -->
+    <link rel="stylesheet" href="@Url.Content("~/css/colorbox.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/ripple.css")">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap-select.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/extra.css")">
+
+    <style type="text/css">
+        input[type=text].error, input[type=password].error, textarea.error, select.error {
+            border: 1px solid red;
+            background-color: #f5e6e6;
+        }
+
+        label.error {
+            display: none !important;
+        }
+        
+        .navBackClr li a:hover {
+            background-color:#000;
+        }        
+    </style>
+    <!--Start of Tawk.to Script-->
+    @*<script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/57e3bf0e6339c4365aa90e10/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>*@
+    @RenderSection("css", false)
+</head>
+
+<body>
+
+    <div class="body-inner">
+       
+        <!-- Header start -->
+        <header id="header" class="header-white">
+            <div id="top-bar" class="top-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 top-social">
+                            <ul class="unstyled">
+                                <li>
+                                    <a title="Facebook" href="#">
+                                        <span class="social-icon"><i class="fa fa-facebook"></i></span>
+                                    </a>
+                                    <a title="Twitter" href="#">
+                                        <span class="social-icon"><i class="fa fa-twitter"></i></span>
+                                    </a>
+                                    <a title="Google+" href="#">
+                                        <span class="social-icon"><i class="fa fa-google-plus"></i></span>
+                                    </a>
+                                    <a title="Linkdin" href="#">
+                                        <span class="social-icon"><i class="fa fa-linkedin"></i></span>
+                                    </a>
+                                    <!--  <a title="instagram" href="#">
+                                  <span class="social-icon"><i class="fa fa-instagram"></i></span>
+                              </a> -->
+                                </li>
+                            </ul>
+                        </div><!--/ Top social end -->
+
+                        <div class="col-md-6 col-sm-6 col-xs-12 top-menu ">
+                            <ul class="unstyled">
+                                @*<a href="~/Help/Support">Click here</a>*@
+                                @*@Html.ActionLink("Customer Support", "Support", "Help", null, null)*@
+                               
+                               <li><a href="@Url.Content("~/Help/Support")"><i class="fa fa-headphones"></i> Customer Support</a></li>
+                                <li><a href="@Url.Content("~/Help/menu")"><i class="fa fa-hand-o-right"></i> Help</a></li>
+
+                            </ul>
+                        </div><!--/ Top menu end -->
+
+                    </div><!--/ Content row end -->
+                </div><!--/ Container end -->
+            </div><!--/ Topbar end -->
+            <div class="container">
+                <div class="row">
+                    <div class="navbar-header">
+                        <div class="logo">
+                            <a href="@Url.Content("~/Home/Index")">
+                                <img src="@Url.Content("~/images/logo.png")" alt="">
+                            </a>
+                        </div><!-- logo end -->
+                    </div>
+
+                    <div class="site-nav-inner">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <form class="navbar-form navbar-right hidden-xs hidden-sm">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No.">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default app_btn tooltips" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button">Get <B><b>Pick-C</b></B> App Link</button>
+                                </span>
+                            </div>
+                        </form>
+                        <nav class="collapse navbar-collapse navbar-responsive-collapse navbar-right">
+                            <ul class="nav navbar-nav navBackClr">
+                                <li class="mleft"><a href="#">Track Cargo with CRN</a></li>
+                                <li><a href="@Url.Content("~/Help/Services")">Services</a></li>
+                                <li><a href="@Url.Content("~/Help/AboutUs")">About Us</a></li>
+                                @*<li><a href="@Url.Content("~/RateCard/index")">Fare chart</a></li>*@
+                                <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>
+                                <li><a href="@Url.Content("~/Help/ContactUs")">Contact us </a></li>
+                                
+                            </ul><!--/ Nav ul end -->
+                           
+                        </nav><!--/ Collapse end -->
+                        
+                    </div><!-- Site nav inner end -->
+                </div><!-- Row end -->
+            </div><!-- Container end -->
+        </header><!--/ Header end -->
+        <!-- ******CONTENT****** -->
+        <div class="main-content"> @RenderBody()</div>
+        <section id="ts-features" class="features-area1">
+            <div class="container">
+                <div class="row text-center">
+                    <h2 class="title">
+                        
+                        <span class="title-head">Why Choose Us</span>
+                        We are a Dedicated Team
+                    </h2>
+                </div><!--/ Title row end --><br>
+
+                <div class="row service-bg-row">
+                    <div class="service-bg-box one  col-md-3 col-sm-12">
+                        <div class="">
+                            <div class="ts-service-icon-wrapper">
+                                <span class="ts-service-icon service-icon"><i class="fa fa-laptop"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-bg-box-content">
+                            <h3>
+                                24/7 Cargo Booking
+
+                            </h3>
+                            <p>Book your Cargo deliveries completely online anytime anywhere in your City</p>
+
+                        </div><!-- Col 1 end -->
+                    </div>
+                    <div class="service-bg-box one  col-md-3 col-sm-12">
+                        <div class="">
+                            <div class="ts-service-icon-wrapper">
+                                <span class="ts-service-icon service-icon"><i class="fa fa-map-marker"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-bg-box-content">
+                            <h3>
+                                Online Tracking
+                            </h3>
+                            <p>Track your cargo online from booking to delivery</p>
+
+                        </div><!-- Col 1 end -->
+                    </div>
+                    <div class="service-bg-box one  col-md-3 col-sm-12">
+                        <div class="">
+                            <div class="ts-service-icon-wrapper">
+                                <span class="ts-service-icon service-icon"><i class="fa fa-rupee"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-bg-box-content">
+                            <h3>
+                                Transparent Pricing
+                            </h3>
+                            <p>Online payment, Competitive pricing and Automated invoicing </p>
+
+                        </div><!-- Col 1 end -->
+                    </div>
+
+                    <div class="service-bg-box one  col-md-3 col-sm-12">
+                        <div class="">
+                            <div class="ts-service-icon-wrapper">
+                                <span class="ts-service-icon service-icon"><i class="fa fa-truck"></i></span>
+                            </div>
+                        </div>
+                        <div class="service-bg-box-content">
+                            <h3>
+                                Time-Definite Delivery
+                            </h3>
+                            <p>Our team of professional Drivers deliver with care In time, every time</p>
+
+                        </div><!-- Col 1 end -->
+                    </div>
+
+                </div><!--/ Content row end -->
+            </div><!--/ Container end -->
+        </section>
+
+
+        <footer id="footer" class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3 col-sm-12 footer-widget footer-about">
+                            <div class="footer-logo">
+                                <img src="@Url.Content("~/images/logo.png")" alt="" class="img-responsive">
+                            </div>
+                            <p>
+                               <b>Pick-C</b> (Cargo) is mobile app unique of its kind for goods transportation, which integrates city goods transportation ...
+                            </p>
+                            <a class="mc" href="@Url.Content("~/Help/AboutUs")">Read More <i class="fa fa-angle-right"></i></a>
+                            <div class="footer-social">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <!-- <li><a href="#"><i class="fa fa-youtube"></i></a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-12 footer-widget">
+                            <h3 class="widget-title">Quick Links</h3>
+                            <ul class="list-arrow">
+                                <li><a href="@Url.Content("~/Help/Services")">Services</a></li>
+                                <li><a href="@Url.Content("~/Help/AboutUs")">About Us</a></li>
+                                <li><a href="@Url.Content("~/Help/ContactUs")">Contact us</a></li>
+                                <li><a href="@Url.Content("~/Help/FeedBack")">Feedback</a></li>
+                                <li><a href="@Url.Content("~/Help/FAQS")">FAQs</a></li>
+                                <li><a href="@Url.Content("~/Help/Terms")">Terms &amp; Conditions</a></li>
+                                <li><a href="@Url.Content("~/Help/Careers")">Careers</a></li>
+                                <li><a href="@Url.Content("~/Help/PrivacyPolicy")">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-12 footer-widget">
+                            <h3 class="widget-title">DownLoad Our App</h3>
+                            <div class="row">
+                                <div class="col-md-10 ">
+                                   <img class="img-responsive" style="margin-bottom:15px;" src="@Url.Content("~/images/app.png")" /> 
+                                   
+                                </div>    
+                                <div class="col-md-10 ">
+                                   <img class="img-responsive" src="@Url.Content("~/images/goo.png")"><br>
+                                                                       
+                                   
+                                </div>                             
+                            </div>
+                        </div>
+                    
+					<div class="col-md-3 col-sm-12 footer-widget">
+                            <h3 class="widget-title">Payment Options</h3>
+                           
+                            <div class="row">
+                                <div class="col-md-6">
+                                     <a href="#" class="paytm"><img class="img-responsive paytm" width="100" src="@Url.Content("~/images/cc-logo.png")"></a> <br/>                                 
+                                </div>
+                                @*<div class="col-md-6">                                    
+                                    <a href="#"><img class="img-responsive" width="56" src="@Url.Content("~/images/qrcode.png")"></a>
+                                </div>*@
+                            </div>
+                            
+                            <p>
+                                <ul class="list-arrow">
+                                    <li>Convenience</li>
+                                    <li>Keeping track of your expenditure</li>
+                                    <li>Discipline spending</li>
+                                    <li>Secured Payments or transactions</li>
+                                </ul>
+
+                            </p>
+                            @*<a class="mc" href="about.html">Read More <i class="fa fa-angle-right"></i></a>*@
+                        </div>
+                    </div>
+                    <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix">
+                        <button class="btn btn-primary" title="Back to Top">
+                            <i class="fa fa-angle-double-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <section class="copyright">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="copyright-info">
+                            <span>Copyright &copy;  2017 PR TECHNO SOLUTIONS Pvt Ltd.. All Rights Reserved.</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-push-1">
+                        <div class="footer-menu">
+                            <ul class="nav unstyled">
+
+                              <!--  <li class="webmaster"><a href="http://thecolourmoon.com">Designed by The Colour Moon</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Javascript Files
+        ================================================== -->
+        <!-- initialize jQuery Library -->
+        <script src="@Url.Content("~/js/moment.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/jquery.js")"></script>
+
+        <script src="@Url.Content("~/js/jquery.validate.js")"></script>
+
+        <!-- Bootstrap jQuery -->
+        <script type="text/javascript" src="@Url.Content("~/js/bootstrap.min.js")"></script>
+        <script src="@Url.Content("~/js/bootstrap-datetimepicker.js")"></script>
+        <!-- Owl Carousel -->
+        <script type="text/javascript" src="@Url.Content("~/js/owl.carousel.min.js")"></script>
+        <!-- Counter -->
+        <script type="text/javascript" src="@Url.Content("~/js/jquery.counterup.min.js")"></script>
+        <!-- Waypoints -->
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="@Url.Content("~/js/bootstrap-select.min.js")"></script>
+
+
+        <script type="text/javascript" src="@Url.Content("~/js/waypoints.min.js")"></script>
+        <!-- Color box -->
+        <script type="text/javascript" src="@Url.Content("~/js/jquery.colorbox.js")"></script>
+        <!-- Isotope -->
+        <script type="text/javascript" src="@Url.Content("~/js/isotope.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/ini.isotope.js")"></script>
+        <!-- Google Map API Key Source -->
+        @*<script src="http://maps.google.com/maps/api/js?sensor=false"></script>*@
+        <!-- For Google Map -->
+        <!-- Doc http://www.mkyong.com/google-maps/google-maps-api-hello-world-example/ -->
+        <script type="text/javascript" src="@Url.Content("~/js/gmap3.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/owl.carousel.js")"></script>
+
+        <script type="text/javascript" src="@Url.Content("~/js/custom.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/ripple.js")"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('.ripple').materialripple();
+                $('.left-menu li a,.btn').materialripple();
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+			 
+     
+        </script>
+        @RenderSection("scripts", false)
+
+
+
+
+    </div><!-- Body inner end -->
+</body>
+
+</html>

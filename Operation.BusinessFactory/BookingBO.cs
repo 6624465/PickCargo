@@ -17,7 +17,10 @@ namespace Operation.BusinessFactory
         {
             return bookingDAL.GetList();
         }
-
+        public List<Booking> GetCustomerBySearch(int? status)
+        {
+            return (List<Booking>)bookingDAL.GetCustomerBySearch(status);
+        }
         public List<Booking> GetListByMobileNo(string mobileNo)
         {
             return bookingDAL.GetListByMobileNo(mobileNo);
