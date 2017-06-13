@@ -45,6 +45,29 @@ namespace PickC.Services
             }
             
         }
+        public async Task<string> RegisterAsync(Customer customer)
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = new RestRequest();
+            request.Method = Method.POST;
+            request.Resource = "master/customer/save";
+            request.AddJsonBody(customer);
+            return ServiceResponse(
+                 await client.ExecuteTaskAsync(request));
+
+        }
+        public async Task<string> RegisterOTPAsync(string mobile,string otp)
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = new RestRequest();
+            request.Method = Method.POST;
+            request.Resource = "master/customer/verifyotp/{mobile}/{otp}";
+            request.AddParameter("mobile", mobile, ParameterType.UrlSegment);
+            request.AddParameter("otp", otp, ParameterType.UrlSegment);
+            return ServiceResponse(
+                 await client.ExecuteTaskAsync(request));
+
+        }
 
         /* while calling this function session is not yet set */
         public async Task<Customer> GetCustomerInfoAsync(string token, string mobile)
@@ -97,6 +120,18 @@ namespace PickC.Services
 
             return ServiceResponse(
                 await client.ExecuteTaskAsync(request));
+        }
+        public async Task<TripInvoice> TripInvoiceList(string BookingNo)
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.GET;
+            request.Resource = "master/customer/TripInvoice/{BookingNo}";
+            request.AddParameter("BookingNo", BookingNo, ParameterType.UrlSegment);
+            request.AddJsonBody(BookingNo);
+
+            return ServiceResponse<TripInvoice>(
+                await client.ExecuteTaskAsync<TripInvoice>(request));
         }
     }
 }

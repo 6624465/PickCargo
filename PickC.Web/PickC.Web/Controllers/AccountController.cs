@@ -19,7 +19,26 @@ namespace PickC.Web.Controllers
         {
             return View(new Customer());
         }
+        public ActionResult Register()
+         {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Register(Customer customer)
+        {
+            Session["MobileNo"] = customer.MobileNo;
+            var result = await new CustomerService().RegisterAsync(customer);
+            customer.OTP = result;
+            return View(customer);
 
+        }
+        [HttpPost]
+        public async Task<JsonResult> RegisterOTP(string OTP)
+        {
+            string MobNo = Session["MobileNo"].ToString();
+            var result = await new CustomerService().RegisterOTPAsync(MobNo,OTP);
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public async Task<ActionResult> Login(Customer customer)
         {
@@ -50,7 +69,7 @@ namespace PickC.Web.Controllers
         public async Task<ActionResult> Logoff()
         {
             var result = await new CustomerService(AUTHTOKEN, p_mobileNo).LogoutAsync();
-            if (result == "USER LOGGEDOUT SUCCESSFULLY")
+            if (result == "\"USER LOGGEDOUT SUCCESSFULLY\"")
             {
                 Session.Abandon();
                 Session.Clear();

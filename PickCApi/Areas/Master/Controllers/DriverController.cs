@@ -191,6 +191,5 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
         }
-
     }
 }

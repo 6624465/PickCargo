@@ -20,6 +20,18 @@ namespace PickC.Services
         {
 
         }
+        public async Task<List<Booking>> GetBookingsByBookingNoAsync(string bookingNo)
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.GET;
+            request.Resource = "operation/booking/bookinglist/{BookingNo}";
+            request.AddParameter("BookingNo", bookingNo, ParameterType.UrlSegment);
+
+            return ServiceResponse(
+                await client.ExecuteTaskAsync<List<Booking>>(request));
+        }
+
         public async Task<List<Booking>> GetBookingsByMobileNoAsync()
         {
             IRestClient client = new RestClient(ApiBaseUrl);
@@ -43,6 +55,18 @@ namespace PickC.Services
 
             return ServiceResponse(
                 await client.ExecuteTaskAsync<SaveBookingDTO>(request));
+        }
+
+        public async Task<List<Booking>> GetBookingsHistoryByMobileNoAsync(string mobileNo)
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.GET;
+            request.Resource = "operation/booking/bookingHistoryList/{mobileNo}";
+            request.AddParameter("mobileNo", mobileNo, ParameterType.UrlSegment);
+
+            return ServiceResponse(
+                await client.ExecuteTaskAsync<List<Booking>>(request));
         }
     }
 }

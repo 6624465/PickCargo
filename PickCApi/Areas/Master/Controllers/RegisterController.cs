@@ -45,7 +45,7 @@ namespace PickCApi.Areas.Master.Controllers
             
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("verifyotp/{mobile}/{otp}")]
         public IHttpActionResult VerifyOTP(string mobile, string otp)
         {
@@ -62,7 +62,6 @@ namespace PickCApi.Areas.Master.Controllers
                 return NotFound();
             }
         }
-
         [HttpPost]
         [Route("{mobile}")]
         [ApiAuthFilter]
@@ -213,7 +212,6 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
         }
-
         [HttpPost]
         [Route("changepassword/{mobile}")]
         [ApiAuthFilter]
@@ -312,5 +310,75 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
         }
+        [HttpGet]
+        [Route("Pay/{BookingNo}/{Driverid}")]
+        [ApiAuthFilter]
+        public IHttpActionResult DriverPayReceived(string BookingNo,string Driverid)
+        {
+            var driver = new DriverBO().GetDriver(new Driver { DriverID = Driverid });
+            PushNotification(driver.DeviceID,
+                        BookingNo, UTILITY.NotifyPaymentDriver);
+
+            return Ok(UTILITY.NotifyPaymentDriver);
+        }
+        [HttpPost]
+        [Route("BillDetails/{bookingNo}")]
+        [ApiAuthFilter]
+        public IHttpActionResult CustomerPaymentDetails(string bookingNo)
+        {
+            var customer = new CustomerBO().GetCustomerPaymentDetails(bookingNo);
+            if (customer != null)
+            {
+                return Ok(customer);
+            }
+            else
+                return NotFound();
+        }
+        [HttpPost]
+        [Route("DriverRating")]
+        [ApiAuthFilter]
+        public IHttpActionResult DriverRatingDetails(DriverRating driverRating)
+        {
+            var DriverRating = new DriverBO().SaveDriverRating(driverRating);
+            if (DriverRating)
+            {
+                return Ok(DriverRating);
+            }
+            else
+                return NotFound();
+        }
+        [HttpGet]
+        [Route("AvgDriverRating/{DriverID}")]
+        [ApiAuthFilter]
+        public IHttpActionResult GetDriverRatingDetails(string DriverID)
+        {
+            var driverRating = new DriverBO().GetDriverRating(new DriverRating { DriverID = DriverID });
+            if (driverRating != null)
+                return Ok(driverRating);
+            else
+                return NotFound();
+        }
+
+        [HttpGet]
+        [Route("TripInvoice/{BookingNo}")]
+        public IHttpActionResult TripInvoice(string BookingNo)
+        {
+            try
+            {
+                TripInvoice tripInvoice = new CustomerBO().GetTripInvoiceList(new TripInvoice { BookingNo = BookingNo });
+                if (tripInvoice != null)
+                    return Ok(tripInvoice);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
     }
+
 }
+
+

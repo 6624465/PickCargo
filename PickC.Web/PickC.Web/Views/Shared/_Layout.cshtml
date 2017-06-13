@@ -23,10 +23,10 @@
     <!-- CSS
     ================================================== -->
     <!-- Bootstrap -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link href="@Url.Content("~/css/font-awesome-4.6.2/css/font-awesome.css")" rel="stylesheet" />
     <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.min.css")">
-   <!-- <link href="@Url.Content("~/css/AdminLTE.min.css")" rel="stylesheet" />-->
+    <!-- <link href="@Url.Content("~/css/AdminLTE.min.css")" rel="stylesheet" />-->
     <link href="@Url.Content("~/css/bootstrap-datetimepicker.css")" rel="stylesheet" />
     <!-- Template styles-->
     <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
@@ -56,30 +56,44 @@
         label.error {
             display: none !important;
         }
-        
+
         .navBackClr li a:hover {
-            background-color:#000;
-        }        
+            background-color: #000;
+        }
+      
+        .modal-body {
+            text-align:center;
+    background: rgb(255, 252, 0) none repeat scroll 0 0;
+        }
+        .modal {
+        overflow-y: hidden;
+        }
+        .modal-open {
+        margin-right:0px !important;
+        }
+        .modal-body p {
+            color:#000;
+        }
     </style>
     <!--Start of Tawk.to Script-->
     @*<script type="text/javascript">
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        (function () {
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/57e3bf0e6339c4365aa90e10/default';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>*@
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function () {
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/57e3bf0e6339c4365aa90e10/default';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        </script>*@
     @RenderSection("css", false)
 </head>
 
 <body>
 
     <div class="body-inner">
-       
+
         <!-- Header start -->
         <header id="header" class="header-white">
             <div id="top-bar" class="top-bar">
@@ -101,19 +115,20 @@
                                         <span class="social-icon"><i class="fa fa-linkedin"></i></span>
                                     </a>
                                     <!--  <a title="instagram" href="#">
-                                  <span class="social-icon"><i class="fa fa-instagram"></i></span>
-                              </a> -->
+                                        <span class="social-icon"><i class="fa fa-instagram"></i></span>
+                                    </a> -->
                                 </li>
                             </ul>
                         </div><!--/ Top social end -->
 
-                        <div class="col-md-6 col-sm-6 col-xs-12 top-menu ">
+                        <div class="col-md-6 col-sm-6 col-xs-12 top-menu " id="header-top">
                             <ul class="unstyled">
                                 @*<a href="~/Help/Support">Click here</a>*@
                                 @*@Html.ActionLink("Customer Support", "Support", "Help", null, null)*@
-                               
-                               <li><a href="@Url.Content("~/Help/Support")"><i class="fa fa-headphones"></i> Customer Support</a></li>
-                                <li><a href="@Url.Content("~/Help/menu")"><i class="fa fa-hand-o-right"></i> Help</a></li>
+
+                                <li><a href="@Url.Content("~/Help/Support")"><i class="fa fa-headphones"></i> Customer Support</a></li>                       
+                                @*<li><a href="@Url.Content("~/Account/Logoff")"><i class="fa fa-user"></i> LogOut</a></li>*@
+                                @*<li><a href="@Url.Content("~/Help/Careers")"><i class="fa fa-hand-o-right"></i> Help</a></li>*@
 
                             </ul>
                         </div><!--/ Top menu end -->
@@ -140,25 +155,27 @@
                         </button>
                         <form class="navbar-form navbar-right hidden-xs hidden-sm">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No.">
+                                <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onchange="onChangeMobileNo()">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default app_btn tooltips" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button">Get <B><b>Pick-C</b></B> App Link</button>
+                                    @*<button class="btn btn-default app_btn tooltips" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button">Get <B><b>Pick-C</b></B> App Link</button>*@
+                                    <button class="btn btn-default app_btn tooltips" onclick="SendSMS()" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button" disabled id="btn-sendSms">Get <B>Pick-C</B> App Link</button>
                                 </span>
                             </div>
                         </form>
                         <nav class="collapse navbar-collapse navbar-responsive-collapse navbar-right">
                             <ul class="nav navbar-nav navBackClr">
-                                <li class="mleft"><a href="#">Track Cargo with CRN</a></li>
+                                @*<li class="mleft"><a href="#">Track Cargo with CRN</a></li>*@
+                                <li class="mleft"><a href="@Url.Content("~/Help/FindCRN")">Track Cargo with CRN</a></li>
                                 <li><a href="@Url.Content("~/Help/Services")">Services</a></li>
                                 <li><a href="@Url.Content("~/Help/AboutUs")">About Us</a></li>
                                 @*<li><a href="@Url.Content("~/RateCard/index")">Fare chart</a></li>*@
                                 <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>
                                 <li><a href="@Url.Content("~/Help/ContactUs")">Contact us </a></li>
-                                
+
                             </ul><!--/ Nav ul end -->
-                           
+
                         </nav><!--/ Collapse end -->
-                        
+
                     </div><!-- Site nav inner end -->
                 </div><!-- Row end -->
             </div><!-- Container end -->
@@ -169,7 +186,7 @@
             <div class="container">
                 <div class="row text-center">
                     <h2 class="title">
-                        
+
                         <span class="title-head">Why Choose Us</span>
                         We are a Dedicated Team
                     </h2>
@@ -249,9 +266,9 @@
                                 <img src="@Url.Content("~/images/logo.png")" alt="" class="img-responsive">
                             </div>
                             <p>
-                               <b>Pick-C</b> (Cargo) is mobile app unique of its kind for goods transportation, which integrates city goods transportation ...
+                                <b>Pick-C</b> (Cargo) is mobile app unique of its kind for goods transportation, which integrates city goods transportation ...
                             </p>
-                            <a class="mc" href="@Url.Content("~/Help/AboutUs")">Read More <i class="fa fa-angle-right"></i></a>
+                            @*<a class="mc" href="@Url.Content("~/Help/AboutUs")">Read More <i class="fa fa-angle-right"></i></a>*@
                             <div class="footer-social">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -280,29 +297,29 @@
                             <h3 class="widget-title">DownLoad Our App</h3>
                             <div class="row">
                                 <div class="col-md-10 ">
-                                   <img class="img-responsive" style="margin-bottom:15px;" src="@Url.Content("~/images/app.png")" /> 
-                                   
-                                </div>    
+                                    <img class="img-responsive" style="margin-bottom:15px;" src="@Url.Content("~/images/app.png")" />
+
+                                </div>
                                 <div class="col-md-10 ">
-                                   <img class="img-responsive" src="@Url.Content("~/images/goo.png")"><br>
-                                                                       
-                                   
-                                </div>                             
+                                    <img class="img-responsive" src="@Url.Content("~/images/goo.png")"><br>
+
+
+                                </div>
                             </div>
                         </div>
-                    
-					<div class="col-md-3 col-sm-12 footer-widget">
+
+                        <div class="col-md-3 col-sm-12 footer-widget">
                             <h3 class="widget-title">Payment Options</h3>
-                           
+
                             <div class="row">
                                 <div class="col-md-6">
-                                     <a href="#" class="paytm"><img class="img-responsive paytm" width="100" src="@Url.Content("~/images/cc-logo.png")"></a> <br/>                                 
+                                    <a href="#" class="paytm"><img class="img-responsive paytm" width="100" src="@Url.Content("~/images/cc-logo.png")"></a> <br />
                                 </div>
-                                @*<div class="col-md-6">                                    
-                                    <a href="#"><img class="img-responsive" width="56" src="@Url.Content("~/images/qrcode.png")"></a>
-                                </div>*@
+                                @*<div class="col-md-6">
+                                        <a href="#"><img class="img-responsive" width="56" src="@Url.Content("~/images/qrcode.png")"></a>
+                                    </div>*@
                             </div>
-                            
+
                             <p>
                                 <ul class="list-arrow">
                                     <li>Convenience</li>
@@ -336,7 +353,7 @@
                         <div class="footer-menu">
                             <ul class="nav unstyled">
 
-                              <!--  <li class="webmaster"><a href="http://thecolourmoon.com">Designed by The Colour Moon</a></li> -->
+                                <!--  <li class="webmaster"><a href="http://thecolourmoon.com">Designed by The Colour Moon</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -380,12 +397,57 @@
         <script type="text/javascript" src="@Url.Content("~/js/ripple.js")"></script>
         <script type="text/javascript">
             $(function () {
+                if (sessionStorage.getItem("isUserLoggedIn") == "True")
+                    $("#header-top ul").append('<li><a href="@Url.Content("~/Account/Logoff")"><i class="fa fa-user"></i> LogOut</a></li>');
+
                 $('.ripple').materialripple();
                 $('.left-menu li a,.btn').materialripple();
                 $('[data-toggle="tooltip"]').tooltip();
             });
-			 
-     
+
+            
+
+            function onChangeMobileNo() {
+                var mobileNumberRegExp = /^[789]\d{9}$/;
+                var mobileNumber = $('#txtmobNo').val();
+
+                if (mobileNumberRegExp.test(mobileNumber) == false) {
+                    alert('Please enter valid phonenumber.');
+                    $("#btn-sendSms").prop("disabled", true);
+                    $('#txtmobNo').val('');
+                    return false;
+                }
+                else
+                    $("#btn-sendSms").prop("disabled", false);
+            }
+
+            function SendSMS() {
+                debugger;
+                if ($('#txtmobNo').val() != '') {
+                    var mobNo = $('#txtmobNo').val();
+                    $.ajax({
+                        url: '@Url.Content("~/Default/SendSMS?MobNo=")' + mobNo + '&ts=' + $.now(),
+                        method: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            if (data = true)
+                                alert("Message send to your Number");
+                            //$('#myModal').modal('show');
+                            $('#txtmobNo').val('');
+                        },
+                        error: function (err) {
+                            debugger;
+                        }
+                    });
+                }
+                else
+                {
+                    $('#myModalno').modal('show');
+                   // alert("Please Enter Your MobileNo!");
+                }
+            }
+    
+
         </script>
         @RenderSection("scripts", false)
 
@@ -393,6 +455,34 @@
 
 
     </div><!-- Body inner end -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+               
+                <div class="modal-body">
+                    <p> Message sent to your MobileNo!</p>
+                </div>
+               
+            </div>
+
+        </div>
+    </div>
+    <div id="myModalno" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <p>Please Enter Your MobileNo!</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 </body>
 
 </html>

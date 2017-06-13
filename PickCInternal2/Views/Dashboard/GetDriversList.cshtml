@@ -213,7 +213,7 @@
             $('#ddlSearchByStatus').on("change", function () {
 
                 $.ajax({
-                    url: '@Url.Content("~/Internal/Dashboard/GetDriverBySearch")',
+                    url: '@Url.Content("~/Dashboard/GetDriverBySearch")',
                     method: 'POST',
                     contentType: 'application/json',
                     dataType: 'json',

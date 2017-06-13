@@ -190,8 +190,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Master\Controllers\AddressController.cs" />
-    <Compile Include="Areas\Master\Controllers\ADdriverlistController.cs" />
-    <Compile Include="Areas\Master\Controllers\ADtruckList.cs" />
+    <Compile Include="Areas\Master\Controllers\ADdriverController.cs" />
+    <Compile Include="Areas\Master\Controllers\ADOperatorController.cs" />
+    <Compile Include="Areas\Master\Controllers\ADOperatortruckListController.cs" />
     <Compile Include="Areas\Master\Controllers\CargoTypeController.cs" />
     <Compile Include="Areas\Master\Controllers\DriverController.cs" />
     <Compile Include="Areas\Master\Controllers\LoadingUnLoadingController.cs" />

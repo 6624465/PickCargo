@@ -41,6 +41,10 @@ namespace Operation.DataFactory
         {
             return db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORVEHICLETOTALLIST, MapBuilder<OperatorVehicle>.BuildAllProperties()).ToList();
         }
+        public List<OperatorVehicle> GetOperatorVehicleListById(string OperatorVehicleID)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORVEHICLETOTALLISTBYID, MapBuilder<OperatorVehicle>.BuildAllProperties(),OperatorVehicleID).ToList();
+        }
         public bool Save<T>(T item, DbTransaction parentTransaction) where T : IContract
         {
             currentTransaction = parentTransaction;

@@ -12,10 +12,8 @@ namespace Master.Contract
         {
 
         }
-        public Int32 DriverId { get; set; }
-
+        public string OperatorBankID { get; set; }
         public string BankName { get; set; }
-
         public string Branch { get; set; }
         public string AccountNumber { get; set; }
         public string AccountType { get; set; }

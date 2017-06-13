@@ -16,5 +16,9 @@ namespace Master.BusinessFactory
         {
             return truckDAL.GetList();
         }
+        public List<TruckList> GetListByType(int VehicleType,string MobileNo)
+        {
+            return truckDAL.GetListByType(VehicleType,MobileNo);
+        }
     }
 }

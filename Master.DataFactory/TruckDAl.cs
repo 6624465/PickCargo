@@ -33,6 +33,11 @@ namespace Master.DataFactory
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTTRUCK, MapBuilder<TruckList>.BuildAllProperties()).ToList();
         }
+        public List<TruckList> GetListByType(int VehicleType,string MobileNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.SELECTTRUCK, MapBuilder<TruckList>.MapAllProperties().DoNotMap(x => x.Maker).Build(), VehicleType, MobileNo).ToList();
+        }
+
 
         #endregion
     }

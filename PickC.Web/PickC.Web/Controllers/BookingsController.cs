@@ -49,7 +49,12 @@ namespace PickC.Web.Controllers
                 throw;
             }
         }
-
+        [HttpGet]
+        public async Task<JsonResult> ShowMap(string bookingNo)
+        {
+             var data = await new BookingService(AUTHTOKEN,p_mobileNo).GetBookingsByBookingNoAsync(bookingNo);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         /*
         [HttpGet]
         public ActionResult Pdf()
@@ -150,6 +155,111 @@ namespace PickC.Web.Controllers
             Response.End();
         }
 
+        public ActionResult CustomerBookingHistory()
+        {
+            BookingHistoryDTO bookingSearchVM = new BookingHistoryDTO();
+            bookingSearchVM.Booking = new List<Booking>();
+            return View("CustomerBookingHistory", bookingSearchVM);
+        }
+        [HttpPost]
+        public async Task<ActionResult> CustomersBookingHistory(BookingHistoryDTO bookingHistoryDTO)
+        {
+            var data = await new BookingService(AUTHTOKEN, p_mobileNo).GetBookingsHistoryByMobileNoAsync(bookingHistoryDTO.CustomerMobile);
+            var bookingSearchVM = new BookingHistoryDTO();
+            bookingSearchVM.Booking = data;
+            return View("CustomerBookingHistory", bookingSearchVM);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> PrintCustomerHistoryInvoice(string BookingNo)
+        {
+
+            var bookingHistoryList = await new CustomerService().TripInvoiceList(BookingNo);
+
+            DownloadPDF2(PartialView("pdf2", bookingHistoryList).RenderToString(), BookingNo);
+
+            return View("Bookings");
+        }
+
+        public void DownloadPDF2(string HtmlContent, string fileName)
+        {
+            Response.Clear();
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=" + fileName + ".pdf");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.BinaryWrite(GetPDF2(HtmlContent));
+            Response.End();
+        }
+
+        public byte[] GetPDF2(string pHTML)
+        {
+            try
+            {
+                byte[] bPDF = null;
+
+                MemoryStream ms = new MemoryStream();
+                TextReader txtReader = new StringReader(pHTML);
+
+                // 1: create object of a itextsharp document class
+                Document doc = new Document(PageSize.A4, 25, 25, 25, 25);
+
+                // 2: we create a itextsharp pdfwriter that listens to the document and directs a XML-stream to a file
+                PdfWriter oPdfWriter = PdfWriter.GetInstance(doc, ms);
+
+                // 3: we create a worker parse the document
+                HTMLWorker htmlWorker = new HTMLWorker(doc);
+
+                // 4: we open document and start the worker on the document
+                doc.Open();
+                htmlWorker.StartDocument();
+
+                // 5: parse the html into the document
+                htmlWorker.Parse(txtReader);
+                //iTextSharp.text.Image LocationImage = iTextSharp.text.Image.GetInstance("http://ragsarma-001-site13.htempurl.com/PickCWeb/images/logo.png");
+                //LocationImage.ScaleToFit(50, 60);
+                //LocationImage.Alignment = iTextSharp.text.Image.UNDERLYING;
+                //var locationcell = new PdfPCell(LocationImage);
+                //locationcell.PaddingBottom = 10;
+                //locationcell.PaddingTop = 10;
+                //locationcell.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
+                //locationcell.VerticalAlignment = 0; //0=Left, 1=Centre, 2=Right
+                //locationcell.Colspan = 3;
+                //locationcell.Border = 0;
+                //var Locationtable = new PdfPTable(2);
+
+                ////Header Widths     
+                //float[] headersOI = { 50, 50 };
+                ////Set the pdf headers
+                //Locationtable.SetWidths(headersOI);
+                ////Set the PDF File witdh percentage
+                //Locationtable.WidthPercentage = 10;
+                //Locationtable.AddCell(new PdfPCell(new Phrase(string.Empty))
+                //{
+                //    Colspan = 0,
+                //    HorizontalAlignment = Element.ALIGN_LEFT,
+                //    VerticalAlignment = Element.ALIGN_TOP,
+                //    FixedHeight = 5,
+                //    MinimumHeight = 1,
+                //    BorderWidth = 0
+
+                //});
+                //Locationtable.AddCell(locationcell);
+                //doc.Add(Locationtable);               
+                htmlWorker.EndDocument();
+                htmlWorker.Close();
+                doc.Close();
+
+                bPDF = ms.ToArray();
+
+                return bPDF;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
         /*
         public static ReturnValue ConvertHtmlToPdfAsBytes(string HtmlData)
         {
@@ -308,4 +418,6 @@ namespace PickC.Web.Controllers
         public string Message = string.Empty;
         public Byte[] Data = null;
     }
+
+
 }

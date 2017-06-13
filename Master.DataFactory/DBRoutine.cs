@@ -20,10 +20,7 @@ namespace Master.DataFactory
         public const string DELETECUSTOMER = "[Master].[usp_CustomerDelete]";
         public const string CUSTOMERUPDATEPASSWORD = "[Master].[usp_CustomerUpdatePassword]";
         public const string CUSTOMERUPDATEDEVICEID = "[Master].[usp_UpdateCustomerDeviceID]";
-
-
-
-
+        public const string CUSTOMERBILLDETAILS = "[Operation].[usp_CustomerBillDetails]";
         /// <summary>
         /// [Master].[VehicleConfig]
         /// </summary>
@@ -81,16 +78,21 @@ namespace Master.DataFactory
         public const string GETDRIVERBYSTATUS = "[Master].[usp_GetDriverByStatus]";
         public const string SAVEATTACHMENTS = "[Master].[usp_AttachmentsSave]";
         public const string SAVEMANUFACTURER = "[Master].[usp_SaveVehicleManufacturer]";
-
+        public const string DRIVERUPDATEPASSWORD = "[Master].[usp_DriverUpdatePassword]";
+        public const string LISTDRIVEROPERATORWISE = "[Master].[usp_DriverListOperatorWise]";
+        public const string LISTBANKDETAILSOPERATORWISE = "[Master].[usp_BankListOperatorWise]";
+        public const string DRIVERTodayListOfTrips = "[Operation].[usp_DriverWiseTripList]";
         /// <summary>
         /// [Master].[Operator]
         /// </summary>
 
         public const string SELECTOPERATOR = "[Master].[usp_OperatorSelect]";
+        public const string SELECTOPERATORBYOPERATORID = "[Master].[usp_OperatorSelectByOperatorID]";
         public const string LISTOPERATOR = "[Master].[usp_OperatorList]";
         public const string SAVEOPERATOR = "[Master].[usp_OperatorSave]";
         public const string DELETEPERATOR = "[Master].[usp_OperatorDelete]";    
-        public const string SAVEOPERATORATTACHMENTS = "[Master].[usp_AttachmentsSave]";
+        public const string SAVEOPERATORATTACHMENTS = "[Master].[usp_OperatorAttachmentsSave]";
+        public const string OPERATORUPDATEPASSWORD = "[Master].[usp_OperatorUpdatePassword]";
 
         /// <summary>
         /// [Master].[OperatorDriver]
@@ -100,11 +102,75 @@ namespace Master.DataFactory
         public const string SELECTVEHICLENODETAILS = "[Master].[usp_OperatorVehicleNoList]";
         public const string SAVEOPERATORDRIVERLIST = "[Master].[usp_OperatorDriverSave]";
         public const string SELECTOPERATORDRIVERTOTALLIST = "[Master].[usp_OperatorDriverSelect]";
+        public const string SELECTOPERATORDRIVERBYID = "[Master].[usp_OperatorDriverSelectByOperatorDriverId]";
+       // public const string UPDATEOPERATORDRIVERVEHICLEATTACHMENTLIST = "[Master].[usp_OperatorDriverVehicleAttachment]";
 
         /// <summary>
         /// [Master].[TruckList]
         /// </summary>
         /// 
         public const string LISTTRUCK = "[Master].[usp_GetTruckList]";
+        public const string SELECTTRUCK = "[Master].[usp_SelectTruckListbyType]";
+        /// <summary>
+        /// [Master].[TripCount]
+        /// </summary>
+        /// 
+        public const String OPERATORTRIPCOUNT = "[Operation].[usp_OperatorWiseTripCount]";
+        public const string OPERATORTRIPAMOUNT = "[Operation].[usp_SumOperatorWiseDailyAmount]";
+        public const string OPERATORTRIPCOUNTAMOUNTBYDATES = "[Operation].[usp_SumOperatorWiseSearchDatesCountAmount]";
+        public const string OPERATORTRIPCOUNTAMOUNTLISTBYDATES = "[Operation].[usp_OperatorWiseListCountAmount]";
+        public const string DRIVERTRIPCOUNTBYDRIVERID = "[Operation].[usp_DriverWiseTripCount]";
+        public const string DRIVERTRIPAMOUNTDAILYWISE = "[Operation].[usp_SumDriverWiseDailyAmount]";
+        public const string OPERATORTRIPEARNINGLISTDAILY = "[Operation].[usp_OperatorWiseDailyAmountList]";
+        public const string OPERATORTRIPCOUNTLISTDAILY = "[Operation].[usp_OperatorWiseDailyCountList]";
+
+
+        /// <summary>
+        /// [Master].[DriverRating]
+        public const string SELECTDRIVERRATING = "[Master].[usp_DriverRatingSelect]";
+        public const string LISTDRIVERRATING = "[Master].[usp_DriverRatingList]";
+        public const string SAVEDRIVERRATING = "[Master].[usp_DriverRatingSave]";
+        public const string DELETEDRIVERRATING = "[Master].[usp_DriverRatingDelete]";
+        public const string SELECTDRIVERAVERAGERATING = "[Master].[usp_DriverRatingSelectByDriverID]";
+        /// </summary>
+
+        /// <summary>
+        /// [Master].[BankDetails]
+        /// </summary>
+
+        public const string SELECTBANKDETAILS ="[Master].[usp_BankDetailsSelect]";
+        public const string LISTBANKDETAILS = "[Master].[usp_BankDetailsList]";
+        public const string SAVEBANKDETAILS = "[Master].[usp_BankDetailsSave]";
+        public const string DELETEBANKDETAILS = "[Master].[usp_BankDetailsDelete]";
+
+        /// <summary>
+        /// [Master].[ReferralDriver]
+        /// </summary>
+
+        public const string SELECTREFERRALDRIVER = "[Master].[usp_DriverReferralSelect]";
+        public const string LISTREFERRALDRIVER = "[Master].[usp_DriverReferralList]";
+        public const string SAVEREFERRALDRIVER = "[Master].[usp_DriverReferralSave]";
+        public const string DELETEREFERRALDRIVER = "[Master].[usp_DriverReferralDelete]";
+
+        /// <summary>
+        /// [Master].[OperatorNotifications]
+        /// </summary>
+
+        public const string SELECTOPERATORNOTIFICATIONS = "[Master].[usp_OperatorNotificationsSelect]";
+        public const string LISTOPERATORNOTIFICATIONS = "[Master].[usp_OperatorNotificationsList]";
+        public const string SAVEOPERATORNOTIFICATIONS = "[Master].[usp_OperatorNotificationsSave]";
+        public const string DELETEOPERATORNOTIFICATIONS = "[Master].[usp_OperatorNotificationsDelete]";
+
+        public const string TRIPINVOICELIST = "[Operation].[usp_CustomerInvoiceReport]";
+
+
+        /// <summary>
+        /// [Master].[DriverVehicle]
+        /// </summary>
+
+        public const string SELECTDRIVERVEHICLE = "[Master].[usp_DriverVehicleSelect]";
+        public const string LISTDRIVERVEHICLE = "[Master].[usp_DriverVehicleList]";
+        public const string SAVEDRIVERVEHICLE = "[Master].[usp_DriverVehicleSave]";
+        public const string DELETEDRIVERVEHICLE = "[Master].[usp_DriverVehicleDelete]";
     }
 }

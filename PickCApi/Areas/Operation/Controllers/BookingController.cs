@@ -75,6 +75,23 @@ namespace PickCApi.Areas.Operation.Controllers
                 return InternalServerError(ex);
             }
         }
+        [HttpGet]
+        [Route("bookinglist/{BookingNo}")]
+        public IHttpActionResult BookingListbyBookingNo(string BookingNo)
+        {
+            try
+            {
+                var bookingList = new BookingBO().GetListByBookingNo(BookingNo);
+                if (bookingList != null)
+                    return Ok(bookingList);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
 
         [HttpPost]
         [Route("save")]
@@ -249,7 +266,27 @@ namespace PickCApi.Areas.Operation.Controllers
             }
         }
 
-        
+        [HttpPost]
+        [Route("Drivercancellations")]
+        public IHttpActionResult CancelBookingByDrivercancellations(BookingCancelDTO bookingCancelDTO)
+        {
+            try
+            {
+                var result = new BookingBO().BookingCancelledByDriver(
+                    HeaderValueByKey("AUTH_TOKEN"),
+                    bookingCancelDTO.driverID,
+                    bookingCancelDTO.vehicleNo,
+                    bookingCancelDTO.bookingNo,
+                    bookingCancelDTO.cancelRemarks,
+                    bookingCancelDTO.istripstarted);
+
+                return Ok(result ? UTILITY.SUCCESSMSG : UTILITY.FAILEDMSG);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
         [HttpPost]
         [Route("pickupreachdatetime")]
         public IHttpActionResult SavePickupReachDateTime(PickupReachDateTimeDTO obj)
@@ -303,6 +340,33 @@ namespace PickCApi.Areas.Operation.Controllers
             }
         }
 
-       
+        [HttpGet]
+        [Route("DriverReceivedConfirm/{BookingNo}")]
+        public IHttpActionResult DriverReceivedConfirm(string BookingNo)
+        {
+            //var driver = new DriverBO().GetDriver(new Driver { DriverID = Driverid });
+            PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(BookingNo),
+                        BookingNo,
+                        UTILITY.NotifyDriverpaymentReceived);
+            return Ok(UTILITY.NotifyDriverpaymentReceived);
+        }
+
+        [HttpGet]
+        [Route("bookingHistoryList/{MobileNo}")]
+        public IHttpActionResult BookingHistoryListbyMobileNo(string MobileNo)
+        {
+            try
+            {
+                var bookingHistoryList = new BookingBO().GetBookingListByMobileNo(MobileNo);
+                if (bookingHistoryList != null)
+                    return Ok(bookingHistoryList);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
 }

@@ -46,12 +46,15 @@ namespace Operation.DataFactory
         public const string SAVEBOOKING = "[Operation].[usp_BookingSave]";
         public const string DELETEBOOKING = "[Operation].[usp_BookingDelete]";
         public const string LISTOFBOOKINGBYMOBILENO = "[Operation].[usp_BookingListByMobileNo]";
+        public const string LISTOFBOOKINGBYBOOKINGNO = "[Operation].[usp_BookingListByBookingNo]";
         public const string LISTNEARBOOKINGSFORDRIVER = "[Operation].[usp_NearBookingsForDriver]";
         public const string LISTOFBOOKINGBYSTATUS = "[Master].[usp_GetCustomerByStatus]";
         public const string LISTOFCURRENTBOOKING = "[Operation].[usp_BookingList]";
 
         public const string SAVEPICKUPREACHDATETIME = "[Operation].[usp_SavePickupReachDateTime]";
         public const string SAVEDESTINATIONREACHDATETIME = "[Operation].[usp_SaveDestinationReachDateTime]";
+
+        public const string LISTOFBOOKINGHISTORYLISTBYMOBILENO = "[Operation].[usp_BookingHistoryListByMobileNo]";
 
         /// <summary>
         /// [Operation].[OperatorVehicle]
@@ -61,7 +64,7 @@ namespace Operation.DataFactory
         public const string SELECTOPERATORVEHICLEMODELLIST = "[Master].[usp_OperatorVehicleModelList]";
         public const string SAVEOPERATORVEHICLELIST = "[Master].[usp_OperatorVehicleSaveList]";
         public const string SELECTOPERATORVEHICLETOTALLIST = "[Master].[usp_OperatorVehicleList]";
-
+        public const string SELECTOPERATORVEHICLETOTALLISTBYID = "[Master].[usp_OperatorVehicleListByID]";
 
 
 
@@ -83,7 +86,7 @@ namespace Operation.DataFactory
         //public const string SELECTCUSTOMERLOGIN = "[Operation].[usp_CustomerLoginSelect]";
         //public const string LISTCUSTOMERLOGIN = "[Operation].[usp_CustomerLoginList]";
         //public const string SAVECUSTOMERLOGIN = "[Operation].[usp_CustomerLoginSave]";
-        //public const string DELETECUSTOMERLOGIN = "[Operation].[usp_CustomerLoginDelete]";
+        public const string DELETEOPERATORLOGIN = "[Operation].[usp_OperatorLoginDelete]";
         public const string OPERATORAUTHENTICATEUSER = "[Operation].[usp_OperatorAUTHENTICATE_USER]";
         public const string OPERATORLOGIN = "[Operation].[usp_DoOperatorLogIn]";
 
@@ -98,7 +101,7 @@ namespace Operation.DataFactory
         public const string LISTTRIPMONITOR = "[Operation].[usp_TripMonitorList]";
         public const string LISTTRIPMONITOR2 = "[Operation].[usp_TripMonitorList2]";
         public const string SAVETRIPMONITOR = "[Operation].[usp_TripMonitorSave]";
-
+        public const string OPERATORTRIPMONITOR = "[Master].[usp_OperatorDriverMonitor]";
 
         public const string SELECTDRIVERACTIVITY = "[Operation].[usp_DriverActivitySelect]";
         public const string LISTDRIVERACTIVITY = "[Operation].[usp_DriverActivityList]";
@@ -133,6 +136,9 @@ namespace Operation.DataFactory
 
         public const string DRIVERSUMMARY = "[Operation].[usp_GetDriverSummary]";
         public const string DRIVERPAYMENTS="[Operation].[usp_GetDriverPayments]";
+
+
+
 
     }
 }

@@ -12,6 +12,7 @@ using Master.DataFactory;
 using PickC.Services.DTO;
 using Operation.DataFactory;
 
+
 namespace Master.DataFactory
 {
   public  class OperatorDAL
@@ -75,6 +76,27 @@ namespace Master.DataFactory
                 if (result > 0)
                 {
                     OPerator.OperatorID = savecommand.Parameters["@NewDocumentNo"].Value.ToString();
+
+                    if (OPerator.operatorAttachment != null && OPerator.operatorAttachment.Count>0)
+                    {
+                        foreach(var operatorAttachment in OPerator.operatorAttachment)
+                        {
+                            operatorAttachment.operatorId = OPerator.OperatorID;
+                            operatorAttachment.attachmentId = OPerator.OperatorID + operatorAttachment.lookupCode;
+                        }
+                        result = new OperatorAttachementDAL().SaveList(OPerator.operatorAttachment, transaction) == true ? 1 : 0;
+                    }
+                    if(OPerator.BankDetails !=null && OPerator.BankDetails.Count>0)
+                    {
+                        foreach(var operatorBankDetails in OPerator.BankDetails)
+                        {
+                            operatorBankDetails.OperatorBankID = OPerator.OperatorID;
+                        }
+                        OPerator.BankDetails.ForEach(x =>
+                        {
+                            result = new BankDetailsDAL().Save(x, transaction) == true ? 1 : 0;
+                        });
+                    }
                     if(OPerator.OperatorDriverList !=null && OPerator.OperatorDriverList.Count > 0)
                     {
                         foreach(var operatorDriverList in OPerator.OperatorDriverList)
@@ -129,6 +151,90 @@ namespace Master.DataFactory
             return (result > 0 ? true : false);
 
         }
+        public bool UpdateOperatorPassword<T>(T item) where T : IContract
+        {
+            var result = false;
+            var operatorpassword = (OperatorPasssword)(object)item;
+
+            var connnection = db.CreateConnection();
+            connnection.Open();
+
+            var transaction = connnection.BeginTransaction();
+
+            try
+            {
+                var deleteCommand = db.GetStoredProcCommand(DBRoutine.OPERATORUPDATEPASSWORD);
+                db.AddInParameter(deleteCommand, "MobileNo", System.Data.DbType.String, operatorpassword.MobileNo);
+                db.AddInParameter(deleteCommand, "Password", System.Data.DbType.String, operatorpassword.Password);
+                db.AddInParameter(deleteCommand, "NewPassword", System.Data.DbType.String, operatorpassword.NewPassword);
+
+                result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
+
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connnection.Close();
+
+            }
+            return result;
+        }
+        public bool SaveOperatorNotifications<T>(T item, DbTransaction parentTransaction) where T : IContract
+        {
+            currentTransaction = parentTransaction;
+            return SaveOperatorNotifications(item);
+
+        }
+
+        public bool SaveOperatorNotifications<T>(T item) where T : IContract
+        {
+            var result = 0;
+            var operatorNotifications = (OperatorNotifications)(object)item;
+
+            if (currentTransaction == null)
+            {
+                connection = db.CreateConnection();
+                connection.Open();
+            }
+
+            var transaction = (currentTransaction == null ? connection.BeginTransaction() : currentTransaction);
+
+            try
+            {
+
+                var savecommand = db.GetStoredProcCommand(DBRoutine.SAVEOPERATORNOTIFICATIONS);
+                db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, operatorNotifications.DriverID);
+                db.AddInParameter(savecommand, "DriverLoginLogoutStatus", System.Data.DbType.String, operatorNotifications.DriverLoginLogoutStatus);
+                db.AddInParameter(savecommand, "DriverOnOffDuty", System.Data.DbType.String, operatorNotifications.DriverOnOffDuty);
+                db.AddInParameter(savecommand, "DailyIncentiveUpdate", System.Data.DbType.String, operatorNotifications.DailyIncentiveUpdate);
+                result = db.ExecuteNonQuery(savecommand, transaction);
+                if (currentTransaction == null)
+                    transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (currentTransaction == null)
+                    transaction.Rollback();
+
+                throw;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
+
+            }
+
+            return (result > 0 ? true : false);
+
+        }
         public IContract GetItem<T>(IContract lookupItem) where T : IContract
         {
             var item = ((Operator)lookupItem);
@@ -137,12 +243,29 @@ namespace Master.DataFactory
                                                     MapBuilder<Operator>
                                                     .MapAllProperties()
                                                     .DoNotMap(x => x.Nationality).Build(),
-                                                    item.OperatorID).FirstOrDefault();
+                                                    item.MobileNo).FirstOrDefault();
 
             if (operatorItem == null) return null;
 
 
             operatorItem.AddressList = new AddressDAL().GetList(operatorItem.OperatorID);
+            operatorItem.OperatorDriverList = new OperatorDriverDAL().GetSelectList(operatorItem.OperatorID);
+            operatorItem.OperatorVehicle = new OperatorVehicleDAL().GetOperatorVehicleListById(operatorItem.OperatorID);
+            operatorItem.BankDetails = new BankDetailsDAL().GetList(operatorItem.OperatorID);
+            return operatorItem;
+        }
+        public Operator GetOperatorDetails(string OperatorID)
+        {
+            var operatorItem = db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORBYOPERATORID,
+                                                   MapBuilder<Operator>
+                                                    .MapAllProperties()
+                                                    .DoNotMap(x => x.Nationality).Build(),
+                                                    OperatorID).FirstOrDefault();
+
+            operatorItem.AddressList = new AddressDAL().GetList(operatorItem.OperatorID);
+            operatorItem.OperatorDriverList = new OperatorDriverDAL().GetSelectList(operatorItem.OperatorID);
+            operatorItem.OperatorVehicle = new OperatorVehicleDAL().GetOperatorVehicleListById(operatorItem.OperatorID);
+            operatorItem.BankDetails = new BankDetailsDAL().GetList(operatorItem.OperatorID);
 
             return operatorItem;
         }
@@ -180,31 +303,10 @@ namespace Master.DataFactory
 
             return result;
         }
-        public bool SaveAttachment(OperatorAttachmentDTO attachment)
+
+        public List<OperatorBankDetails> GetOperatorWiseBankList(string MobileNo)
         {
-            var result = false;
-            var connection = db.CreateConnection();
-            connection.Open();
-
-            var transaction = connection.BeginTransaction();
-            try
-            {
-                var saveCommand = db.GetStoredProcCommand(DBRoutine.SAVEOPERATORATTACHMENTS);
-                db.AddInParameter(saveCommand, "AttachmentId", System.Data.DbType.String, attachment.attachmentId);
-                db.AddInParameter(saveCommand, "OperatorID", System.Data.DbType.String, attachment.operatorId);
-                db.AddInParameter(saveCommand, "LookupCode", System.Data.DbType.String, attachment.lookupCode);
-                db.AddInParameter(saveCommand, "ImagePath", System.Data.DbType.String, attachment.imagePath);
-
-                result = Convert.ToBoolean(db.ExecuteNonQuery(saveCommand, transaction));
-
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                throw ex;
-            }
-            return result;
+            return db.ExecuteSprocAccessor(DBRoutine.LISTBANKDETAILSOPERATORWISE, MapBuilder<OperatorBankDetails>.BuildAllProperties(), MobileNo).ToList();
         }
         #region IDataFactory Members
     }

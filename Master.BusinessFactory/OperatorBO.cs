@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PickC.Services.DTO;
 using Master.DataFactory;
 using Master.Contract;
+using Operation.Contract;
 
 namespace Master.BusinessFactory
 {
@@ -29,9 +30,31 @@ namespace Master.BusinessFactory
         {
             return (Operator)operatorDAL.GetItem<Operator>(item);
         }
-        public bool SaveAttachment(OperatorAttachmentDTO attachment)
+        public Operator GetOperatorDetails(string operatorID)
         {
-            return operatorDAL.SaveAttachment(attachment);
-        }        
+            return operatorDAL.GetOperatorDetails(operatorID);
+        }
+        public bool UpdateOperatorPassword(OperatorPasssword item)
+        {
+            return operatorDAL.UpdateOperatorPassword(item);
+        }
+        public bool SaveOperatorNotifications(OperatorNotifications newItem)
+        {
+
+            return operatorDAL.SaveOperatorNotifications(newItem);
+        }
+        //public bool DeleteOperatorLogIn(OperatorLogIn item)
+        //{
+        //    return operatorDAL.DeleteOperatorLogIn(item);
+        //}
+
+        //public bool SaveAttachment(OperatorAttachment attachment)
+        //{
+        //    return operatorDAL.SaveAttachment(attachment);
+        //}  
+        public List<OperatorBankDetails> GetOperatorWiseBankList(string MobileNo)
+        {
+            return operatorDAL.GetOperatorWiseBankList(MobileNo);
+        }
     }
 }

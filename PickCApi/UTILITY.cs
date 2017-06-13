@@ -18,11 +18,13 @@ namespace PickCApi
         public static string NotifySuccess = "Booking Confirmed";//done
         public static string NotifyFailed = "Booking Failed";
         public static string NotifyCancelledByDriver = "Booking Cancelled by driver";//done
+        public static string NotifyDriverpaymentReceived = "DriverpaymentReceived";
         public static string NotifyTripStart = "Trip Started";//pending
         public static string NotifyTripEnd = "Trip End";//pending
         public static string NotifyInvoiceGenerated = "Invoice Generated";//pending
         public static string NotifyNewBooking = "New Booking Available";
         public static string NotifyBookingCancelledByUser = "Booking Cancelled by user";//done
+        public static string NotifyPaymentDriver = "Customer Payment Received";//done
         public static string NotifyBookingAcceptedByOtherDriver = "Booking Accepted by other driver";
         public static string NotifyPickUpReachDateTime = "Driver reached pickup location";
         public static string NotifyDestinationReachDateTime = "Driver reached destination location";

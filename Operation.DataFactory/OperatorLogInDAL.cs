@@ -10,6 +10,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Operation.Contract;
 using Operation.DataFactory;
 
+
 namespace Operation.DataFactory
 {
   public class OperatorLogInDAL
@@ -120,6 +121,45 @@ namespace Operation.DataFactory
 
             return (result > 0 ? true : false);
         }
+        public List<OperatorMonitor> GetOperatorDriverMonitor(string MobileNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.OPERATORTRIPMONITOR, MapBuilder<OperatorMonitor>.BuildAllProperties(), MobileNo).ToList();
+        }
+        public bool DeleteOperatorLogIn<T>(T item) where T : IContract
+        {
+            var result = false;
+            var operatorLogin = (OperatorLogIn)(object)item;
+
+            var connection = db.CreateConnection();
+            connection.Open();
+
+            var transaction = connection.BeginTransaction();
+
+            try
+            {
+                var deleteCommand = db.GetStoredProcCommand(DBRoutine.DELETEOPERATORLOGIN);
+
+                db.AddInParameter(deleteCommand, "TokenNo", System.Data.DbType.String, operatorLogin.TokenNo);
+
+                result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
+
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
+            }
+
+            return result;
+        }
+
         #endregion
 
     }

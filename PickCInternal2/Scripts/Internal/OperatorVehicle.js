@@ -17,6 +17,33 @@
     });
 });
 var gIndex = -1;
+function EditOperatorVehicle(index) {
+    gIndex = index;
+    //OPerator_OperatorVehicle_0__VehicleRegistrationNo
+    var baseID = 'OPerator_OperatorVehicle_' + index + '__';
+    $('#operatorVehicle_VehicleRegistrationNo').val($('#' + baseID + 'VehicleRegistrationNo').val());
+    $('#operatorVehicle_VehicleType option').filter(function () {
+        return this.text == $('#' + baseID + 'VehicleType').val();
+    }).attr('selected', true);
+
+    $('#operatorVehicle_Model option').filter(function () {
+        return this.text == $('#' + baseID + 'Model').val();
+    }).attr('selected', true);
+    
+    
+    $('#operatorVehicle_Tonnage').val($('#' + baseID + 'Tonnage').val());
+    $('#VehicleModal').modal('show');
+
+}
+function DeleteOperatorVehicle(index) {
+    var id = '#vehicle_OperatorVehicleList_' + index + '__IsActive';
+    $(id).val('False');
+    $('#trRow_' + index).css({
+        color: 'red',
+        'text-decoration': 'line-through',
+        'font-style': 'italic'
+    });
+}
 function btnSaveVehicle() {
     debugger;
     if (!$('#frmVehicle').valid())
@@ -28,7 +55,7 @@ function btnSaveVehicle() {
         $('#' + 'operatorVehicle_VehicleRegistrationNo_span_' + gIndex).text($('#operatorVehicle_VehicleRegistrationNo').val());
 
         $('#' + baseID + 'operatorVehicle_VehicleType').val($('#operatorVehicle_VehicleType').val());
-        $('#' + 'operatorVehicle_VehicleType_span_' + gIndex).text($('#operatorVehicle_VehicleType').val());
+        $('#' + 'operatorVehicle_VehicleType_span_' + gIndex).text($('#operatorVehicle_VehicleType option:selected').text());
 
         $('#' + baseID + 'operatorVehicle_Model').val($('#operatorVehicle_Model').val());
         $('#' + 'operatorVehicle_Model_span_' + gIndex).text($('#operatorVehicle_Model').val());
@@ -40,7 +67,7 @@ function btnSaveVehicle() {
         var html = '<tr id="trRow_' + index + '">' +
                         '<td>' +
                             '<span id="operatorVehicle_VehicleRegistrationNo_span_' + index + '">' + $('#operatorVehicle_VehicleRegistrationNo').val() + '</span>' +
-                            '<input id="vehicle_OperatorVehicleList_' + index + '__operatorVehicle_VehicleRegistrationNo" name="OPerator.OperatorVehicle[' + index + '].VehicleRegistrationNo" type="hidden" value="' + $('#operatorVehicle_VehicleRegistrationNo').val() + '">' +
+                            '<input class="vehicleNoCss" id="vehicle_OperatorVehicleList_' + index + '__operatorVehicle_VehicleRegistrationNo" name="OPerator.OperatorVehicle[' + index + '].VehicleRegistrationNo" type="hidden" value="' + $('#operatorVehicle_VehicleRegistrationNo').val() + '">' +
                         '</td>' +
                         '<td>' +
                             '<span id="operatorVehicle_VehicleType_span_' + index + '">' + $('#operatorVehicle_VehicleType').val() + '</span>' +

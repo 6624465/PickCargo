@@ -17,6 +17,25 @@
     });
 });
 var gIndex = -1;
+function EditOperatorVehicle(index) {
+    gIndex = index;
+    var baseID = 'vehicle_OperatorVehicleList_' + index + '__';
+    $('#operatorVehicle_VehicleRegistrationNo').val($('#' + baseID + 'operatorVehicle_VehicleRegistrationNo').val());
+    $('#operatorVehicle_VehicleType').val($('#' + baseID + 'operatorVehicle_VehicleType').val());
+    $('#operatorVehicle_Model').val($('#' + baseID + 'operatorVehicle_Model').val());
+    $('#operatorVehicle_Tonnage').val($('#' + baseID + 'operatorVehicle_Tonnage').val());
+    $('#VehicleModal').modal('show');
+
+}
+function DeleteOperatorVehicle(index) {
+    var id = '#vehicle_OperatorVehicleList_' + index + '__IsActive';
+    $(id).val('False');
+    $('#trRow_' + index).css({
+        color: 'red',
+        'text-decoration': 'line-through',
+        'font-style': 'italic'
+    });
+}
 function btnSaveVehicle() {
     debugger;
     if (!$('#frmVehicle').valid())

@@ -139,10 +139,10 @@ namespace Operation.DataFactory
             var result = false;
             var customerlogin = (CustomerLogin)(object)item;
 
-            var connnection = db.CreateConnection();
-            connnection.Open();
+            var connection = db.CreateConnection();
+            connection.Open();
 
-            var transaction = connnection.BeginTransaction();
+            var transaction = connection.BeginTransaction();
 
             try
             {
@@ -227,7 +227,7 @@ namespace Operation.DataFactory
             }
 
             return tokenNo;
-        }
+        }       
 
         #endregion
 

@@ -17,6 +17,26 @@
     });
 });
 var gIndex = -1;
+function EditOperatorDriver(index) {
+    debugger;
+    gIndex = index;
+    var baseID = 'driver_OperatorDriverList_' + index + '__';
+    $('#operatorDriverList_DriverName').val($('#' + baseID + 'operatorDriverList_DriverName').val());
+    $('#operatorDriverList_DriverLicenseNo').val($('#' + baseID + 'operatorDriverList_DriverLicenseNo').val());
+    $('#operatorDriverList_DriverMobileNo').val($('#' + baseID + 'operatorDriverList_DriverMobileNo').val());
+    $('#operatorDriverList_VehicleNo').val($('#' + baseID + 'operatorDriverList_VehicleNo').val());
+    $('#DriverModal').modal('show');
+
+}
+function DeleteOperatorDriver(index) {
+    var id = '#driver_OperatorDriverList_' + index + '__IsActive';
+    $(id).val('False');
+    $('#trRow_' + index).css({
+        color: 'red',
+        'text-decoration': 'line-through',
+        'font-style': 'italic'
+    });
+}
 function btnSavedriver() {
     debugger;
     if (!$('#frmDriver').valid())

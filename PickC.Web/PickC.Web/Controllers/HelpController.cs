@@ -1,6 +1,8 @@
-﻿using System;
+﻿using PickC.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,12 +17,30 @@ namespace PickC.Web.Controllers
             else
                 return View(name, "_Layout");
         }
-
+        public ActionResult FindCRN()
+        {
+            return View();
+        }
         public ActionResult Services()
         {
             return View();
         }
+        public ActionResult mobilehelp()
+        {
+            return View();
+        }
+        public async Task<ActionResult> TRIPINVOICE(string bookingNo)
+        {
+            bookingNo = "BK170500094";
+            var bookingHistoryList = await new CustomerService().TripInvoiceList(bookingNo);
 
+            return View(bookingHistoryList);
+        }
+
+        public ActionResult TRIPINVOICEMOBILE()
+        {
+            return View();
+        }
         public ActionResult AboutUs()
         {
             return View();

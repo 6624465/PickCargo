@@ -25,6 +25,10 @@ namespace Operation.BusinessFactory
         {
             return bookingDAL.GetListByMobileNo(mobileNo);
         }
+        public List<Booking> GetListByBookingNo(string BookingNo)
+        {
+            return bookingDAL.GetListByBookingNo(BookingNo);
+        }
 
         public bool SaveBooking(Booking newItem)
         {
@@ -90,6 +94,11 @@ namespace Operation.BusinessFactory
         public bool SaveDestinationReachDateTime(string bookingNo, DateTime DestinationReachDateTime)
         {
             return bookingDAL.SaveDestinationReachDateTime(bookingNo, DestinationReachDateTime);
+        }
+
+        public List<Booking> GetBookingListByMobileNo(string MobileNo)
+        {
+            return bookingDAL.GetBookingListByMobileNo(MobileNo);
         }
 
     }

@@ -45,6 +45,10 @@ namespace Operation.DataFactory
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTOFBOOKINGBYMOBILENO, MapBuilder<Booking>.BuildAllProperties(), mobileNo).ToList();
         }
+        public List<Booking> GetListByBookingNo(string BookingNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.LISTOFBOOKINGBYBOOKINGNO, MapBuilder<Booking>.BuildAllProperties(), BookingNo).ToList();
+        }
 
         public bool Save<T>(T item, DbTransaction parentTransaction) where T : IContract
         {
@@ -415,6 +419,11 @@ namespace Operation.DataFactory
 
             return result;
 
+        }
+
+        public List<Booking> GetBookingListByMobileNo(string MobileNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.LISTOFBOOKINGHISTORYLISTBYMOBILENO, MapBuilder<Booking>.BuildAllProperties(), MobileNo).ToList();
         }
     }
 }

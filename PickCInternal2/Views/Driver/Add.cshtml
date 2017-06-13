@@ -10,6 +10,11 @@
     <link href="@Url.Content("~/Css/bootstrap-datetimepicker.css")" rel="stylesheet" />
 }
 <section class="content-header">
+    <div class="row">
+        <div class="col-xs-12">
+            @{ Html.RenderPartial("DashboardMenuList"); }
+        </div>
+    </div>
     <h1>Driver Details</h1>
 </section>
 @using (Html.BeginForm("SaveDriver", "Driver", FormMethod.Post, new { id = "frmDriverAdd", name = "frmDriverAdd" }))
@@ -302,9 +307,9 @@
     <script src="@Url.Content("~/Scripts/Internal/DriverAddress.js")"></script>
     <script type="text/javascript">
         $(function () {
+           $('#driver.DateOfBirth').val('');
             $('#frmDriverAdd').validate({
                 rules: {
-                    
                     'driver.DriverName': {
                         required: true
                     },
@@ -344,7 +349,7 @@
                 }
             });
             $('.dtCss').datetimepicker({
-                format: 'MM/DD/YY HH:mm A'
+                format: 'DD/MM/YY'
             });
         });
 

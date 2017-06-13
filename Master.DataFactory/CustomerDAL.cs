@@ -94,7 +94,6 @@ namespace Master.DataFactory
 
         }
 
-
         public bool Delete<T>(T item) where T : IContract
         {
             var result = false;
@@ -221,6 +220,23 @@ namespace Master.DataFactory
 
             }
             return result;
+        }
+        public IEnumerable<CustomerBillDetails> GetCustomerPaymentDetails(string BookingNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.CUSTOMERBILLDETAILS, MapBuilder<CustomerBillDetails>.BuildAllProperties(), BookingNo).ToList();
+        }
+
+        public IContract GetTripInvoice<T>(IContract lookupItem) where T : IContract
+        {
+            var item = ((TripInvoice)lookupItem);
+
+            var customerItem = db.ExecuteSprocAccessor(DBRoutine.TRIPINVOICELIST,
+                                                    MapBuilder<TripInvoice>.BuildAllProperties(),
+                                                    item.BookingNo).FirstOrDefault();
+
+            if (customerItem == null) return null;
+
+            return customerItem;
         }
 
     }

@@ -60,6 +60,10 @@
       <Project>{9e8aaf88-c0d5-44c9-a7ff-53d25d5ef242}</Project>
       <Name>Master.DataFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Operation.Contract\Operation.Contract.csproj">
+      <Project>{ef1065e7-b862-4409-88c4-bfd4a1a83ab5}</Project>
+      <Name>Operation.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PickC.Services\PickC.Services.csproj">
       <Project>{A3CEF276-F503-45B0-8E74-0211475D2B09}</Project>
       <Name>PickC.Services</Name>

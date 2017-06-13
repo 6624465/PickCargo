@@ -61,7 +61,7 @@
     <Compile Include="DTO\DriverManufacturerDTO.cs" />
     <Compile Include="DTO\DriverPaymentsDTO.cs" />
     <Compile Include="DTO\LoginDTO.cs" />
-    <Compile Include="DTO\OperatorAttachmentDTO.cs" />
+    <Compile Include="DTO\AttachmentDTO.cs" />
     <Compile Include="DTO\OperatorDriverDTO.cs" />
     <Compile Include="DTO\OperatorLookup.cs" />
     <Compile Include="DTO\OperatorVehicleDTO.cs" />

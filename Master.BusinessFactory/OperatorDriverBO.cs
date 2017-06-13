@@ -25,6 +25,10 @@ namespace Master.BusinessFactory
         {
             return operatorDriverDAL.Save(operatorDriverList);
         }
+        public bool UpdateOperatorDriverTruckAttachment(OperatorDriverTruckAttachment operatorDriverTruckAttachment)
+        {
+            return operatorDriverDAL.Update(operatorDriverTruckAttachment);
+        }
         public List<OperatorDriverList> GetOperatorDriverList()
         {
             return operatorDriverDAL.GetOperatorDriverList();

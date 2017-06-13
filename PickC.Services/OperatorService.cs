@@ -83,7 +83,7 @@ namespace PickC.Services
                 return ServiceResponse(client.Execute(request));
             });
         }
-        public async Task<string> SaveOperatorAttachmentAsync(OperatorAttachmentDTO attachment)
+        public async Task<string> SaveOperatorAttachmentAsync(OperatorAttachment attachment)
         {
 
             IRestClient client = new RestClient(ApiBaseUrl);

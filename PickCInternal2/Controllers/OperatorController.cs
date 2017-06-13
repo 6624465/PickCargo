@@ -38,7 +38,89 @@ namespace PickCInternal2.Controllers
         }
         [HttpPost]
         public async Task<ActionResult> SaveOperator(Operator OPerator)
-            {
+        {
+            //var attachmentsList = new List<OperatorAttachment>();
+            //var lookupId = "";
+            //foreach (string file in Request.Files)
+            //{
+            //    var fileContent = Request.Files[file];
+            //    if (fileContent.ContentLength > 0)
+            //    {
+            //        if (file == "fadhar")
+            //        {
+            //            lookupId = "1375";
+            //        }
+            //        if (file == "fpan")
+            //        {
+            //            lookupId = "1374";
+            //        }
+            //        if (file == "flicense")
+            //        {
+            //            lookupId = "1376";
+            //        }
+            //        if (file == "fvoter")
+            //        {
+            //            lookupId = "1377";
+            //        }
+            //        if (file == "fothers")
+            //        {
+            //            lookupId = "1382";
+            //        }
+            //        string mapPath = Server.MapPath("~/Attachments/");
+            //        if (!Directory.Exists(mapPath))
+            //        {
+            //            Directory.CreateDirectory(mapPath);
+            //        }
+            //        fileContent.SaveAs(mapPath + fileContent.FileName);
+
+            //        OperatorAttachment attachment = new OperatorAttachment()
+            //        {
+            //            imagePath = fileContent.FileName,
+            //            lookupCode = lookupId
+            //        };
+
+            //        attachmentsList.Add(attachment);
+            //    }
+            //}
+            //foreach (string file in Request.Files)
+            //{
+            //    var fileContent = Request.Files[file];
+            //    if(file== "fadhar")
+            //    {
+            //         lookupId = "1375";
+            //    }
+            //    if(file == "fpan") 
+            //    {
+            //        lookupId = "1374";
+            //    }
+            //    if(file == "flicense")
+            //    {
+            //        lookupId = "1376";
+            //    }
+            //    if(file == "fvoter")
+            //    {
+            //        lookupId = "1377";
+            //    }
+            //    if(file== "fothers")
+            //    {
+            //        lookupId = "1382";
+            //    }
+            //    string mapPath = Server.MapPath("~/Attachments/");
+            //    if (!Directory.Exists(mapPath))
+            //    {
+            //        Directory.CreateDirectory(mapPath);
+            //    }
+            //    fileContent.SaveAs(mapPath + fileContent.FileName);
+
+            //    OperatorAttachment attachment = new OperatorAttachment()
+            //    {
+            //        imagePath = fileContent.FileName,
+            //        lookupCode = lookupId
+            //    };
+
+            //    attachmentsList.Add(attachment);
+            //}
+           // OPerator.operatorAttachment = attachmentsList;
             var result = await new OperatorService(AUTHTOKEN, p_mobileNo).SaveOperatorAsync(OPerator);
             return RedirectToAction("Operator", "Operator");
         }
@@ -87,6 +169,19 @@ namespace PickCInternal2.Controllers
         {
             var tonnage = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorModelList()).Where(x => x.Model == Tonnage).Select(x => new { Value = x.Tonnage, Text = x.Tonnage }).ToList();
             return Json(tonnage, JsonRequestBehavior.AllowGet);
+        }     
+       [HttpGet]
+        public async Task<JsonResult> GetVehicleNo(string VehicleNo)
+        {
+            var vehicleNo = (await new OperatorDriverService(AUTHTOKEN, p_mobileNo).GetvehicleNoList()).Where(x => x.VehicleRegistrationNo == VehicleNo).Count();
+            if (vehicleNo > 0)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
         }
         public async Task<JsonResult> GetDriverDetails(string DriverId)
         {
@@ -111,10 +206,10 @@ namespace PickCInternal2.Controllers
                     }
                     fileContent.SaveAs(mapPath + fileContent.FileName);
 
-                    OperatorAttachmentDTO atttachment = new OperatorAttachmentDTO()
+                    OperatorAttachment atttachment = new OperatorAttachment()
                     {
-                        attachmentId = operatorId + lookupId,
-                        operatorId = operatorId,
+                        //attachmentId = operatorId + lookupId,
+                        //operatorId = operatorId,
                         imagePath = fileContent.FileName,
                         lookupCode = lookupId
                     };

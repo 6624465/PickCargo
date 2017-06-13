@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Master.Contract;
 using Master.DataFactory;
+using Operation.Contract;
 
 namespace Master.BusinessFactory
 {
@@ -43,6 +44,14 @@ namespace Master.BusinessFactory
         {
             return customerDAL.UpdateCustomerDevice(mobileNo, deviceID);
         }
+        public IEnumerable<CustomerBillDetails> GetCustomerPaymentDetails(string bookingNo)
+        {
+            return customerDAL.GetCustomerPaymentDetails(bookingNo);
+        }
 
+        public TripInvoice GetTripInvoiceList(TripInvoice tripInvoice)
+        {
+            return (TripInvoice)customerDAL.GetTripInvoice<TripInvoice>(tripInvoice);
+        }
     }
 }

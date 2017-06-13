@@ -60,5 +60,7 @@ namespace Master.Contract
 
         public List<OperatorDriverList> OperatorDriverList { get; set; }
         public List<OperatorVehicle> OperatorVehicle { get; set; }
+
+        public List<OperatorAttachment> operatorAttachment { get; set; }
     }
 }

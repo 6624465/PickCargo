@@ -34,6 +34,10 @@ namespace Master.DataFactory
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTDRIVER, MapBuilder<Driver>.BuildAllProperties()).ToList();
         }
+        public List<Driver> GetOperatorWiseDriverList(string MobileNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.LISTDRIVEROPERATORWISE, MapBuilder<Driver>.BuildAllProperties(),MobileNo).ToList();
+        }
 
         public bool Save<T>(T item, DbTransaction parentTransaction) where T : IContract
         {
@@ -76,7 +80,7 @@ namespace Master.DataFactory
                 //db.AddInParameter(savecommand, "Status", System.Data.DbType.Boolean, driver.Status);
                 db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, driver.CreatedBy);
                 db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, driver.ModifiedBy);
-                db.AddInParameter(savecommand, "Nationality", System.Data.DbType.String, driver.Nationality);
+                db.AddInParameter(savecommand, "Nationality", System.Data.DbType.String, driver.Nationality ?? "Indian");
                 //db.AddInParameter(savecommand, "DeviceID", System.Data.DbType.String, driver.DeviceID);
                 db.AddInParameter(savecommand, "NewDocumentNo", System.Data.DbType.String,0);
 
@@ -121,7 +125,98 @@ namespace Master.DataFactory
             return (result > 0 ? true : false);
 
         }
+        public bool SaveDriverReferral<T>(T item, DbTransaction parentTransaction) where T : IContract
+        {
+            currentTransaction = parentTransaction;
+            return SaveDriverReferral(item);
 
+        }
+
+        public bool SaveDriverReferral<T>(T item) where T : IContract
+        {
+            var result = 0;
+            var driverReferral = (DriverReferral)(object)item;
+
+            if (currentTransaction == null)
+            {
+                connection = db.CreateConnection();
+                connection.Open();
+            }
+
+            var transaction = (currentTransaction == null ? connection.BeginTransaction() : currentTransaction);
+
+            try
+            {
+
+                var savecommand = db.GetStoredProcCommand(DBRoutine.SAVEREFERRALDRIVER);
+                db.AddInParameter(savecommand, "ReferralId", System.Data.DbType.Int64, driverReferral.ReferralId);
+                db.AddInParameter(savecommand, "Name", System.Data.DbType.String, driverReferral.Name);
+                db.AddInParameter(savecommand, "Mobile", System.Data.DbType.String, driverReferral.Mobile);
+                db.AddInParameter(savecommand, "EmailID", System.Data.DbType.String, driverReferral.EmailID);
+                db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, driverReferral.DriverID);
+                db.AddInParameter(savecommand, "Status", System.Data.DbType.Boolean, driverReferral.Status);
+                db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, driverReferral.CreatedBy ?? "ADMIN");
+                db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, driverReferral.ModifiedBy ?? "ADMIN");
+                //db.AddInParameter(savecommand, "OTP", System.Data.DbType.String, driverReferral.OTP);
+                //db.AddInParameter(savecommand, "IsOTPVerified", System.Data.DbType.Boolean, driverReferral.IsOTPVerified);
+                //db.AddInParameter(savecommand, "OTPSendDate", System.Data.DbType.DateTime, driverReferral.OTPSendDate);
+                //db.AddInParameter(savecommand, "OTPVerifiedDate", System.Data.DbType.DateTime, driverReferral.OTPVerifiedDate);
+                result = db.ExecuteNonQuery(savecommand, transaction);
+                    if (currentTransaction == null)
+                        transaction.Commit();              
+            }
+            catch (Exception ex)
+            {
+                if (currentTransaction == null)
+                    transaction.Rollback();
+
+                throw;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
+
+            }
+
+            return (result > 0 ? true : false);
+
+        }
+        public bool UpdateDriverPassword<T>(T item) where T : IContract
+        {
+            var result = false;
+            var driverpassword = (DriverPassword)(object)item;
+
+            var connnection = db.CreateConnection();
+            connnection.Open();
+
+            var transaction = connnection.BeginTransaction();
+
+            try
+            {
+                var deleteCommand = db.GetStoredProcCommand(DBRoutine.DRIVERUPDATEPASSWORD);
+                db.AddInParameter(deleteCommand, "DriverID", System.Data.DbType.String,driverpassword.DriverID);
+                db.AddInParameter(deleteCommand, "Password", System.Data.DbType.String, driverpassword.Password);
+                db.AddInParameter(deleteCommand, "NewPassword", System.Data.DbType.String, driverpassword.NewPassword);
+              
+                result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
+
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connnection.Close();
+
+            }
+            return result;
+        }
         public bool Delete<T>(T item) where T : IContract
         {
             var result = false;
@@ -173,6 +268,17 @@ namespace Master.DataFactory
             driverItem.AddressList = new AddressDAL().GetList(driverItem.DriverID);
 
             return driverItem;
+        }
+        public IContract GetDriverRating<T>(IContract lookupItem) where T : IContract
+        {
+            var item = ((DriverRating)lookupItem);
+
+            DriverRating driverItem = db.ExecuteSprocAccessor(DBRoutine.SELECTDRIVERAVERAGERATING,
+                                                    MapBuilder<DriverRating>
+                                                    .MapAllProperties().Build(),item.DriverID).FirstOrDefault();
+
+            if (driverItem == null) return null;
+               return driverItem;
         }
 
 
@@ -256,9 +362,200 @@ namespace Master.DataFactory
             return result;
 
         }
+        public int GetTripCount(string MobileNo)
+        {
+            int result = 0;
 
+            var connnection = db.CreateConnection();
+            connnection.Open();
 
+            var transaction = connnection.BeginTransaction();
 
+            try
+            {
+                var tripCount = db.GetStoredProcCommand(DBRoutine.OPERATORTRIPCOUNT);
+                db.AddInParameter(tripCount, "MobileNo", System.Data.DbType.String, MobileNo);
+                result =Convert.ToInt32(db.ExecuteScalar(tripCount, transaction));
+
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connnection.Close();
+
+            }
+            return result;
+        }
+        public decimal GetTripAmount(string MobileNo)
+        {
+            decimal result = 0m;
+
+            var connnection = db.CreateConnection();
+            connnection.Open();
+
+            var transaction = connnection.BeginTransaction();
+
+            try
+            {
+                var tripAmount = db.GetStoredProcCommand(DBRoutine.OPERATORTRIPAMOUNT);
+                db.AddInParameter(tripAmount, "MobileNo", System.Data.DbType.String, MobileNo);
+                result = Convert.ToDecimal(db.ExecuteScalar(tripAmount, transaction));
+
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connnection.Close();
+
+            }
+            return result;
+        }
+        public int GetTripCountbyDriverID(string DriverID)
+        {
+            int result = 0;
+
+            var connnection = db.CreateConnection();
+            connnection.Open();
+
+            var transaction = connnection.BeginTransaction();
+
+            try
+            {
+                var tripCount = db.GetStoredProcCommand(DBRoutine.DRIVERTRIPCOUNTBYDRIVERID);
+                db.AddInParameter(tripCount, "DriverID", System.Data.DbType.String, DriverID);
+                result = Convert.ToInt32(db.ExecuteScalar(tripCount, transaction));
+
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connnection.Close();
+
+            }
+            return result;
+        }
+        public decimal GetTripAmountbyDriverID(string DriverID)
+        {
+            decimal result = 0m;
+
+            var connnection = db.CreateConnection();
+            connnection.Open();
+
+            var transaction = connnection.BeginTransaction();
+
+            try
+            {
+                var tripAmount = db.GetStoredProcCommand(DBRoutine.DRIVERTRIPAMOUNTDAILYWISE);
+                db.AddInParameter(tripAmount, "DriverID", System.Data.DbType.String, DriverID);
+                result = Convert.ToDecimal(db.ExecuteScalar(tripAmount, transaction));
+
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connnection.Close();
+
+            }
+            return result;
+        }
+        public List<TripCE> GetTripCountandEarnings(string MobileNo,DateTime fromdate, DateTime todate)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.OPERATORTRIPCOUNTAMOUNTBYDATES, MapBuilder<TripCE>.BuildAllProperties(), MobileNo, fromdate, todate).ToList();
+        }
+        public List<DriverTodayTripList> GetTodayListOfTrips(string DriverID)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.DRIVERTodayListOfTrips, MapBuilder<DriverTodayTripList>.BuildAllProperties(), DriverID).ToList();
+        }
+        public List<TripCElist> GetTripCountandEarningsList(string MobileNo, DateTime fromdate, DateTime todate)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.OPERATORTRIPCOUNTAMOUNTLISTBYDATES, MapBuilder<TripCElist>.BuildAllProperties(), MobileNo, fromdate, todate).ToList();
+        }
+        public List<TripCElist> GetDailyTripEarningsList(string MobileNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.OPERATORTRIPEARNINGLISTDAILY, MapBuilder<TripCElist>.MapAllProperties().DoNotMap(x=>x.LocationFrom).DoNotMap(x=>x.LocationTo).DoNotMap(x=>x.vehicleType).Build(), MobileNo).ToList();
+        }
+        public List<TripCountList> GetDailyTripCountList(string MobileNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.OPERATORTRIPCOUNTLISTDAILY, MapBuilder<TripCountList>.BuildAllProperties(), MobileNo).ToList();
+        }
+        public bool SaveDriverRating<T>(T item, DbTransaction parentTransaction) where T : IContract
+        {
+            currentTransaction = parentTransaction;
+            return SaveDriverRating(item);
+
+        }
+
+        public bool SaveDriverRating<T>(T item) where T : IContract
+        {
+            var result = 0;
+            DriverRating driverRating = (DriverRating)(object)item;
+
+            if (currentTransaction == null)
+            {
+                connection = db.CreateConnection();
+                connection.Open();
+            }
+
+            var transaction = (currentTransaction == null ? connection.BeginTransaction() : currentTransaction);
+
+            try
+            {
+
+                var savecommand = db.GetStoredProcCommand(DBRoutine.SAVEDRIVERRATING);
+                db.AddInParameter(savecommand, "BookingNo", System.Data.DbType.String, driverRating.BookingNo);
+                db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, driverRating.DriverID);
+                db.AddInParameter(savecommand, "Rating", System.Data.DbType.String, driverRating.Rating);
+
+                result = db.ExecuteNonQuery(savecommand, transaction);
+
+                if (currentTransaction == null)
+                    transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                if (currentTransaction == null)
+                    transaction.Rollback();
+
+                throw;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
+            }
+
+            return (result > 0 ? true : false);
+
+        }
 
     }
 }

@@ -27,6 +27,10 @@ public class OperatorDriverDAL
         }
 
         #region IDataFactory Members
+        public List<OperatorDriverList> GetSelectList(string OperatorID)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORDRIVERBYID, MapBuilder<OperatorDriverList>.BuildAllProperties(), OperatorID).ToList();
+        }
         public List<OperatorDriver> GetList()
         {
             return db.ExecuteSprocAccessor(DBRoutine.SELECTDRIVERDETAILS, MapBuilder<OperatorDriver>.BuildAllProperties()).ToList();
@@ -85,6 +89,46 @@ public class OperatorDriverDAL
             return (result > 0 ? true : false);
 
         }
+        public bool Update<T>(T item)
+        {
+            var result = 0;
+            OperatorDriverTruckAttachment operatorDriverTruckAttachment = (OperatorDriverTruckAttachment)(object)item;
+
+            if (currentTransaction == null)
+            {
+                connection = db.CreateConnection();
+                connection.Open();
+            }
+
+            DbTransaction transaction = (currentTransaction == null ? connection.BeginTransaction() : currentTransaction);
+
+            try
+            {
+                DbCommand savecommand = db.GetStoredProcCommand(DBRoutine.SAVEDRIVERVEHICLE);
+                
+                db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, operatorDriverTruckAttachment.DriverID);
+                db.AddInParameter(savecommand, "VehicleNo", System.Data.DbType.String, operatorDriverTruckAttachment.VehicleNo);
+                db.AddInParameter(savecommand, "OperatorMobNo", System.Data.DbType.String, operatorDriverTruckAttachment.OperatorMobNo);
+                db.AddInParameter(savecommand, "Status", System.Data.DbType.String, operatorDriverTruckAttachment.Status);
+                                      
+                result = db.ExecuteNonQuery(savecommand, transaction);
+
+                if (currentTransaction == null)
+                    transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                if (currentTransaction == null)
+                    transaction.Rollback();
+
+                throw;
+            }
+            return (result > 0 ? true : false);
+
+        }
     }
-    #endregion
+    
 }
+    #endregion
+

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,13 +13,15 @@ using PickCApi.Core;
 using PickCApi.Areas.Master.DTO;
 using PickC.Services.DTO;
 using Operation.BusinessFactory;
+using System.IO;
 
 namespace PickCApi.Areas.Master.Controllers
 {
     [RoutePrefix("api/master/operator")]
-    [ApiAuthFilter]
+    [OperatorAPIAuthFilter]
     public class OperatorController : ApiBase
     {
+
         [HttpGet]
         [Route("list")]
         public IHttpActionResult OperatorList()
@@ -62,25 +65,25 @@ namespace PickCApi.Areas.Master.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("saveattachment")]
+        //[HttpPost]
+        //[Route("saveattachment")]
 
-        public IHttpActionResult SaveAttachment(OperatorAttachmentDTO attachments)
-        {
-            try
-            {
-                var result = new OperatorBO().SaveAttachment(attachments);
-                if (result)
-                    return Ok(UTILITY.SUCCESSMSG);
-                else
-                    return BadRequest();
-            }
-            catch (Exception ex)
-            {
+        //public IHttpActionResult SaveAttachment(OperatorAttachment attachments)
+        //{
+        //    try
+        //    {
+        //        var result = new OperatorBO().SaveAttachment(attachments);
+        //        if (result)
+        //            return Ok(UTILITY.SUCCESSMSG);
+        //        else
+        //            return BadRequest();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return InternalServerError(ex);
-            }
-        }
+        //        return InternalServerError(ex);
+        //    }
+        //}
         [HttpDelete]
         [Route("{OPEratorID}")]
         public IHttpActionResult DeleteOperator(string operatorID)
@@ -137,7 +140,7 @@ namespace PickCApi.Areas.Master.Controllers
         {
             try
             {
-                var OPerator = new OperatorBO().GetOperator(new Operator { OperatorID = operatorID });
+                var OPerator = new OperatorBO().GetOperatorDetails(operatorID);
                 if (OPerator != null)
                     return Ok(OPerator);
                 else

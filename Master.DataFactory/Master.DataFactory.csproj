@@ -48,11 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressDAL.cs" />
+    <Compile Include="BankDetailsDAL.cs" />
     <Compile Include="CustomerDAL.cs" />
     <Compile Include="DBRoutine.cs" />
     <Compile Include="DriverDAL.cs" />
     <Compile Include="LookUpDAL.cs" />
     <Compile Include="ManufacturerDAL.cs" />
+    <Compile Include="OperatorAttachementDAL.cs" />
     <Compile Include="OperatorDAL.cs" />
     <Compile Include="OperatorDriverDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +66,10 @@
     <ProjectReference Include="..\Master.Contract\Master.Contract.csproj">
       <Project>{b9e20a20-01c6-480a-a49a-647df7c89463}</Project>
       <Name>Master.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Operation.Contract\Operation.Contract.csproj">
+      <Project>{ef1065e7-b862-4409-88c4-bfd4a1a83ab5}</Project>
+      <Name>Operation.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\Operation.DataFactory\Operation.DataFactory.csproj">
       <Project>{37B63EEA-9A96-475B-8AF3-4D81ECE5753E}</Project>

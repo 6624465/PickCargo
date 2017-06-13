@@ -22,5 +22,13 @@ namespace Operation.BusinessFactory
         {
             return operatorloginDAL.AuthUser(item);
         }
+        public bool DeleteOperatorLogIn(OperatorLogIn item)
+        {
+            return operatorloginDAL.DeleteOperatorLogIn(item);
+        }
+        public List<OperatorMonitor> GetOperatorDriverMonitor(string MobileNo)
+        {
+            return operatorloginDAL.GetOperatorDriverMonitor(MobileNo);
+        }
     }
 }
