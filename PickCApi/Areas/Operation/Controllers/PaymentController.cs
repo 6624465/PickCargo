@@ -1,4 +1,4 @@
-﻿using Operation.BusinessFactory;
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Configuration;
+
+using Operation.BusinessFactory;
 
 namespace PickCApi.Areas.Operation.Controllers
 {
@@ -45,17 +48,21 @@ namespace PickCApi.Areas.Operation.Controllers
         [Route("getRSAKey")]
         public IHttpActionResult getRSAKey(RSAObject obj)
         {
-            /*
-            string vParams = "";
-            foreach (string key in Request.Params.AllKeys)
+            var CCAVENUE_ACCESS_CODE = ConfigurationManager.AppSettings["CCAVENUE_ACCESS_CODE"];
+            if(CCAVENUE_ACCESS_CODE == obj.access_code)
             {
-                vParams += key + "=" + Request[key] + "&";
-            }*/
-           string vParams = "access_code=" + obj.access_code + "&" + "order_id" + obj.order_id;
-
-            string queryUrl = "https://secure.ccavenue.com/transaction/getRSAKey";
-            var encStr = postPaymentRequestToGateway(queryUrl, vParams);
-            return Ok(encStr);
+                string vParams = "access_code=" + obj.access_code + "&" + "order_id=" + obj.order_id;
+                string queryUrl = "https://secure.ccavenue.com/transaction/getRSAKey";
+                var encStr = postPaymentRequestToGateway(queryUrl, vParams);
+                return Ok(new
+                {
+                    RSAKey = encStr
+                });
+            }
+            else
+            {
+                return Unauthorized();
+            }            
         }
 
         [HttpGet]
