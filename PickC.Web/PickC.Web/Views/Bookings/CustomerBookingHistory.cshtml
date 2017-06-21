@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    WebGrid grid = new WebGrid(Model.Booking, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "grid");
+    WebGrid grid = new WebGrid(Model.BookingHistoryDetails, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "grid");
 }
 <style>
     table td a, th a {
@@ -37,7 +37,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                @if (Model.Booking != null && Model.Booking.Count != 0)
+                                @if (Model.BookingHistoryDetails != null && Model.BookingHistoryDetails.Count != 0)
                                 {
                                     @grid.GetHtml(tableStyle: "table",
                                                              headerStyle: "header",
@@ -49,26 +49,29 @@
                                                              grid.Column("CustomerID", "Mobile Number", canSort: false),
                                                              grid.Column("LocationFrom", "Location From", canSort: false),
                                                              grid.Column("LocationTo", header: "Location To", canSort: false),
-                                                             grid.Column("DriverID", "Driver Name", canSort: false),
+                                                             grid.Column("DriverName", "Driver Name", canSort: false),
                                                              grid.Column("VehicleType", "Vehicle Type", canSort: false),
+                                                             grid.Column("VehicleNo", "Vehicle No", canSort: false),
                                                              grid.Column(header: "PDF", canSort: false, format: @<text>@Html.ActionLink("PrintInvoice", "PrintCustomerHistoryInvoice", new { BookingNo = item.BookingNo })</text>)
                                                          ))
                                 }
-                                else if (@Model.CustomerMobile != null)
+                                else if (@Model.CustomerMobile == null)
                                 {
                                     <div>
                                         <label>No Data Found...!</label>
                                     </div>
                                 }
+                                <div class="col-md-12">
+                                    <div class="pull-right">@grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-sm")</div>
+                                </div>
 
                             </div>
+                            
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
-                            @*<div class="pull-right">@grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-sm")</div>*@
-                        </div>
+                       
                     </div>
                 </div>
             </div>

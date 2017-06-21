@@ -192,5 +192,21 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [HttpGet]
+        [Route("IsOperatorValid/{operatorId}")]
+        public IHttpActionResult IsOperatorValid(string operatorId)
+        {
+            try
+            {
+                int IsOperatorExists = new OperatorBO().IsOperatorValid(operatorId);
+                    return Ok(IsOperatorExists);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
     }
 }

@@ -421,9 +421,9 @@ namespace Operation.DataFactory
 
         }
 
-        public List<Booking> GetBookingListByMobileNo(string MobileNo)
+        public List<BookingHistoryDetails> GetBookingListByMobileNo(string MobileNo)
         {
-            return db.ExecuteSprocAccessor(DBRoutine.LISTOFBOOKINGHISTORYLISTBYMOBILENO, MapBuilder<Booking>.BuildAllProperties(), MobileNo).ToList();
+            return db.ExecuteSprocAccessor(DBRoutine.LISTOFBOOKINGHISTORYLISTBYMOBILENO, MapBuilder<BookingHistoryDetails>.BuildAllProperties(), MobileNo).ToList();
         }
     }
 }

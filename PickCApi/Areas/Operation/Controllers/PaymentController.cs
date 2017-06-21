@@ -66,17 +66,17 @@ namespace PickCApi.Areas.Operation.Controllers
         }
 
         [HttpGet]
-        [Route("ccavenue/cancel")]
-        public IHttpActionResult ccavenueCancel()
+        [Route("ccavenue/cancel/{mobile}")]
+        public IHttpActionResult ccavenueCancel(string mobile)
         {
-            return Ok();
+            return Ok("Cancelled");
         }
 
         [HttpGet]
-        [Route("ccavenue/redirect")]
-        public IHttpActionResult redirect()
+        [Route("ccavenue/redirect/{mobile}/{bookingNo}")]
+        public IHttpActionResult redirect(string mobile)
         {
-            return Ok();
+            return Ok("redirected");
         }
 
         private string postPaymentRequestToGateway(String queryUrl, String urlParam)

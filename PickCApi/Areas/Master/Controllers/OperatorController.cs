@@ -18,7 +18,7 @@ using System.IO;
 namespace PickCApi.Areas.Master.Controllers
 {
     [RoutePrefix("api/master/operator")]
-    [OperatorAPIAuthFilter]
+    //[OperatorAPIAuthFilter]
     public class OperatorController : ApiBase
     {
 

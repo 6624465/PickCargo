@@ -24,6 +24,27 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
+                        <h3 class="box-title">Operator Info</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Operator Number</label>
+                                    <input type="text" id="txt-Operator-Number" class="form-control" />
+                                    <button type="button" id="btn-Operator" onclick="Check()">Valid</button>
+                                   @* @Html.TextBoxFor(x => new { @class = "form-control", placeholder = "Operator Number", @readonly = "readonly" })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="DriverInfo" style="display:none;">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
                         <h3 class="box-title">Driver Info</h3>
                     </div>
                     <div class="box-body">
@@ -37,7 +58,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Driver Name</label>
-                                    @Html.TextBoxFor(x => x.driver.DriverName, new { @class = "form-control", placeholder = "Driver Name" })
+                                    @Html.TextBoxFor(x => x.driver.DriverName, new { @class = "form-control", placeholder = "Driver Name", @readonly = "readonly" })
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -51,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="display:none;" id="PersonalInfo">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
@@ -131,7 +152,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="display:none;" id="IdentificationInfo">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
@@ -162,7 +183,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="display:none;" id="AddressInfo">
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
@@ -213,7 +234,7 @@
                 </div>
             </div>
         </div>
-        <div class="box">
+        <div class="box" style="display:none;" id="Attachments">
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
@@ -226,7 +247,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="display:none;" id="buttons">
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-body">
@@ -241,7 +262,7 @@
             </div>
         </div>
     </section>
-    
+
 }
 <div class="modal" id="addressModal">
     <div class="modal-dialog modal-md">
@@ -307,7 +328,7 @@
     <script src="@Url.Content("~/Scripts/Internal/DriverAddress.js")"></script>
     <script type="text/javascript">
         $(function () {
-           $('#driver.DateOfBirth').val('');
+            $('#driver.DateOfBirth').val('');
             $('#frmDriverAdd').validate({
                 rules: {
                     'driver.DriverName': {
@@ -357,6 +378,37 @@
             if ($('#frmDriverAdd').valid()) {
                 $('#frmDriverAdd').submit();
             }
+        }
+        function Check()
+        {
+            debugger;
+            var operatorId = $('#txt-Operator-Number').val();
+            if (operatorId != '' && operatorId != undefined) {
+
+                $.ajax({
+                    url: '@Url.Content("~/Dashboard/IsValidOperatorId?operatorId=")' + operatorId,
+                    method: 'get',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        debugger;
+                        if (data ==1){
+                            alert("Valid!");
+                            $("#DriverInfo").css("display", "block");
+                            $("#DriverInfo").css("display", "block");
+                            $("#DriverInfo").css("display", "block");
+                            //$('.hide').show();
+
+                        }
+                        if(data=0)
+                            alert("NotValid!");
+                        $('#txt-Operator-Number').val('');
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+           
         }
     </script>
 }

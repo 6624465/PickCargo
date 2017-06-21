@@ -57,7 +57,7 @@ namespace PickC.Services
                 await client.ExecuteTaskAsync<SaveBookingDTO>(request));
         }
 
-        public async Task<List<Booking>> GetBookingsHistoryByMobileNoAsync(string mobileNo)
+        public async Task<List<BookingHistoryDetails>> GetBookingsHistoryByMobileNoAsync(string mobileNo)
         {
             IRestClient client = new RestClient(ApiBaseUrl);
             var request = p_request;
@@ -66,7 +66,7 @@ namespace PickC.Services
             request.AddParameter("mobileNo", mobileNo, ParameterType.UrlSegment);
 
             return ServiceResponse(
-                await client.ExecuteTaskAsync<List<Booking>>(request));
+                await client.ExecuteTaskAsync<List<BookingHistoryDetails>>(request));
         }
     }
 }

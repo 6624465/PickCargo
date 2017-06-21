@@ -304,6 +304,26 @@ namespace Master.DataFactory
             return result;
         }
 
+        public int IsOperatorExixts(string operatorID)
+        {
+            try
+            {
+                
+                var result =Convert.ToInt32(db.ExecuteScalar(db.GetStoredProcCommand(DBRoutine.OPERATORVALIDCHECK, operatorID)));
+
+                //if (result > 0)
+                //    return 1;
+                //else
+                //    return 0;
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public List<OperatorBankDetails> GetOperatorWiseBankList(string MobileNo)
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTBANKDETAILSOPERATORWISE, MapBuilder<OperatorBankDetails>.BuildAllProperties(), MobileNo).ToList();

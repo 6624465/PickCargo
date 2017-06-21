@@ -272,7 +272,6 @@ jQuery(function ($) {
     /* ----------------------------------------------------------- */
 
     $(window).scroll(function () {
-        debugger;
         if ($(this).scrollTop() > 50) {
             $('#back-to-top').fadeIn();
         } else {

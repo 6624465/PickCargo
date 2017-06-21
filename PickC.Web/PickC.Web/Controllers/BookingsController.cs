@@ -158,7 +158,7 @@ namespace PickC.Web.Controllers
         public ActionResult CustomerBookingHistory()
         {
             BookingHistoryDTO bookingSearchVM = new BookingHistoryDTO();
-            bookingSearchVM.Booking = new List<Booking>();
+            bookingSearchVM.BookingHistoryDetails = new List<BookingHistoryDetails>();
             return View("CustomerBookingHistory", bookingSearchVM);
         }
         [HttpPost]
@@ -166,7 +166,7 @@ namespace PickC.Web.Controllers
         {
             var data = await new BookingService(AUTHTOKEN, p_mobileNo).GetBookingsHistoryByMobileNoAsync(bookingHistoryDTO.CustomerMobile);
             var bookingSearchVM = new BookingHistoryDTO();
-            bookingSearchVM.Booking = data;
+            bookingSearchVM.BookingHistoryDetails = data;
             return View("CustomerBookingHistory", bookingSearchVM);
         }
 
@@ -176,10 +176,17 @@ namespace PickC.Web.Controllers
 
             var bookingHistoryList = await new CustomerService().TripInvoiceList(BookingNo);
 
-            DownloadPDF2(PartialView("pdf2", bookingHistoryList).RenderToString(), BookingNo);
+            if (bookingHistoryList != null)
+                DownloadPDF2(PartialView("pdf2", bookingHistoryList).RenderToString(), BookingNo);
 
             return View("Bookings");
         }
+
+        //public JsonResult CustomerBookingHistory(int? page)
+        //{
+
+
+        //}
 
         public void DownloadPDF2(string HtmlContent, string fileName)
         {
