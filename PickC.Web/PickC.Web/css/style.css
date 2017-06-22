@@ -3965,3 +3965,25 @@ text-align:center;
     width:100%;
     max-width:200px;
 }
+
+.notes ul li{
+        border-width: 0 !important;
+    float: none !important;
+    font-size: 10px !important;
+    list-style: outside none circle !important;
+    width: 100% !important;
+    text-align:left !important;
+    padding-top:6px !important;
+  
+}
+.notes > b {
+    display: inline-block;
+    left: 0;
+    position: absolute;
+    top: 6px;
+    width: 15%;
+}
+.notes ul {
+    display: inline-block;
+    width: 83%;
+}

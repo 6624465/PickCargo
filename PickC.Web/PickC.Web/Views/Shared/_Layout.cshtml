@@ -153,15 +153,14 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <form class="navbar-form navbar-right hidden-xs hidden-sm">
+                        @*<form class="navbar-form navbar-right hidden-xs hidden-sm">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onchange="onChangeMobileNo()">
                                 <span class="input-group-btn">
-                                    @*<button class="btn btn-default app_btn tooltips" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button">Get <B><b>Pick-C</b></B> App Link</button>*@
-                                    <button class="btn btn-default app_btn tooltips" onclick="SendSMS()" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button" disabled id="btn-sendSms">Get <B>Pick-C</B> App Link</button>
+                                     <button class="btn btn-default app_btn tooltips" onclick="SendSMS()" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button" disabled id="btn-sendSms">Get <B>Pick-C</B> App Link</button>
                                 </span>
                             </div>
-                        </form>
+                        </form>*@
                         <nav class="collapse navbar-collapse navbar-responsive-collapse navbar-right">
                             <ul class="nav navbar-nav navBackClr">
                                 @*<li class="mleft"><a href="#">Track Cargo with CRN</a></li>*@
@@ -170,6 +169,7 @@
                                 <li><a href="@Url.Content("~/Help/AboutUs")">About Us</a></li>
                                 @*<li><a href="@Url.Content("~/RateCard/index")">Fare chart</a></li>*@
                                 <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>
+                                <li><a data-toggle="modal" data-target="#myModal">Get Pick-C App Link  </a></li>
                                 <li><a href="@Url.Content("~/Help/ContactUs")">Contact us </a></li>
 
                             </ul><!--/ Nav ul end -->
@@ -446,7 +446,20 @@
                    // alert("Please Enter Your MobileNo!");
                 }
             }
-    
+            var toggle = document.getElementById('toggle');
+            var slider = document.querySelector('.slider');
+
+            toggle.addEventListener('click', toggleSlider, false);
+
+            function toggleSlider() {
+                if (slider.classList.contains('opened')) {
+                    slider.classList.remove('opened');
+                    slider.classList.add('closed');
+                } else {
+                    slider.classList.remove('closed');
+                    slider.classList.add('opened');
+                }
+            }
 
         </script>
         @RenderSection("scripts", false)
@@ -455,16 +468,39 @@
 
 
     </div><!-- Body inner end -->
+    <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
+            <div class="modal-content" style="top:200px;">
+
+                <div class="modal-body" style="min-height:200px; background:rgba(246,246,246,0.5); ">
+                    <form class="navbar-form  hidden-xs hidden-sm">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onchange="onChangeMobileNo()">
+                            <span class="input-group-btn">
+                                @*<button class="btn btn-default app_btn tooltips" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button">Get <B><b>Pick-C</b></B> App Link</button>*@
+                                <button class="btn btn-default app_btn tooltips" style="background-color: rgba(255, 252, 0, 0.5);" onclick="SendSMS()" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button" disabled id="btn-sendSms">Get <b>Pick-C</b> App Link</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div id="myModalnos" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
             <div class="modal-content">
-               
+
                 <div class="modal-body">
                     <p> Message sent to your MobileNo!</p>
                 </div>
-               
+
             </div>
 
         </div>
