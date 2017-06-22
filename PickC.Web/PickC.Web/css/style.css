@@ -3654,7 +3654,7 @@ border-top: 2px #000 solid;
  height: 35px; 
 }
 .mleft{
-  margin: 0px 331px 0px 0px;
+  margin: 0px 244px 0px 0px;
 }
 .p-0{
   padding: 0px;
@@ -3988,3 +3988,24 @@ text-align:center;
     display: inline-block;
     width: 83%;
 }
+.getapp {
+    background:rgb(37,39,46);
+    
+}
+.getapp:hover {
+    background:rgb(37,39,46);
+    
+}
+     .header-white ul.navbar-nav > li.getapp > a {
+    color:#000;
+    line-height:normal;
+    }
+.header-white ul.navbar-nav > li.getapp:hover > a {
+    color:rgb(255,252,0);
+}
+nav {
+padding-right:0px !important;
+}
+    nav .getapp button {
+    padding:8px 15px;
+    }

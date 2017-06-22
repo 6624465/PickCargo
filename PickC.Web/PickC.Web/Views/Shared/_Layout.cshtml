@@ -29,7 +29,7 @@
     <!-- <link href="@Url.Content("~/css/AdminLTE.min.css")" rel="stylesheet" />-->
     <link href="@Url.Content("~/css/bootstrap-datetimepicker.css")" rel="stylesheet" />
     <!-- Template styles-->
-    <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css?v=1.0")">
     <!-- Responsive styles-->
     <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")">
     <!-- FontAwesome -->
@@ -217,9 +217,10 @@
                                 <li><a href="@Url.Content("~/Help/Services")">Services</a></li>
                                 <li><a href="@Url.Content("~/Help/AboutUs")">About Us</a></li>
                                 @*<li><a href="@Url.Content("~/RateCard/index")">Fare chart</a></li>*@
-                                <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>
-                                <li><a data-toggle="modal" data-target="#myModal">Get Pick-C App Link  </a></li>
+                                <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>                               
                                 <li><a href="@Url.Content("~/Help/ContactUs")">Contact us </a></li>
+                                <li class="getapp"><button data-toggle="modal" class="btn btn-primary solid blank has-ripple" data-target="#myModal">Get Pick-C App Link <i class="fa fa-download" aria-hidden="true"></i>
+ </button></li>
 
                             </ul><!--/ Nav ul end -->
 
@@ -515,7 +516,7 @@
             <!-- Modal content-->
             <div class="modal-content" style="top:200px;">
                 
-                <div class="modal-body" style="min-height:200px; background:rgba(246,246,246,0.5); ">
+                <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); ">
                     <form class="navbar-form  hidden-xs hidden-sm">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onchange="onChangeMobileNo()">
