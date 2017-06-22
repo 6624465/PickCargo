@@ -20,6 +20,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.html.simpleparser;
 using System.Web;
 
+
 namespace PickCApi.Areas.Master.Controllers
 {
     [RoutePrefix("api/master/customer")]
