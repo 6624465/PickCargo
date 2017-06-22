@@ -276,12 +276,12 @@ namespace Operation.DataFactory
                 var savecommand = db.GetStoredProcCommand(DBRoutine.UPDATEDRIVERDUTYSTATUS);
                 db.AddInParameter(savecommand, "TokenNo", System.Data.DbType.String, driveractivity.TokenNo);
                 db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, driveractivity.DriverID);
+                db.AddInParameter(savecommand, "Password", System.Data.DbType.String, null);
                 db.AddInParameter(savecommand, "IsOnDuty", System.Data.DbType.Boolean, driveractivity.IsOnDuty);
                 db.AddInParameter(savecommand, "IsLogIn", System.Data.DbType.String, driveractivity.IsLogIn);
                 db.AddInParameter(savecommand, "Latitude", System.Data.DbType.String, driveractivity.Latitude);
                 db.AddInParameter(savecommand, "Longitude", System.Data.DbType.String, driveractivity.Longitude);
-                
-
+                db.AddOutParameter(savecommand, "NewTokenNo", System.Data.DbType.String, 50);
 
 
                 result = db.ExecuteNonQuery(savecommand, transaction);
