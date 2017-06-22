@@ -74,6 +74,62 @@
         .modal-body p {
             color:#000;
         }
+        .mobile-link {
+      
+    position: absolute;
+   
+    top: 110px;
+    overflow:hidden;
+    width: 100%;
+    z-index: 99;
+    text-align:center;
+}
+
+
+.slider {
+
+	/* complete liquid height based on the parent's height!! */
+    height:100%;
+
+    /* only transition on transform properties which are hardware accelerated = way better performances */
+	-webkit-transition:-webkit-transform .3s ease;
+       -moz-transition:   -moz-transform .3s ease;
+        -ms-transition:    -ms-transform .3s ease;
+            transition:        transform .3s ease;
+}
+
+.slider.opened { 
+    /* visible */
+    -webkit-transform: translate(0, 0%);
+       -moz-transform: translate(0, 0%);
+        -ms-transform: translate(0, 0%);
+            transform: translate(0, 0%);
+}
+.slider.closed { 
+    /* completely offscreen */
+    -webkit-transform: translate(0, -100%);
+       -moz-transform: translate(0, -100%);
+        -ms-transform: translate(0, -100%);
+            transform: translate(0, -100%);
+}
+
+
+
+/* -------- not interesting styles ----------- body {
+    background:#eee;
+    margin:50px;
+}*/
+
+.slider {
+    -webkit-box-sizing:border-box;
+       -moz-box-sizing:border-box;
+        -ms-box-sizing:border-box;
+            box-sizing:border-box;
+
+    padding:20px;
+    background:rgba(37,39,46,0.9);
+   
+}
     </style>
     <!--Start of Tawk.to Script-->
     @*<script type="text/javascript">
@@ -126,7 +182,7 @@
                                 @*<a href="~/Help/Support">Click here</a>*@
                                 @*@Html.ActionLink("Customer Support", "Support", "Help", null, null)*@
 
-                                <li><a href="@Url.Content("~/Help/Support")"><i class="fa fa-headphones"></i> Customer Support</a></li>                       
+                                <li><a href="@Url.Content("~/Help/Support")"><i class="fa fa-headphones"></i> Customer Support</a></li>
                                 @*<li><a href="@Url.Content("~/Account/Logoff")"><i class="fa fa-user"></i> LogOut</a></li>*@
                                 @*<li><a href="@Url.Content("~/Help/Careers")"><i class="fa fa-hand-o-right"></i> Help</a></li>*@
 
@@ -153,14 +209,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        @*<form class="navbar-form navbar-right hidden-xs hidden-sm">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onchange="onChangeMobileNo()">
-                                <span class="input-group-btn">
-                                     <button class="btn btn-default app_btn tooltips" onclick="SendSMS()" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button" disabled id="btn-sendSms">Get <B>Pick-C</B> App Link</button>
-                                </span>
-                            </div>
-                        </form>*@
+
                         <nav class="collapse navbar-collapse navbar-responsive-collapse navbar-right">
                             <ul class="nav navbar-nav navBackClr">
                                 @*<li class="mleft"><a href="#">Track Cargo with CRN</a></li>*@
@@ -171,7 +220,7 @@
                                 <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>
                                 <li><a data-toggle="modal" data-target="#myModal">Get Pick-C App Link  </a></li>
                                 <li><a href="@Url.Content("~/Help/ContactUs")">Contact us </a></li>
-
+                               
                             </ul><!--/ Nav ul end -->
 
                         </nav><!--/ Collapse end -->
@@ -181,7 +230,8 @@
             </div><!-- Container end -->
         </header><!--/ Header end -->
         <!-- ******CONTENT****** -->
-        <div class="main-content"> @RenderBody()</div>
+        <div class="main-content"> @RenderBody() 
+</div>
         <section id="ts-features" class="features-area1">
             <div class="container">
                 <div class="row text-center">
@@ -256,7 +306,9 @@
             </div><!--/ Container end -->
         </section>
 
+        @*<button id="toggle">slider toggle</button>*@
 
+       
         <footer id="footer" class="footer">
             <div class="container">
                 <div class="row">
@@ -405,7 +457,7 @@
                 $('[data-toggle="tooltip"]').tooltip();
             });
 
-            
+
 
             function onChangeMobileNo() {
                 var mobileNumberRegExp = /^[789]\d{9}$/;
@@ -431,7 +483,8 @@
                         contentType: 'application/json',
                         success: function (data) {
                             if (data = true)
-                                alert("Message send to your Number");
+                                // alert("Message send to your Number");
+                                $('#myModalnos').modal('show');
                             //$('#myModal').modal('show');
                             $('#txtmobNo').val('');
                         },
@@ -440,12 +493,12 @@
                         }
                     });
                 }
-                else
-                {
+                else {
                     $('#myModalno').modal('show');
-                   // alert("Please Enter Your MobileNo!");
+                    // alert("Please Enter Your MobileNo!");
                 }
             }
+
             var toggle = document.getElementById('toggle');
             var slider = document.querySelector('.slider');
 
@@ -460,7 +513,6 @@
                     slider.classList.add('opened');
                 }
             }
-
         </script>
         @RenderSection("scripts", false)
 
@@ -468,13 +520,14 @@
 
 
     </div><!-- Body inner end -->
+  
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" >
 
             <!-- Modal content-->
             <div class="modal-content" style="top:200px;">
-
+                
                 <div class="modal-body" style="min-height:200px; background:rgba(246,246,246,0.5); ">
                     <form class="navbar-form  hidden-xs hidden-sm">
                         <div class="input-group">
@@ -486,7 +539,7 @@
                         </div>
                     </form>
                 </div>
-
+               
             </div>
 
         </div>
@@ -496,11 +549,11 @@
 
             <!-- Modal content-->
             <div class="modal-content">
-
+               
                 <div class="modal-body">
                     <p> Message sent to your MobileNo!</p>
                 </div>
-
+               
             </div>
 
         </div>

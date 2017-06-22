@@ -22,7 +22,7 @@ namespace PickCApi.Areas.Operation.Controllers
     public class BookingController : ApiBase
     {
         [HttpGet]
-        [Route("balist")]
+        [Route("list")]
         public IHttpActionResult BookingList()
         {
             try
