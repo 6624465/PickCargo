@@ -15,7 +15,7 @@ namespace PickC.Services.DTO
         public string CustomerMobile { get; set; }
         public DateTime? Datefrom { get; set; }
         public DateTime? DateTo { get; set; }
-        public List<Booking> Booking { get; set; }
+        public List<BookingHistoryDetails> BookingHistoryDetails { get; set; }
     }
 
 }

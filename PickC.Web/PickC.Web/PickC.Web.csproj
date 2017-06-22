@@ -16,7 +16,7 @@
     <RootNamespace>PickC.Web</RootNamespace>
     <AssemblyName>PickC.Web</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -279,6 +279,7 @@
     <Content Include="images\paytm.jpg" />
     <Content Include="images\product-bg.jpg" />
     <Content Include="images\qrcode.png" />
+    <Content Include="images\rupee.png" />
     <Content Include="images\S1.png" />
     <Content Include="images\S2.png" />
     <Content Include="images\S3.png" />
@@ -544,7 +545,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52329</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/PickCWeb</IISUrl>
+          <IISUrl>http://localhost:52329/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

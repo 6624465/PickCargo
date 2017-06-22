@@ -96,7 +96,7 @@ namespace Operation.BusinessFactory
             return bookingDAL.SaveDestinationReachDateTime(bookingNo, DestinationReachDateTime);
         }
 
-        public List<Booking> GetBookingListByMobileNo(string MobileNo)
+        public List<BookingHistoryDetails> GetBookingListByMobileNo(string MobileNo)
         {
             return bookingDAL.GetBookingListByMobileNo(MobileNo);
         }

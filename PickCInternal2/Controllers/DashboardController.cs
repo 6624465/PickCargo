@@ -142,5 +142,12 @@ namespace PickC.Internal2.Controllers
             var driverlist = await new DriverService(AUTHTOKEN, p_mobileNo).DriverInfoAsync(id);
             return Json(driverlist, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> IsValidOperatorId(string operatorId)
+        {
+            string operatorDetails = await new DriverService(AUTHTOKEN, p_mobileNo).IsOperatorValid(operatorId);
+            int i = Convert.ToInt32(operatorDetails);
+            return Json(i,JsonRequestBehavior.AllowGet);
+        }
     }
 }

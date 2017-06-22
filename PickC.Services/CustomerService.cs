@@ -133,5 +133,17 @@ namespace PickC.Services
             return ServiceResponse<TripInvoice>(
                 await client.ExecuteTaskAsync<TripInvoice>(request));
         }
+
+        public async Task<string> SendMail(ContactUs contactUs)
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = new RestRequest();
+            request.Method = Method.POST;
+            request.Resource = "master/customer/TripInvoice/SendMessageToPickC";
+            request.AddJsonBody(contactUs);
+            return ServiceResponse(
+                 await client.ExecuteTaskAsync(request));
+
+        }
     }
 }

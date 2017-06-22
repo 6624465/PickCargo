@@ -93,6 +93,7 @@ namespace Master.DataFactory
         public const string DELETEPERATOR = "[Master].[usp_OperatorDelete]";    
         public const string SAVEOPERATORATTACHMENTS = "[Master].[usp_OperatorAttachmentsSave]";
         public const string OPERATORUPDATEPASSWORD = "[Master].[usp_OperatorUpdatePassword]";
+        public const string OPERATORVALIDCHECK = "[Master].[usp_OperatorValidCheck]";
 
         /// <summary>
         /// [Master].[OperatorDriver]

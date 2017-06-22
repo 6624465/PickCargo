@@ -126,5 +126,19 @@ namespace PickC.Services
             });
             
         }
+
+        public async Task<string> IsOperatorValid(string operatorId)
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.GET;
+            request.Resource = "master/driver/IsOperatorValid/{operatorId}";
+            request.AddParameter("operatorId", operatorId, ParameterType.UrlSegment);
+
+            return await Task.Run(() =>
+            {
+                return ServiceResponse(client.Execute(request));
+            });
+        }
     }
 }

@@ -12,6 +12,13 @@ using Operation.Contract;
 using PickCApi.Core;
 
 using PickCApi.Areas.Master.DTO;
+using PickCApi.Utility;
+using System.Web.Routing;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+using System.Web;
 
 namespace PickCApi.Areas.Master.Controllers
 {
@@ -42,7 +49,7 @@ namespace PickCApi.Areas.Master.Controllers
             {
                 return InternalServerError(ex);
             }
-            
+
         }
 
         [HttpPost]
@@ -50,7 +57,7 @@ namespace PickCApi.Areas.Master.Controllers
         public IHttpActionResult VerifyOTP(string mobile, string otp)
         {
             var customer = new CustomerBO().GetCustomer(new Customer { MobileNo = mobile });
-            if(customer.OTP == otp)
+            if (customer.OTP == otp)
             {
                 customer.IsOTPVerified = true;
                 customer.OTPVerifiedDate = DateTime.UtcNow;
@@ -70,7 +77,7 @@ namespace PickCApi.Areas.Master.Controllers
             try
             {
                 var customerBO = new CustomerBO();
-                var customerObj = customerBO.GetCustomer(new Customer { MobileNo =  mobile });
+                var customerObj = customerBO.GetCustomer(new Customer { MobileNo = mobile });
                 if (customerObj != null)
                 {
                     customerObj.Name = customer.Name;
@@ -105,7 +112,8 @@ namespace PickCApi.Areas.Master.Controllers
                                         MobileNo = mobile
                                     });
                 if (customer != null)
-                    return Ok(new {
+                    return Ok(new
+                    {
                         MobileNo = customer.MobileNo,
                         Name = customer.Name,
                         EmailID = customer.EmailID
@@ -168,7 +176,8 @@ namespace PickCApi.Areas.Master.Controllers
         {
             try
             {
-                var customerList = new CustomerBO().GetList().Select(x => new {
+                var customerList = new CustomerBO().GetList().Select(x => new
+                {
                     MobileNo = x.MobileNo,
                     Name = x.Name,
                     EmailID = x.EmailID
@@ -203,7 +212,7 @@ namespace PickCApi.Areas.Master.Controllers
                     else
                         return Ok("OTP not Verified...!");
                 }
-                    
+
                 else
                     return NotFound();
             }
@@ -241,7 +250,7 @@ namespace PickCApi.Areas.Master.Controllers
                 return Ok("OTP Generated...!");
             }
             else
-                return NotFound();            
+                return NotFound();
 
         }
 
@@ -297,7 +306,7 @@ namespace PickCApi.Areas.Master.Controllers
                 bool result = false;
                 var customerList = new CustomerBO().GetList();
 
-                if(customerList != null)
+                if (customerList != null)
                 {
                     result = customerList.Where(x => x.MobileNo == mobile).ToList().Count() > 0;
                     return Ok(result);
@@ -313,7 +322,7 @@ namespace PickCApi.Areas.Master.Controllers
         [HttpGet]
         [Route("Pay/{BookingNo}/{Driverid}")]
         [ApiAuthFilter]
-        public IHttpActionResult DriverPayReceived(string BookingNo,string Driverid)
+        public IHttpActionResult DriverPayReceived(string BookingNo, string Driverid)
         {
             var driver = new DriverBO().GetDriver(new Driver { DriverID = Driverid });
             PushNotification(driver.DeviceID,
@@ -361,6 +370,7 @@ namespace PickCApi.Areas.Master.Controllers
 
         [HttpGet]
         [Route("TripInvoice/{BookingNo}")]
+        [ApiAuthFilter]
         public IHttpActionResult TripInvoice(string BookingNo)
         {
             try
@@ -375,6 +385,79 @@ namespace PickCApi.Areas.Master.Controllers
             {
                 return InternalServerError(ex);
             }
+        }
+        [HttpGet]
+        [Route("SendInvoiceMail/{BookingNo}/{EmailId}/")]
+        [ApiAuthFilter]
+        public IHttpActionResult SendInvoiceMail(string BookingNo, string EmailId)
+        {
+           // HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
+            TripInvoice tripInvoiceList = new CustomerBO().GetTripInvoiceList(new TripInvoice
+            {
+                BookingNo = BookingNo
+            });
+            string pHTML = this.RenderView<TripInvoice>("~/Areas/Master/Views/Driver/pdf2.cshtml", tripInvoiceList);
+            bool sendMail = new EmailGenerator().ConfigMail(EmailId, true, "PickC Invoice", "<div>PickC Invoice</div>", this.GetPDF2(pHTML));
+            if (sendMail)
+                return Ok("Invoice Is Sent To Your Mail!");
+            else
+                return NotFound();
+        }
+
+        [HttpPost]
+        [Route("SendMessageToPickC")]
+        [ApiAuthFilter]
+        public IHttpActionResult SendMessageToPickC(ContactUs contactUs)
+        {
+            try
+            {
+                bool  sendMail=  new EmailGenerator().ConfigMail(contactUs.Email, false, contactUs.Subject, contactUs.Message);
+                if (sendMail)
+                    return Ok("Mail Sent Successfully!");
+                else
+                    return NotFound();
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception);
+            }
+            
+        }
+
+        private string RenderView<T>(string path, T model)
+        {
+            var controller = CreateController<PickCApi.Areas.Master.Controllers.EmailController>();
+            RouteData route = new RouteData();
+            System.Web.Mvc.ControllerContext newContext = new System.Web.Mvc.ControllerContext(new HttpContextWrapper(System.Web.HttpContext.Current), route, controller);
+            newContext.RouteData.Values.Add("controller", "Fault");
+            var html = RenderViewToString(newContext, path, model, true);
+
+            return html;
+        }
+
+        private byte[] GetPDF2(string pHTML)
+        {
+            byte[] result;
+            try
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                TextReader reader = new StringReader(pHTML);
+                Document expr_2B = new Document(PageSize.A4, 25f, 25f, 25f, 25f);
+                PdfWriter.GetInstance(expr_2B, memoryStream);
+                HTMLWorker hTMLWorker = new HTMLWorker(expr_2B);
+                expr_2B.Open();
+                hTMLWorker.StartDocument();
+                hTMLWorker.Parse(reader);
+                hTMLWorker.EndDocument();
+                hTMLWorker.Close();
+                expr_2B.Close();
+                result = memoryStream.ToArray();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return result;
         }
 
     }

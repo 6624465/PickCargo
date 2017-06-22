@@ -22,7 +22,7 @@ namespace PickCApi.Areas.Operation.Controllers
     public class BookingController : ApiBase
     {
         [HttpGet]
-        [Route("list")]
+        [Route("balist")]
         public IHttpActionResult BookingList()
         {
             try
@@ -368,5 +368,6 @@ namespace PickCApi.Areas.Operation.Controllers
                 return InternalServerError(ex);
             }
         }
+
     }
 }

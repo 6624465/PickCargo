@@ -34,6 +34,10 @@ namespace Master.BusinessFactory
         {
             return operatorDAL.GetOperatorDetails(operatorID);
         }
+        public int IsOperatorValid(string operatorID)
+        {
+            return operatorDAL.IsOperatorExixts(operatorID);
+        }
         public bool UpdateOperatorPassword(OperatorPasssword item)
         {
             return operatorDAL.UpdateOperatorPassword(item);

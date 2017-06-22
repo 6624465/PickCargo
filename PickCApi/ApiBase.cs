@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using PickCApi.Areas.Operation.DTO;
+using System.Web.Routing;
+using System.Web.Mvc;
 
 namespace PickCApi
 {
@@ -206,6 +208,64 @@ namespace PickCApi
                 _response.duration = duration;
                 return _response;
             }
+        }
+
+        public static T CreateController<T>(RouteData routeData = null) where T : Controller, new()
+        {
+
+            T controller = new T();
+            HttpContextBase wrapper;
+            if (System.Web.HttpContext.Current != null)
+                wrapper = new HttpContextWrapper(System.Web.HttpContext.Current);
+            else
+                throw new InvalidOperationException(
+                    "Can't create Controller Context if no " +
+                    "active HttpContext instance is available.");
+
+            if (routeData == null)
+                routeData = new RouteData();
+
+            if (!routeData.Values.ContainsKey("controller") &&
+                !routeData.Values.ContainsKey("Controller"))
+                routeData.Values.Add("controller",
+                                     controller.GetType()
+                                               .Name.ToLower().Replace("controller", ""));
+
+            controller.ControllerContext = new ControllerContext(wrapper, routeData, controller);
+            return controller;
+        }
+
+        public string RenderViewToString(ControllerContext context,
+                                   string viewPath,
+                                   object model = null,
+                                   bool partial = false)
+        {
+            ViewEngineResult viewEngineResult = null;
+            if (partial)
+                viewEngineResult = ViewEngines.Engines.FindPartialView(context, viewPath);
+            else
+                viewEngineResult = ViewEngines.Engines.FindView(context, viewPath, null);
+
+            if (viewEngineResult == null)
+                throw new FileNotFoundException("View cannot be found.");
+
+
+            var view = viewEngineResult.View;
+            context.Controller.ViewData.Model = model;
+
+            string result = null;
+
+            using (var sw = new StringWriter())
+            {
+                var ctx = new ViewContext(context, view,
+                                            context.Controller.ViewData,
+                                            context.Controller.TempData,
+                                            sw);
+                view.Render(ctx, sw);
+                result = sw.ToString();
+            }
+
+            return result;
         }
     }
 

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="BankDetails.cs" />
+    <Compile Include="ContactUs.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerBillDetails.cs" />
     <Compile Include="CustomerPassword.cs" />

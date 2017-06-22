@@ -375,10 +375,6 @@
       <Project>{a3cef276-f503-45b0-8e74-0211475d2b09}</Project>
       <Name>PickC.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PickCApi\PickCApi.csproj">
-      <Project>{BA1F286F-C41D-4EC7-AE1C-DFC524135495}</Project>
-      <Name>PickCApi</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

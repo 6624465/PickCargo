@@ -1,4 +1,5 @@
-﻿using PickC.Services;
+﻿using Master.Contract;
+using PickC.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,6 @@ namespace PickC.Web.Controllers
         }
         public async Task<ActionResult> TRIPINVOICE(string bookingNo)
         {
-            bookingNo = "BK170500094";
             var bookingHistoryList = await new CustomerService().TripInvoiceList(bookingNo);
 
             return View(bookingHistoryList);
@@ -49,6 +49,12 @@ namespace PickC.Web.Controllers
         public ActionResult ContactUs()
         {
             return View();
+        }
+
+        public async Task<ActionResult> SendMail(ContactUs contactUs)
+        {
+            string test= await new CustomerService().SendMail(contactUs);
+            return View("ContactUs");
         }
 
         public ActionResult FeedBack()
