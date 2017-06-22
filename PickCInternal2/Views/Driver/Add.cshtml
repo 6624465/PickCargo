@@ -390,14 +390,13 @@
                     method: 'get',
                     contentType: 'application/json',
                     success: function (data) {
-                        debugger;
                         if (data ==1){
                             alert("Valid!");
                             $("#DriverInfo").css("display", "block");
-                            $("#DriverInfo").css("display", "block");
-                            $("#DriverInfo").css("display", "block");
-                            //$('.hide').show();
-
+                            $("#IdentificationInfo").css("display", "block");
+                            $("#AddressInfo").css("display", "block");
+                            $("#Attachments").css("display", "block");
+                            $("#buttons").css("display", "block");
                         }
                         if(data=0)
                             alert("NotValid!");
