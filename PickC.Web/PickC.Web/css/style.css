@@ -3437,16 +3437,15 @@ font-weight:normal;
   animation-duration: 0.01s;
 }
 .app_btn{
-  border: 2px solid #fffc00;
+  border: 1px solid #fffc00;
 padding: 0px 5px;
 background-color: #fffc00;
 color: #000;
 }
-.navbar-form{
-padding: 18px 0px;
-margin-right: -15px;
-margin-left: 20px;
-       width: 300px;
+.navbar-form {
+    margin: 0 auto;
+    padding: 18px 0;
+    width: 400px;
 }
 
 
@@ -3646,8 +3645,10 @@ border-top: 2px #000 solid;
 border-top: 2px #000 solid;
 }
 .input-group .form-control{
-  width: 160px;
-height: 35px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+    color: #000;
+    height: 35px;
+    width: 250px;
 }
 .input-group-btn > .btn{
  height: 35px; 
