@@ -19,7 +19,10 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.html.simpleparser;
 using System.Web;
-
+using System.Net.Mail;
+using System.Net.Configuration;
+using System.Web.Configuration;
+using System.Configuration;
 
 namespace PickCApi.Areas.Master.Controllers
 {
@@ -412,7 +415,11 @@ namespace PickCApi.Areas.Master.Controllers
         {
             try
             {
-                bool  sendMail=  new EmailGenerator().ConfigMail(contactUs.Email, false, contactUs.Subject, contactUs.Message);
+                Configuration configuration =  WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+                MailSettingsSectionGroup mailSettingsSectionGroup = (MailSettingsSectionGroup)configuration.GetSectionGroup("system.net/mailSettings");
+
+                //var from = new MailAddress(cailSettingsSectionGroup.Smtp.From, "PickC");
+                bool  sendMail=  new EmailGenerator().ConfigMail(mailSettingsSectionGroup.Smtp.From, false, contactUs.Subject, contactUs.Message);
                 if (sendMail)
                     return Ok("Mail Sent Successfully!");
                 else

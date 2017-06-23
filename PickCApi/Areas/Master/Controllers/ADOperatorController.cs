@@ -72,15 +72,13 @@ namespace PickCApi.Areas.Master.Controllers
             }
         }
         [HttpGet]
-        [Route("TripCE")]
+        [Route("TripCE/{FromDate}/{ToDate}")]
         [OperatorAPIAuthFilter]
-        public IHttpActionResult TripCountEarnings()
+        public IHttpActionResult TripCountEarnings(DateTime FromDate, DateTime ToDate)
         {
             try
             {
                 var MOBILENO = HttpContext.Current.Request.Headers["MOBILENO"];
-                DateTime FromDate = Convert.ToDateTime(HttpContext.Current.Request.Headers["FromDate"]);
-                DateTime ToDate = Convert.ToDateTime(HttpContext.Current.Request.Headers["ToDate"]);
                 var tripCountEarnings = new DriverBO().GetTripCountEarnings(MOBILENO,FromDate,ToDate);
                 return Ok(tripCountEarnings);
             }
