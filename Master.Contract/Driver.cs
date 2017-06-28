@@ -22,6 +22,8 @@ namespace Master.Contract
 
         public string VehicleType { get; set; }
 
+        public string VehicleGroup { get; set; }
+
         public string FatherName { get; set; }
 
 
