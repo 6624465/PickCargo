@@ -271,7 +271,10 @@
     <Content Include="images\logo.png" />
     <Content Include="images\logo2.png" />
     <Content Include="images\n2.jpg" />
+    <Content Include="images\n3.jpg" />
     <Content Include="images\n4.jpg" />
+    <Content Include="images\n5.jpg" />
+    <Content Include="images\n6.jpg" />
     <Content Include="images\new2.png" />
     <Content Include="images\new3.png" />
     <Content Include="images\newsletter-icon.png" />

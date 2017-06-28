@@ -48,88 +48,87 @@
     <link rel="stylesheet" href="@Url.Content("~/css/extra.css")">
 
     <style type="text/css">
-        input[type=text].error, input[type=password].error, textarea.error, select.error {
-            border: 1px solid red;
-            background-color: #f5e6e6;
-        }
+                input[type=text].error, input[type=password].error, textarea.error, select.error {
+                    border: 1px solid red;
+                    background-color: #f5e6e6;
+                }
 
-        label.error {
-            display: none !important;
-        }
+                label.error {
+                    display: none !important;
+                }
 
-        .navBackClr li a:hover {
-            background-color: #000;
-        }
-      
-        .modal-body {
-            text-align:center;
-    background: rgb(255, 252, 0) none repeat scroll 0 0;
-        }
-        .modal {
-        overflow-y: hidden;
-        }
-        .modal-open {
-        margin-right:0px !important;
-        }
-        .modal-body p {
-            color:#000;
-        }
-        .mobile-link {
-      
-    position: absolute;
-   
-    top: 110px;
-    overflow:hidden;
-    width: 100%;
-    z-index: 99;
-    text-align:center;
-}
+                .navBackClr li a:hover {
+                    background-color: #000;
+                }
 
+                .modal-body {
+                    text-align: center;
+                    background: rgb(255, 252, 0) none repeat scroll 0 0;
+                }
 
-.slider {
+                .modal {
+                    overflow-y: hidden;
+                }
 
-	/* complete liquid height based on the parent's height!! */
-    height:100%;
+                .modal-open {
+                    margin-right: 0px !important;
+                }
 
-    /* only transition on transform properties which are hardware accelerated = way better performances */
-	-webkit-transition:-webkit-transform .3s ease;
-       -moz-transition:   -moz-transform .3s ease;
-        -ms-transition:    -ms-transform .3s ease;
-            transition:        transform .3s ease;
-}
+                .modal-body p {
+                    color: #000;
+                }
 
-.slider.opened { 
-    /* visible */
-    -webkit-transform: translate(0, 0%);
-       -moz-transform: translate(0, 0%);
-        -ms-transform: translate(0, 0%);
-            transform: translate(0, 0%);
-}
-.slider.closed { 
-    /* completely offscreen */
-    -webkit-transform: translate(0, -100%);
-       -moz-transform: translate(0, -100%);
-        -ms-transform: translate(0, -100%);
-            transform: translate(0, -100%);
-}
+                .mobile-link {
+                    position: absolute;
+                    top: 110px;
+                    overflow: hidden;
+                    width: 100%;
+                    z-index: 99;
+                    text-align: center;
+                }
 
 
+                .slider {
+                    /* complete liquid height based on the parent's height!! */
+                    height: 100%;
+                    /* only transition on transform properties which are hardware accelerated = way better performances */
+                    -webkit-transition: -webkit-transform .3s ease;
+                    -moz-transition: -moz-transform .3s ease;
+                    -ms-transition: -ms-transform .3s ease;
+                    transition: transform .3s ease;
+                }
 
-/* -------- not interesting styles ----------- body {
-    background:#eee;
-    margin:50px;
-}*/
+                    .slider.opened {
+                        /* visible */
+                        -webkit-transform: translate(0, 0%);
+                        -moz-transform: translate(0, 0%);
+                        -ms-transform: translate(0, 0%);
+                        transform: translate(0, 0%);
+                    }
 
-.slider {
-    -webkit-box-sizing:border-box;
-       -moz-box-sizing:border-box;
-        -ms-box-sizing:border-box;
-            box-sizing:border-box;
+                    .slider.closed {
+                        /* completely offscreen */
+                        -webkit-transform: translate(0, -100%);
+                        -moz-transform: translate(0, -100%);
+                        -ms-transform: translate(0, -100%);
+                        transform: translate(0, -100%);
+                    }
 
-    padding:20px;
-    background:rgba(37,39,46,0.9);
-   
-}
+
+
+                /* -------- not interesting styles ----------- body {
+            background:#eee;
+            margin:50px;
+        }*/
+
+                .slider {
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    -ms-box-sizing: border-box;
+                    box-sizing: border-box;
+                    padding: 20px;
+                    background: rgba(37,39,46,0.9);
+                }
     </style>
     <!--Start of Tawk.to Script-->
     @*<script type="text/javascript">
@@ -182,7 +181,7 @@
                                 @*<a href="~/Help/Support">Click here</a>*@
                                 @*@Html.ActionLink("Customer Support", "Support", "Help", null, null)*@
 
-                                <li><a href="@Url.Content("~/Help/Support")"><i class="fa fa-headphones"></i> Customer Support</a></li>                       
+                                <li><a href="@Url.Content("~/Help/Support")"><i class="fa fa-headphones"></i> Customer Support</a></li>
                                 @*<li><a href="@Url.Content("~/Account/Logoff")"><i class="fa fa-user"></i> LogOut</a></li>*@
                                 @*<li><a href="@Url.Content("~/Help/Careers")"><i class="fa fa-hand-o-right"></i> Help</a></li>*@
 
@@ -217,10 +216,13 @@
                                 <li><a href="@Url.Content("~/Help/Services")">Services</a></li>
                                 <li><a href="@Url.Content("~/Help/AboutUs")">About Us</a></li>
                                 @*<li><a href="@Url.Content("~/RateCard/index")">Fare chart</a></li>*@
-                                <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>                               
+                                <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>
                                 <li><a href="@Url.Content("~/Help/ContactUs")">Contact us </a></li>
-                                <li class="getapp"><button data-toggle="modal" class="btn btn-primary solid blank has-ripple" data-target="#myModal">Get Pick-C App Link <i class="fa fa-download" aria-hidden="true"></i>
- </button></li>
+                                <li class="getapp">
+                                    <button data-toggle="modal" class="btn btn-primary solid blank has-ripple" data-target="#myModal">
+                                        Get Pick-C App Link <i class="fa fa-download" aria-hidden="true"></i>
+                                    </button>
+                                </li>
 
                             </ul><!--/ Nav ul end -->
 
@@ -231,8 +233,9 @@
             </div><!-- Container end -->
         </header><!--/ Header end -->
         <!-- ******CONTENT****** -->
-        <div class="main-content"> @RenderBody() 
-</div>
+        <div class="main-content">
+            @RenderBody()
+        </div>
         <section id="ts-features" class="features-area1">
             <div class="container">
                 <div class="row text-center">
@@ -458,7 +461,7 @@
                 $('[data-toggle="tooltip"]').tooltip();
             });
 
-            
+
 
             function onChangeMobileNo() {
                 var mobileNumberRegExp = /^[789]\d{9}$/;
@@ -496,12 +499,12 @@
                 }
                 else {
                     $('#myModalno').modal('show');
-                   // alert("Please Enter Your MobileNo!");
+                    // alert("Please Enter Your MobileNo!");
                 }
             }
             var toggle = document.getElementById('toggle');
             var slider = document.querySelector('.slider');
-    
+
 
         </script>
         @RenderSection("scripts", false)
@@ -511,11 +514,11 @@
 
     </div><!-- Body inner end -->
     <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog" >
+        <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content" style="top:200px;">
-                
+
                 <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); ">
                     <form class="navbar-form  hidden-xs hidden-sm">
                         <div class="input-group">
@@ -527,22 +530,22 @@
                         </div>
                     </form>
                 </div>
-               
+
             </div>
 
         </div>
     </div>
-    
+
     <div id="myModalnos" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content">
-               
+
                 <div class="modal-body">
                     <p> Message sent to your MobileNo!</p>
                 </div>
-               
+
             </div>
 
         </div>
