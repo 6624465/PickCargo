@@ -31,8 +31,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Operator Number</label>
-                                    <input type="text" id="txt-Operator-Number" class="form-control" />
-                                    <button type="button" id="btn-Operator btn-primary" onclick="Check()">Valid</button>
+                                  @*  <input type="text" id="txt-Operator-Number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.driver.OperatorID, new { @class = "form-control", placeholder = "Operator ID",id= "txt-Operator-Number" })
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-primary" onclick="Check();">Valid</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -51,21 +56,21 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Driver ID</label>
-                                    @Html.TextBoxFor(x => x.driver.DriverID, new { @class = "form-control", placeholder = "Driver ID", @readonly = "readonly" })
+                                    @Html.TextBoxFor(x => x.driver.DriverID, new { @class = "form-control", placeholder = "Driver ID" })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Driver Name</label>
-                                    @Html.TextBoxFor(x => x.driver.DriverName, new { @class = "form-control", placeholder = "Driver Name", @readonly = "readonly" })
+                                    @Html.TextBoxFor(x => x.driver.DriverName, new { @class = "form-control", placeholder = "Driver Name" })
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            @*<div class="col-md-4">
                                 <div class="form-group">
                                     <label>Vehicle No</label>
                                     @Html.TextBoxFor(x => x.driver.VehicleNo, new { @class = "form-control", placeholder = "Vehicle No" })
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>
@@ -378,8 +383,7 @@
                 $('#frmDriverAdd').submit();
             }
         }
-        function Check()
-        {
+        function Check() {
             var operatorId = $('#txt-Operator-Number').val();
             if (operatorId != '' && operatorId != undefined) {
 
@@ -388,24 +392,27 @@
                     method: 'get',
                     contentType: 'application/json',
                     success: function (data) {
-                        if (data ==1){
+                        if (data == 1) {
                             alert("Valid!");
                             $("#DriverInfo").css("display", "block");
                             $("#IdentificationInfo").css("display", "block");
+                            $("#PersonalInfo").css("display", "block")
                             $("#AddressInfo").css("display", "block");
                             $("#Attachments").css("display", "block");
-                            $("#buttons").css("display", "block");
+                            $("#buttons").css("display", "block"); 
+                            $("#txt-Operator-Number").prop("readonly", true);
                         }
-                        if(data=0)
+                        if (data = 0) {
                             alert("NotValid!");
-                        $('#txt-Operator-Number').val('');
+                            $('#txt-Operator-Number').val('');
+                        }
                     },
                     error: function (err) {
 
                     }
                 });
             }
-           
+
         }
     </script>
 }

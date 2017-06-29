@@ -33,6 +33,10 @@ namespace Operation.DataFactory
         {
             return db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORVEHICLETYPELIST, MapBuilder<LookUp>.BuildAllProperties()).ToList();
         }
+        public List<LookUp> GetVehicleCategoryList()
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORVEHICLECATEGORYLIST, MapBuilder<LookUp>.BuildAllProperties()).ToList();
+        }
         public List<OperatorVehicles> GetModelList()
         {
             return db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORVEHICLEMODELLIST, MapBuilder<OperatorVehicles>.BuildAllProperties()).ToList();

@@ -61,6 +61,7 @@ namespace Operation.DataFactory
         /// </summary>
 
         public const string SELECTOPERATORVEHICLETYPELIST = "[Master].[usp_OperatorVehicleTypeList]";
+        public const string SELECTOPERATORVEHICLECATEGORYLIST = "[Master].[usp_OperatorVehicleCategoryList]";
         public const string SELECTOPERATORVEHICLEMODELLIST = "[Master].[usp_OperatorVehicleModelList]";
         public const string SAVEOPERATORVEHICLELIST = "[Master].[usp_OperatorVehicleSaveList]";
         public const string SELECTOPERATORVEHICLETOTALLIST = "[Master].[usp_OperatorVehicleList]";

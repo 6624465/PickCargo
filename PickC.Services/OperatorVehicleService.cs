@@ -30,6 +30,18 @@ namespace PickC.Services
                 return ServiceResponse<List<LookUp>>(client.Execute<List<LookUp>>(request));
             });
         }
+        public async Task<List<LookUp>> GetOperatorVehicleCategoryList()
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.GET;
+            request.Resource = "operator/Vehicle/CategoryList";
+
+            return await Task.Run(() =>
+            {
+                return ServiceResponse<List<LookUp>>(client.Execute<List<LookUp>>(request));
+            });
+        }
         public async Task<List<OperatorVehicles>> GetOperatorModelList()
         {
             IRestClient client = new RestClient(ApiBaseUrl);

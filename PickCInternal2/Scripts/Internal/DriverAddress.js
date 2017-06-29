@@ -28,6 +28,7 @@
 
 var gIndex = -1;
 function EditAddress(index) {
+    debugger;
     /*
     $.ajax({
         url: UrlAddress + '/Address?addressID=' + addressID,
@@ -109,6 +110,7 @@ function btnSaveAddress() {
 }
 
 function AddAddress(index) {
+    debugger
     gIndex = -1;
     $('#Address1, #Address2, #Address3, #Address4, #CityName, #StateName, #ZipCode').val('');
     $('#addressModal').modal('show');

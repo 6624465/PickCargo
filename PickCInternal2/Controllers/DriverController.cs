@@ -48,7 +48,7 @@ namespace PickC.Internal2.Controllers
             Task<Driver> taskDriver = new DriverService(AUTHTOKEN, p_mobileNo).DriverInfoAsync(driverID);
             Task<DriverLookupDTO> taskDriverLookupDTO = new DriverService(AUTHTOKEN, p_mobileNo).LookUpDataAsync();
 
-            await Task.WhenAll(taskDriver, taskDriverLookupDTO);            
+            await Task.WhenAll(taskDriver, taskDriverLookupDTO);   
 
             var driverVm = new DriverVm
             {

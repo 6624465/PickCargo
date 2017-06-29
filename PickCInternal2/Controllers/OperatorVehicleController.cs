@@ -22,7 +22,8 @@ namespace PickC.Internal2.Controllers
         //[ActionName("Index")]
         public async Task<ActionResult> OperatorVehicle()
         {
-            ViewBag.VehicleType = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorVehicleList()).Select(x=> new { Value = x.LookupID, Text = x.LookupCode }).ToList();
+            ViewBag.VehicleCategory = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorVehicleCategoryList()).Select(x => new { Value = x.LookupID, Text = x.LookupCode }).ToList();
+            ViewBag.VehicleType = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorVehicleList()).Select(x => new { Value = x.LookupID, Text = x.LookupCode }).ToList();
             ViewBag.Model = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorModelList()).Select(x => new { Value = x.Model, Text = x.Model }).ToList();
             return View("OperatorVehicle");
         }

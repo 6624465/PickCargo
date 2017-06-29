@@ -17,6 +17,10 @@ namespace Operation.BusinessFactory
         {
             return operatorVehicleDAL.GetList();
         }
+        public List<LookUp> GetCategoryList()
+        {
+            return operatorVehicleDAL.GetVehicleCategoryList();
+        }
         public List<OperatorVehicles> GetModelList()
         {
             return operatorVehicleDAL.GetModelList();

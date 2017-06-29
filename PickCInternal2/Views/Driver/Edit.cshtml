@@ -20,6 +20,25 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
+                        <h3 class="box-title">Operator Info</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Operator Number</label>
+                                    @Html.TextBoxFor(x => x.driver.OperatorID, new { @class = "form-control", placeholder = "Operator ID", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
                         <h3 class="box-title">Driver Info</h3>
                     </div>
                     <div class="box-body">
@@ -36,12 +55,12 @@
                                     @Html.TextBoxFor(x => x.driver.DriverName, new { @class = "form-control", placeholder = "Driver Name" })
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            @*<div class="col-md-4">
                                 <div class="form-group">
                                     <label>Vehicle No</label>
                                     @Html.TextBoxFor(x => x.driver.VehicleNo, new { @class = "form-control", placeholder = "Vehicle No" })
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>
@@ -201,7 +220,7 @@
                                                 @Html.HiddenFor(x => Model.driver.AddressList[i].ZipCode)
                                                 @Html.HiddenFor(x => Model.driver.AddressList[i].IsActive)
                                                 <a class="hand" onclick="EditAddress('@i')">Edit</a>&nbsp;|&nbsp;
-                                                <a class="hand" onclick="DeleteAddress('@i')">Delete</a>
+                                                <a class="hand" onclick="DeleteAddress('@i')">Delete</a>  
                                             </td>
                                         </tr>
                                     }
@@ -291,7 +310,7 @@
     <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
     <script src="@Url.Content("~/Scripts/moment.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
-    <script src="@Url.Content("~/Scripts/Js/Driver/DriverAddress.js")"></script>
+    <script src="@Url.Content("~/Scripts/Internal/DriverAddress.js")"></script>
     <script type="text/javascript">
         $(function () {
             $('#frmDriverAdd').validate({
@@ -347,7 +366,6 @@
                 $('#frmDriverAdd').submit();
             }
         }
-
 
     </script>
 }

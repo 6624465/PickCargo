@@ -319,6 +319,10 @@
       <Project>{a3cef276-f503-45b0-8e74-0211475d2b09}</Project>
       <Name>PickC.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PickCInternal2\PickC.Internal2.csproj">
+      <Project>{5eebc5af-3626-45c7-ac3d-b451fc679fd8}</Project>
+      <Name>PickC.Internal2</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

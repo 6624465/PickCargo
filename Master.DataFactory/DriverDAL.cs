@@ -66,7 +66,7 @@ namespace Master.DataFactory
                 db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, driver.DriverID);
                 db.AddInParameter(savecommand, "DriverName", System.Data.DbType.String, driver.DriverName);
                 db.AddInParameter(savecommand, "Password", System.Data.DbType.String, driver.Password ?? "pickcdriver");
-                db.AddInParameter(savecommand, "VehicleNo", System.Data.DbType.String, driver.VehicleNo);
+                db.AddInParameter(savecommand, "VehicleNo", System.Data.DbType.String, "");
                 db.AddInParameter(savecommand, "FatherName", System.Data.DbType.String, driver.FatherName);
                 db.AddInParameter(savecommand, "DateOfBirth", System.Data.DbType.DateTime, driver.DateOfBirth);
                 db.AddInParameter(savecommand, "PlaceOfBirth", System.Data.DbType.String, driver.PlaceOfBirth);
@@ -82,8 +82,8 @@ namespace Master.DataFactory
                 db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, driver.ModifiedBy);
                 db.AddInParameter(savecommand, "Nationality", System.Data.DbType.String, driver.Nationality ?? "Indian");
                 //db.AddInParameter(savecommand, "DeviceID", System.Data.DbType.String, driver.DeviceID);
-                db.AddInParameter(savecommand, "NewDocumentNo", System.Data.DbType.String,0);
-
+                db.AddOutParameter(savecommand, "NewDocumentNo", System.Data.DbType.String,50);
+                db.AddInParameter(savecommand, "OperatorID", System.Data.DbType.String, driver.OperatorID);
 
                 result = db.ExecuteNonQuery(savecommand, transaction);
                 

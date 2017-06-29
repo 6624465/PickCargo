@@ -11,9 +11,8 @@ namespace Master.Contract
         public string DriverName { get; set; }
 
         public string VehicleNo { get; set; }
-
+        public string VehicleType { get; set; }
         public string LocationFrom { get; set; }
-
         public string LocationTo { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }

@@ -40,6 +40,24 @@ namespace PickCApi.Areas.Operation.Controllers
 
         }
         [HttpGet]
+        [Route("CategoryList")]
+        public IHttpActionResult CategoryList()
+        {
+            try
+            {
+                var categoryList = new OperatorVehicleBO().GetCategoryList();
+                if (categoryList != null)
+                    return Ok(categoryList);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+        [HttpGet]
         [Route("ModelList")]
         public IHttpActionResult OperatorModelList()
         {
