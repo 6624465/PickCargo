@@ -75,6 +75,7 @@ namespace Operation.DataFactory
                 db.AddInParameter(savecommand, "OperatorVehicleID", System.Data.DbType.String, operatorvehicle.OperatorVehicleID);
                 db.AddInParameter(savecommand, "VehicleRegistrationNo", System.Data.DbType.String, operatorvehicle.VehicleRegistrationNo);
                 db.AddInParameter(savecommand, "VehicleType", System.Data.DbType.String, operatorvehicle.VehicleType);
+                db.AddInParameter(savecommand, "VehicleCategory", System.Data.DbType.String, operatorvehicle.VehicleCategory);
                 db.AddInParameter(savecommand, "Model", System.Data.DbType.String, operatorvehicle.Model);
                 db.AddInParameter(savecommand, "Tonnage", System.Data.DbType.String, operatorvehicle.Tonnage);
                 db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, operatorvehicle.CreatedBy);

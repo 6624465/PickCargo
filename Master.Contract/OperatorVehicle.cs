@@ -10,6 +10,7 @@ namespace Master.Contract
     {
         public string OperatorVehicleID { get; set; }
         public string VehicleRegistrationNo { get; set; }
+        public string VehicleCategory { get; set; }
         public string VehicleType { get; set; }
         public string Model { get; set; }
         public string Tonnage { get; set; }

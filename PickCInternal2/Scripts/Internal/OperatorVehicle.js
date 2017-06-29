@@ -7,6 +7,9 @@
             operatorVehicle_VehicleType: {
                 required: true
             },
+            operatorVehicle_VehicleCategory: {
+                required: true
+            },
             operatorVehicle_Model: {
                 required: true
             },
@@ -57,6 +60,9 @@ function btnSaveVehicle() {
         $('#' + baseID + 'operatorVehicle_VehicleType').val($('#operatorVehicle_VehicleType').val());
         $('#' + 'operatorVehicle_VehicleType_span_' + gIndex).text($('#operatorVehicle_VehicleType option:selected').text());
 
+        $('#' + baseID + 'operatorVehicle_VehicleCategory').val($('#operatorVehicle_VehicleCategory').val());
+        $('#' + 'operatorVehicle_VehicleCategory_span_' + gIndex).text($('#operatorVehicle_VehicleCategory').text());
+
         $('#' + baseID + 'operatorVehicle_Model').val($('#operatorVehicle_Model').val());
         $('#' + 'operatorVehicle_Model_span_' + gIndex).text($('#operatorVehicle_Model').val());
 
@@ -72,6 +78,10 @@ function btnSaveVehicle() {
                         '<td>' +
                             '<span id="operatorVehicle_VehicleType_span_' + index + '">' + $('#operatorVehicle_VehicleType').val() + '</span>' +
                             '<input id="vehicle_OperatorVehicleList_' + index + '__operatorVehicle_VehicleType" name="OPerator.OperatorVehicle[' + index + '].VehicleType" type="hidden" value="' + $('#operatorVehicle_VehicleType').val() + '">' +
+                        '</td>' +
+                        '<td>' +
+                            '<span id="operatorVehicle_VehicleCategory_span_' + index + '">' + $('#operatorVehicle_VehicleCategory').val() + '</span>' +
+                            '<input id="vehicle_OperatorVehicleList_' + index + '__operatorVehicle_VehicleCategory" name="OPerator.OperatorVehicle[' + index + '].VehicleCategory" type="hidden" value="' + $('#operatorVehicle_VehicleCategory').val() + '">' +
                         '</td>' +
                          '<td>' +
                             '<span id="operatorVehicle_Model_span_' + index + '">' + $('#operatorVehicle_Model').val() + '</span>' +
@@ -89,6 +99,7 @@ function btnSaveVehicle() {
         $('#trBodyVehicle').append(html);
         $('#operatorVehicle_VehicleRegistrationNo').val('');
         $('#operatorVehicle_VehicleType').val('');
+        $('#operatorVehicle_VehicleCategory').val('');
         $('#operatorVehicle_Model').val('');
         $('#operatorVehicle_Tonnage').val('');
     }
@@ -99,6 +110,6 @@ function btnSaveVehicle() {
 }
 function AddVehicle(index) {
     gIndex = -1;
-    $('#operatorVehicle_VehicleRegistrationNo, #operatorVehicle_VehicleType, #operatorVehicle_Model, #operatorVehicle_Tonnage').val('');
+    $('#operatorVehicle_VehicleRegistrationNo, #operatorVehicle_VehicleType,#operatorVehicle_VehicleCategory, #operatorVehicle_Model, #operatorVehicle_Tonnage').val('');
     $('#VehicleModal').modal('show');
 }

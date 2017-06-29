@@ -311,7 +311,8 @@ new { @class = "form-control" })
                                                                             <tr>
                                                                                 <th>Vehicle Registration No</th>
                                                                                 <th>Vehicle Type</th>
-                                                                                <th>Mode</th>
+                                                                                <th>Vehicle Category</th>
+                                                                                <th>Mode</th>                                                                                
                                                                                 <th>Tonnage</th>
                                                                                 <th>#Action</th>
                                                                             </tr>
@@ -329,6 +330,10 @@ new { @class = "form-control" })
                                                                                         <td>
                                                                                             <span id="operatorVehicle_VehicleType_span_@i">@Model.OPerator.OperatorVehicle[i].VehicleType</span>
                                                                                             @Html.HiddenFor(x => Model.OPerator.OperatorVehicle[i].VehicleType)
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <span id="operatorVehicle_VehicleCategory_span_@i">@Model.OPerator.OperatorVehicle[i].VehicleCategory</span>
+                                                                                            @Html.HiddenFor(x => Model.OPerator.OperatorVehicle[i].VehicleCategory)
                                                                                         </td>
                                                                                         <td>
                                                                                             <span id="operatorVehicle_Model_span_@i">@Model.OPerator.OperatorVehicle[i].Model</span>
@@ -555,8 +560,14 @@ new { @class = "form-control" })
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
+                                    <label>Vehicle Category</label>
+                                    @Html.DropDownList("operatorVehicle_VehicleCategory", new SelectList(ViewBag.VehicleCategory, "Value", "Text"), "Select Category", new { @class = "form-control input-sm", onchange = "onChangeVehicleCategory(this)" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
                                     <label>Model</label>
-                                    @Html.DropDownList("operatorVehicle_Model", new SelectList(ViewBag.Model, "Value", "Text"), "Select Category", new { @class = "form-control input-sm", onchange = "ModelChanged(this)" })
+                                    @Html.DropDownList("operatorVehicle_Model", new SelectList("Value", "Text"), "Select Category", new { @class = "form-control input-sm", onchange = "ModelChanged(this)", @disabled = "disabled" })
                                 </div>
                             </div>
                             <div class="row">
@@ -855,10 +866,30 @@ new { @class = "form-control" })
                 });
 
                 function btnSave() {
-                    debugger;
                     if ($('#frmOperatorAdd').valid()) {
                         $('#frmOperatorAdd').submit();
                     }
+                }
+                function onChangeVehicleCategory(selectedCategory) {
+                    debugger
+                    var category = selectedCategory.value;
+                    $.ajax({
+                        url: '@Url.Content("~/Operator/GetCategoryModel?categoryValue=")' + category,
+                        method: 'get',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            $('#operatorVehicle_Model').removeAttr("disabled");
+                                $("#operatorVehicle_Model").html(""); // clear before appending new list 
+                                $("<option value='-1'>Select item</option>").appendTo("#operatorVehicle_Model");
+                                $.each(data, function (i, val) {
+                                    $("#operatorVehicle_Model").append(
+                                        $('<option></option>').val(val.Text).html(val.Value));
+                                });
+                        },
+                        error: function (err) {
+
+                        }
+                    });
                 }
                 function ModelChanged(el) {
                     var tonnage = el.value;

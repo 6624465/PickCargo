@@ -130,7 +130,8 @@ namespace PickCInternal2.Controllers
             ViewBag.Driver = (await new OperatorDriverService(AUTHTOKEN, p_mobileNo).GetDriverList()).Select(x => new { Value = x.DriverID, Text = x.DriverName }).ToList();
             ViewBag.VehicleNo = (await new OperatorDriverService(AUTHTOKEN, p_mobileNo).GetvehicleNoList()).Select(x => new { Value = x.VehicleRegistrationNo, Text = x.VehicleRegistrationNo }).ToList();
             ViewBag.VehicleType = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorVehicleList()).Select(x => new { Value = x.LookupID, Text = x.LookupCode }).ToList();
-            ViewBag.Model = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorModelList()).Select(x => new { Value = x.Model, Text = x.Model }).ToList();
+            ViewBag.VehicleCategory = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorVehicleCategoryList()).Select(x => new { Value = x.LookupID, Text = x.LookupCode }).ToList();
+            //ViewBag.Model = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorModelList()).Select(x => new { Value = x.Model, Text = x.Model }).ToList();
             var operatorVm = new OperatorVm
             {
                 operatorLookupDTO = await new OperatorService(AUTHTOKEN, p_mobileNo).LookUpDataAsync(),
@@ -147,7 +148,8 @@ namespace PickCInternal2.Controllers
             ViewBag.Driver = (await new OperatorDriverService(AUTHTOKEN, p_mobileNo).GetDriverList()).Select(x => new { Value = x.DriverID, Text = x.DriverName }).ToList();
             ViewBag.VehicleNo = (await new OperatorDriverService(AUTHTOKEN, p_mobileNo).GetvehicleNoList()).Select(x => new { Value = x.VehicleRegistrationNo, Text = x.VehicleRegistrationNo }).ToList();
             ViewBag.VehicleType = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorVehicleList()).Select(x => new { Value = x.LookupID, Text = x.LookupCode }).ToList();
-            ViewBag.Model = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorModelList()).Select(x => new { Value = x.Model, Text = x.Model }).ToList();
+            ViewBag.VehicleCategory = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorVehicleCategoryList()).Select(x => new { Value = x.LookupID, Text = x.LookupCode }).ToList();
+            //ViewBag.Model = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorModelList()).Select(x => new { Value = x.Model, Text = x.Model }).ToList();
             await Task.WhenAll(taskOperator, taskoperatorLookupDTO);
 
             var operatorVm = new OperatorVm
@@ -169,8 +171,14 @@ namespace PickCInternal2.Controllers
         {
             var tonnage = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorModelList()).Where(x => x.Model == Tonnage).Select(x => new { Value = x.Tonnage, Text = x.Tonnage }).ToList();
             return Json(tonnage, JsonRequestBehavior.AllowGet);
-        }     
-       [HttpGet]
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetCategoryModel(int categoryValue)
+        {
+            var model = (await new OperatorVehicleService(AUTHTOKEN, p_mobileNo).GetOperatorModelList()).Where(x => x.VehicleGroup == categoryValue).Select(m => new { Value = m.Model, Text = m.Model }).ToList();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
         public async Task<JsonResult> GetVehicleNo(string VehicleNo)
         {
             var vehicleNo = (await new OperatorDriverService(AUTHTOKEN, p_mobileNo).GetvehicleNoList()).Where(x => x.VehicleRegistrationNo == VehicleNo).Count();
