@@ -410,16 +410,12 @@ namespace PickCApi.Areas.Master.Controllers
 
         [HttpPost]
         [Route("SendMessageToPickC")]
-        [ApiAuthFilter]
         public IHttpActionResult SendMessageToPickC(ContactUs contactUs)
         {
             try
             {
-                Configuration configuration =  WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
-                MailSettingsSectionGroup mailSettingsSectionGroup = (MailSettingsSectionGroup)configuration.GetSectionGroup("system.net/mailSettings");
-
-                //var from = new MailAddress(cailSettingsSectionGroup.Smtp.From, "PickC");
-                bool  sendMail=  new EmailGenerator().ConfigMail(mailSettingsSectionGroup.Smtp.From, false, contactUs.Subject, contactUs.Message);
+                contactUs.Email = "contactus.pickc@gmail.com";
+                bool  sendMail=  new EmailGenerator().ConfigMail(contactUs.Email, false, contactUs.Subject, contactUs.Message);
                 if (sendMail)
                     return Ok("Mail Sent Successfully!");
                 else

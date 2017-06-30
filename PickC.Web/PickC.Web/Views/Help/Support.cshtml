@@ -3,7 +3,8 @@
     ViewBag.Title = "Support";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@using (Html.BeginForm("SendMail", "Help", FormMethod.Post, new { id = "frmContactUs", name = "frmContactUs" }))
+{
 <section class="help">
     <div class="container">
         <div class="row">
@@ -12,6 +13,12 @@
                 <form id="contact-form" action="contact-form.html" method="post" role="form">
                     <div class="error-container"></div>
                     <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Company Mail</label>
+                                <input style="background-color:rgb(221,221,221);" class="form-control form-control-name" name="name" id="name" placeholder="" type="text" value="support@pickcargo.in" disabled>
+                            </div>
+                        </div>
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label>Name</label>
@@ -29,6 +36,13 @@
                             <div class="form-group">
                                 <label>Mobile</label>
                                 <input class="form-control form-control-subject" name="Mobile" id="subject"
+                                       placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input class="form-control form-control-subject" name="Subject" id="subject"
                                        placeholder="" required>
                             </div>
                         </div>
@@ -103,4 +117,5 @@
     </div>
     <!-- Conatiner end -->
 </section>
+}
 
