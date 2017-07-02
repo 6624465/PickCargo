@@ -11,7 +11,5 @@ namespace Master.Contract
         public string DriverID { get; set; }
         public string VehicleNo { get; set; }
         public string OperatorMobNo { get; set; }       
-        public bool Status { get; set; }
-        public DateTime StatusDate { get; set; }
     }
 }

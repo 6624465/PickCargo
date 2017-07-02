@@ -96,7 +96,8 @@
                         else
                             vehicleType = 'Closed';
 
-                        var fromAndToLatLngs = [{ "lat": data[0].Latitude, "lng": data[0].Longitude }, { "lat": data[0].ToLatitude, "lng": data[0].ToLongitude }];
+                        var fromAndToLatLngs = [{ "lat": data[0].Latitude, "lng": data[0].Longitude, vehicleType: vehicleType, DriverName: data[0].DriverID },
+                                                { "lat": data[0].ToLatitude, "lng": data[0].ToLongitude, vehicleType: vehicleType, DriverName: data[0].DriverID }];
                         onGetMapData(fromAndToLatLngs);
                         $('#tripEstimateVm').show();
                         $('#pickuparea').text(data[0].LocationFrom);
@@ -143,9 +144,12 @@
                 map: map
             });
             latlngbounds.extend(marker.position);
+            var infowincontent = '<div>DriverName:' + fromandtolatlng.DriverName + '</div>' + '<br/>' +
+                                '<div>VehicleType:' + fromandtolatlng.vehicleType + '</div>';
+
             (function (marker, fromandtolatlng) {
                 google.maps.event.addListener(marker, "click", function (e) {
-                    infoWindow.setContent(fromandtolatlng.description);
+                    infoWindow.setContent(infowincontent);
                     infoWindow.open(map, marker);
                 });
             })(marker, fromandtolatlng);
@@ -166,6 +170,10 @@
                 service.route({
                     origin: src,
                     destination: des,
+                    waypoints: [{
+                        location: new google.maps.LatLng(42.496403, -124.413128),
+                        stopover: false
+                    }],
                     travelMode: google.maps.DirectionsTravelMode.DRIVING
                 }, function (result, status) {
                     if (status == google.maps.DirectionsStatus.OK) {

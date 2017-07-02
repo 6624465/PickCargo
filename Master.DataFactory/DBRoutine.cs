@@ -104,7 +104,7 @@ namespace Master.DataFactory
         public const string SAVEOPERATORDRIVERLIST = "[Master].[usp_OperatorDriverSave]";
         public const string SELECTOPERATORDRIVERTOTALLIST = "[Master].[usp_OperatorDriverSelect]";
         public const string SELECTOPERATORDRIVERBYID = "[Master].[usp_OperatorDriverSelectByOperatorDriverId]";
-       // public const string UPDATEOPERATORDRIVERVEHICLEATTACHMENTLIST = "[Master].[usp_OperatorDriverVehicleAttachment]";
+        public const string UPDATEOPERATORDRIVERVEHICLEATTACHMENTLIST = "[Master].[usp_OperatorDriverVehicleAttachment]";
 
         /// <summary>
         /// [Master].[TruckList]
@@ -165,13 +165,23 @@ namespace Master.DataFactory
         public const string TRIPINVOICELIST = "[Operation].[usp_CustomerInvoiceReport]";
 
 
-        /// <summary>
-        /// [Master].[DriverVehicle]
-        /// </summary>
+        ///// <summary>
+        ///// [Master].[DriverVehicle]
+        ///// </summary>
 
-        public const string SELECTDRIVERVEHICLE = "[Master].[usp_DriverVehicleSelect]";
-        public const string LISTDRIVERVEHICLE = "[Master].[usp_DriverVehicleList]";
-        public const string SAVEDRIVERVEHICLE = "[Master].[usp_DriverVehicleSave]";
-        public const string DELETEDRIVERVEHICLE = "[Master].[usp_DriverVehicleDelete]";
+        //public const string SELECTDRIVERVEHICLE = "[Master].[usp_DriverVehicleSelect]";
+        //public const string LISTDRIVERVEHICLE = "[Master].[usp_DriverVehicleList]";
+        //public const string SAVEDRIVERVEHICLE = "[Master].[usp_DriverVehicleSave]";
+        //public const string DELETEDRIVERVEHICLE = "[Master].[usp_DriverVehicleDelete]";
+
+        /// <summary>
+        /// [Master].[CustomerContactUs]
+        /// Added By Meena Konakondla
+        /// </summary>
+        /// 
+
+        public const string SAVECUSTOMERCONTACTUS = "[Master].[usp_CustomerContactUsSave]";
+
+
     }
 }

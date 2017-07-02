@@ -165,9 +165,13 @@ namespace PickC.Web.Controllers
         public async Task<ActionResult> CustomersBookingHistory(BookingHistoryDTO bookingHistoryDTO)
         {
             var data = await new BookingService(AUTHTOKEN, p_mobileNo).GetBookingsHistoryByMobileNoAsync(bookingHistoryDTO.CustomerMobile);
-            var bookingSearchVM = new BookingHistoryDTO();
-            bookingSearchVM.BookingHistoryDetails = data;
-            return View("CustomerBookingHistory", bookingSearchVM);
+            if (data.Count == 0)
+            {
+                return Content("<script language='javascript' type='text/javascript'>alert('No Data Found...!');location.href='/Bookings/CustomerBookingHistory';</script>");
+            }
+                var bookingSearchVM = new BookingHistoryDTO();
+                bookingSearchVM.BookingHistoryDetails = data;
+                return View("CustomerBookingHistory", bookingSearchVM);         
         }
 
         [HttpGet]

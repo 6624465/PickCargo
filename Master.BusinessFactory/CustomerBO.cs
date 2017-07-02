@@ -53,5 +53,11 @@ namespace Master.BusinessFactory
         {
             return (TripInvoice)customerDAL.GetTripInvoice<TripInvoice>(tripInvoice);
         }
+
+        public bool SaveCustomer(ContactUs contactUs)
+        {
+
+            return customerDAL.SaveContactUs(contactUs);
+        }
     }
 }

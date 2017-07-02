@@ -497,6 +497,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\chlub-webfont.woff" />
     <Content Include="fonts\chlub-webfont.woff2" />
+    <Content Include="images\RegisterNow.pdf" />
     <None Include="Properties\PublishProfiles\PicKCWebNew.pubxml" />
     <Content Include="Views\Bill\mobile.cshtml" />
     <Content Include="Views\Bill\mobilefeedback.cshtml" />
@@ -508,6 +509,7 @@
     <Content Include="Views\Bookings\CustomerBookingHistory.cshtml" />
     <Content Include="Views\Help\TRIPINVOICE.cshtml" />
     <Content Include="Views\Bookings\pdf2.cshtml" />
+    <Content Include="Views\Home\ImageRegisterNow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

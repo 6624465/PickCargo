@@ -78,7 +78,7 @@ namespace PickCApi.Areas.Operation.Controllers
             }
         }
 
-        [HttpGet]
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
         [Route("logout")]
         [ApiAuthFilter]
         public IHttpActionResult DriverLogOut()
@@ -96,8 +96,7 @@ namespace PickCApi.Areas.Operation.Controllers
                 };
 
                 var result = new DriverActivityBO().DriverActivityUpdate(driverActivity);
-
-                return Ok(result ? UTILITY.SUCCESSMSG : UTILITY.FAILEDMSG);
+                return Ok(result ? UTILITY.LOGOUT : UTILITY.FAILEDMSG);
             }
             catch (Exception ex)
             {

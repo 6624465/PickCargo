@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Master.Contract;
 using PickC.Web.ViewModels;
 using PickC.Services;
+using System.Net;
 
 namespace PickC.Web.Controllers
 {
@@ -34,6 +35,28 @@ namespace PickC.Web.Controllers
 
             return View(tripEstimateVm);
             
+        }
+        [HttpGet]
+        public  ActionResult ImageRegisterNow()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetFile(Driver driver)
+        {
+            DownloadPDF();
+            return View("ImageRegisterNow");
+        }
+
+        public void DownloadPDF()
+        {
+            Response.Clear();
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=" + "ImageRegisterNow" + ".pdf");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.TransmitFile(Server.MapPath("~/Images/RegisterNow.pdf"));
+            Response.End();
         }
     }
 }

@@ -78,21 +78,21 @@
     .marquee {
         font-size: 16px;
         background-color: rgb(37, 39, 46);
-    border-bottom: 3px solid rgb(255, 252, 0);
-    border-top:3px solid rgb(255, 252, 0);
+        border-bottom: 3px solid rgb(255, 252, 0);
+        border-top: 3px solid rgb(255, 252, 0);
         color: rgb(37,39,46);
-      
         margin-top: 4px;
         padding-top: 10px;
-        	font-family: 'chlubregular';
+        font-family: 'chlubregular';
     }
+
     .marquee {
-    color:rgb(255, 252, 0) ;
-    font-family: "chlubregular";
-    font-size: 49px;
-    font-weight: normal;
-    line-height: 30px;
-}
+        color: rgb(255, 252, 0);
+        font-family: "chlubregular";
+        font-size: 49px;
+        font-weight: normal;
+        line-height: 30px;
+    }
 </style>
 <script>
 
@@ -198,40 +198,43 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    @if (ViewBag.isUserLoggedIn)
-                                    {
-                                        @Html.TextBoxFor(x => Model.customer.Name, new { @class = "form-control", placeholder = "Name", disabled = "disabled" })
-                                    }
-                                    else
-                                    {
-                                        @Html.TextBoxFor(x => Model.customer.Name, new { @class = "form-control", placeholder = "Name", })
-                                    }
+                                    @Html.TextBoxFor(x => Model.customer.Name, new { @class = "form-control", placeholder = "Name" })
+                                    @*@if (ViewBag.isUserLoggedIn)
+                                        {
+                                            @Html.TextBoxFor(x => Model.customer.Name, new { @class = "form-control", placeholder = "Name" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(x => Model.customer.Name, new { @class = "form-control", placeholder = "Name", })
+                                        }*@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    @if (ViewBag.isUserLoggedIn)
-                                    {
-                                        @Html.TextBoxFor(x => Model.customer.MobileNo, new { @class = "form-control", disabled = "disabled", placeholder = "Mobile" })
-                                    }
-                                    else
-                                    {
-                                        @Html.TextBoxFor(x => Model.customer.MobileNo, new { @class = "form-control", placeholder = "Mobile" })
-                                    }
+                                    @Html.TextBoxFor(x => Model.customer.MobileNo, new { @class = "form-control", placeholder = "Mobile" })
+                                    @*@if (ViewBag.isUserLoggedIn)
+                                        {
+                                            @Html.TextBoxFor(x => Model.customer.MobileNo, new { @class = "form-control", placeholder = "Mobile" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(x => Model.customer.MobileNo, new { @class = "form-control", placeholder = "Mobile" })
+                                        }*@
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    @if (ViewBag.isUserLoggedIn)
-                                    {
-                                        @Html.TextBoxFor(x => Model.customer.EmailID, new { @class = "form-control", placeholder = "Email", disabled = "disabled", type = "email" })
-                                    }
-                                    else
-                                    {
-                                        @Html.TextBoxFor(x => Model.customer.EmailID, new { @class = "form-control", placeholder = "Email", type = "email" })
-                                    }
+                                    @Html.TextBoxFor(x => Model.customer.EmailID, new { @class = "form-control", placeholder = "Email", type = "email" })
+                                    @*@if (ViewBag.isUserLoggedIn)
+                                        {
+                                            @Html.TextBoxFor(x => Model.customer.EmailID, new { @class = "form-control", placeholder = "Email", type = "email" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(x => Model.customer.EmailID, new { @class = "form-control", placeholder = "Email", type = "email" })
+                                        }*@
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -242,7 +245,7 @@
                         </div>
                         <div class="form-group">
                             <button onclick="GetRoute()" class="btn btn-default btn-submit btn-md ripple has-ripple" type="button">Trip Estimate</button>
-                            <button class="btn btn-default btn-submit btn-md ripple has-ripple" type="reset"><i class="fa fa-refresh"></i> Clear</button>
+                            <button class="btn btn-default btn-submit btn-md ripple has-ripple" onclick="onClickTripEstimate()"><i class="fa fa-refresh"></i> Clear</button>
                         </div>
                     </div>
                     @Html.HiddenFor(x => x.booking.Latitude)
@@ -271,12 +274,15 @@
             </div>
             <div class="row driverimg">
                 <div class="col-md-12">
-                    <img src="~/images/Final-Register-Now.png" />
-                    </div>
-</div>
+                    <a href="@Url.Content("~/Home/ImageRegisterNow")">
+                        <img src="~/images/Final-Register-Now.png" />
+                    </a>
                 </div>
+
             </div>
         </div>
+    </div>
+</div>
 <div class="modal" id="tripEstimateModal">
     <div class="modal-dialog modal-md" style="width:900px;">
         <div class="modal-content">
@@ -500,6 +506,17 @@
             });
             $('#tripEstimateModal').modal('show');
         }
+        function onClickTripEstimate() {
+            $('#City').val(0);
+            $('#booking_VehicleType').val(0);
+            $('#booking_VehicleGroup').val(0);
+            $('#booking_LocationFrom').val("");
+            $('#booking_LocationTo').val("");
+            $('#customer_Name').val("");
+            $('#customer_MobileNo').val("");
+            $('#customer_EmailID').val("");
+            $('#booking_RequiredDate').val("");
+        };
 
         function btnConfirmBooking() {
             @if(ViewBag.isUserLoggedIn)

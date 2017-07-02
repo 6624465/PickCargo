@@ -22,7 +22,6 @@ namespace PickCApi.Utility
 
         public bool SendMail(MailMessage msg)
         {
-
             MailSettingsSectionGroup settings = (MailSettingsSectionGroup)config.GetSectionGroup("system.net/mailSettings");
 
             msg.From = new MailAddress(settings.Smtp.From, "PickC");

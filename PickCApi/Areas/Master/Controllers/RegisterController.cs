@@ -374,7 +374,6 @@ namespace PickCApi.Areas.Master.Controllers
 
         [HttpGet]
         [Route("TripInvoice/{BookingNo}")]
-        [ApiAuthFilter]
         public IHttpActionResult TripInvoice(string BookingNo)
         {
             try
@@ -410,20 +409,30 @@ namespace PickCApi.Areas.Master.Controllers
 
         [HttpPost]
         [Route("SendMessageToPickC")]
-        [ApiAuthFilter]
+        //[ApiAuthFilter]
         public IHttpActionResult SendMessageToPickC(ContactUs contactUs)
         {
             try
             {
-                Configuration configuration =  WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
-                MailSettingsSectionGroup mailSettingsSectionGroup = (MailSettingsSectionGroup)configuration.GetSectionGroup("system.net/mailSettings");
+                contactUs.CreatedBy = UTILITY.DEFAULTUSER;
+                bool result = new CustomerBO().SaveCustomer(contactUs);
+                string fromMail = string.Empty;
+                if (result == true)
+                {
+                    if (contactUs.Type == "CustomerSupport" || contactUs.Type == "FeedBack")
+                        fromMail = "support@pickcargo.in";
+                    else if (contactUs.Type == "ContactUs" || contactUs.Type == "Careers")
+                        fromMail = "info@pickcargo.in";
+                    bool sendMail = new EmailGenerator().ConfigMail(fromMail,true, contactUs.Subject, contactUs.Message);
 
-                //var from = new MailAddress(cailSettingsSectionGroup.Smtp.From, "PickC");
-                bool  sendMail=  new EmailGenerator().ConfigMail(mailSettingsSectionGroup.Smtp.From, false, contactUs.Subject, contactUs.Message);
-                if (sendMail)
-                    return Ok("Mail Sent Successfully!");
+                    if (sendMail)
+                        return Ok("Mail Sent Successfully!");
+                    else
+                        return NotFound();
+                }
                 else
                     return NotFound();
+
             }
             catch (Exception exception)
             {
