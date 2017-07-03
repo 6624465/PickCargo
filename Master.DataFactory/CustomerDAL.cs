@@ -239,5 +239,54 @@ namespace Master.DataFactory
             return customerItem;
         }
 
+
+        public bool SaveContactUs<T>(T item) where T : IContract
+        {
+            var result = 0;
+            var contactUs = (ContactUs)(object)item;
+
+            if (currentTransaction == null)
+            {
+                connection = db.CreateConnection();
+                connection.Open();
+            }
+
+            var transaction = (currentTransaction == null ? connection.BeginTransaction() : currentTransaction);
+
+            try
+            {
+
+                var savecommand = db.GetStoredProcCommand(DBRoutine.SAVECUSTOMERCONTACTUS);
+                db.AddInParameter(savecommand, "Name", System.Data.DbType.String, contactUs.Name);
+                db.AddInParameter(savecommand, "Email", System.Data.DbType.String, contactUs.Email);
+                db.AddInParameter(savecommand, "MobileNo", System.Data.DbType.String, contactUs.MobileNo);
+                db.AddInParameter(savecommand, "Message", System.Data.DbType.String, contactUs.Message);
+                db.AddInParameter(savecommand, "Subject", System.Data.DbType.String, contactUs.Subject);
+                db.AddInParameter(savecommand, "Type", System.Data.DbType.String, contactUs.Type);
+                db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, contactUs.CreatedBy ?? "ADMIN");
+
+                result = db.ExecuteNonQuery(savecommand, transaction);
+
+                if (currentTransaction == null)
+                    transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                if (currentTransaction == null)
+                    transaction.Rollback();
+
+                throw;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
+            }
+
+            return (result > 0 ? true : false);
+
+        }
+
     }
 }

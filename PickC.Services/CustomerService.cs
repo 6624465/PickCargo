@@ -139,7 +139,7 @@ namespace PickC.Services
             IRestClient client = new RestClient(ApiBaseUrl);
             var request = new RestRequest();
             request.Method = Method.POST;
-            request.Resource = "master/customer/TripInvoice/SendMessageToPickC";
+            request.Resource = "master/customer/SendMessageToPickC";
             request.AddJsonBody(contactUs);
             return ServiceResponse(
                  await client.ExecuteTaskAsync(request));

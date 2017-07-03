@@ -41,8 +41,8 @@ namespace PickCInternal2.Controllers
         [HttpPost]
         public async Task<ActionResult> SaveOperatorDriverList(OperatorDriverDTO operatorDriverDTO)
         {
-            operatorDriverDTO.operatorDriverList.CreatedBy = "JOHN";
-            operatorDriverDTO.operatorDriverList.ModifiedBy = "JOHN";
+            operatorDriverDTO.operatorDriverList.CreatedBy = "ADMIN";
+            operatorDriverDTO.operatorDriverList.ModifiedBy = "ADMIN";
             var result = (await new OperatorDriverService(AUTHTOKEN, p_mobileNo).SaveOperatorDriverList(operatorDriverDTO.operatorDriverList));
             return RedirectToAction("OperatorDriverList");
         }

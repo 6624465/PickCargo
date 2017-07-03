@@ -12,6 +12,7 @@ namespace Master.Contract
         public string DriverName { get; set; }
         public string LicenseNo { get; set; }
         public string MobileNo { get; set; }
+        public string OperatorID { get; set; }
 
     }
 }

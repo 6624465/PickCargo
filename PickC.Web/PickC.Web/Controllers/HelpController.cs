@@ -54,7 +54,19 @@ namespace PickC.Web.Controllers
         public async Task<ActionResult> SendMail(ContactUs contactUs)
         {
             string test= await new CustomerService().SendMail(contactUs);
-            return View("ContactUs");
+            if (contactUs.Type == "ContactUs")
+                return Content("<script language='javascript' type='text/javascript'>alert('Your Request is Received.!');window.location = '/Help/ContactUs';</script>");
+
+            //return View("ContactUs");
+            else if (contactUs.Type == "CustomerSupport")
+                return View("Support");
+            else if (contactUs.Type == "FeedBack")
+                return View("FeedBack");
+            else if (contactUs.Type == "Careers")
+                return View("Careers");
+            else
+                return View("ContactUs");
+
         }
 
         public ActionResult FeedBack()

@@ -104,12 +104,12 @@ public class OperatorDriverDAL
 
             try
             {
-                DbCommand savecommand = db.GetStoredProcCommand(DBRoutine.SAVEDRIVERVEHICLE);
+                DbCommand savecommand = db.GetStoredProcCommand(DBRoutine.UPDATEOPERATORDRIVERVEHICLEATTACHMENTLIST);
                 
                 db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, operatorDriverTruckAttachment.DriverID);
                 db.AddInParameter(savecommand, "VehicleNo", System.Data.DbType.String, operatorDriverTruckAttachment.VehicleNo);
                 db.AddInParameter(savecommand, "OperatorMobNo", System.Data.DbType.String, operatorDriverTruckAttachment.OperatorMobNo);
-                db.AddInParameter(savecommand, "Status", System.Data.DbType.String, operatorDriverTruckAttachment.Status);
+               // db.AddInParameter(savecommand, "Status", System.Data.DbType.String, operatorDriverTruckAttachment.Status);
                                       
                 result = db.ExecuteNonQuery(savecommand, transaction);
 

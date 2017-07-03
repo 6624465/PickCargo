@@ -374,7 +374,6 @@ namespace PickCApi.Areas.Master.Controllers
 
         [HttpGet]
         [Route("TripInvoice/{BookingNo}")]
-        [ApiAuthFilter]
         public IHttpActionResult TripInvoice(string BookingNo)
         {
             try
@@ -392,7 +391,7 @@ namespace PickCApi.Areas.Master.Controllers
         }
         [HttpGet]
         [Route("SendInvoiceMail/{BookingNo}/{EmailId}/")]
-        [ApiAuthFilter]
+        //[ApiAuthFilter]
         public IHttpActionResult SendInvoiceMail(string BookingNo, string EmailId)
         {
            // HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
@@ -410,16 +409,30 @@ namespace PickCApi.Areas.Master.Controllers
 
         [HttpPost]
         [Route("SendMessageToPickC")]
+        //[ApiAuthFilter]
         public IHttpActionResult SendMessageToPickC(ContactUs contactUs)
         {
             try
             {
-                contactUs.Email = "contactus.pickc@gmail.com";
-                bool  sendMail=  new EmailGenerator().ConfigMail(contactUs.Email, false, contactUs.Subject, contactUs.Message);
+                contactUs.CreatedBy = UTILITY.DEFAULTUSER;
+                bool result = new CustomerBO().SaveCustomer(contactUs);
+                string fromMail = string.Empty;
+                if (result == true)
+                {
+                    if (contactUs.Type == "CustomerSupport" || contactUs.Type == "FeedBack")
+                        fromMail = "support@pickcargo.in";
+                    else if (contactUs.Type == "ContactUs" || contactUs.Type == "Careers")
+                        fromMail = "info@pickcargo.in";
+                    bool sendMail = new EmailGenerator().ConfigMail(fromMail,true, contactUs.Subject, contactUs.Message);
+
                 if (sendMail)
                     return Ok("Mail Sent Successfully!");
                 else
                     return NotFound();
+                }
+                else
+                    return NotFound();
+
             }
             catch (Exception exception)
             {
