@@ -280,8 +280,10 @@ namespace Master.DataFactory
             if (driverItem == null) return null;
                return driverItem;
         }
-
-
+        public DriverEarningPaymentType GetDriverTripAmountbyPaymentType(string DriverID)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.GETDRIVERTRIPAMOUNTBYPAYMENTTYPE, MapBuilder<DriverEarningPaymentType>.MapAllProperties().Build(),DriverID).FirstOrDefault();
+        }
         public List<Driver> GetDriverBySearch(bool? status)
         {
 
