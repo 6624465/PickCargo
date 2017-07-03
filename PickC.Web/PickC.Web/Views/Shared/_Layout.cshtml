@@ -453,7 +453,6 @@
         <script type="text/javascript" src="@Url.Content("~/js/ripple.js")"></script>
         <script type="text/javascript">
             $(function () {
-                debugger
                 if (sessionStorage.getItem("isUserLoggedIn") == "True")
                     $("#header-top ul").append('<li><a href="#" id="logout")"><i class="fa fa-user"></i> LogOut</a></li>');
 
@@ -462,13 +461,15 @@
                 $('[data-toggle="tooltip"]').tooltip();
 
                 $('#logout').on("click", function () {
-                    debugger
                     $.ajax({
                         url: '@Url.Content("~/Account/Logoff")',
                         method: 'GET',
                         contentType: 'application/json',
                         success: function (data) {
-                           debugger
+                            if (data) {
+                                sessionStorage.removeItem("isUserLoggedIn");
+                                window.location= "@Url.Content("~/Account/Login")";
+                            }
                         },
                         error: function (err) {
                             debugger;
@@ -477,24 +478,41 @@
                 })
             });
 
-           
+            function CheckMob() {
+                $("#txtmobNo").keyup(function (event) {
+                    var mobileNumber = $('#txtmobNo').val();
+                    var mobileNumberRegExp = /^[789]\d{9}$/;
+                   if (mobileNumber.length == 10) {
+                       event.preventDefault();
 
-            function onChangeMobileNo() {
-                var mobileNumberRegExp = /^[789]\d{9}$/;
-                var mobileNumber = $('#txtmobNo').val();
-
-                if (mobileNumberRegExp.test(mobileNumber) == false) {
-                    alert('Please enter valid phonenumber.');
-                    $("#btn-sendSms").prop("disabled", true);
-                    $('#txtmobNo').val('');
-                    return false;
-                }
-                else
-                    $("#btn-sendSms").prop("disabled", false);
+                        $('#btn-sendSms').css("background-color", "#fffc00");
+                        if (mobileNumberRegExp.test(mobileNumber) == false) {
+                            alert('Please enter valid phonenumber.');
+                            $("#btn-sendSms").prop("disabled", true);
+                            $('#txtmobNo').val('');
+                            return false;
+                        }
+                        else
+                            $("#btn-sendSms").prop("disabled", false);
+                    }
+                })
             }
 
+            //function onChangeMobileNo() {
+            //    var mobileNumberRegExp = /^[789]\d{9}$/;
+            //    var mobileNumber = $('#txtmobNo').val();
+
+            //    if (mobileNumberRegExp.test(mobileNumber) == false) {
+            //        alert('Please enter valid phonenumber.');
+            //        $("#btn-sendSms").prop("disabled", true);
+            //        $('#txtmobNo').val('');
+            //        return false;
+            //    }
+            //    else
+            //        $("#btn-sendSms").prop("disabled", false);
+            //}
+
             function SendSMS() {
-                debugger;
                 if ($('#txtmobNo').val() != '') {
                     var mobNo = $('#txtmobNo').val();
                     $.ajax({
@@ -538,7 +556,7 @@
                 <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); ">
                     <form class="navbar-form  hidden-xs hidden-sm">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onchange="onChangeMobileNo()">
+                            <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onkeyup="CheckMob()">
                             <span class="input-group-btn">
                                 @*<button class="btn btn-default app_btn tooltips" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button">Get <B><b>Pick-C</b></B> App Link</button>*@
                                 <button class="btn btn-default app_btn tooltips" style="background-color: rgba(255, 252, 0, 0.5);" onclick="SendSMS()" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button" disabled id="btn-sendSms">Get <b>Pick-C</b> App Link</button>

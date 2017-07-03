@@ -66,17 +66,16 @@ namespace PickC.Web.Controllers
 
         [HttpGet]
         [WebAuthFilter]
-        public async Task<ActionResult> Logoff()
+        public async Task<JsonResult> Logoff()
         {
             var result = await new CustomerService(AUTHTOKEN, p_mobileNo).LogoutAsync();
+            bool isSuccess = false;
             if (result == "\"USER LOGGEDOUT SUCCESSFULLY\"")
-            {
-              //  return Content("<script language='javascript' type='text/javascript'>sessionStorage.setItem('isUserLoggedIn', "+ISLOGGEDIN+");</script>");
-                Session.Abandon();
-                Session.Clear();
-            }
+                isSuccess = true;
+            else
+                isSuccess = false;
 
-            return RedirectToAction("Login", "Account");
+                return Json(isSuccess, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
