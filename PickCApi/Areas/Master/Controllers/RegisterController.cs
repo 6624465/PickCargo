@@ -391,7 +391,7 @@ namespace PickCApi.Areas.Master.Controllers
         }
         [HttpGet]
         [Route("SendInvoiceMail/{BookingNo}/{EmailId}/")]
-        [ApiAuthFilter]
+        //[ApiAuthFilter]
         public IHttpActionResult SendInvoiceMail(string BookingNo, string EmailId)
         {
            // HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
@@ -425,10 +425,10 @@ namespace PickCApi.Areas.Master.Controllers
                         fromMail = "info@pickcargo.in";
                     bool sendMail = new EmailGenerator().ConfigMail(fromMail,true, contactUs.Subject, contactUs.Message);
 
-                    if (sendMail)
-                        return Ok("Mail Sent Successfully!");
-                    else
-                        return NotFound();
+                if (sendMail)
+                    return Ok("Mail Sent Successfully!");
+                else
+                    return NotFound();
                 }
                 else
                     return NotFound();

@@ -58,7 +58,9 @@ namespace PickC.Web.Controllers
         {
             string test= await new CustomerService().SendMail(contactUs);
             if (contactUs.Type == "ContactUs")
-                return View("ContactUs");
+                return Content("<script language='javascript' type='text/javascript'>alert('Your Request is Received.!');window.location = '/Help/ContactUs';</script>");
+
+            //return View("ContactUs");
             else if (contactUs.Type == "CustomerSupport")
                 return View("Support");
             else if (contactUs.Type == "FeedBack")

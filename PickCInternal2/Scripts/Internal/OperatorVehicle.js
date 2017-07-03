@@ -21,9 +21,10 @@
 });
 var gIndex = -1;
 function EditOperatorVehicle(index) {
+    debugger
     gIndex = index;
     //OPerator_OperatorVehicle_0__VehicleRegistrationNo
-    var baseID = 'OPerator_OperatorVehicle_' + index + '__';
+    var baseID = 'operatorVehicle_' + index + '__';
     $('#operatorVehicle_VehicleRegistrationNo').val($('#' + baseID + 'VehicleRegistrationNo').val());
     $('#operatorVehicle_VehicleType option').filter(function () {
         return this.text == $('#' + baseID + 'VehicleType').val();
