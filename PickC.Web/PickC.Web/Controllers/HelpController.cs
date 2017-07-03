@@ -20,7 +20,10 @@ namespace PickC.Web.Controllers
         }
         public ActionResult FindCRN()
         {
-            return View();
+            if (ISLOGGEDIN)
+                return View();
+            else
+                return RedirectToAction("Login", "Account");
         }
         public ActionResult Services()
         {

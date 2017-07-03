@@ -71,6 +71,7 @@ namespace PickC.Web.Controllers
             var result = await new CustomerService(AUTHTOKEN, p_mobileNo).LogoutAsync();
             if (result == "\"USER LOGGEDOUT SUCCESSFULLY\"")
             {
+              //  return Content("<script language='javascript' type='text/javascript'>sessionStorage.setItem('isUserLoggedIn', "+ISLOGGEDIN+");</script>");
                 Session.Abandon();
                 Session.Clear();
             }

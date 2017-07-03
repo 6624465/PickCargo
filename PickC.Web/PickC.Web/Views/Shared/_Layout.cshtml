@@ -453,15 +453,31 @@
         <script type="text/javascript" src="@Url.Content("~/js/ripple.js")"></script>
         <script type="text/javascript">
             $(function () {
+                debugger
                 if (sessionStorage.getItem("isUserLoggedIn") == "True")
-                    $("#header-top ul").append('<li><a href="@Url.Content("~/Account/Logoff")"><i class="fa fa-user"></i> LogOut</a></li>');
+                    $("#header-top ul").append('<li><a href="#" id="logout")"><i class="fa fa-user"></i> LogOut</a></li>');
 
                 $('.ripple').materialripple();
                 $('.left-menu li a,.btn').materialripple();
                 $('[data-toggle="tooltip"]').tooltip();
+
+                $('#logout').on("click", function () {
+                    debugger
+                    $.ajax({
+                        url: '@Url.Content("~/Account/Logoff")',
+                        method: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                           debugger
+                        },
+                        error: function (err) {
+                            debugger;
+                        }
+                    });
+                })
             });
 
-
+           
 
             function onChangeMobileNo() {
                 var mobileNumberRegExp = /^[789]\d{9}$/;
