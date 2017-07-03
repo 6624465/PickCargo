@@ -126,14 +126,35 @@ namespace PickCApi.Areas.Master.Controllers
             {
                 var DRIVERID = HttpContext.Current.Request.Headers["DRIVERID"];
                 decimal tripAmount = new DriverBO().GetTripAmountbyDriverID(DRIVERID);
-                return Ok(tripAmount);
+                return Ok(new { tripAmount });
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
         }
-
+        [HttpGet]
+        [Route("GetDriverTripAmountbyPaymentType")]
+        [ApiAuthFilter]
+        public IHttpActionResult GetDriverTripAmountbyPaymentType()
+        {
+            try
+            {
+                var driverBO = new DriverBO();
+                var DRIVERID = HttpContext.Current.Request.Headers["DRIVERID"];
+                var driverObj = driverBO.GetDriverTripAmountbyPaymentType(DRIVERID);
+                if (driverObj != null)
+                {
+                    return Ok(driverObj );
+                }
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
         [HttpPost]
         [Route("DriverReferral")]
         [ApiAuthFilter]

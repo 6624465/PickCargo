@@ -82,6 +82,7 @@ namespace Master.DataFactory
         public const string LISTDRIVEROPERATORWISE = "[Master].[usp_DriverListOperatorWise]";
         public const string LISTBANKDETAILSOPERATORWISE = "[Master].[usp_BankListOperatorWise]";
         public const string DRIVERTodayListOfTrips = "[Operation].[usp_DriverWiseTripList]";
+        public const string GETDRIVERTRIPAMOUNTBYPAYMENTTYPE = "[Operation].[usp_SumDriverWiseDailyAmountPaymentType]";
         /// <summary>
         /// [Master].[Operator]
         /// </summary>

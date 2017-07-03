@@ -73,6 +73,10 @@ namespace Master.BusinessFactory
         {
             return (Driver)driverDAL.GetItem<Driver>(item);
         }
+        public DriverEarningPaymentType GetDriverTripAmountbyPaymentType(string DriverID)
+        {
+            return driverDAL.GetDriverTripAmountbyPaymentType(DriverID);
+        }
         public DriverRating GetDriverRating(DriverRating item)
         {
             return (DriverRating)driverDAL.GetDriverRating<DriverRating>(item);
