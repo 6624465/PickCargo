@@ -38,14 +38,13 @@ function DeleteOperatorDriver(index) {
     });
 }
 function btnSavedriver() {
-    debugger;
     if (!$('#frmDriver').valid())
         return;
 
     if (gIndex != -1) {
         var baseID = 'driver_OperatorDriverList_' + gIndex + '__';
         $('#' + baseID + 'operatorDriverList_DriverName').val($('#operatorDriverList_DriverName').val());
-        $('#' + 'operatorDriverList_DriverName_span_' + gIndex).text($('#operatorDriverList_DriverName').val());
+        $('#' + 'operatorDriverList_DriverName_span_' + gIndex).text($("#operatorDriverList_DriverName option:selected").text());
 
         $('#' + baseID + 'operatorDriverList_DriverLicenseNo').val($('#operatorDriverList_DriverLicenseNo').val());
         $('#' + 'operatorDriverList_DriverLicenseNo_span_' + gIndex).text($('#operatorDriverList_DriverLicenseNo').val());
@@ -56,7 +55,7 @@ function btnSavedriver() {
         $('#' + baseID + 'operatorDriverList_VehicleNo').val($('#operatorDriverList_VehicleNo').val());
         $('#' + 'operatorDriverList_VehicleNo_span_' + gIndex).text($('#operatorDriverList_VehicleNo').val());
     } else {
-        var index = $('.trRowCss').length;
+        var index = ($('#tblDriver tr').length) - 1;
         var html = '<tr id="trRow_' + index + '">' +
                         '<td>' +
                             '<span id="operatorDriverList_DriverName_span_' + index + '">' + $('#operatorDriverList_DriverName option:selected').text() + '</span>' +

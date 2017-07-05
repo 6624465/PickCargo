@@ -53,7 +53,6 @@ function EditAddress(index) {
 }
 
 function btnSaveAddress() {
-    debugger;
     if (!$('#frmAddress').valid())
         return;
 
@@ -80,7 +79,8 @@ function btnSaveAddress() {
         $('#' + baseID + 'ZipCode').val($('#ZipCode').val());
         $('#' + 'ZipCode_span_' + gIndex).val($('#ZipCode').val());
     } else {
-        var index = $('.trRowCss').length;
+        var index = ($('#tblAddress tr').length)-1;
+        //var index = $('.trRowCss').length;
         var html = '<tr id="trRow_' + index + '">' +
                         '<td>' +
                             '<span id="Address1_span_' + index + '">' + $('#Address1').val() + '</span>' +
