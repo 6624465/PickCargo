@@ -50,7 +50,7 @@ function btnSaveBank() {
         $('#' + baseID + 'AccountType').val($('#txtAccType').val());
         $('#' + 'txtAccType_span_' + gIndex).text($('#txtAccType').val());
     } else {
-        var index = $('.trRowCss').length;
+        var index = ($('#tblBank tr').length)-1;
         var html = '<tr id="trRow_' + index + '">' +
                         '<td>' +
                             '<span id="txtBankName_span_' + index + '">' + $('#txtBankName').val() + '</span>' +
