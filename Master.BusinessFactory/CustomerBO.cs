@@ -29,6 +29,11 @@ namespace Master.BusinessFactory
 
             return customerDAL.Save(newItem);
         }
+        public bool SaveImageDriverDetails(DriverImageRegister driverImageRegister)
+        {
+
+            return customerDAL.SaveImageDriverDetails(driverImageRegister);
+        }
 
         public bool DeleteCustomer(Customer item)
         {

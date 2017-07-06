@@ -461,6 +461,7 @@
                 $('[data-toggle="tooltip"]').tooltip();
 
                 $('#logout').on("click", function () {
+                    debugger
                     $.ajax({
                         url: '@Url.Content("~/Account/Logoff")',
                         method: 'GET',
@@ -541,6 +542,9 @@
 
 
         </script>
+    <script type="text/javascript">
+        var baseUrl = '@Url.Content("~/")';
+    </script>
         @RenderSection("scripts", false)
 
 

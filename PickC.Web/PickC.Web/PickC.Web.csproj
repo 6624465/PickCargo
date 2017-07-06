@@ -243,6 +243,7 @@
     <Content Include="images\down-arrow-color.png" />
     <Content Include="images\down-arrow-transparent.png" />
     <Content Include="images\down-arrow-white.png" />
+    <Content Include="images\DriverDocument.png" />
     <Content Include="images\f5.png" />
     <Content Include="images\feedback.png" />
     <Content Include="images\Final-Register-Now.png" />
@@ -300,6 +301,7 @@
     <Content Include="js\bootstrap-select.min.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\custom.js" />
+    <Content Include="js\DriverImage.js" />
     <Content Include="js\gmap3.min.js" />
     <Content Include="js\icheck.min.js" />
     <Content Include="js\ini.isotope.js" />

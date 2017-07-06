@@ -128,6 +128,7 @@
             center: fromLatlng,
             zoom: 10,
             mapTypeId: google.maps.MapTypeId.ROADMAP
+
         };
         $('#dvMap').show();
         var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
@@ -170,10 +171,10 @@
                 service.route({
                     origin: src,
                     destination: des,
-                    waypoints: [{
-                        location: new google.maps.LatLng(42.496403, -124.413128),
-                        stopover: false
-                    }],
+                    //waypoints: [{
+                    //    location: new google.maps.LatLng(42.496403, -124.413128),
+                    //    stopover: false
+                    //}],
                     travelMode: google.maps.DirectionsTravelMode.DRIVING
                 }, function (result, status) {
                     if (status == google.maps.DirectionsStatus.OK) {

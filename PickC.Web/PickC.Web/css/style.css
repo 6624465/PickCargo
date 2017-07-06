@@ -4010,3 +4010,9 @@ padding-right:0px !important;
     nav .getapp button {
     padding:8px 15px;
     }
+.download-btn {
+    position:absolute;
+    top:200px;
+    right:20px;
+    z-index:9;
+}

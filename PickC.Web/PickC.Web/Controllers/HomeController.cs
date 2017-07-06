@@ -43,11 +43,12 @@ namespace PickC.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetFile(Driver driver)
+        public async Task<ActionResult> GetFile(DriverImageRegister driverImageRegister)
         {
-            DownloadPDF();
-            return View("ImageRegisterNow");
-        }
+            //DownloadPDF();
+            var result = await new CustomerService().SaveImageRegisterAsync(driverImageRegister);
+            return Json(result,JsonRequestBehavior.AllowGet);
+             }
 
         public void DownloadPDF()
         {
@@ -55,8 +56,8 @@ namespace PickC.Web.Controllers
             Response.ContentType = "application/pdf";
             Response.AddHeader("content-disposition", "attachment;filename=" + "ImageRegisterNow" + ".pdf");
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.TransmitFile(Server.MapPath("~/Images/RegisterNow.pdf"));
-            Response.End();
+            Response.TransmitFile(Server.MapPath("~/images/RegisterNow.pdf"));
+            Response.End();    
         }
     }
 }

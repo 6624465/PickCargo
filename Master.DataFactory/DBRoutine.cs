@@ -9,6 +9,10 @@ namespace Master.DataFactory
     public static class DBRoutine
     {
 
+        /// <summary>
+        /// [Master].[DriverImageRegister]
+        /// </summary>
+        public const string SAVEDRIVERIMAGEREGISTER = "[Master].[usp_DriverImageSave]";
 
         /// <summary>
         /// [Master].[Customer]

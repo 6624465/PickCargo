@@ -45,7 +45,6 @@ namespace PickC.Services
                 return ServiceResponse(client.Execute(request));
             });
         }
-
         public async Task<Driver> DriverInfoAsync(string driverID)
         {
             IRestClient client = new RestClient(ApiBaseUrl);

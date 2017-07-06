@@ -56,6 +56,18 @@ namespace PickC.Services
                  await client.ExecuteTaskAsync(request));
 
         }
+        public async Task<string> SaveImageRegisterAsync(DriverImageRegister driverImageRegister)
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = new RestRequest();
+            request.Method = Method.POST;
+            request.Resource = "master/customer/saveImageRegister";
+            request.AddJsonBody(driverImageRegister);
+            return ServiceResponse(
+                 await client.ExecuteTaskAsync(request));
+
+        }
+
         public async Task<string> RegisterOTPAsync(string mobile,string otp)
         {
             IRestClient client = new RestClient(ApiBaseUrl);

@@ -93,6 +93,51 @@ namespace Master.DataFactory
             return (result > 0 ? true : false);
 
         }
+        public bool SaveImageDriverDetails<T>(T item) where T : IContract
+        {
+            var result = 0;
+            var driverImageRegister = (DriverImageRegister)(object)item;
+
+            if (currentTransaction == null)
+            {
+                connection = db.CreateConnection();
+                connection.Open();
+            }
+
+            var transaction = (currentTransaction == null ? connection.BeginTransaction() : currentTransaction);
+
+            try
+            {
+
+                var savecommand = db.GetStoredProcCommand(DBRoutine.SAVEDRIVERIMAGEREGISTER);
+                db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, driverImageRegister.DriverID);
+                db.AddInParameter(savecommand, "DriverName", System.Data.DbType.String, driverImageRegister.DriverName);
+                db.AddInParameter(savecommand, "MobileNo", System.Data.DbType.String, driverImageRegister.MobileNo);
+                db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, driverImageRegister.CreatedBy?? "ADMIN");
+                db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, driverImageRegister.ModifiedBy?? "ADMIN");
+
+                result = db.ExecuteNonQuery(savecommand, transaction);
+
+                if (currentTransaction == null)
+                    transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                if (currentTransaction == null)
+                    transaction.Rollback();
+
+                throw;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
+            }
+
+            return (result > 0 ? true : false);
+
+        }
 
         public bool Delete<T>(T item) where T : IContract
         {
