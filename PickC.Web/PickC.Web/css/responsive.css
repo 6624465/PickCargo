@@ -2,6 +2,12 @@
 ================================================== */
 
 /* Large Devices, Wide Screens */
+@media (min-width : 1300px) {
+
+    #DriverDescription .modal-dialog {
+        height: calc(100% - 100px) !important;
+    }
+}
 @media (min-width : 1200px) {
 
 	.navbar-collapse{
@@ -16,7 +22,7 @@
 		width: 100%;
 		height: 100%;
 	}
-
+    
 }
 
 

@@ -281,6 +281,7 @@
     <Content Include="images\newsletter-icon.png" />
     <Content Include="images\pageunderconstruction.png" />
     <Content Include="images\paytm.jpg" />
+    <Content Include="images\PDFDownloadButton.png" />
     <Content Include="images\product-bg.jpg" />
     <Content Include="images\qrcode.png" />
     <Content Include="images\rupee.png" />

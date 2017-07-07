@@ -56,11 +56,22 @@
         animation-fill-mode: both;
     }
     .download-btn {
-    position:absolute;
-    top:200px;
-    right:20px;
-    z-index:9;
+   background-color: transparent;
+    border: 0 none;
+    color: #fff;
+    max-width: 200px;
+    position: absolute;
+    right: 20px;
+    top: 26%;
+    z-index: 9;
 }
+    .download-btn img{
+        width:100%;
+    }
+    .download-btn:hover,   .download-btn:active,   .download-btn:focus {
+         background-color:transparent;
+           border: 0 none;
+    }
     .owl-animated-out {
         z-index: 1;
     }
@@ -340,7 +351,7 @@
                         <div class="row" style="margin-top:10px;">
                             <div class="col-lg-12 col-xs-12">
                                 <button type="button" class="btn btn-default btn-submit btn-md ripple has-ripple" onclick="btnConfirmBooking();">Confirm Booking</button>
-                                <button type="button" class="btn btn-default btn-submit btn-md ripple has-ripple">Cancel </button>
+                                <button type="button" class="btn btn-default btn-submit btn-md ripple has-ripple" data-dismiss="modal">Cancel </button>
                             </div>
                         </div>
                         <div class="row">
@@ -371,29 +382,29 @@
     <div class="modal-dialog">
         <form id="frmImgRegister" name="frmImgRegister">
             <!-- Modal content-->
-            <div class="modal-content" style="top:200px;">
+            <div class="modal-content" >
 
                 <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); ">
                     <div class="row">
-                        <div class="col-md-3 text-left col-md-offset-1">
+                        <div class="col-md-4 text-left ">
                             <label>Driver Name</label>
-                        </div>  <div class="col-md-7 text-left">
+                        </div>  <div class="col-md-8 text-left">
                             <input class="form-control" id="DriverName" name="DriverName" type="text" value="">
                         </div>
                     </div><br />
                     <div class="row">
-                        <div class="col-md-3 text-left col-md-offset-1">
+                        <div class="col-md-4 text-left">
 
                             <label>Mobile No.</label>
-                        </div>  <div class="col-md-7 text-left">
+                        </div>  <div class="col-md-8 text-left">
                             <input class="form-control" id="MobileNo" name="MobileNo" type="text" value="">
 
                         </div>
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-md-7 text-left col-md-offset-4">
-                            <button type="button" onclick="btnSaveImageRegistration();" class="btn btn-default btn-submit btn-md ripple has-ripple"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</button>
+                        <div class="col-md-8 text-left col-md-offset-4">
+                            <button type="button" onclick="btnSaveImageRegistration();" class="btn btn-default btn-submit btn-md ripple has-ripple">&nbsp;Submit</button>
                             <button type="button" onclick="Clear()" class="btn btn-default btn-submit btn-md ripple has-ripple"><i class="fa fa-refresh"></i>&nbsp;Clear</button>
                         </div>
                     </div>
@@ -404,17 +415,21 @@
             </div>
 </div>
 
-<div id="DriverDescription" class="modal">
-    <div class="modal-dialog">
-        <form id="frmDriverDescription" name="frmDriverDescription">
+<div id="DriverDescription" class="modal" style="height: calc(100%);">
+    <div class="modal-dialog" style="height: calc(100%);">
+        <form id="frmDriverDescription" name="frmDriverDescription" style="height: calc(100%); ">
             <!-- Modal content-->
-            <div class="modal-content" >
+            <div class="modal-content" style="height: calc(100%);" >
 
-                <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); padding:0px;">
-                    <img id="myImg" src="@Url.Content("~/images/DriverDocument.png")" alt="Driver Document" style="width:100%; height:auto;">
-                    @*<button type="button" class="download-btn btn btn-primary solid blank has-ripple"  onclick="DownloadImage()" style="font-size: 17px;font-weight: bold;">Download <i class="fa fa-download" aria-hidden="true"></i></button>*@
-                    <a href="@Url.Content("~/images/RegisterNow.pdf")"  style="font-size: 17px;font-weight: bold;" alt="Pdf" target="_blank" download><i class="fa fa-download" aria-hidden="true"></i>Download
-                    </a>
+                <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); padding:0px; height: calc(100%);">
+                    <div style="width:100%;height: calc(100% - 100px); background-image:url(../images/DriverDocument.png); background-size:100% 100%; height: calc(100%);">
+                        @*<img id="myImg" src="@Url.Content("~/images/DriverDocument.png")" alt="Driver Document" style="width:100%; height:;">*@
+                        @*<button type="button" class="download-btn btn btn-primary solid blank has-ripple"  onclick="DownloadImage()" style="font-size: 17px;font-weight: bold;">Download <i class="fa fa-download" aria-hidden="true"></i></button>*@
+                        <a href="@Url.Content("~/images/RegisterNow.pdf")" class="download-btn btn btn-primary solid blank has-ripple" style="font-size: 17px;font-weight: bold; " alt="Pdf" target="_blank" download>
+                            @*Download &nbsp; <i class="fa fa-download" aria-hidden="true"></i>*@
+                            <img src="~/images/PDFDownloadButton.png" />
+                        </a>
+                    </div>
                     </div>
 
                 </div>
