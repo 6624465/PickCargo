@@ -3,8 +3,9 @@
     ViewBag.Title = "ContactUs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @using (Html.BeginForm("SendMail", "Help", FormMethod.Post, new { id = "frmContactUs", name = "frmContactUs" }))
-{ 
+{
     <section class="help">
         <div class="container">
             <div class="row">
@@ -13,7 +14,7 @@
                     <form id="contact-form" action="contact-form.html" method="post" role="form">
                         <div class="error-container"></div>
                         <div class="row">
-                            <input class="form-control form-control-name" name="Type" id="Type"  value="ContactUs" type="text" style="display:none;">
+                            <input class="form-control form-control-name" name="Type" id="Type" value="ContactUs" type="text" style="display:none;">
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label>Name</label>
@@ -55,20 +56,16 @@
                     </form>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                    <div class="sidebar sidebar-right">
-                      
-                            <h3 class="widget-title">Contact Us</h3>
-                            
-                                   
-                                    <iframe src="https://www.google.com/maps/d/embed?mid=1PsgcAaPIz3hVz9Q1qW6vzH5oy_8"  style="width:100%; border:0px;" height="480" width="640" height="480"></iframe>
+                    <div class="sidebar sidebar-right" >
 
-                         
-                      
+
+                        <h3 class="widget-title">Contact Us</h3>
+                        <div id="map-canvas" style="height:350px;" />
 
                     </div>
-                   
+
                 </div>
-              
+
 
             </div>
 
@@ -78,9 +75,3 @@
         <!-- Conatiner end -->
     </section>
 }
-
-<script type="text/javascript">
-    $('#frmContactUs').validate({
-
-    })
-</script>

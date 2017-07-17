@@ -282,6 +282,7 @@
     <Content Include="images\paytm.jpg" />
     <Content Include="images\product-bg.jpg" />
     <Content Include="images\qrcode.png" />
+    <Content Include="images\red-dot.png" />
     <Content Include="images\rupee.png" />
     <Content Include="images\S1.png" />
     <Content Include="images\S2.png" />
@@ -310,6 +311,7 @@
     <Content Include="js\jquery.counterup.min.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\jquery.validate.js" />
+    <Content Include="js\map.js" />
     <Content Include="js\moment.js" />
     <Content Include="js\owl.carousel.js" />
     <Content Include="js\owl.carousel.min.js" />
