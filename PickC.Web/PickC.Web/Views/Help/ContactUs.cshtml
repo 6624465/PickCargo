@@ -14,7 +14,7 @@
                     @*<form id="contact-form" action="contact-form.html" method="post" role="form">*@
                         <div class="error-container"></div>
                         <div class="row">
-                            <input class="form-control form-control-name" name="Type" id="Type" value="ContactUs" type="text" style="display:none;">
+                            <input class="form-control form-control-name" name="Type" id="Type"  value="ContactUs" type="text" style="display:none;">
                             <div class="col-md-10">
                                 <div class="form-group">
                                 @*<label>Type</label>*@
@@ -79,39 +79,15 @@
                     @*</form>*@
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                    <div class="sidebar sidebar-right" >
-
-                      
-                                    <div class="contact-info-box-content support">
-
-                                       <p><i class="fa fa-phone"></i>&nbsp; +91. 40. 6 5454 222 </p>
-                                        <p>
-                                            <i class="fa fa-globe" aria-hidden="true"></i>
-                                            &nbsp; www.pickcargo.in
-                                        </p>
-                                    </div>
-                                </div>*@
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        <h3 class="widget-title">Contact Us</h3>
-                        <div id="map-canvas" style="height:350px;" />
-
-                        </div>
-                        <!-- Widget end -->
-
-                    </div>
-                    <!-- Sidebar end -->
-                </div>
-                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12  fd" style="display:none">
                     <div class="sidebar sidebar-right">
-                        <div class="widget">
+                      
+                            <h3 class="widget-title">Contact Us</h3>
+                            
+                                   
+                                    @*<iframe src="https://www.google.com/maps/d/embed?mid=1PsgcAaPIz3hVz9Q1qW6vzH5oy_8"  style="width:100%; border:0px;" height="480" width="640" height="480"></iframe>*@
 
-                            <div class="row" style="background: rgb(255, 255, 255) none repeat scroll 0% 0%; padding-bottom: 30px; padding-top: 10px;">
-                                <div class="col-md-12">
-                                    <div class="">
+                        <div id="map-canvas" style="height:350px;" />
+                      
 
                                         <div class="col-md-12">
                                             <div class="support">
@@ -133,44 +109,13 @@
                                 </div>
 
             </div>
-
-                        </div>
-                        <!-- Widget end -->
-
-                    </div>
-                    <!-- Sidebar end -->
-                </div>
-
-            </div>
-
-
-            <!-- Content row -->
-        </div>
+         </div>
         <!-- Conatiner end -->
     </section>
 }
-<script src="@Url.Content("~/js/jquery.js")"></script>
+
 <script type="text/javascript">
-    $(function () {
-        $('#Type').on('change',function () {
-            var i = $('#Type').val();
-            if (i == "ContactUs")
-                {
-                    $('.cn').show();
-                    $('.cs').hide();
-                    $('.fd').hide();
-                }
-            if (i == "CustomerSupport")
-                {
-                    $('.cs').show();
-                    $('.cn').hide();
-                    $('.fd').hide();
-                }
-                if (i == "FeedBack") {
-                    $('.fd').show();
-                    $('.cn').hide();
-                    $('.cs').hide();
-                }
-        });
-    });
+    $('#frmContactUs').validate({
+
+    })
 </script>
