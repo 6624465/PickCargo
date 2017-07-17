@@ -7,6 +7,8 @@ namespace PickCApi
 {
     public static class UTILITY
     {
+        public static string SUCCESSMESSAGE = "Success"; //krishna & Srinath
+        public static string FAILEDMESSAGE = "Failed"; //krishna & Srinath
         public static string SUCCESSMSG = "SAVED SUCSSFULLY";
         public static string DELETEMSG = "DELETED SUCSSFULLY";
         public static string FAILEDAUTH = "MOBILENO OR AUTH TOKEN IS MISSING";

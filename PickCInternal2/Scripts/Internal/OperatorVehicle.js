@@ -30,30 +30,38 @@ function EditOperatorVehicle(index) {
         return this.text == $('#' + baseID + 'VehicleType').val();
     }).attr('selected', true);
 
-    $('#operatorVehicle_Model option').filter(function () {
-        return this.text == $('#' + baseID + 'Model').val();
-    }).prop('selected', true);
-
     $('#operatorVehicle_VehicleCategory option').filter(function () {
         return this.text == $('#' + baseID + 'VehicleCategory').val();
-    }).prop('selected', true);
+    }).attr('selected', true);
+
+    $('#operatorVehicle_Model option').filter(function () {
+        return this.text == $('#' + baseID + 'Model').val();
+    }).attr('selected', true);
+  
     $('#operatorVehicle_Tonnage').val($('#' + baseID + 'Tonnage').val());
     $('#VehicleModal').modal('show');
 
 }
 function DeleteOperatorVehicle(index) {
-    var id = '#vehicle_OperatorVehicleList_' + index + '__IsActive';
-    $(id).val('False');
-    $('#trRow_' + index).css({
-        color: 'red',
-        'text-decoration': 'line-through',
-        'font-style': 'italic'
-    });
+    //var id = '#vehicle_OperatorVehicleList_' + index + '__IsActive';
+    //$(id).val('False');
+    //$('#trRow_' + index).css({
+    //    color: 'red',
+    //    'text-decoration': 'line-through',
+    //    'font-style': 'italic'
+    //});
+    $('#trRow_Vehicle_' + index).remove();
+    $('#operatorVehicle_VehicleRegistrationNo').val('');
+    $('#operatorVehicle_VehicleType').val('');
+    $('#operatorVehicle_VehicleCategory').val('');
+    $('#operatorVehicle_Model').val('');
+    $('#operatorVehicle_Tonnage').val('');
 }
 function btnSaveVehicle() {
     if (!$('#frmVehicle').valid())
         return;
     if (gIndex != -1) {
+        debugger;
         var baseID = 'OPerator_OperatorVehicle_' + gIndex + '__';
         $('#' + baseID + 'VehicleRegistrationNo').val($('#operatorVehicle_VehicleRegistrationNo').val());
         $('#' + 'VehicleRegistrationNo_span_' + gIndex).text($('#operatorVehicle_VehicleRegistrationNo').val());
@@ -70,8 +78,9 @@ function btnSaveVehicle() {
         $('#' + baseID + 'Tonnage').val($('#operatorVehicle_Tonnage').val());
         $('#' + 'Tonnage_span_' + gIndex).text($('#operatorVehicle_Tonnage').val());
     } else {
-        var index = ($('#tblVehicle tr').length)-1;
-        var html = '<tr id="trRow_' + index + '">' +
+        debugger;
+        var index = ($('#trBodyVehicle tr').length);
+        var html = '<tr id="trRow_Vehicle_' + index + '">' +
                         '<td>' +
                             '<span id="operatorVehicle_VehicleRegistrationNo_span_' + index + '">' + $('#operatorVehicle_VehicleRegistrationNo').val() + '</span>' +
                             '<input class="vehicleNoCss" id="OPerator_OperatorVehicle_' + index + '__VehicleRegistrationNo" name="OPerator.OperatorVehicle[' + index + '].VehicleRegistrationNo" type="hidden" value="' + $('#operatorVehicle_VehicleRegistrationNo').val() + '">' +

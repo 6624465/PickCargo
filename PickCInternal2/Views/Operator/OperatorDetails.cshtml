@@ -193,12 +193,12 @@ new { @class = "form-control" })
                                                                                 <th>#Action</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody id="trBody">
+                                                                        <tbody id="trBodyAddress">
                                                                             @if (Model.OPerator.AddressList != null)
                                                                             {
                                                                                 for (var i = 0; i < Model.OPerator.AddressList.Count; i++)
                                                                                 {
-                                                                                    <tr id="trRow_@i" class="trRowCss">
+                                                                                    <tr id="trRow_Address_@i" class="trRowCss">
                                                                                         <td>
                                                                                             <span id="Address1_span_@i">@Model.OPerator.AddressList[i].Address1</span>
                                                                                             @Html.HiddenFor(x => Model.OPerator.AddressList[i].Address1)
@@ -319,13 +319,13 @@ new { @class = "form-control" })
                                                         <div class="box-body">
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <table class="table table-hover table-bordered">
+                                                                    <table class="table table-hover table-bordered" id="tblVehicle">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>Vehicle Registration No</th>
                                                                                 <th>Vehicle Type</th>
                                                                                 <th>Vehicle Category</th>
-                                                                                <th>Mode</th>                                                                                
+                                                                                <th>Model</th>                                                                                
                                                                                 <th>Tonnage</th>
                                                                                 <th>#Action</th>
                                                                             </tr>
@@ -335,7 +335,7 @@ new { @class = "form-control" })
                                                                             {
                                                                                 for (var i = 0; i < Model.OPerator.OperatorVehicle.Count; i++)
                                                                                 {
-                                                                                    <tr id="trRow_@i" class="trRowCss">
+                                                                                    <tr id="trRow_Vehicle_@i" class="trRowCss">
                                                                                         <td>
                                                                                             <span id="operatorVehicle_VehicleRegistrationNo_span_@i">@Model.OPerator.OperatorVehicle[i].VehicleRegistrationNo</span>
                                                                                             @Html.HiddenFor(x => Model.OPerator.OperatorVehicle[i].VehicleRegistrationNo, new { @class = "vehicleNoCss" })
@@ -400,7 +400,7 @@ new { @class = "form-control" })
                                                                             {
                                                                                 for (var i = 0; i < Model.OPerator.OperatorDriverList.Count; i++)
                                                                                 {
-                                                                                    <tr id="trRow_@i" class="trRowCss">
+                                                                                    <tr id="trRow_Driver_@i" class="trRowCss">
                                                                                         <td>
                                                                                             <span id="operatorDriverList_DriverName_span_@i">@Model.OPerator.OperatorDriverList[i].DriverName</span>
                                                                                             @Html.HiddenFor(x => Model.OPerator.OperatorDriverList[i].DriverName)
@@ -739,6 +739,7 @@ new { @class = "form-control" })
                     $('#VehicleModal').modal('show');
                 }
                 function AddDriver() {
+                    debugger;
                     $('#DriverModal').modal('show');
                     $('#operatorDriverList_VehicleNo option').each(function () {
                         if ($(this).hasClass('new')) {
@@ -750,7 +751,8 @@ new { @class = "form-control" })
 
                     if (vehicles.length > 0) {
                         $.each(vehicles, function (index, item) {
-                            var vehicle = $('#vehicle_OperatorVehicleList_' + index + '__operatorVehicle_VehicleRegistrationNo').val();
+                            //OPerator_OperatorVehicle_-1__VehicleRegistrationNo 
+                            var vehicle = $('#OPerator_OperatorVehicle_' + index + '__VehicleRegistrationNo').val();
                             newVehicleArr.push(vehicle);
                         });
                     }

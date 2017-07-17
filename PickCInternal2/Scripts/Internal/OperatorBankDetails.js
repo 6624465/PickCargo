@@ -19,6 +19,7 @@
 var gIndex = -1;
 function EditBankDetails(index) {
     gIndex = index;
+    debugger
     var baseID = 'OPerator_BankDetails_' + index + '__';
     $('#txtBankName').val($('#' + baseID + 'BankName').val());
     $('#txtBranch').val($('#' + baseID + 'Branch').val());
@@ -29,8 +30,12 @@ function EditBankDetails(index) {
 }
 function DeleteBankDetails(index) {
     //var id = '#OPerator_BankDetails_' + index + '__IsActive';
-    //$(id).val('False');
+    //$(id).val('False');trRow_Bank_
     $('#trRow_Bank_' + index).remove();
+    $('#txtBankName').val('');
+    $('#txtBranch').val('');
+    $('#txtAccNumber').val('');
+    $('#txtAccType').val('');
 }
 function btnSaveBank() {
     if (!$('#frmBank').valid())
@@ -50,15 +55,15 @@ function btnSaveBank() {
         $('#' + baseID + 'AccountType').val($('#txtAccType').val());
         $('#' + 'txtAccType_span_' + gIndex).text($('#txtAccType').val());
     } else {
-        var index = ($('#tblBank tr').length)-1;
-        var html = '<tr id="trRow_' + index + '">' +
+        var index = ($('#trBodyBank tr').length);
+        var html = '<tr id="trRow_Bank_' + index + '">' +
                         '<td>' +
                             '<span id="txtBankName_span_' + index + '">' + $('#txtBankName').val() + '</span>' +
-                            '<input id="OPerator_BankDetails_' + index + '_BankName" name="OPerator.BankDetails[' + index + '].BankName" type="hidden"  value="' + $('#txtBankName').val() + '">' +
+                            '<input id="OPerator_BankDetails_' + index + '__BankName" name="OPerator.BankDetails[' + index + '].BankName" type="hidden"  value="' + $('#txtBankName').val() + '">' +
                         '</td>' +
                         '<td>' +
                             '<span id="txtBranch_span_' + index + '">' + $('#txtBranch').val() + '</span>' +
-                            '<input id="OPerator_BankDetails_' + index + '_Branch" name="OPerator.BankDetails[' + index + '].Branch" type="hidden" value="' + $('#txtBranch').val() + '">' +
+                            '<input id="OPerator_BankDetails_' + index + '__Branch" name="OPerator.BankDetails[' + index + '].Branch" type="hidden" value="' + $('#txtBranch').val() + '">' +
                         '</td>' +
                          '<td>' +
                             '<span id="txtAccNumber_span_' + index + '">' + $('#txtAccNumber').val() + '</span>' +

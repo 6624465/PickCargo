@@ -114,6 +114,8 @@ namespace Operation.DataFactory
         public const string SELECTDRIVERACTIVITYBYDRIVERID = "[Operation].[usp_DriverActivitySelectByDriverID]";
 
 
+        public const string UPDATEDRIVERCURRENTLOCATIONVALUES = "[Operation].[usp_UpdateDriverCurrentLocationValues]";
+
         public const string LISTNEARTRUCKSINRANGE = "[Operation].[usp_NearTrucksInRange]";
         public const string BOOKINGCANCELLEDBYDRIVER = "[Operation].[usp_BookingCancelledByDriver]";
 

@@ -215,7 +215,7 @@
                                 <li class="mleft"><a href="@Url.Content("~/Help/FindCRN")">Track Cargo with CRN</a></li>
                                 <li><a href="@Url.Content("~/Help/Services")">Services</a></li>
                                 <li><a href="@Url.Content("~/Help/AboutUs")">About Us</a></li>
-                                <li><a href="@Url.Content("~/RateCard/index")">Fare chart</a></li>
+                                @*<li><a href="@Url.Content("~/RateCard/index")">Fare chart</a></li>*@
                                 <li><a href="@Url.Content("~/Home/index")">Trip Estimate</a></li>
                                 <li><a href="@Url.Content("~/Help/ContactUs")">Contact us </a></li>
                                 <li class="getapp">
@@ -495,19 +495,12 @@
                         }
                         else
                             $("#btn-sendSms").prop("disabled", false);
-                    }
+                   }
+                   else
+                   {
+                       $("#btn-sendSms").prop("disabled", true);
+                   }
                 })
-            }
-            function CheckMb()
-            {
-                $("#txtmobNo").on("keydown", function () {
-                    var mobileNumber = $('#txtmobNo').val();
-                    if (!(mobileNumber.length = 10))
-                    {
-                        debugger;
-                        $("#btn-sendSms").prop("disabled", false);
-                    }
-                });                
             }
             //function onChangeMobileNo() {
             //    var mobileNumberRegExp = /^[789]\d{9}$/;
@@ -570,7 +563,7 @@
                 <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); ">
                     <form class="navbar-form  hidden-xs hidden-sm">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onkeyup="CheckMob()" onkeydown="CheckMb()">
+                            <input type="text" class="form-control" placeholder="Enter 10 Digit Mobile No." id="txtmobNo" onkeyup="CheckMob()">
                             <span class="input-group-btn">
                                 @*<button class="btn btn-default app_btn tooltips" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button">Get <B><b>Pick-C</b></B> App Link</button>*@
                                 <button class="btn btn-default app_btn tooltips" style="background-color: rgba(255, 252, 0, 0.5);" onclick="SendSMS()" data-toggle="tooltip" data-placement="bottom" title="get App link through sms" type="button" disabled id="btn-sendSms">Get <b>Pick-C</b> App Link</button>

@@ -77,7 +77,7 @@ namespace PickCApi.Areas.Master.Controllers
         {
             try
             {
-                var OperatorDriverList = new OperatorDriverBO().GetOperatorDriverList();
+                var OperatorDriverList = new OperatorDriverBO().GetOperatorTotalDriverList();
                 if (OperatorDriverList != null)
                     return Ok(OperatorDriverList);
                 else

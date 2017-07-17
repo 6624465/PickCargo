@@ -28,6 +28,11 @@ namespace Operation.BusinessFactory
 
             return driveractivityDAL.Save(newItem);
         }
+        public bool UpdateCurrentDriverLocation(UpdateDriverCurrentLocation updateDriverCurrentLocation)
+        {
+
+            return driveractivityDAL.UpdateCurrentDriverLocation(updateDriverCurrentLocation);
+        }
 
         public bool DeleteDriverActivity(DriverActivity item)
         {

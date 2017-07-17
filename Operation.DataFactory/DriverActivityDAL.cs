@@ -142,6 +142,52 @@ namespace Operation.DataFactory
             return (result > 0 ? true : false);
 
         }
+        public bool UpdateCurrentDriverLocation<T>(T item) where T : IContract
+        {
+            var result = 0;
+            var updateDriverCurrentLocation = (UpdateDriverCurrentLocation)(object)item;
+
+            if (currentTransaction == null)
+            {
+                connection = db.CreateConnection();
+                connection.Open();
+            }
+
+            var transaction = (currentTransaction == null ? connection.BeginTransaction() : currentTransaction);
+
+            try
+            {
+
+                var savecommand = db.GetStoredProcCommand(DBRoutine.UPDATEDRIVERCURRENTLOCATIONVALUES);
+                db.AddInParameter(savecommand, "AUTH_TOKEN", System.Data.DbType.String, updateDriverCurrentLocation.AUTH_TOKEN);
+                db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, updateDriverCurrentLocation.DriverID);
+                db.AddInParameter(savecommand, "IsLogIn", System.Data.DbType.Boolean, updateDriverCurrentLocation.IsLogIn);
+                db.AddInParameter(savecommand, "IsOnDuty", System.Data.DbType.Boolean, updateDriverCurrentLocation.IsOnDuty);
+                db.AddInParameter(savecommand, "CurrentLatitude", System.Data.DbType.String, updateDriverCurrentLocation.CurrentLatitude);
+                db.AddInParameter(savecommand, "CurrentLongitude", System.Data.DbType.String, updateDriverCurrentLocation.CurrentLongitude);
+
+                    result = db.ExecuteNonQuery(savecommand, transaction);
+
+                if (currentTransaction == null)
+                    transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                if (currentTransaction == null)
+                    transaction.Rollback();
+
+                throw;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
+            }
+
+            return (result > 0 ? true : false);
+
+        }
 
         public bool Delete<T>(T item) where T : IContract
         {

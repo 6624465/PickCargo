@@ -40,7 +40,11 @@ public class OperatorDriverDAL
         {
             return db.ExecuteSprocAccessor(DBRoutine.SELECTVEHICLENODETAILS, MapBuilder<OperatorVehuicleAttachedNo>.BuildAllProperties()).ToList();
         }
-        public List<OperatorDriverList> GetOperatorDriverList()
+        public List<OperatorDriverList> GetOperatorDriverList(string DriverID)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORCHECKDRIVERLIST, MapBuilder<OperatorDriverList>.BuildAllProperties(),DriverID).ToList();
+        }
+        public List<OperatorDriverList> GetOperatortotalDriverList()
         {
             return db.ExecuteSprocAccessor(DBRoutine.SELECTOPERATORDRIVERTOTALLIST, MapBuilder<OperatorDriverList>.BuildAllProperties()).ToList();
         }

@@ -107,6 +107,7 @@ namespace Master.DataFactory
         public const string SELECTDRIVERDETAILS = "[Master].[usp_DriverListDetails]";
         public const string SELECTVEHICLENODETAILS = "[Master].[usp_OperatorVehicleNoList]";
         public const string SAVEOPERATORDRIVERLIST = "[Master].[usp_OperatorDriverSave]";
+        public const string SELECTOPERATORCHECKDRIVERLIST = "[Master].[usp_OperatorCheckDriverSelect]";
         public const string SELECTOPERATORDRIVERTOTALLIST = "[Master].[usp_OperatorDriverSelect]";
         public const string SELECTOPERATORDRIVERBYID = "[Master].[usp_OperatorDriverSelectByOperatorDriverId]";
         public const string UPDATEOPERATORDRIVERVEHICLEATTACHMENTLIST = "[Master].[usp_OperatorDriverVehicleAttachment]";

@@ -83,6 +83,10 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PickCInternal2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PickCInternal2\bin\PickCInternal2.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
       <Private>True</Private>
@@ -318,10 +322,6 @@
     <ProjectReference Include="..\PickC.Services\PickC.Services.csproj">
       <Project>{a3cef276-f503-45b0-8e74-0211475d2b09}</Project>
       <Name>PickC.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PickCInternal2\PickC.Internal2.csproj">
-      <Project>{5eebc5af-3626-45c7-ac3d-b451fc679fd8}</Project>
-      <Name>PickC.Internal2</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

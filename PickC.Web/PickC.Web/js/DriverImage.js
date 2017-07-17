@@ -41,7 +41,8 @@ function btnSaveImageRegistration() {
             }
         });
     }
-}
+} 
+
 $('#MobileNo').change(function (e) {
     var mobileNumberRegExp = /^[789]\d{9}$/,
         mobileNumber = e.currentTarget ? e.currentTarget.value : '';

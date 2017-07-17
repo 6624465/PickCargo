@@ -55,7 +55,6 @@ function EditAddress(index) {
 function btnSaveAddress() {
     if (!$('#frmAddress').valid())
         return;
-
     if (gIndex != -1) {
         var baseID = 'OPerator_AddressList_' + gIndex + '__';
         $('#' + baseID + 'Address1').val($('#Address1').val());
@@ -79,9 +78,9 @@ function btnSaveAddress() {
         $('#' + baseID + 'ZipCode').val($('#ZipCode').val());
         $('#' + 'ZipCode_span_' + gIndex).val($('#ZipCode').val());
     } else {
-        var index = ($('#tblAddress tr').length)-1;
+        var index = ($('#trBodyAddress tr').length);
         //var index = $('.trRowCss').length;
-        var html = '<tr id="trRow_' + index + '">' +
+        var html = '<tr id="trRow_Address_' + index + '">' +
                         '<td>' +
                             '<span id="Address1_span_' + index + '">' + $('#Address1').val() + '</span>' +
                             '<input id="OPerator_AddressList_' + index + '__Address1" name="OPerator.AddressList[' + index + '].Address1" type="hidden" value="' + $('#Address1').val() + '">' +
@@ -100,7 +99,14 @@ function btnSaveAddress() {
                             '<a class="hand" onclick="DeleteAddress(\'' + index + '\')">Delete</a>' +
                         '</td>' +
                     '</tr>';
-        $('#trBody').append(html);
+        $('#trBodyAddress').append(html);
+        $('#Address1').val('');
+        $('#Address2').val('');
+        $('#Address3').val('');
+        $('#Address4').val('');
+        $('#StateName').val('');
+        $('#CityName').val('');
+        $('#ZipCode').val('');
     }
 
 
@@ -115,12 +121,20 @@ function AddAddress(index) {
 }
 
 function DeleteAddress(index) {
-    var id = '#OPerator_AddressList_' + index + '__IsActive';
-    $(id).val('False');
-    $('#trRow_' + index).css({
-        color: 'red',
-        'text-decoration': 'line-through',
-        'font-style': 'italic'
-    });
+    //var id = '#OPerator_AddressList_' + index + '__IsActive';
+    //$(id).val('False');
+    //$('#trRow_' + index).css({
+    //    color: 'red',
+    //    'text-decoration': 'line-through',
+    //    'font-style': 'italic'
+    //});
+    $('#trRow_Address_' + index).remove();
+    $('#Address1').val('');
+    $('#Address2').val('');
+    $('#Address3').val('');
+    $('#Address4').val('');
+    $('#StateName').val('');
+    $('#CityName').val('');
+    $('#ZipCode').val('');
 }
 

@@ -154,14 +154,14 @@ namespace PickCApi.Areas.Operation.Controllers
             try
             {
                 var DRIVERID = HttpContext.Current.Request.Headers["DRIVERID"];
-                var OperatorDriverList = new OperatorDriverBO().GetOperatorDriverList().Where(x => x.DriverName == DRIVERID);
+                var OperatorDriverList = new OperatorDriverBO().GetOperatorDriverList(DRIVERID);
                 string vehicleattachedNo = OperatorDriverList.Select(s => s.VehicleattachedNo).FirstOrDefault();
                 if (string.IsNullOrWhiteSpace(vehicleattachedNo))
                 {
-                    return Ok("Sorry there is No Vehicle attched to your Profile!");
+                    return Ok(new {Status= UTILITY.FAILEDMESSAGE, Message="Sorry there is No Vehicle attched to your Profile!" });
                 }
                 else
-                    return NotFound();
+                    return Ok(new {Status = UTILITY.SUCCESSMESSAGE });
             }
             catch (Exception ex)
             {
@@ -259,6 +259,34 @@ namespace PickCApi.Areas.Operation.Controllers
                 {
                     return InternalServerError(ex);
                 }
+            }
+        }
+
+        [HttpPost]
+        [Route("UpdateDriverCurrentLocation")]
+        [ApiAuthFilter]
+        public IHttpActionResult UpdateCurrentDriverLocation()
+        {
+            try
+            {
+                var updateDriverCurrentLocation = new UpdateDriverCurrentLocation
+                {
+                    DriverID = HeaderValueByKey("DRIVERID"),
+                    AUTH_TOKEN = HeaderValueByKey("AUTH_TOKEN"),
+                    CurrentLatitude = Convert.ToDecimal(HeaderValueByKey("LATITUDE")),
+                    CurrentLongitude = Convert.ToDecimal(HeaderValueByKey("LONGITUDE")),
+                    IsLogIn = true,
+                    IsOnDuty = true
+                };
+                var result = new DriverActivityBO().UpdateCurrentDriverLocation(updateDriverCurrentLocation);
+                if(result==true)
+                return Ok(new { Status = UTILITY.SUCCESSMESSAGE });
+                else
+                    return Ok(new { Status = UTILITY.FAILEDMESSAGE });
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
             }
         }
     }
