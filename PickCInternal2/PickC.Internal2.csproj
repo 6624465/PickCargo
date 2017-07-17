@@ -349,7 +349,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Start\App_Data\" />
     <Folder Include="Attachments\" />
     <Folder Include="Css\font-awesome-4.7.0\" />
     <Folder Include="Models\" />

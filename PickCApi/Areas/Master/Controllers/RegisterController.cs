@@ -55,7 +55,26 @@ namespace PickCApi.Areas.Master.Controllers
             }
 
         }
+        [HttpPost]
+        [Route("saveImageRegister")]
+        public IHttpActionResult SaveImageRegister(DriverImageRegister driverImageRegister)
+        {
+            try
+            {            
+                var result = new CustomerBO().SaveImageDriverDetails(driverImageRegister);
+                if (result)
+                {                 
+                    return Ok("Success");
+                }
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
 
+        }
         [HttpPost]
         [Route("verifyotp/{mobile}/{otp}")]
         public IHttpActionResult VerifyOTP(string mobile, string otp)

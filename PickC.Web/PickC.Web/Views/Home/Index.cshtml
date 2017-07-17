@@ -55,7 +55,23 @@
         -webkit-animation-fill-mode: both;
         animation-fill-mode: both;
     }
-
+    .download-btn {
+   background-color: transparent;
+    border: 0 none;
+    color: #fff;
+    max-width: 200px;
+    position: absolute;
+    right: 20px;
+    top: 26%;
+    z-index: 9;
+}
+    .download-btn img{
+        width:100%;
+    }
+    .download-btn:hover,   .download-btn:active,   .download-btn:focus {
+         background-color:transparent;
+           border: 0 none;
+    }
     .owl-animated-out {
         z-index: 1;
     }
@@ -238,13 +254,13 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <div class="form-group" id="RdDate">
                                     @Html.TextBoxFor(x => Model.booking.RequiredDate, new { @class = "form-control", placeholder = "Date" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button onclick="GetRoute()" class="btn btn-default btn-submit btn-md ripple has-ripple" type="button">Get Estimate</button>
+                            <button onclick="GetRoute()" class="btn btn-default btn-submit btn-md ripple has-ripple" type="button">Get Trip Estimate</button>
                             <button class="btn btn-default btn-submit btn-md ripple has-ripple" onclick="onClickTripEstimate()"><i class="fa fa-refresh"></i> Clear</button>
                         </div>
                     </div>
@@ -274,7 +290,7 @@
             </div>
             <div class="row driverimg">
                 <div class="col-md-12">
-                    <a href="@Url.Content("~/Home/ImageRegisterNow")">
+                    <a data-toggle="modal" data-target="#Registration">
                         <img src="~/images/Final-Register-Now.png" />
                     </a>
                 </div>
@@ -335,7 +351,7 @@
                         <div class="row" style="margin-top:10px;">
                             <div class="col-lg-12 col-xs-12">
                                 <button type="button" class="btn btn-default btn-submit btn-md ripple has-ripple" onclick="btnConfirmBooking();">Confirm Booking</button>
-                                <button type="button" class="btn btn-default btn-submit btn-md ripple has-ripple">Cancel </button>
+                                <button type="button" class="btn btn-default btn-submit btn-md ripple has-ripple" data-dismiss="modal">Cancel </button>
                             </div>
                         </div>
                         <div class="row">
@@ -362,7 +378,66 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+<div id="Registration" class="modal fade">
+    <div class="modal-dialog">
+        <form id="frmImgRegister" name="frmImgRegister">
+            <!-- Modal content-->
+            <div class="modal-content" >
+
+                <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); ">
+                    <div class="row">
+                        <div class="col-md-4 text-left ">
+                            <label>Driver Name</label>
+                        </div>  <div class="col-md-8 text-left">
+                            <input class="form-control" id="DriverName" name="DriverName" type="text" value="">
+                        </div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-md-4 text-left">
+
+                            <label>Mobile No.</label>
+                        </div>  <div class="col-md-8 text-left">
+                            <input class="form-control" id="MobileNo" name="MobileNo" type="text" value="">
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-8 text-left col-md-offset-4">
+                            <button type="button" onclick="btnSaveImageRegistration();" class="btn btn-default btn-submit btn-md ripple has-ripple">&nbsp;Submit</button>
+                            <button type="button" onclick="Clear()" class="btn btn-default btn-submit btn-md ripple has-ripple"><i class="fa fa-refresh"></i>&nbsp;Clear</button>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+                </form>
+            </div>
+</div>
+
+<div id="DriverDescription" class="modal" style="height: calc(100%);">
+    <div class="modal-dialog" style="height: calc(100%);">
+        <form id="frmDriverDescription" name="frmDriverDescription" style="height: calc(100%); ">
+            <!-- Modal content-->
+            <div class="modal-content" style="height: calc(100%);" >
+
+                <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); padding:0px; height: calc(100%);">
+                    <div style="width:100%;height: calc(100% - 100px); background-image:url(../images/DriverDocument.png); background-size:100% 100%; height: calc(100%);">
+                        @*<img id="myImg" src="@Url.Content("~/images/DriverDocument.png")" alt="Driver Document" style="width:100%; height:;">*@
+                        @*<button type="button" class="download-btn btn btn-primary solid blank has-ripple"  onclick="DownloadImage()" style="font-size: 17px;font-weight: bold;">Download <i class="fa fa-download" aria-hidden="true"></i></button>*@
+                        <a href="@Url.Content("~/images/RegisterNow.pdf")" class="download-btn btn btn-primary solid blank has-ripple" style="font-size: 17px;font-weight: bold; " alt="Pdf" target="_blank" download>
+                            @*Download &nbsp; <i class="fa fa-download" aria-hidden="true"></i>*@
+                            <img src="~/images/PDFDownloadButton.png" />
+                        </a>
+                    </div>
+                    </div>
+
+                </div>
+        </form>
+    </div>
+</div>
 @section scripts {
+<script src="@Url.Content("~/js/DriverImage.js")"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7WVBL9AmhKs1QAr4x7mArA2mKZY-9nUo&v=3.exp&libraries=places&sensor=true"></script>
     <script type="text/javascript">
         var source, destination;
@@ -388,9 +463,21 @@
         sessionStorage.setItem("isUserLoggedIn", "@ViewBag.isUserLoggedIn");
         $(function () {
             $('#booking_RequiredDate').datetimepicker({
-                format: 'MM/DD/YYYY hh:mm'
+                format: 'DD/MM/YYYY hh:mm'
             });
-
+            //$(function () {
+            //    $('#frmImgRegister').validate({
+            //        rules: {
+            //            DriverName: {
+            //                required: true
+            //            },
+            //            MobileNo: {
+            //                required: true
+            //            }
+            //        }
+            //    });
+            //});
+           
             $('#frmTripEstimate').validate({
                 rules: {
                     City: {
@@ -528,6 +615,11 @@
                 <text>location.href = '@Url.Content("~/Account/Login")'</text>
             }
         }
+        @*@if(ViewBag.isUserLoggedIn)
+          {
+              <text> $('#RdDate').data("DateTimePicker").maxDate(moment().endOf('today'));</text>
+          }
+        $('#RdDate').data("DateTimePicker").maxDate(moment().endOf('today'));*@
     </script>
 }
 
