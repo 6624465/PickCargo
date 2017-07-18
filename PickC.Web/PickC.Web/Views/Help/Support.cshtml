@@ -77,7 +77,7 @@
                    
                 @*</form>*@
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cn" style="display:none">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cn" >
                 <div id="imageHolder" class="sidebar sidebar-right">
                     <h3 class="widget-title">Contact Us</h3>
                     @*<iframe src="https://www.google.com/maps/d/embed?mid=1PsgcAaPIz3hVz9Q1qW6vzH5oy_8&zoom=12" style="width:100%; border:0px; height:480px" ></iframe>*@
@@ -133,7 +133,7 @@
                 <!-- Sidebar end -->
             </div>
         
-            <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12  fd" style="display:none">
+            <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12  fd" >
                 <div class="sidebar sidebar-right">
                     <div class="widget">
 
@@ -178,6 +178,50 @@
 </section>
 }
 <script src="@Url.Content("~/js/jquery.js")"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $(".fd").height(0);
+        $(".cn").height(0);
+        $('.cn').css("visibility", 'hidden');
+        $('.fd').css("visibility", 'hidden');
+
+
+
+        $('#Type').on('change', function () {
+            var i = $('#Type').val();
+            if (i == "ContactUs") {
+
+                $('.cn').css("visibility", 'visible');
+                //$(".cn").height(200);
+                $('.cs').css("visibility", 'hidden');
+                $('.fd').css("visibility", 'hidden');
+
+            }
+            if (i == "CustomerSupport") {
+                $('.cs').css("height", '0px');
+                $(".cs").height(0);
+                $(".cn").height(0);
+
+                $('.cn').css("visibility", 'hidden');
+                $('.cs').css("visibility", 'visible');
+                $('.fd').css("visibility", 'hidden');
+
+            }
+            if (i == "FeedBack") {
+
+              
+
+                $('.cn').css("visibility", 'hidden');
+                $('.cs').css("visibility", 'hidden');
+                $('.fd').css("visibility", 'visible');
+
+            }
+        });
+    });
+</script>
+
 <script type="text/javascript">
     $(function () {
         $('#Type').on('change',function () {
