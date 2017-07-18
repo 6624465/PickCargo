@@ -114,8 +114,28 @@
     </section>
 }
 
+<script src="@Url.Content("~/js/jquery.js")"></script>
 <script type="text/javascript">
-    $('#frmContactUs').validate({
-
-    })
+    $(function () {
+        $('#Type').on('change',function () {
+            var i = $('#Type').val();
+            if (i == "ContactUs")
+                {
+                    $('.cn').show();
+                    $('.cs').hide();
+                    $('.fd').hide();
+                }
+            if (i == "CustomerSupport")
+                {
+                    $('.cs').show();
+                    $('.cn').hide();
+                    $('.fd').hide();
+                }
+                if (i == "FeedBack") {
+                    $('.fd').show();
+                    $('.cn').hide();
+                    $('.cs').hide();
+                }
+        });
+    });
 </script>

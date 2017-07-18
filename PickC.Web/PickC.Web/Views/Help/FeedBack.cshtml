@@ -79,7 +79,8 @@
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cn" style="display:none">
                     <div id="imageHolder" class="sidebar sidebar-right">
                         <h3 class="widget-title">Contact Us</h3>
-                        <iframe src="https://www.google.com/maps/d/embed?mid=1PsgcAaPIz3hVz9Q1qW6vzH5oy_8" style="width:100%; border:0px;" height="480" width="640"></iframe>
+                        @*<iframe src="https://www.google.com/maps/d/embed?mid=1PsgcAaPIz3hVz9Q1qW6vzH5oy_8" style="width:100%; border:0px;" height="480" width="640"></iframe>*@
+                        <div id="map-canvas" style="height:350px;" > </div>
                     </div>
 
                 </div>
@@ -181,7 +182,8 @@
         $('#Type').on('change',function () {
             var i = $('#Type').val();
             if (i == "ContactUs")
-                {
+            {
+                debugger;
                     $('.cn').show();
                     $('.cs').hide();
                     $('.fd').hide();
