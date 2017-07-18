@@ -453,7 +453,25 @@
 
        
         <script type="text/javascript">
+            $(".map-content").hover(
+  function () {
+      $(this).addClass("result_hover");
+  },
+  function () {
+      $(this).removeClass("result_hover");
+  }
+);
+            // $(".gm-style-iw").parent().addClass('has-sub');
+            //jQuery(document).ready(function ($) {
+              
+            //    $(".gm-style-iw").parent().css('background', '#8b66ac');
+             
+            //   // $('.round_text:focus').parent().css('background-color', 'red');
+            //});
+            
             $(function () {
+                debugger; $('.map-content').parent().addClass('type-1-parent');
+                //$(".gm-style-iw").parent("div").addClass("type-1-parent");
                 if (sessionStorage.getItem("isUserLoggedIn") == "True")
                     $("#header-top ul").append('<li><a href="#" id="logout")"><i class="fa fa-user"></i> LogOut</a></li>');
 
@@ -554,13 +572,13 @@ google.maps.visualRefresh = true;
            draggable: false,
             maxZoom: 2,
             minZoom: 2,
-            panControl: true,
-            zoomControl: true,
+            panControl: false,
+            zoomControl: false,
             mapTypeControl: false,
             scaleControl: false,
             streetViewControl: false,
             overviewMapControl: false,
-            disableDoubleClickZoom: true,
+            disableDoubleClickZoom: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             animation: google.maps.Animation.DROP,
            
@@ -594,7 +612,7 @@ google.maps.visualRefresh = true;
             var z = i;
             var myLatLng = new google.maps.LatLng(lat, lng);
 
-            var content = '<div class="map-content" style="color:#333;">' + desc + '</div>';
+            var content = '<div class="map-content" style="color:#333; font-weight:bold; ">' + desc + '</div>';
 
             var marker = new google.maps.Marker({
                 map: map,
