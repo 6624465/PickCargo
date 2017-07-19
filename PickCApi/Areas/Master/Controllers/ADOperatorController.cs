@@ -352,5 +352,42 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
         }
+        [HttpGet]
+        [Route("Operatorwisedrivervehicleattachedlist")]
+        [OperatorAPIAuthFilter]
+        public IHttpActionResult OperatorWiseDriverVehicleAttachedTodayList()
+        {
+            try
+            {
+                var MOBILENO = HttpContext.Current.Request.Headers["MOBILENO"];
+                var driverList = new OperatorBO().GetOperatorWiseDriverVehicleAttachedTodayList(MOBILENO);
+                if (driverList != null)
+                    return Ok(new { Status = UTILITY.SUCCESSMESSAGE, driverList });
+                else
+                    return Ok(new { Status = UTILITY.FAILEDMESSAGE });
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        [HttpPost]
+        [Route("DeductOperatorwisedrivervehicleattachedlist")]
+        [OperatorAPIAuthFilter]
+        public IHttpActionResult DeductOperatorwisedrivervehicleattachedlist(OperatorWiseDriverVehicleAttachedTodayList operatorWiseDriverVehicleAttachedTodayList)
+        {
+            try
+            {
+                var result = new OperatorBO().DeductOperatorwisedrivervehicleattachedlist(operatorWiseDriverVehicleAttachedTodayList);
+                if (result)
+                    return Ok(new { Status = UTILITY.SUCCESSMESSAGE});
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
 }

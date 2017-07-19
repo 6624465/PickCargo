@@ -15,7 +15,7 @@ using Operation.DataFactory;
 
 namespace Master.DataFactory
 {
-  public  class OperatorDAL
+    public class OperatorDAL
     {
         private Database db;
         private DbTransaction currentTransaction = null;
@@ -56,7 +56,7 @@ namespace Master.DataFactory
             try
             {
                 var savecommand = db.GetStoredProcCommand(DBRoutine.SAVEOPERATOR);
-                db.AddInParameter(savecommand, "OperatorID", System.Data.DbType.String,OPerator.OperatorID ?? "");
+                db.AddInParameter(savecommand, "OperatorID", System.Data.DbType.String, OPerator.OperatorID ?? "");
                 db.AddInParameter(savecommand, "OperatorName", System.Data.DbType.String, OPerator.OperatorName);
                 db.AddInParameter(savecommand, "Password", System.Data.DbType.String, OPerator.Password ?? "pickcoperator");
                 db.AddInParameter(savecommand, "FatherName", System.Data.DbType.String, OPerator.FatherName);
@@ -70,25 +70,25 @@ namespace Master.DataFactory
                 db.AddInParameter(savecommand, "AadharCardNo", System.Data.DbType.String, OPerator.AadharCardNo);
                 db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, OPerator.CreatedBy);
                 db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, OPerator.ModifiedBy);
-                db.AddInParameter(savecommand, "Nationality", System.Data.DbType.String, OPerator.Nationality?? "Indian");
-                db.AddOutParameter(savecommand, "NewDocumentNo", System.Data.DbType.String,50);
-                       result = db.ExecuteNonQuery(savecommand, transaction);
+                db.AddInParameter(savecommand, "Nationality", System.Data.DbType.String, OPerator.Nationality ?? "Indian");
+                db.AddOutParameter(savecommand, "NewDocumentNo", System.Data.DbType.String, 50);
+                result = db.ExecuteNonQuery(savecommand, transaction);
                 if (result > 0)
                 {
                     OPerator.OperatorID = savecommand.Parameters["@NewDocumentNo"].Value.ToString();
 
-                    if (OPerator.operatorAttachment != null && OPerator.operatorAttachment.Count>0)
+                    if (OPerator.operatorAttachment != null && OPerator.operatorAttachment.Count > 0)
                     {
-                        foreach(var operatorAttachment in OPerator.operatorAttachment)
+                        foreach (var operatorAttachment in OPerator.operatorAttachment)
                         {
                             operatorAttachment.operatorId = OPerator.OperatorID;
                             operatorAttachment.attachmentId = OPerator.OperatorID + operatorAttachment.lookupCode;
                         }
                         result = new OperatorAttachementDAL().SaveList(OPerator.operatorAttachment, transaction) == true ? 1 : 0;
                     }
-                    if(OPerator.BankDetails !=null && OPerator.BankDetails.Count>0)
+                    if (OPerator.BankDetails != null && OPerator.BankDetails.Count > 0)
                     {
-                        foreach(var operatorBankDetails in OPerator.BankDetails)
+                        foreach (var operatorBankDetails in OPerator.BankDetails)
                         {
                             operatorBankDetails.OperatorBankID = OPerator.OperatorID;
                         }
@@ -97,9 +97,9 @@ namespace Master.DataFactory
                             result = new BankDetailsDAL().Save(x, transaction) == true ? 1 : 0;
                         });
                     }
-                    if(OPerator.OperatorDriverList !=null && OPerator.OperatorDriverList.Count > 0)
+                    if (OPerator.OperatorDriverList != null && OPerator.OperatorDriverList.Count > 0)
                     {
-                        foreach(var operatorDriverList in OPerator.OperatorDriverList)
+                        foreach (var operatorDriverList in OPerator.OperatorDriverList)
                         {
                             operatorDriverList.OperatorDriverId = OPerator.OperatorID;
                         }
@@ -274,10 +274,10 @@ namespace Master.DataFactory
             var result = false;
             var OPerator = (Operator)(object)item;
 
-            var connnection = db.CreateConnection();
-            connnection.Open();
+            var connection = db.CreateConnection();
+            connection.Open();
 
-            var transaction = connnection.BeginTransaction();
+            var transaction = connection.BeginTransaction();
 
             try
             {
@@ -297,7 +297,42 @@ namespace Master.DataFactory
             finally
             {
                 transaction.Dispose();
-                connnection.Close();
+                connection.Close();
+
+            }
+
+            return result;
+        }
+        public bool DeductOperatorwisedrivervehicleattachedlist<T>(T item) where T : IContract
+        {
+            var result = false;
+            var operatorWiseDriverVehicleAttachedTodayList = (OperatorWiseDriverVehicleAttachedTodayList)(object)item;
+
+            var connection = db.CreateConnection();
+
+            connection.Open();
+
+            var transaction = connection.BeginTransaction();
+
+            try
+            {
+                var deleteCommand = db.GetStoredProcCommand(DBRoutine.DEDUCTOPERATORWISEDRIVERVEHICLEATTACHEDLIST);
+                db.AddInParameter(deleteCommand, "DriverName", System.Data.DbType.String, operatorWiseDriverVehicleAttachedTodayList.DriverName);
+                db.AddInParameter(deleteCommand, "VehicleattachedNo", System.Data.DbType.String, operatorWiseDriverVehicleAttachedTodayList.VehicleattachedNo);
+                db.AddInParameter(deleteCommand, "OperatorMobileNo", System.Data.DbType.String, operatorWiseDriverVehicleAttachedTodayList.OperatorMobileNo);
+                result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
 
             }
 
@@ -308,8 +343,8 @@ namespace Master.DataFactory
         {
             try
             {
-                
-                var result =Convert.ToInt32(db.ExecuteScalar(db.GetStoredProcCommand(DBRoutine.OPERATORVALIDCHECK, operatorID)));
+
+                var result = Convert.ToInt32(db.ExecuteScalar(db.GetStoredProcCommand(DBRoutine.OPERATORVALIDCHECK, operatorID)));
 
                 //if (result > 0)
                 //    return 1;
@@ -327,6 +362,10 @@ namespace Master.DataFactory
         public List<OperatorBankDetails> GetOperatorWiseBankList(string MobileNo)
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTBANKDETAILSOPERATORWISE, MapBuilder<OperatorBankDetails>.BuildAllProperties(), MobileNo).ToList();
+        }
+        public List<OperatorWiseDriverVehicleAttachedTodayList> GetOperatorWiseDriverVehicleAttachedTodayList(string MobileNo)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.LISTOPERATORWISEDRIVERVEHICLEATTACHEDTODAYLIST, MapBuilder<OperatorWiseDriverVehicleAttachedTodayList>.BuildAllProperties(), MobileNo).ToList();
         }
         #region IDataFactory Members
     }

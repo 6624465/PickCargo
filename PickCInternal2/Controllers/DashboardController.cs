@@ -127,9 +127,15 @@ namespace PickC.Internal2.Controllers
         {
             return View("PaymentHistory");
         }
+        [HttpGet]
         public ActionResult PendingAmount()
         {
-            return View("PendingAmount");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult PendingAmounts(PendingAmountDTO pendingAmountDTO)
+        {
+            return View();
         }
         public async Task<JsonResult> GetDriverBySearch(bool? status = null)
         {

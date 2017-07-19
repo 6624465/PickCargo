@@ -494,7 +494,7 @@ namespace Master.DataFactory
         }
         public List<DriverTodayTripList> GetTodayListOfTrips(string DriverID)
         {
-            return db.ExecuteSprocAccessor(DBRoutine.DRIVERTodayListOfTrips, MapBuilder<DriverTodayTripList>.BuildAllProperties(), DriverID).ToList();
+            return db.ExecuteSprocAccessor(DBRoutine.DRIVERTODAYLISTOFTRIPS, MapBuilder<DriverTodayTripList>.BuildAllProperties(), DriverID).ToList();
         }
         public List<TripCElist> GetTripCountandEarningsList(string MobileNo, DateTime fromdate, DateTime todate)
         {

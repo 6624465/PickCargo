@@ -21,6 +21,7 @@
 });
 var gIndex = -1;
 function EditOperatorVehicle(index) {
+    debugger
     gIndex = index;
     //OPerator_OperatorVehicle_0__VehicleRegistrationNo
     var baseID = 'OPerator_OperatorVehicle_' + index + '__';

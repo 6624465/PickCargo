@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace Master.Contract
 {
-  public  class OperatorDriverList : IContract
-    { 
-        public string OperatorDriverId { get; set; }
+  public  class OperatorWiseDriverVehicleAttachedTodayList :IContract
+    {
+        public string OperatorMobileNo { get; set; }
         public string DriverName { get; set; }
         public string DriverLicenseNo { get; set; }
         public string DriverMobileNo { get; set; }
-        public string VehicleattachedNo { get; set; }       
-        public string CreatedBy { get; set; }
+        public string VehicleattachedNo { get; set; }
         public DateTime CreatedOn { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime ModifiedOn { get; set; }
-        public bool Status { get; set; }
     }
 }

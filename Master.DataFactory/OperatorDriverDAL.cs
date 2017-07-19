@@ -57,8 +57,8 @@ public class OperatorDriverDAL
         public bool Save<T>(T item) 
         {
             var result = 0;
-            var operatorDriverList = (OperatorDriverList)(object)item;
-
+          
+           var operatorDriverList = (OperatorDriverList)(object)item;
             if (currentTransaction == null)
             {
                 connection = db.CreateConnection();
@@ -77,6 +77,7 @@ public class OperatorDriverDAL
                 db.AddInParameter(savecommand, "VehicleattachedNo", System.Data.DbType.String, operatorDriverList.VehicleattachedNo);
                 db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, operatorDriverList.CreatedBy ?? "");
                 db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, operatorDriverList.ModifiedBy ?? "");
+                db.AddInParameter(savecommand, "Status", System.Data.DbType.Boolean, operatorDriverList.Status);
                 result = db.ExecuteNonQuery(savecommand, transaction);
 
                 if (currentTransaction == null)

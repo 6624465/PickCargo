@@ -259,6 +259,9 @@
     <Content Include="Css\help\images\Pick-C Logo%281%29.psd" />
     <Content Include="Css\help\images\road.psd" />
     <None Include="Properties\PublishProfiles\PickC.Internal.pubxml" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
@@ -283,7 +286,9 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\DashboardMenuList.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -339,6 +344,7 @@
     <Content Include="Views\Dashboard\PendingAmount.cshtml" />
     <Content Include="Views\Dashboard\UserApp.cshtml" />
     <Content Include="Views\Operator\Operator.cshtml" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Views\Operator\OperatorDetails.cshtml" />
     <None Include="Web.Debug.config">

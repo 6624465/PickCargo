@@ -81,11 +81,9 @@ namespace Master.DataFactory
         public const string DRIVERUPDATEDEVICEID = "[Master].[usp_UpdateDriverDeviceID]";
         public const string GETDRIVERBYSTATUS = "[Master].[usp_GetDriverByStatus]";
         public const string SAVEATTACHMENTS = "[Master].[usp_AttachmentsSave]";
-        public const string SAVEMANUFACTURER = "[Master].[usp_SaveVehicleManufacturer]";
+        public const string SAVEMANUFACTURER = "[Master].[usp_SaveVehicleManufacturer]";      
+        public const string DRIVERTODAYLISTOFTRIPS = "[Operation].[usp_DriverWiseTripList]";
         public const string DRIVERUPDATEPASSWORD = "[Master].[usp_DriverUpdatePassword]";
-        public const string LISTDRIVEROPERATORWISE = "[Master].[usp_DriverListOperatorWise]";
-        public const string LISTBANKDETAILSOPERATORWISE = "[Master].[usp_BankListOperatorWise]";
-        public const string DRIVERTodayListOfTrips = "[Operation].[usp_DriverWiseTripList]";
         public const string GETDRIVERTRIPAMOUNTBYPAYMENTTYPE = "[Operation].[usp_SumDriverWiseDailyAmountPaymentType]";
         /// <summary>
         /// [Master].[Operator]
@@ -95,10 +93,13 @@ namespace Master.DataFactory
         public const string SELECTOPERATORBYOPERATORID = "[Master].[usp_OperatorSelectByOperatorID]";
         public const string LISTOPERATOR = "[Master].[usp_OperatorList]";
         public const string SAVEOPERATOR = "[Master].[usp_OperatorSave]";
-        public const string DELETEPERATOR = "[Master].[usp_OperatorDelete]";    
+        public const string DELETEPERATOR = "[Master].[usp_OperatorDelete]";
+        public const string LISTBANKDETAILSOPERATORWISE = "[Master].[usp_BankListOperatorWise]";
+        public const string LISTDRIVEROPERATORWISE = "[Master].[usp_DriverListOperatorWise]";
         public const string SAVEOPERATORATTACHMENTS = "[Master].[usp_OperatorAttachmentsSave]";
         public const string OPERATORUPDATEPASSWORD = "[Master].[usp_OperatorUpdatePassword]";
         public const string OPERATORVALIDCHECK = "[Master].[usp_OperatorValidCheck]";
+        public const string LISTOPERATORWISEDRIVERVEHICLEATTACHEDTODAYLIST = "[Master].[usp_OperatorWiseDriverVehicleAttachedTodayList]";
 
         /// <summary>
         /// [Master].[OperatorDriver]
@@ -111,6 +112,9 @@ namespace Master.DataFactory
         public const string SELECTOPERATORDRIVERTOTALLIST = "[Master].[usp_OperatorDriverSelect]";
         public const string SELECTOPERATORDRIVERBYID = "[Master].[usp_OperatorDriverSelectByOperatorDriverId]";
         public const string UPDATEOPERATORDRIVERVEHICLEATTACHMENTLIST = "[Master].[usp_OperatorDriverVehicleAttachment]";
+        public const string DEDUCTOPERATORWISEDRIVERVEHICLEATTACHEDLIST = "[Master].[usp_DeductOperatorwisedrivervehicleattachedlist]";
+
+
 
         /// <summary>
         /// [Master].[TruckList]

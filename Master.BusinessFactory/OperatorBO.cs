@@ -60,5 +60,13 @@ namespace Master.BusinessFactory
         {
             return operatorDAL.GetOperatorWiseBankList(MobileNo);
         }
+        public List<OperatorWiseDriverVehicleAttachedTodayList> GetOperatorWiseDriverVehicleAttachedTodayList(string MobileNo)
+        {
+            return operatorDAL.GetOperatorWiseDriverVehicleAttachedTodayList(MobileNo);
+        }
+        public bool DeductOperatorwisedrivervehicleattachedlist(OperatorWiseDriverVehicleAttachedTodayList item)
+        {
+            return operatorDAL.DeductOperatorwisedrivervehicleattachedlist(item);
+        }
     }
 }

@@ -65,6 +65,7 @@
     <Compile Include="DTO\OperatorDriverDTO.cs" />
     <Compile Include="DTO\OperatorLookup.cs" />
     <Compile Include="DTO\OperatorVehicleDTO.cs" />
+    <Compile Include="DTO\PendingAmountDTO.cs" />
     <Compile Include="DTO\SaveBookingDTO.cs" />
     <Compile Include="DTO\SummaryDTO.cs" />
     <Compile Include="ManufacturerService.cs" />
