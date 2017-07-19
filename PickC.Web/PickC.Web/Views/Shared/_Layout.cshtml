@@ -29,7 +29,7 @@
     <!-- <link href="@Url.Content("~/css/AdminLTE.min.css")" rel="stylesheet" />-->
     <link href="@Url.Content("~/css/bootstrap-datetimepicker.css")" rel="stylesheet" />
     <!-- Template styles-->
-    <link rel="stylesheet" href="@Url.Content("~/css/style.css?v=1.3")">
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css?v=1.")">
     <!-- Responsive styles-->
     <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")">
     <!-- FontAwesome -->
@@ -453,7 +453,11 @@
 
        
         <script type="text/javascript">
+           
+           
+            
             $(function () {
+               
                 if (sessionStorage.getItem("isUserLoggedIn") == "True")
                     $("#header-top ul").append('<li><a href="#" id="logout")"><i class="fa fa-user"></i> LogOut</a></li>');
 
@@ -554,13 +558,13 @@ google.maps.visualRefresh = true;
            draggable: false,
             maxZoom: 2,
             minZoom: 2,
-            panControl: true,
-            zoomControl: true,
+            panControl: false,
+            zoomControl: false,
             mapTypeControl: false,
             scaleControl: false,
             streetViewControl: false,
             overviewMapControl: false,
-            disableDoubleClickZoom: true,
+            disableDoubleClickZoom: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             animation: google.maps.Animation.DROP,
            
@@ -594,7 +598,7 @@ google.maps.visualRefresh = true;
             var z = i;
             var myLatLng = new google.maps.LatLng(lat, lng);
 
-            var content = '<div class="map-content" style="color:#333;">' + desc + '</div>';
+            var content = '<div class="map-content" style="color:#333; font-weight:bold; ">' + desc + '</div>';
 
             var marker = new google.maps.Marker({
                 map: map,
