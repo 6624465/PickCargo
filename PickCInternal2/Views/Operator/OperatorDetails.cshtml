@@ -736,7 +736,6 @@ new { @class = "form-control" })
                     $('#addressModal').modal('show');
                 }
                 function AddVehicle() {
-                    debugger
                     $('#VehicleModal').modal('show');
                     $('#operatorVehicle_VehicleRegistrationNo').val('');
                     $('#operatorVehicle_VehicleType').val('');
@@ -746,6 +745,10 @@ new { @class = "form-control" })
                 }
                 function AddDriver() {
                     debugger;
+                    $('#operatorDriverList_DriverName').val('');
+                    $('#operatorDriverList_DriverLicenseNo').val('');
+                    $('#operatorDriverList_DriverMobileNo').val('');
+                    $('#operatorDriverList_VehicleNo').val('');
                     $('#DriverModal').modal('show');
                     $('#operatorDriverList_VehicleNo option').each(function () {
                         if ($(this).hasClass('new')) {
