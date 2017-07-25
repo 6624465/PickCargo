@@ -65,19 +65,19 @@ function btnSaveVehicle() {
         debugger;
         var baseID = 'OPerator_OperatorVehicle_' + gIndex + '__';
         $('#' + baseID + 'VehicleRegistrationNo').val($('#operatorVehicle_VehicleRegistrationNo').val());
-        $('#' + 'VehicleRegistrationNo_span_' + gIndex).text($('#operatorVehicle_VehicleRegistrationNo').val());
+        $('#' + 'operatorVehicle_VehicleRegistrationNo_span_' + gIndex).text($('#operatorVehicle_VehicleRegistrationNo').val());
 
         $('#' + baseID + 'VehicleType').val($('#operatorVehicle_VehicleType').val());
-        $('#' + 'VehicleType_span_' + gIndex).text($('#operatorVehicle_VehicleType option:selected').text());
+        $('#' + 'operatorVehicle_VehicleType_span_' + gIndex).text($('#operatorVehicle_VehicleType option:selected').text());
 
         $('#' + baseID + 'VehicleCategory').val($('#operatorVehicle_VehicleCategory').val());
-        $('#' + 'VehicleCategory_span_' + gIndex).text($("#operatorVehicle_VehicleCategory option:selected").text());
+        $('#' + 'operatorVehicle_VehicleCategory_span_' + gIndex).text($("#operatorVehicle_VehicleCategory option:selected").text());
 
         $('#' + baseID + 'Model').val($('#operatorVehicle_Model').val());
-        $('#' + 'Model_span_' + gIndex).text($('#operatorVehicle_Model').val());
+        $('#' + 'operatorVehicle_Model_span_' + gIndex).text($('#operatorVehicle_Model').val());
 
         $('#' + baseID + 'Tonnage').val($('#operatorVehicle_Tonnage').val());
-        $('#' + 'Tonnage_span_' + gIndex).text($('#operatorVehicle_Tonnage').val());
+        $('#' + 'operatorVehicle_Tonnage_span_' + gIndex).text($('#operatorVehicle_Tonnage').val());
     } else {
         debugger;
         var index = ($('#trBodyVehicle tr').length);

@@ -26,7 +26,21 @@ function EditOperatorDriver(index) {
     //    return this.text == $('#' + baseID + 'operatorDriverList_DriverName').val();
     //}).attr('selected', true);
 
-  
+    var vehicles = $('.vehicleNoCss');
+    var newVehicleArr = new Array();
+
+    if (vehicles.length > 0) {
+        $.each(vehicles, function (index, item) {
+            //OPerator_OperatorVehicle_-1__VehicleRegistrationNo 
+            var vehicle = $('#OPerator_OperatorVehicle_' + index + '__VehicleRegistrationNo').val();
+            newVehicleArr.push(vehicle);
+        });
+    }
+    $.each(newVehicleArr, function (key, value) {
+        $('#operatorDriverList_VehicleNo')
+             .append($('<option class="new">', { value: value })
+             .text(value));
+    });
 
     //$('#operatorVehicle_VehicleType option').filter(function () {
     //    return this.text == $('#' + baseID + 'VehicleType').val();
@@ -83,19 +97,19 @@ function btnSavedriver() {
         var html = '<tr id="trRow_Driver_' + index + '">' +
                         '<td>' +
                             '<span id="operatorDriverList_DriverName_span_' + index + '">' + $('#operatorDriverList_DriverName option:selected').text() + '</span>' +
-                            '<input id="OPerator_OperatorDriverList_' + index + '__operatorDriverList_DriverName" name="OPerator.OperatorDriverList[' + index + '].DriverName" type="hidden"  value="' + $('#operatorDriverList_DriverName').val() + '">' +
+                            '<input id="OPerator_OperatorDriverList_' + index + '__DriverName" name="OPerator[' + index + '].DriverName" type="hidden"  value="' + $('#operatorDriverList_DriverName').val() + '">' +
                         '</td>' +
                         '<td>' +
                             '<span id="operatorDriverList_DriverLicenseNo_span_' + index + '">' + $('#operatorDriverList_DriverLicenseNo').val() + '</span>' +
-                            '<input id="OPerator_OperatorDriverList_' + index + '__operatorDriverList_DriverLicenseNo" name="OPerator.OperatorDriverList[' + index + '].DriverLicenseNo" type="hidden" value="' + $('#operatorDriverList_DriverLicenseNo').val() + '">' +
+                            '<input id="OPerator_OperatorDriverList_' + index + '__DriverLicenseNo" name="OPerator[' + index + '].DriverLicenseNo" type="hidden" value="' + $('#operatorDriverList_DriverLicenseNo').val() + '">' +
                         '</td>' +
                          '<td>' +
                             '<span id="operatorDriverList_DriverMobileNo_span_' + index + '">' + $('#operatorDriverList_DriverMobileNo').val() + '</span>' +
-                            '<input id="OPerator_OperatorDriverList_' + index + '__operatorDriverList_DriverMobileNo" name="OPerator.OperatorDriverList[' + index + '].DriverMobileNo" type="hidden" value="' + $('#operatorDriverList_DriverMobileNo').val() + '">' +
+                            '<input id="OPerator_OperatorDriverList_' + index + '__DriverMobileNo" name="OPerator[' + index + '].DriverMobileNo" type="hidden" value="' + $('#operatorDriverList_DriverMobileNo').val() + '">' +
                         '</td>' +
                          '<td>' +
                             '<span id="operatorDriverList_VehicleNo_span_' + index + '">' + $('#operatorDriverList_VehicleNo').val() + '</span>' +
-                            '<input id="OPerator_OperatorDriverList_' + index + '__operatorDriverList_VehicleNo" name="OPerator.OperatorDriverList[' + index + '].VehicleattachedNo" type="hidden" value="' + $('#operatorDriverList_VehicleNo').val() + '">' +
+                            '<input id="OPerator_OperatorDriverList_' + index + '__VehicleNo" name="OPerator[' + index + '].VehicleattachedNo" type="hidden" value="' + $('#operatorDriverList_VehicleNo').val() + '">' +
                         '</td>' +
                         '<td>' +
                          '<a class="hand" onclick="EditOperatorDriver(\'' + index + '\')">Edit</a>&nbsp;|&nbsp;' +

@@ -33,6 +33,14 @@ namespace PickC.Web.Controllers
         {
             return View();
         }
+        public ActionResult DriverInvoice()
+        {
+            return View();
+        }
+        public ActionResult CompanyInvoice()
+        {
+            return View();
+        }
         public async Task<ActionResult> TRIPINVOICE(string bookingNo)
         {
             var bookingHistoryList = await new CustomerService().TripInvoiceList(bookingNo);
