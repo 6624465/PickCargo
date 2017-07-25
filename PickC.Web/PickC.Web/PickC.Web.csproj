@@ -240,9 +240,11 @@
     <Content Include="images\content-bg.jpg" />
     <Content Include="images\controls.png" />
     <Content Include="images\crossword.png" />
+    <Content Include="images\DOST_shadow.jpg" />
     <Content Include="images\down-arrow-color.png" />
     <Content Include="images\down-arrow-transparent.png" />
     <Content Include="images\down-arrow-white.png" />
+    <Content Include="images\driver.jpg" />
     <Content Include="images\DriverDocument.png" />
     <Content Include="images\f5.png" />
     <Content Include="images\feedback.png" />
@@ -298,6 +300,8 @@
     <Content Include="images\thankyou.png" />
     <Content Include="images\thumb.png" />
     <Content Include="images\usa.png" />
+    <Content Include="js\angular.js" />
+    <Content Include="js\app.js" />
     <Content Include="js\bootstrap-datetimepicker.js" />
     <Content Include="js\bootstrap-rating.min.js" />
     <Content Include="js\bootstrap-select.min.js" />
@@ -320,6 +324,7 @@
     <Content Include="js\owl.carousel.min.js" />
     <Content Include="js\ripple.js" />
     <Content Include="js\sticky.js" />
+    <Content Include="js\ui-bootstrap.js" />
     <Content Include="js\waypoints.min.js" />
     <Content Include="mobile\terms.html" />
     <Content Include="Views\Help\terms-mobile.html" />
@@ -515,6 +520,8 @@
     <Content Include="Views\Help\TRIPINVOICE.cshtml" />
     <Content Include="Views\Bookings\pdf2.cshtml" />
     <Content Include="Views\Home\ImageRegisterNow.cshtml" />
+    <Content Include="Views\Help\driverinvoice.cshtml" />
+    <Content Include="Views\Help\CompanyInvoice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
