@@ -70,7 +70,7 @@ namespace PickCApi.Areas.Operation.Controllers
                         token = token
                     });
                 else
-                    return NotFound();
+                return Ok(new { Status = UTILITY.FAILEDMESSAGE });
             }
             catch (Exception ex)
             {

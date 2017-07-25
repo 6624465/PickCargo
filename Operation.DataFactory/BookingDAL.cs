@@ -209,7 +209,7 @@ namespace Operation.DataFactory
                                             "", (decimal)latitude, (decimal)longitude, minDistance, vehicleType, vehicleGroup).ToList();
         }
 
-        public bool BookingCancelledByDriver(string tokenNo, string driverID, string vehicleNo, string bookingNo, string cancelRemarks, bool isTripStarted)
+        public bool BookingCancelledByDriver(string tokenNo, string driverID, string vehicleNo, string bookingNo, string cancelRemarks, bool isTripStarted,bool IsLoadingUnloading)
         {
 
             var result = false;
@@ -229,6 +229,7 @@ namespace Operation.DataFactory
                 db.AddInParameter(deleteCommand, "BookingNo", System.Data.DbType.String, bookingNo);
                 db.AddInParameter(deleteCommand, "CancelRemarks", System.Data.DbType.String, cancelRemarks);
                 db.AddInParameter(deleteCommand, "IsTripStarted", System.Data.DbType.Boolean, isTripStarted);
+                db.AddInParameter(deleteCommand, "IsLoadingUnloading", System.Data.DbType.Boolean, IsLoadingUnloading);
 
 
                 result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));

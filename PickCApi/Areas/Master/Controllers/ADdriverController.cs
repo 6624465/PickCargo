@@ -166,7 +166,7 @@ namespace PickCApi.Areas.Master.Controllers
                 if (result)
                 {
                     SendOTP(driverReferral.Mobile,"You have been Referred for PickC Services!");
-                    return Ok(UTILITY.SUCCESSMSG);
+                    return Ok(new{ Status = UTILITY.SUCCESSMESSAGE });
                 }
                 else
                     return BadRequest();

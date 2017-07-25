@@ -186,7 +186,7 @@
     <Content Include="Images\64-Small-open.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Operation\Views\web.config" />
+    <Content Include="Areas\Operation\DTO\Views\web.config" />
     <Content Include="Areas\Master\Views\Driver\pdf2.cshtml" />
     <None Include="Properties\PublishProfiles\PickC.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -289,9 +289,9 @@
     <Folder Include="Areas\Master\Models\" />
     <Folder Include="Areas\Master\Views\Email\" />
     <Folder Include="Areas\Master\Views\Shared\" />
+    <Folder Include="Areas\Operation\DTO\Views\OperatorVehicle\" />
+    <Folder Include="Areas\Operation\DTO\Views\Shared\" />
     <Folder Include="Areas\Operation\Models\" />
-    <Folder Include="Areas\Operation\Views\OperatorVehicle\" />
-    <Folder Include="Areas\Operation\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

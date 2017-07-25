@@ -57,7 +57,6 @@ namespace PickCApi.Areas.Operation.Controllers
             }
 
         }
-
         [HttpGet]
         [Route("list/{mobileNo}")]
         public IHttpActionResult BookingList(string mobileNo)
@@ -252,13 +251,17 @@ namespace PickCApi.Areas.Operation.Controllers
                     bookingCancelDTO.vehicleNo,
                     bookingCancelDTO.bookingNo,
                     bookingCancelDTO.cancelRemarks,
-                    bookingCancelDTO.istripstarted);
-
-                PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(bookingCancelDTO.bookingNo), 
-                    bookingCancelDTO.bookingNo, 
-                    UTILITY.NotifyCancelledByDriver);
-
-                return Ok(result ? UTILITY.SUCCESSMSG : UTILITY.FAILEDMSG);
+                    bookingCancelDTO.istripstarted,
+                    bookingCancelDTO.IsLoadingUnloading);
+                if (result == true)
+                {
+                    PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(bookingCancelDTO.bookingNo),
+                      bookingCancelDTO.bookingNo,
+                      UTILITY.NotifyCancelledByDriver);
+                    return Ok(new { Status = UTILITY.SUCCESSMESSAGE });                  
+                }
+                else
+                    return Ok(new { Status = UTILITY.FAILEDMESSAGE });
             }
             catch (Exception ex)
             {
@@ -266,27 +269,30 @@ namespace PickCApi.Areas.Operation.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("Drivercancellations")]
-        public IHttpActionResult CancelBookingByDrivercancellations(BookingCancelDTO bookingCancelDTO)
-        {
-            try
-            {
-                var result = new BookingBO().BookingCancelledByDriver(
-                    HeaderValueByKey("AUTH_TOKEN"),
-                    bookingCancelDTO.driverID,
-                    bookingCancelDTO.vehicleNo,
-                    bookingCancelDTO.bookingNo,
-                    bookingCancelDTO.cancelRemarks,
-                    bookingCancelDTO.istripstarted);
-
-                return Ok(result ? UTILITY.SUCCESSMSG : UTILITY.FAILEDMSG);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
+        //[HttpPost]
+        //[Route("Drivercancellations")]
+        //public IHttpActionResult CancelBookingByDrivercancellations(BookingCancelDTO bookingCancelDTO)
+        //{
+        //    try
+        //    {
+        //        var result = new BookingBO().BookingCancelledByDriver(
+        //            HeaderValueByKey("AUTH_TOKEN"),
+        //            bookingCancelDTO.driverID,
+        //            bookingCancelDTO.vehicleNo,
+        //            bookingCancelDTO.bookingNo,
+        //            bookingCancelDTO.cancelRemarks,
+        //            bookingCancelDTO.istripstarted);
+        //        if (result == true)
+        //            return Ok(new { Status = UTILITY.SUCCESSMESSAGE });
+        //        else
+        //            return Ok(new { Status = UTILITY.FAILEDMESSAGE });
+        //        //return Ok(result ? UTILITY.SUCCESSMSG : UTILITY.FAILEDMSG);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return InternalServerError(ex);
+        //    }
+        //}
         [HttpPost]
         [Route("pickupreachdatetime")]
         public IHttpActionResult SavePickupReachDateTime(PickupReachDateTimeDTO obj)
