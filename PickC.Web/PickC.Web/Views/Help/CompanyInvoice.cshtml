@@ -1,16 +1,18 @@
 ﻿
+@{
+    ViewBag.Title = "CompanyInvoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <br />
-<div style="width:70%;  margin:0px auto; background:#fff;">
+<div class="container content">
     <div style="border:1px thin #e7e7e7; border-style: double;">
         <br />
-        <h2 style="font-size: 12px;text-transform: uppercase; line-height: 34px; font-weight: 400; margin-bottom: 20px; margin-top: 0; text-align: center;
-    position: relative;letter-spacing: 1px;"> <span class="title-head" style="font-size:30px;text-transform: capitalize; display: block; font-weight: 700;
-    letter-spacing: 0;"> Company Invoice</span> <span style="height:4px; width:100px; margin:0px auto; background:#fffc00; display:block; margin-top:10px;"> </span> </h2>
+        <h2 class="title"> <span class="title-head" style="font-size:30px;"> Company Invoice</span> </h2>
         <br />
-        <div >
-            
-                <div style="width:40%; float:left; padding-left:20%; ">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-2">
+                <div class="driverpic">
                     <p>
                         <b>PR Techno Solutions Pvt. Ltd.</b><br />
                         #3rd Floor, Plot No.12-A, Survey No.71/1,<br />
@@ -26,12 +28,12 @@
                         <p>  Web : www.pickcargo.in  </p>*@
 
                 </div>
-           
-            <div style="width:20%;  float:left; text-align:center;">
+            </div>
+            <div class="col-md-2 text-center">
                 <img src="~/images/logo.png" style="width:100%;max-width:90px;height:auto;" />
             </div>
 
-            <div style="width:40%;  float:left; padding-left:1%;">
+            <div class="col-md-5">
                 <p>
                     <b>
                         GST Number : 
