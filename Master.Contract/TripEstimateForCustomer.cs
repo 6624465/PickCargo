@@ -11,6 +11,7 @@ public class TripEstimateForCustomer
         public decimal TotalDistanceFare { get; set; }
         public decimal LoadingUnLoadingCharges { get; set; }
         public decimal TotalTripEstimateminValue { get; set; }
+
         public decimal GST { get; set; }
         public decimal ApproximateDistanceKM { get; set; }
         public decimal ApproximateTime { get; set; }
