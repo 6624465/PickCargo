@@ -16,7 +16,7 @@
     <RootNamespace>PickCApi</RootNamespace>
     <AssemblyName>PickCApi</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -169,6 +169,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="DriverImages\DR170800007.png" />
+    <Content Include="DriverImages\DR170800008.png" />
+    <Content Include="DriverImages\DR170800009.png" />
+    <Content Include="DriverImages\DR170800010.png" />
+    <Content Include="DriverImages\DR170800011.png" />
+    <Content Include="DriverImages\DR170800012.png" />
+    <Content Include="DriverImages\DR170800013.png" />
+    <Content Include="DriverImages\DR170800014.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="getRSA.aspx" />
     <Content Include="Global.asax" />
@@ -184,6 +192,17 @@
     <Content Include="Images\64-Mini-open.png" />
     <Content Include="Images\64-Small-closed.png" />
     <Content Include="Images\64-Small-open.png" />
+    <Content Include="Images\ConstructionMaterial.png" />
+    <Content Include="Images\Electronics.png" />
+    <Content Include="Images\fragile.png" />
+    <Content Include="Images\groceries.png" />
+    <Content Include="Images\healthy-groceries.png" />
+    <Content Include="Images\Hotel-Hospital.png" />
+    <Content Include="Images\Household.png" />
+    <Content Include="Images\IndustrialGoods.png" />
+    <Content Include="Images\LiquidGoods.png" />
+    <Content Include="Images\others.png" />
+    <Content Include="Images\Pharmacy.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Operation\DTO\Views\web.config" />
@@ -339,7 +358,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51896</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51896/</IISUrl>
+          <IISUrl>http://localhost/PickCApi</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

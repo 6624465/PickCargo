@@ -17,6 +17,8 @@ namespace PickCApi
         public static string DEFAULTUSER = "ADMIN";
         public static string FAILEDMSG = "Operation failed";
 
+        public static string NotifyCustomer = "Booking Cancelled by System";
+        public static string NotifyCustomerFail = "Booking Cancelled by System is Failed";
         public static string NotifySuccess = "Booking Confirmed";//done
         public static string NotifyFailed = "Booking Failed";
         public static string NotifyCancelledByDriver = "Booking Cancelled by driver";//done

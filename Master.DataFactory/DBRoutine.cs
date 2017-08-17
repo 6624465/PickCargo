@@ -26,6 +26,8 @@ namespace Master.DataFactory
         public const string CUSTOMERUPDATEDEVICEID = "[Master].[usp_UpdateCustomerDeviceID]";
         public const string CUSTOMERBILLDETAILS = "[Operation].[usp_CustomerBillDetails]";
         public const string CUSTOMERLOGIN = "[Master].[usp_CustomerLogIn]";
+
+        public const string TRIPESTIMATEFORCUSTOMER = "[Operation].[usp_TripEstimateForCustomer]";
         /// <summary>
         /// [Master].[VehicleConfig]
         /// </summary>
@@ -102,6 +104,7 @@ namespace Master.DataFactory
         public const string OPERATORVALIDCHECK = "[Master].[usp_OperatorValidCheck]";
         public const string LISTOPERATORWISEDRIVERVEHICLEATTACHEDTODAYLIST = "[Master].[usp_OperatorWiseDriverVehicleAttachedTodayList]";
 
+        
         /// <summary>
         /// [Master].[OperatorDriver]
         /// </summary>

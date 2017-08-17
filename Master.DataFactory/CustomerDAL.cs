@@ -283,7 +283,10 @@ namespace Master.DataFactory
 
             return customerItem;
         }
-
+        public IEnumerable<TripEstimateForCustomer> GetTripEstimateForCustomer(int VehicleType, int VehicleGroup, decimal distance, int LdUdCharges, decimal duration)
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.TRIPESTIMATEFORCUSTOMER, MapBuilder<TripEstimateForCustomer>.BuildAllProperties(), VehicleType, VehicleGroup, distance, LdUdCharges, duration).ToList();
+        }
 
         public bool SaveContactUs<T>(T item) where T : IContract
         {

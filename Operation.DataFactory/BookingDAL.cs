@@ -33,6 +33,10 @@ namespace Operation.DataFactory
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTBOOKING, MapBuilder<Booking>.BuildAllProperties()).ToList();
         }
+        public List<BookingHistoryList> GetBookingHistoryList()
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.BOOKINGHISTORYLIST, MapBuilder<BookingHistoryList>.BuildAllProperties()).ToList();
+        }
         public List<Booking> GetCustomerBySearch(int? status)
         {
 
@@ -253,7 +257,7 @@ namespace Operation.DataFactory
 
         }
 
-        public bool BookingConfirmByDriver(string driverID, string tokenNo, string vehicleNo, string bookingNo)
+        public bool BookingConfirmByDriver(string driverID, string tokenNo, string vehicleNo, string bookingNo,string CustomerOTP)
         {
 
             var result = false;
@@ -280,7 +284,7 @@ namespace Operation.DataFactory
                 db.AddInParameter(deleteCommand, "DriverID", System.Data.DbType.String, driverID);
                 db.AddInParameter(deleteCommand, "VehicleNo", System.Data.DbType.String, vehicleNo);
                 db.AddInParameter(deleteCommand, "BookingNo", System.Data.DbType.String, bookingNo);
-
+                db.AddInParameter(deleteCommand, "OTP", System.Data.DbType.String, CustomerOTP);
 
                 result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
 

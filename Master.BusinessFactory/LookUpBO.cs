@@ -43,7 +43,7 @@ namespace Master.BusinessFactory
             return lookupDAL.GetVehicleTypeList();
         }
 
-        public List<LookUp> GetCargoTypeList()
+        public List<CargoTypeList> GetCargoTypeList()
         {
             return lookupDAL.GetCargoTypeList();
         }

@@ -1,16 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Operation.Contract;
+using System.Threading.Tasks;
 
 namespace Operation.Contract
 {
-
-    public class Booking : IContract
+    public class BookingHistoryList : IContract
     {
-        public Booking() { }
-
+        public BookingHistoryList() { }
 
         public string BookingNo { get; set; }
 
@@ -87,10 +85,10 @@ namespace Operation.Contract
 
         public string LoadingUnLoadingDescription { get; set; }
 
-        public string OTP { get; set; }
+        public decimal TripAmount { get; set; }
+
+        public int PaymentType { get; set; }        
+
+        public int DriverRating { get; set; }
     }
 }
-
-
-
-

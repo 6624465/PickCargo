@@ -13,7 +13,6 @@ namespace Master.BusinessFactory
         {
             driverDAL = new DriverDAL();
         }
-
         public List<Driver> GetList()
         {
             return driverDAL.GetList();

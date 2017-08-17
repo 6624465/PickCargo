@@ -101,7 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="companyinvoice.html" />
+    <Content Include="Views\Help\companyinvoice.html" />
     <Content Include="css\AdminLTE.min.css" />
     <Content Include="css\AjaxLoader.html" />
     <Content Include="css\animate.css" />
@@ -196,7 +196,7 @@
     <Content Include="css\revolution-slider.css" />
     <Content Include="css\ripple.css" />
     <Content Include="css\style.css" />
-    <Content Include="driverinvoice.html" />
+    <Content Include="Views\Help\driverinvoice.html" />
     <Content Include="fonts\fontawesome-webfont93e3.html" />
     <Content Include="fonts\fontawesome-webfont93e3.svg" />
     <Content Include="fonts\glyphicons-halflings-regular-2.html" />

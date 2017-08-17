@@ -103,7 +103,31 @@ namespace PickCApi.Areas.Operation.Controllers
                 return InternalServerError(ex);
             }
         }
-
+        [HttpGet]
+        [Route("checkOTP/{BookingNo}/{OTP}")]
+        [ApiAuthFilter]
+        public IHttpActionResult CheckMobile(string BookingNo,string OTP)
+        {
+            try
+            {
+                bool result = false;
+                var bookingList = new BookingBO().GetList();
+                if (bookingList != null)
+                {
+                    result = bookingList.Where(x => x.BookingNo == BookingNo && x.OTP== OTP).ToList().Count() > 0;
+                    if (result == true)
+                        return Ok(new { Status = UTILITY.SUCCESSMESSAGE });
+                    else
+                        return Ok(new { Status = UTILITY.FAILEDMESSAGE });
+                }
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
         [HttpGet]
         [Route("dutystatus/{status}/{isintrip}/{tripID}")]
         [ApiAuthFilter]
@@ -204,11 +228,12 @@ namespace PickCApi.Areas.Operation.Controllers
                 var bookingObj = new BookingBO().GetBooking(new Booking { BookingNo = BookingNo });
                 if (!bookingObj.IsCancel)
                 {
-                    var result = new BookingBO().BookingConfirmByDriver(HeaderValueByKey("DRIVERID"), HeaderValueByKey("AUTH_TOKEN"), vehicleNo, BookingNo);
+                    string CustomerOTP= GenerateOTP();
+                    var result = new BookingBO().BookingConfirmByDriver(HeaderValueByKey("DRIVERID"), HeaderValueByKey("AUTH_TOKEN"), vehicleNo, BookingNo,CustomerOTP);
                     if (result)
                     {
                         PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(BookingNo), BookingNo, UTILITY.NotifySuccess);
-
+                        SendOTP(bookingObj.CustomerID, CustomerOTP);
                         var booking = new BookingBO().GetBooking(new Booking
                         {
                             BookingNo = BookingNo

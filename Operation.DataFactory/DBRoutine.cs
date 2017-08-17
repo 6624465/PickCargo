@@ -53,7 +53,7 @@ namespace Operation.DataFactory
 
         public const string SAVEPICKUPREACHDATETIME = "[Operation].[usp_SavePickupReachDateTime]";
         public const string SAVEDESTINATIONREACHDATETIME = "[Operation].[usp_SaveDestinationReachDateTime]";
-
+        public const string BOOKINGHISTORYLIST = "[Operation].[usp_BookingHistoryList]";
         public const string LISTOFBOOKINGHISTORYLISTBYMOBILENO = "[Operation].[usp_BookingHistoryListByMobileNo]";
 
         /// <summary>

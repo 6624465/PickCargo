@@ -23,11 +23,11 @@ namespace PickCApi.Areas.Operation.Controllers
     {
         [HttpGet]
         [Route("list")]
-        public IHttpActionResult BookingList()
+        public IHttpActionResult BookingHistoryList()
         {
             try
             {
-                var bookingList = new BookingBO().GetList();
+                var bookingList = new BookingBO().GetBookingHistoryList();
                 if (bookingList != null)
                     return Ok(bookingList);
                 else
@@ -111,12 +111,20 @@ namespace PickCApi.Areas.Operation.Controllers
                     {
                         PushNotification(driverList.Select(x => x.DeviceID).ToList<string>(),
                             booking.BookingNo, UTILITY.NotifyNewBooking);
+                        return Ok(new
+                        {
+                            bookingNo = booking.BookingNo,
+                            message = UTILITY.SUCCESSMSG
+                        });
                     }
-                    return Ok(new
+                    else
                     {
-                        bookingNo = booking.BookingNo,
-                        message = UTILITY.SUCCESSMSG
-                    });
+                        var CancelBooking = new BookingBO().DeleteBooking(new Booking { BookingNo = booking.BookingNo });
+                        if(CancelBooking==true)
+                        return Ok(new { Status = UTILITY.NotifyCustomer });
+                        else
+                            return Ok(new { Status = UTILITY.NotifyCustomerFail });
+                    }
                 }
                 else
                     return BadRequest();
@@ -156,7 +164,8 @@ namespace PickCApi.Areas.Operation.Controllers
                         driverImage = "",
                         MobileNo = driverInfo.MobileNo ?? "",
                         latitude = driverActivity.CurrentLat,
-                        longitude = driverActivity.CurrentLong
+                        longitude = driverActivity.CurrentLong,
+                        OTP=booking.OTP
                     });
                 else
                     return NotFound();
@@ -196,11 +205,18 @@ namespace PickCApi.Areas.Operation.Controllers
                 var result = new BookingBO().DeleteBooking(new Booking { BookingNo = deleteBookingDTO.bookingNo });
                 if (result)
                 {
-                    PushNotification(new BookingBO().GetDriverDeviceIDByBookingNo(deleteBookingDTO.bookingNo),
-                        deleteBookingDTO.bookingNo, 
-                        UTILITY.NotifyBookingCancelledByUser);
+                    //PushNotification(new BookingBO().GetDriverDeviceIDByBookingNo(deleteBookingDTO.bookingNo),
+                    //    deleteBookingDTO.bookingNo, 
+                    //    UTILITY.NotifyBookingCancelledByUser);
 
-                    return Ok(UTILITY.DELETEMSG);
+                    string GetDriverDeviceIDByBookingNo = new BookingBO().GetDriverDeviceIDByBookingNo(deleteBookingDTO.bookingNo);
+                    if (!string.IsNullOrWhiteSpace(GetDriverDeviceIDByBookingNo))
+                    {
+                        PushNotification(GetDriverDeviceIDByBookingNo, deleteBookingDTO.bookingNo, UTILITY.NotifyBookingCancelledByUser);
+                        return Ok(UTILITY.DELETEMSG);
+                    }
+                    else
+                        return Ok(UTILITY.DELETEMSG);
                 }
                 else
                     return NotFound();
@@ -218,7 +234,6 @@ namespace PickCApi.Areas.Operation.Controllers
         {            
             try
             {
-
                 var bookingsList = new BookingBO().GetNearBookingsForDriver(
                     new Guid(HeaderValueByKey(UTILITY.HEADERKEYS.AUTH_TOKEN.ToString())),
                     HeaderValueByKey(UTILITY.HEADERKEYS.DRIVERID.ToString()),
@@ -374,6 +389,6 @@ namespace PickCApi.Areas.Operation.Controllers
                 return InternalServerError(ex);
             }
         }
-
+       
     }
 }

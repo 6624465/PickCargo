@@ -353,7 +353,7 @@ namespace PickCApi.Areas.Master.Controllers
 
             return Ok(UTILITY.NotifyPaymentDriver);
         }
-        [HttpPost]
+        [HttpGet]
         [Route("BillDetails/{bookingNo}")]
         [ApiAuthFilter]
         public IHttpActionResult CustomerPaymentDetails(string bookingNo)
@@ -391,6 +391,29 @@ namespace PickCApi.Areas.Master.Controllers
                 return NotFound();
         }
 
+        [HttpPost]
+        [Route("tripestimate")]
+        [ApiAuthFilter]
+        public IHttpActionResult CustomerTripEstimate(TripEstimate tripEstimate)
+        {
+            try
+            {
+                decimal distance = GetTravelTimeBetweenTwoLocations(tripEstimate.frmLatLong, tripEstimate.toLatLong).distance;
+                decimal duration = GetTravelTimeBetweenTwoLocations(tripEstimate.frmLatLong, tripEstimate.toLatLong).duration;
+                var tripEstimateForCustomer = new CustomerBO().GetTripEstimateForCustomer
+                    (tripEstimate.VehicleType, tripEstimate.VehicleGroup,distance, tripEstimate.LdUdCharges, duration);
+                if (tripEstimateForCustomer != null)
+                {
+                    return Ok(new { tripEstimateForCustomer });
+                }
+                else
+                    return Ok(new { UTILITY.FAILEDMSG });            
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
         [HttpGet]
         [Route("TripInvoice/{BookingNo}")]
         public IHttpActionResult TripInvoice(string BookingNo)
@@ -429,6 +452,7 @@ namespace PickCApi.Areas.Master.Controllers
         [HttpPost]
         [Route("SendMessageToPickC")]
         //[ApiAuthFilter]
+
         public IHttpActionResult SendMessageToPickC(ContactUs contactUs)
         {
             try
