@@ -11,5 +11,6 @@ namespace Master.Contract
         public string BookingNo { get; set; }
         public string DriverID { get; set; }
         public Int32 Rating { get; set; }
+        public string Remarks { get; set; }
     }
 }

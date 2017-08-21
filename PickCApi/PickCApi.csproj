@@ -203,6 +203,7 @@
     <Content Include="Images\LiquidGoods.png" />
     <Content Include="Images\others.png" />
     <Content Include="Images\Pharmacy.png" />
+    <Content Include="Images\rupee.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Operation\DTO\Views\web.config" />

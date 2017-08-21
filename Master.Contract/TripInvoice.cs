@@ -158,23 +158,23 @@ namespace Master.Contract
             set;
         }
 
-        public string SalesTax
+        public string GSTTax
         {
             get;
             set;
         }
 
-        public string Tax1
-        {
-            get;
-            set;
-        }
+        //public string Tax1
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string Tax2
-        {
-            get;
-            set;
-        }
+        //public string Tax2
+        //{
+        //    get;
+        //    set;
+        //}
 
         public string PaymentType
         {

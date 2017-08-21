@@ -343,6 +343,24 @@ namespace PickCApi.Areas.Master.Controllers
             }
         }
         [HttpGet]
+        [Route("DriverMonitorInCustomer/{DriverID}")]
+        [ApiAuthFilter]
+        public IHttpActionResult DriverMonitorInCustomer(string DriverID)
+        {
+            try
+            {
+                var driverMonitorList = new DriverActivityBO().GetDriverMonitorInCustomer(new DriverMonitorInCustomer { DriverID= DriverID });
+                if (driverMonitorList != null)
+                    return Ok(driverMonitorList);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        [HttpGet]
         [Route("Pay/{BookingNo}/{Driverid}")]
         [ApiAuthFilter]
         public IHttpActionResult DriverPayReceived(string BookingNo, string Driverid)
@@ -436,18 +454,27 @@ namespace PickCApi.Areas.Master.Controllers
         //[ApiAuthFilter]
         public IHttpActionResult SendInvoiceMail(string BookingNo, string EmailId)
         {
-           // HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
-            TripInvoice tripInvoiceList = new CustomerBO().GetTripInvoiceList(new TripInvoice
+            try
             {
-                BookingNo = BookingNo
-            });
-            string pHTML = this.RenderView<TripInvoice>("~/Areas/Master/Views/Driver/pdf2.cshtml", tripInvoiceList);
-            bool sendMail = new EmailGenerator().ConfigMail(EmailId, true, "PickC Invoice", "<div>PickC Invoice</div>", this.GetPDF2(pHTML));
-            if (sendMail)
-                return Ok("Invoice Is Sent To Your Mail!");
-            else
-                return NotFound();
+                TripInvoice tripInvoiceList = new CustomerBO().GetTripInvoiceList(new TripInvoice
+                {
+                    BookingNo = BookingNo
+                });
+                string pHTML = this.RenderView<TripInvoice>("~/Areas/Master/Views/Driver/pdf2.cshtml", tripInvoiceList);
+                bool sendMail = new EmailGenerator().ConfigMail(EmailId, true, "PickC Invoice", "<div>PickC Invoice</div>", this.GetPDF2(pHTML));
+                if (sendMail)
+                    return Ok("Invoice Is Sent To Your Mail!");
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+
+                return Ok(ex);
+            }
         }
+           // HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
+           
 
         [HttpPost]
         [Route("SendMessageToPickC")]
@@ -466,7 +493,7 @@ namespace PickCApi.Areas.Master.Controllers
                         fromMail = "support@pickcargo.in";
                     else if (contactUs.Type == "ContactUs" || contactUs.Type == "Careers")
                         fromMail = "info@pickcargo.in";
-                    bool sendMail = new EmailGenerator().ConfigMail(fromMail,true, contactUs.Subject, contactUs.Message);
+                    bool sendMail = new EmailGenerator().ConfigMail(contactUs.Email,true, contactUs.Subject, contactUs.Message);
 
                 if (sendMail)
                     return Ok("Mail Sent Successfully!");

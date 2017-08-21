@@ -80,6 +80,7 @@ namespace Operation.DataFactory
         public const string AUTHENTICATEUSER = "[Operation].[usp_AUTHENTICATE_USER]";
         public const string CUSTOMERLOGIN = "[Operation].[usp_DoCustomerLogIn]";
 
+        public const string SELECTDRIVERMONITORINCUSTOMER = "[Operation].[usp_DriverMonitorInCustomer]";
         /// <summary>
         /// [Operation].[OperatorLogin]
         /// </summary>

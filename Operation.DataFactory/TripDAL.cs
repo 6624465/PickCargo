@@ -109,7 +109,7 @@ namespace Operation.DataFactory
 
         }
 
-        public bool EndTrip(TripEndDTO tripEndDTO)
+        public bool EndTrip(TripEndDTO tripEndDTO,decimal distance)
         {
             var result = 0;            
 
@@ -132,7 +132,7 @@ namespace Operation.DataFactory
                 db.AddInParameter(savecommand, "TripEndLat", System.Data.DbType.Decimal, tripEndDTO.TripEndLat);
                 db.AddInParameter(savecommand, "TripEndLong", System.Data.DbType.Decimal, tripEndDTO.TripEndLong);
                 db.AddInParameter(savecommand, "DistanceTravelled", System.Data.DbType.Decimal, 0.00M);
-
+                db.AddInParameter(savecommand, "Distance", System.Data.DbType.Decimal, distance);
                 result = db.ExecuteNonQuery(savecommand, transaction);                
 
                 if (currentTransaction == null)

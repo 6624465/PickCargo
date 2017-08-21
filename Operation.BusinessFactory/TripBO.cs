@@ -29,9 +29,9 @@ namespace Operation.BusinessFactory
             return tripDAL.Delete(item);
         }
 
-        public bool EndTrip(TripEndDTO tripEndDTO)
+        public bool EndTrip(TripEndDTO tripEndDTO,decimal distance)
         {
-            return tripDAL.EndTrip(tripEndDTO);
+            return tripDAL.EndTrip(tripEndDTO,distance);
         }
 
         public Trip GetTrip(Trip item)

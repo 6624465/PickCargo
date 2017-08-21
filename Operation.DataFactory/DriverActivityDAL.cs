@@ -224,6 +224,17 @@ namespace Operation.DataFactory
 
             return result;
         }
+        public IContract GetDriverMonitorInCustomer<T>(IContract lookupItem) where T : IContract
+        {
+            var item = ((DriverMonitorInCustomer)lookupItem);
+            var driverMonitorInCustomer = db.ExecuteSprocAccessor(DBRoutine.SELECTDRIVERMONITORINCUSTOMER,
+                                                    MapBuilder<DriverMonitorInCustomer>.BuildAllProperties(),
+                                                    item.DriverID).FirstOrDefault();
+
+            if (driverMonitorInCustomer == null) return null;
+
+            return driverMonitorInCustomer;
+        }
 
         public IContract GetItem<T>(IContract lookupItem) where T : IContract
         {

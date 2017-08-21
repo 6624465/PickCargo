@@ -535,6 +535,7 @@ namespace Master.DataFactory
                 db.AddInParameter(savecommand, "BookingNo", System.Data.DbType.String, driverRating.BookingNo);
                 db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, driverRating.DriverID);
                 db.AddInParameter(savecommand, "Rating", System.Data.DbType.String, driverRating.Rating);
+                db.AddInParameter(savecommand, "Remarks", System.Data.DbType.String, driverRating.Remarks);
 
                 result = db.ExecuteNonQuery(savecommand, transaction);
 

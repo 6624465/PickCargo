@@ -81,14 +81,17 @@ namespace PickCApi.Areas.Operation.Controllers
         {
             try
             {
+                var tripInfo = new TripBO().GetTrip(new Trip { TripID = tripEndDTO.TripID });
+                string frmLatLong = tripInfo.Latitude + "," + tripInfo.Longitude.ToString();
+                string toLatLong = tripEndDTO.TripEndLat + "," + tripEndDTO.TripEndLong.ToString();
+                decimal distance = GetTravelTimeBetweenTwoLocations(frmLatLong, toLatLong).distance;
                 tripEndDTO.Token = HeaderValueByKey("AUTH_TOKEN");
                 tripEndDTO.DriverID = HeaderValueByKey("DRIVERID");
-                var result = new TripBO().EndTrip(tripEndDTO);
+                var result = new TripBO().EndTrip(tripEndDTO,distance);
                 if (result)
                 {
-                    var tripInfo = new TripBO().GetTrip(new Trip { TripID = tripEndDTO.TripID });
+                     tripInfo = new TripBO().GetTrip(new Trip { TripID = tripEndDTO.TripID });                    
                     var customerObj = new CustomerBO().GetCustomer(new Customer { MobileNo = tripInfo.CustomerMobile });
-
                     PushNotification(customerObj.DeviceID, "", UTILITY.NotifyTripEnd);
                     return Ok(new
                     {
