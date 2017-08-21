@@ -386,6 +386,7 @@ namespace PickCApi.Areas.Master.Controllers
         }
         [HttpPost]
         [Route("DriverRating")]
+
         [ApiAuthFilter]
         public IHttpActionResult DriverRatingDetails(DriverRating driverRating)
         {
