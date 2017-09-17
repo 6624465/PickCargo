@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
 using Master.Contract;
 using Master.BusinessFactory;
 using Operation.BusinessFactory;
@@ -23,6 +22,7 @@ using System.Net.Mail;
 using System.Net.Configuration;
 using System.Web.Configuration;
 using System.Configuration;
+using iTextSharp.tool.xml;
 
 namespace PickCApi.Areas.Master.Controllers
 {
@@ -60,10 +60,10 @@ namespace PickCApi.Areas.Master.Controllers
         public IHttpActionResult SaveImageRegister(DriverImageRegister driverImageRegister)
         {
             try
-            {            
+            {
                 var result = new CustomerBO().SaveImageDriverDetails(driverImageRegister);
                 if (result)
-                {                 
+                {
                     return Ok("Success");
                 }
                 else
@@ -343,13 +343,34 @@ namespace PickCApi.Areas.Master.Controllers
             }
         }
         [HttpGet]
+        [Route("checkCustomerPassword/{mobile}/{password}")]
+        [ApiAuthFilter]
+        public IHttpActionResult CheckCustomerPassword(string mobile, string password)
+        {
+            try
+            {
+                var customer = new CustomerBO().GetList().Where(x => x.MobileNo == mobile).ToList();
+                string CusPassword = customer.Select(x => x.Password).FirstOrDefault();
+                if (CusPassword != "" && CusPassword == password)
+                {
+                    return Ok(UTILITY.SUCCESSMSG);
+                }
+                else
+                    return Ok(UTILITY.FAILEDMESSAGE);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        [HttpGet]
         [Route("DriverMonitorInCustomer/{DriverID}")]
         [ApiAuthFilter]
         public IHttpActionResult DriverMonitorInCustomer(string DriverID)
         {
             try
             {
-                var driverMonitorList = new DriverActivityBO().GetDriverMonitorInCustomer(new DriverMonitorInCustomer { DriverID= DriverID });
+                var driverMonitorList = new DriverActivityBO().GetDriverMonitorInCustomer(new DriverMonitorInCustomer { DriverID = DriverID });
                 if (driverMonitorList != null)
                     return Ok(driverMonitorList);
                 else
@@ -420,15 +441,15 @@ namespace PickCApi.Areas.Master.Controllers
                 decimal distance = GetTravelTimeBetweenTwoLocations(tripEstimate.frmLatLong, tripEstimate.toLatLong).distance;
                 decimal duration = GetTravelTimeBetweenTwoLocations(tripEstimate.frmLatLong, tripEstimate.toLatLong).duration;
                 var tripEstimateForCustomer = new CustomerBO().GetTripEstimateForCustomer
-                    (tripEstimate.VehicleType, tripEstimate.VehicleGroup,distance, tripEstimate.LdUdCharges, duration);
+                    (tripEstimate.VehicleType, tripEstimate.VehicleGroup, distance, tripEstimate.LdUdCharges, duration);
                 if (tripEstimateForCustomer != null)
                 {
                     return Ok(new { tripEstimateForCustomer });
                 }
                 else
-                    return Ok(new { UTILITY.FAILEDMSG });            
+                    return Ok(new { UTILITY.FAILEDMSG });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
@@ -450,6 +471,46 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [HttpGet]
+        [Route("TestTripInvoice")]
+        public IHttpActionResult TestInvoice()
+        {
+            try
+            {
+                byte[] pdf; // result will be here
+
+                var cssText = File.ReadAllText(HttpContext.Current.Server.MapPath("~/Areas/Master/Views/Driver/bootstrap.css"));
+                var html = File.ReadAllText(HttpContext.Current.Server.MapPath("~/Areas/Master/Views/Driver/driverinvoice.html"));
+                using (var memoryStream = new MemoryStream())
+                {
+                    var document = new Document(PageSize.A4, 25f, 25f, 25f, 25f);
+                    var writer = PdfWriter.GetInstance(document, memoryStream);
+                    document.Open();
+
+                    using (var cssMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(cssText)))
+                    {
+                        using (var htmlMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(html)))
+                        {
+                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, htmlMemoryStream, cssMemoryStream);
+                        }
+                    }
+                    document.Close();
+
+                    pdf = memoryStream.ToArray();
+                    FileStream fs = new FileStream(@"Downloads\driverinvoice.pdf", FileMode.OpenOrCreate);
+                    fs.Write(pdf, 0, pdf.Length);
+                    fs.Close();
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return Ok();
+            }
+
+        }
+
         [HttpGet]
         [Route("SendInvoiceMail/{BookingNo}/{EmailId}/")]
         //[ApiAuthFilter]
@@ -461,21 +522,54 @@ namespace PickCApi.Areas.Master.Controllers
                 {
                     BookingNo = BookingNo
                 });
-                string pHTML = this.RenderView<TripInvoice>("~/Areas/Master/Views/Driver/pdf2.cshtml", tripInvoiceList);
-                bool sendMail = new EmailGenerator().ConfigMail(EmailId, true, "PickC Invoice", "<div>PickC Invoice</div>", this.GetPDF2(pHTML));
-                if (sendMail)
-                    return Ok("Invoice Is Sent To Your Mail!");
-                else
-                    return NotFound();
+
+                DriverTripInvoice driverTripInvoice = new DriverBO().GetDriverTripInvoice(new DriverTripInvoice
+                {
+                    BookingNo = BookingNo
+                });
+                CompanyTripInvoice companyTripInvoice = new CustomerBO().GetCompanyTripInvoiceList(new CompanyTripInvoice
+                {
+                    BookingNo = BookingNo
+                });
+
+                InvoiceDTO invoiceDTO = new InvoiceDTO();
+                invoiceDTO.CompanyTripInvoice = companyTripInvoice;
+                invoiceDTO.DriverTripInvoice = driverTripInvoice;
+                invoiceDTO.TripInvoice = tripInvoiceList;
+
+                byte[] pdf; // result will be here
+
+                var cssText = File.ReadAllText(HttpContext.Current.Server.MapPath("~/Areas/Master/Views/Driver/bootstrap.css"));
+                var html = this.RenderView<InvoiceDTO>("~/Areas/Master/Views/Driver/Invoices.cshtml", invoiceDTO);
+                using (var memoryStream = new MemoryStream())
+                {
+                    var document = new Document(PageSize.A4, 25f, 25f, 25f, 25f);
+                    var writer = PdfWriter.GetInstance(document, memoryStream);
+                    document.Open();
+
+                    using (var cssMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(cssText)))
+                    {
+                        using (var htmlMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(html)))
+                        {
+                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, htmlMemoryStream, cssMemoryStream);
+                        }
+                    }
+                    document.Close();
+                    pdf = memoryStream.ToArray();
+                    bool sendCustomerMail = new EmailGenerator().ConfigMail(EmailId, true, "PickC Invoice", "<div>PickC Invoice</div>", pdf);
+                    if (sendCustomerMail)
+                        return Ok("Invoice Is Sent To Your Mail!");
+                    else
+                        return NotFound();
+                }
             }
             catch (Exception ex)
             {
-
                 return Ok(ex);
             }
         }
-           // HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
-           
+        // HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
+
 
         [HttpPost]
         [Route("SendMessageToPickC")]
@@ -494,12 +588,12 @@ namespace PickCApi.Areas.Master.Controllers
                         fromMail = "support@pickcargo.in";
                     else if (contactUs.Type == "ContactUs" || contactUs.Type == "Careers")
                         fromMail = "info@pickcargo.in";
-                    bool sendMail = new EmailGenerator().ConfigMail(contactUs.Email,true, contactUs.Subject, contactUs.Message);
+                    bool sendMail = new EmailGenerator().ConfigMail(fromMail, true, contactUs.Subject, contactUs.Message);
 
-                if (sendMail)
-                    return Ok("Mail Sent Successfully!");
-                else
-                    return NotFound();
+                    if (sendMail)
+                        return Ok("Mail Sent Successfully!");
+                    else
+                        return NotFound();
                 }
                 else
                     return NotFound();
@@ -509,7 +603,7 @@ namespace PickCApi.Areas.Master.Controllers
             {
                 return InternalServerError(exception);
             }
-            
+
         }
 
         private string RenderView<T>(string path, T model)
@@ -547,7 +641,6 @@ namespace PickCApi.Areas.Master.Controllers
             }
             return result;
         }
-
     }
 
 }

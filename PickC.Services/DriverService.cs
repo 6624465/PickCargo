@@ -31,6 +31,18 @@ namespace PickC.Services
                 return ServiceResponse<List<Driver>>(client.Execute<List<Driver>>(request));
             });
         }
+        public async Task<List<DriverDetails>> DriverDetailListAsync()
+        {
+            IRestClient client = new RestClient(ApiBaseUrl);
+            var request = p_request;
+            request.Method = Method.GET;
+            request.Resource = "master/driver/DriverDetailList";
+
+            return await Task.Run(() =>
+            {
+                return ServiceResponse<List<DriverDetails>>(client.Execute<List<DriverDetails>>(request));
+            });
+        }
 
         public async Task<string> SaveDriverAsync(Driver driver)
         {

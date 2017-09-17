@@ -55,23 +55,27 @@
         -webkit-animation-fill-mode: both;
         animation-fill-mode: both;
     }
+
     .download-btn {
-   background-color: transparent;
-    border: 0 none;
-    color: #fff;
-    max-width: 200px;
-    position: absolute;
-    right: -10px;
-    top: 26%;
-    z-index: 9;
-}
-    .download-btn img{
-        width:100%;
+        background-color: transparent;
+        border: 0 none;
+        color: #fff;
+        max-width: 200px;
+        position: absolute;
+        right: -10px;
+        top: 26%;
+        z-index: 9;
     }
-    .download-btn:hover,   .download-btn:active,   .download-btn:focus {
-         background-color:transparent;
-           border: 0 none;
-    }
+
+        .download-btn img {
+            width: 100%;
+        }
+
+        .download-btn:hover, .download-btn:active, .download-btn:focus {
+            background-color: transparent;
+            border: 0 none;
+        }
+
     .owl-animated-out {
         z-index: 1;
     }
@@ -261,7 +265,8 @@
                         </div>
                         <div class="form-group">
                             <button onclick="GetRoute()" class="btn btn-default btn-submit btn-md ripple has-ripple" type="button">Get Trip Estimate</button>
-                            <button class="btn btn-default btn-submit btn-md ripple has-ripple" onclick="onClickTripEstimate()"><i class="fa fa-refresh"></i> Clear</button>
+                            <button type="reset" class="btn btn-default btn-submit btn-md ripple has-ripple"><i class="fa fa-refresh"></i> Clear</button>
+                            @*<button class="btn btn-default btn-submit btn-md ripple has-ripple" onclick="onClickTripEstimate()"><i class="fa fa-refresh"></i> Clear</button>*@
                         </div>
                     </div>
                     @Html.HiddenFor(x => x.booking.Latitude)
@@ -294,19 +299,19 @@
                         <img src="~/images/Final-Register-Now.png" />
                     </a>
                     @*<button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
-                    <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
-                    <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
-                    <button type="button"
-                            class="btn btn-default"
-                            ng-click="$ctrl.open('sm', '.modal-parent')">
-                        Modal appended to a custom parent
-                    </button>
-                    <button type="button" class="btn btn-default" ng-click="$ctrl.toggleAnimation()">Toggle Animation ({{ $ctrl.animationsEnabled }})</button>
-                    <button type="button" class="btn btn-default" ng-click="$ctrl.openComponentModal()">Open a component modal!</button>
-                    <button type="button" class="btn btn-default" ng-click="$ctrl.openMultipleModals()">
-                        Open multiple modals at once
-                    </button>*@
-                    
+                        <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
+                        <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="$ctrl.open('sm', '.modal-parent')">
+                            Modal appended to a custom parent
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="$ctrl.toggleAnimation()">Toggle Animation ({{ $ctrl.animationsEnabled }})</button>
+                        <button type="button" class="btn btn-default" ng-click="$ctrl.openComponentModal()">Open a component modal!</button>
+                        <button type="button" class="btn btn-default" ng-click="$ctrl.openMultipleModals()">
+                            Open multiple modals at once
+                        </button>*@
+
                 </div>
 
             </div>
@@ -427,16 +432,16 @@
                     </div>
 
                 </div>
-                </div>
-                </form>
             </div>
+        </form>
+    </div>
 </div>
 
 <div id="DriverDescription" class="modal" style="height: calc(100%);">
     <div class="modal-dialog" style="height: calc(100%);">
         <form id="frmDriverDescription" name="frmDriverDescription" style="height: calc(100%); ">
             <!-- Modal content-->
-            <div class="modal-content" style="height: calc(100%);" >
+            <div class="modal-content" style="height: calc(100%);">
 
                 <div class="modal-body" style="min-height:100px; background:rgba(246,246,246,0.5); padding:0px; height: calc(100%);">
                     <div style="width:100%;height: calc(100% - 100px); background-image:url(../images/DriverDocument.png); background-size:100% 100%; height: calc(100%);">
@@ -447,14 +452,14 @@
                             <img src="~/images/PDFDownloadButton.png" />
                         </a>
                     </div>
-                    </div>
-
                 </div>
+
+            </div>
         </form>
     </div>
 </div>
 @section scripts {
-<script src="@Url.Content("~/js/DriverImage.js")"></script>
+    <script src="@Url.Content("~/js/DriverImage.js")"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7WVBL9AmhKs1QAr4x7mArA2mKZY-9nUo&v=3.exp&libraries=places&sensor=true"></script>
     <script type="text/javascript">
         var source, destination;
@@ -494,7 +499,7 @@
             //        }
             //    });
             //});
-           
+
             $('#frmTripEstimate').validate({
                 rules: {
                     City: {
@@ -611,9 +616,9 @@
             $('#tripEstimateModal').modal('show');
         }
         function onClickTripEstimate() {
-            $('#City').val(0);
-            $('#booking_VehicleType').val(0);
-            $('#booking_VehicleGroup').val(0);
+            $('#City').val("");
+            $('#booking_VehicleType').val("");
+            $('#booking_VehicleGroup').val("");
             $('#booking_LocationFrom').val("");
             $('#booking_LocationTo').val("");
             $('#customer_Name').val("");

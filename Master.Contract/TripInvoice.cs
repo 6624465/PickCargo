@@ -170,11 +170,11 @@ namespace Master.Contract
         //    set;
         //}
 
-        //public string Tax2
-        //{
-        //    get;
-        //    set;
-        //}
+        public string LoadingUnloading
+        {
+            get;
+            set;
+        }
 
         public string PaymentType
         {
@@ -241,6 +241,5 @@ namespace Master.Contract
             get;
             set;
         }
-
     }
 }

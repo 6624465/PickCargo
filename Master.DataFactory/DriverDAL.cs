@@ -34,6 +34,10 @@ namespace Master.DataFactory
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTDRIVER, MapBuilder<Driver>.BuildAllProperties()).ToList();
         }
+        public List<DriverDetails> GetDriversDetailList()
+        {
+            return db.ExecuteSprocAccessor(DBRoutine.DRIVERDETAILLIST, MapBuilder<DriverDetails>.BuildAllProperties()).ToList();
+        }
         public List<Driver> GetOperatorWiseDriverList(string MobileNo)
         {
             return db.ExecuteSprocAccessor(DBRoutine.LISTDRIVEROPERATORWISE, MapBuilder<Driver>.BuildAllProperties(),MobileNo).ToList();
@@ -280,9 +284,9 @@ namespace Master.DataFactory
             if (driverItem == null) return null;
                return driverItem;
         }
-        public DriverEarningPaymentType GetDriverTripAmountbyPaymentType(string DriverID)
+        public List<DriverEarningPaymentType> GetDriverTripAmountbyPaymentType(string DriverID)
         {
-            return db.ExecuteSprocAccessor(DBRoutine.GETDRIVERTRIPAMOUNTBYPAYMENTTYPE, MapBuilder<DriverEarningPaymentType>.MapAllProperties().Build(),DriverID).FirstOrDefault();
+            return db.ExecuteSprocAccessor(DBRoutine.GETDRIVERTRIPAMOUNTBYPAYMENTTYPE,MapBuilder<DriverEarningPaymentType>.MapAllProperties().Build(),DriverID).ToList();
         }
         public List<Driver> GetDriverBySearch(bool? status)
         {
@@ -558,6 +562,18 @@ namespace Master.DataFactory
 
             return (result > 0 ? true : false);
 
+        }
+        public IContract GetDriverTripInvoice<T>(IContract lookupItem) where T : IContract
+        {
+            var item = ((DriverTripInvoice)lookupItem);
+
+            var driverItem = db.ExecuteSprocAccessor(DBRoutine.DRIVERTRIPINVOICE,
+                                                    MapBuilder<DriverTripInvoice>.BuildAllProperties(),
+                                                    item.BookingNo).FirstOrDefault();
+
+            if (driverItem == null) return null;
+
+            return driverItem;
         }
 
     }

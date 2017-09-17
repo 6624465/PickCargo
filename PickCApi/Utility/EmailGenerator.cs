@@ -88,7 +88,7 @@ namespace PickCApi.Utility
             msg.BodyEncoding = UTF8Encoding.UTF8;
             msg.IsBodyHtml = isHtml;
 
-            Attachment att = new Attachment(new MemoryStream(attBytes), "PickInvoice.Pdf");
+            Attachment att = new Attachment(new MemoryStream(attBytes), "PickInvoice.pdf");
             msg.Attachments.Add(att);
 
             return SendMail(msg);

@@ -17,6 +17,10 @@ namespace Master.BusinessFactory
         {
             return driverDAL.GetList();
         }
+        public List<DriverDetails> GetDriversDetailList()
+        {
+            return driverDAL.GetDriversDetailList();
+        }
         public int GetTripCount(string MobileNo)
         {
             return driverDAL.GetTripCount(MobileNo);
@@ -72,7 +76,7 @@ namespace Master.BusinessFactory
         {
             return (Driver)driverDAL.GetItem<Driver>(item);
         }
-        public DriverEarningPaymentType GetDriverTripAmountbyPaymentType(string DriverID)
+        public List<DriverEarningPaymentType> GetDriverTripAmountbyPaymentType(string DriverID)
         {
             return driverDAL.GetDriverTripAmountbyPaymentType(DriverID);
         }
@@ -107,6 +111,10 @@ namespace Master.BusinessFactory
         public bool SaveDriverRating(DriverRating driverRating)
         {
             return driverDAL.SaveDriverRating(driverRating);
+        }
+        public DriverTripInvoice GetDriverTripInvoice(DriverTripInvoice driverTripInvoice)
+        {
+            return (DriverTripInvoice)driverDAL.GetDriverTripInvoice<DriverTripInvoice>(driverTripInvoice);
         }
     }
 }

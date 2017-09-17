@@ -8,7 +8,7 @@ namespace Master.Contract
 {
   public  class DriverEarningPaymentType:IContract
     {
-        public decimal CASH { get; set; }
-        public decimal ONLINE { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string PaymentType { get; set; }
     }
 }

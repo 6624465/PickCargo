@@ -70,7 +70,7 @@ namespace PickCApi.Areas.Operation.Controllers
                         token = token
                     });
                 else
-                return Ok(new { Status = UTILITY.FAILEDMESSAGE });
+                    return Ok(new { Status = UTILITY.FAILEDMESSAGE });
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace PickCApi.Areas.Operation.Controllers
         [HttpGet]
         [Route("checkOTP/{BookingNo}/{OTP}")]
         [ApiAuthFilter]
-        public IHttpActionResult CheckMobile(string BookingNo,string OTP)
+        public IHttpActionResult CheckMobile(string BookingNo, string OTP)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace PickCApi.Areas.Operation.Controllers
                 var bookingList = new BookingBO().GetList();
                 if (bookingList != null)
                 {
-                    result = bookingList.Where(x => x.BookingNo == BookingNo && x.OTP== OTP).ToList().Count() > 0;
+                    result = bookingList.Where(x => x.BookingNo == BookingNo && x.OTP == OTP).ToList().Count() > 0;
                     if (result == true)
                         return Ok(new { Status = UTILITY.SUCCESSMESSAGE });
                     else
@@ -182,17 +182,55 @@ namespace PickCApi.Areas.Operation.Controllers
                 string vehicleattachedNo = OperatorDriverList.Select(s => s.VehicleattachedNo).FirstOrDefault();
                 if (string.IsNullOrWhiteSpace(vehicleattachedNo))
                 {
-                    return Ok(new {Status= UTILITY.FAILEDMESSAGE, Message="Sorry there is No Vehicle attched to your Profile!" });
+                    return Ok(new { Status = UTILITY.FAILEDMESSAGE, Message = "Sorry there is No Vehicle attched to your Profile!" });
                 }
                 else
-                    return Ok(new {Status = UTILITY.SUCCESSMESSAGE });
+                    return Ok(new { Status = UTILITY.SUCCESSMESSAGE });
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
         }
-
+        [HttpGet]
+        [Route("checkDriverPassword/{DriverID}/{password}")]
+        [ApiAuthFilter]
+        public IHttpActionResult CheckPasswordForDriver(string DriverID, string password)
+        {
+            try
+            {
+                var Driver = new DriverBO().GetDriver(new Driver { DriverID = DriverID });
+                string driverPassword = Driver.Password;
+                if (driverPassword != "" && driverPassword == password)
+                {
+                    return Ok(UTILITY.SUCCESSMSG);
+                }
+                else
+                    return Ok(UTILITY.FAILEDMESSAGE);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        [HttpGet]
+        [Route("forgotpassword/{DriverID}")]
+        public IHttpActionResult ForgotpasswordForDriver(string DriverID)
+        {
+            bool result = false;
+            var driver = new DriverBO().GetDriver(new Driver {  DriverID=DriverID });
+            if (driver != null)
+            {
+                result = SendDriverPassword(driver.MobileNo, driver.Password);
+                if (result)
+                {
+                    return Ok("Driver Password Is Sent to Registered MobileNo!");
+                }
+                return Ok(UTILITY.FAILEDMESSAGE);
+            }
+            else
+                return NotFound();
+        }
         /* only for user */
         [HttpPost]
         [Route("user")]
@@ -228,8 +266,8 @@ namespace PickCApi.Areas.Operation.Controllers
                 var bookingObj = new BookingBO().GetBooking(new Booking { BookingNo = BookingNo });
                 if (!bookingObj.IsCancel)
                 {
-                    string CustomerOTP= GenerateOTP();
-                    var result = new BookingBO().BookingConfirmByDriver(HeaderValueByKey("DRIVERID"), HeaderValueByKey("AUTH_TOKEN"), vehicleNo, BookingNo,CustomerOTP);
+                    string CustomerOTP = GenerateOTP();
+                    var result = new BookingBO().BookingConfirmByDriver(HeaderValueByKey("DRIVERID"), HeaderValueByKey("AUTH_TOKEN"), vehicleNo, BookingNo, CustomerOTP);
                     if (result)
                     {
                         PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(BookingNo), BookingNo, UTILITY.NotifySuccess);
@@ -305,8 +343,8 @@ namespace PickCApi.Areas.Operation.Controllers
                     IsOnDuty = true
                 };
                 var result = new DriverActivityBO().UpdateCurrentDriverLocation(updateDriverCurrentLocation);
-                if(result==true)
-                return Ok(new { Status = UTILITY.SUCCESSMESSAGE });
+                if (result)
+                    return Ok(new { Status = UTILITY.SUCCESSMESSAGE });
                 else
                     return Ok(new { Status = UTILITY.FAILEDMESSAGE });
             }

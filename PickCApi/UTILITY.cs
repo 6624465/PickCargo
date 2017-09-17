@@ -23,6 +23,7 @@ namespace PickCApi
         public static string NotifyFailed = "Booking Failed";
         public static string NotifyCancelledByDriver = "Booking Cancelled by driver";//done
         public static string NotifyDriverpaymentReceived = "DriverpaymentReceived";
+        public static string NotifyCustomerPickupStart = "Driver is Started to reach pickup location";
         public static string NotifyTripStart = "Trip Started";//pending
         public static string NotifyTripEnd = "Trip End";//pending
         public static string NotifyInvoiceGenerated = "Invoice Generated";//pending

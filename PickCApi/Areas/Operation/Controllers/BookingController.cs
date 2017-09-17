@@ -39,6 +39,24 @@ namespace PickCApi.Areas.Operation.Controllers
             }
         }
         [HttpGet]
+        [Route("BookingHistoryListbyCustomerMobileNo/{MobileNo}")]
+        public IHttpActionResult BookingHistoryListbyCustomerMobileNo(string MobileNo)
+        {
+            try
+            {
+                var bookingList = new BookingBO().GetBookingHistoryList().Where(x=>x.CustomerID==MobileNo);
+                if (bookingList != null)
+                    return Ok(bookingList);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+        [HttpGet]
         [Route("list/customerbyname/{status?}")]
 
         public IHttpActionResult GetDriverBySearch(int? status)
@@ -101,12 +119,16 @@ namespace PickCApi.Areas.Operation.Controllers
                 var result = new BookingBO().SaveBooking(booking);
                 if (result)
                 {
-                    var driverList = new BookingBO().GetNearTrucksDeviceID(booking.BookingNo, 
-                        UTILITY.radius, 
-                        booking.VehicleType, 
-                        booking.VehicleGroup,
-                        booking.Latitude,
-                        booking.Longitude);//UTILITY.radius
+                    Booking bookings = new BookingBO().GetBooking(new Booking
+                    {
+                        BookingNo = booking.BookingNo
+                    });
+                    var driverList = new BookingBO().GetNearTrucksDeviceID(bookings.BookingNo, 
+                        UTILITY.radius,
+                        bookings.VehicleType,
+                        bookings.VehicleGroup,
+                        bookings.Latitude,
+                        bookings.Longitude);//UTILITY.radius
                     if (driverList.Count > 0)
                     {
                         PushNotification(driverList.Select(x => x.DeviceID).ToList<string>(),
@@ -165,7 +187,8 @@ namespace PickCApi.Areas.Operation.Controllers
                         MobileNo = driverInfo.MobileNo ?? "",
                         latitude = driverActivity.CurrentLat,
                         longitude = driverActivity.CurrentLong,
-                        OTP=booking.OTP
+                        OTP=booking.OTP,
+                        VehicleType=booking.VehicleType
                     });
                 else
                     return NotFound();
@@ -205,10 +228,6 @@ namespace PickCApi.Areas.Operation.Controllers
                 var result = new BookingBO().DeleteBooking(new Booking { BookingNo = deleteBookingDTO.bookingNo });
                 if (result)
                 {
-                    //PushNotification(new BookingBO().GetDriverDeviceIDByBookingNo(deleteBookingDTO.bookingNo),
-                    //    deleteBookingDTO.bookingNo, 
-                    //    UTILITY.NotifyBookingCancelledByUser);
-
                     string GetDriverDeviceIDByBookingNo = new BookingBO().GetDriverDeviceIDByBookingNo(deleteBookingDTO.bookingNo);
                     if (!string.IsNullOrWhiteSpace(GetDriverDeviceIDByBookingNo))
                     {
@@ -389,6 +408,22 @@ namespace PickCApi.Areas.Operation.Controllers
                 return InternalServerError(ex);
             }
         }
-       
+
+        [HttpGet]
+        [Route("PickupTripStartbyBookingNo/{BookingNo}")]
+        public IHttpActionResult PickupTripStartbyTripID(string BookingNo)
+        {
+            try
+            {
+                PushNotification(new BookingBO().GetCustomerDeviceIDByBookingNo(BookingNo),
+                       BookingNo,
+                       UTILITY.NotifyCustomerPickupStart);
+                return Ok(UTILITY.NotifyCustomerPickupStart);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
 }

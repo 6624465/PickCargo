@@ -159,13 +159,14 @@ namespace Operation.DataFactory
             {
 
                 var savecommand = db.GetStoredProcCommand(DBRoutine.UPDATEDRIVERCURRENTLOCATIONVALUES);
-                db.AddInParameter(savecommand, "AUTH_TOKEN", System.Data.DbType.String, updateDriverCurrentLocation.AUTH_TOKEN);
+              
                 db.AddInParameter(savecommand, "DriverID", System.Data.DbType.String, updateDriverCurrentLocation.DriverID);
-                db.AddInParameter(savecommand, "IsLogIn", System.Data.DbType.Boolean, updateDriverCurrentLocation.IsLogIn);
-                db.AddInParameter(savecommand, "IsOnDuty", System.Data.DbType.Boolean, updateDriverCurrentLocation.IsOnDuty);
+                db.AddInParameter(savecommand, "AUTH_TOKEN", System.Data.DbType.String, updateDriverCurrentLocation.AUTH_TOKEN);
                 db.AddInParameter(savecommand, "CurrentLatitude", System.Data.DbType.String, updateDriverCurrentLocation.CurrentLatitude);
                 db.AddInParameter(savecommand, "CurrentLongitude", System.Data.DbType.String, updateDriverCurrentLocation.CurrentLongitude);
-
+                db.AddInParameter(savecommand, "IsLogIn", System.Data.DbType.Boolean, updateDriverCurrentLocation.IsLogIn);
+                db.AddInParameter(savecommand, "IsOnDuty", System.Data.DbType.Boolean, updateDriverCurrentLocation.IsOnDuty);
+                
                     result = db.ExecuteNonQuery(savecommand, transaction);
 
                 if (currentTransaction == null)

@@ -283,6 +283,18 @@ namespace Master.DataFactory
 
             return customerItem;
         }
+        public IContract GetCompanyTripInvoice<T>(IContract lookupItem) where T : IContract
+        {
+            var item = ((CompanyTripInvoice)lookupItem);
+
+            var customerItem = db.ExecuteSprocAccessor(DBRoutine.COMPANYTRIPINVOICE,
+                                                    MapBuilder<CompanyTripInvoice>.BuildAllProperties(),
+                                                    item.BookingNo).FirstOrDefault();
+
+            if (customerItem == null) return null;
+
+            return customerItem;
+        }
         public IEnumerable<TripEstimateForCustomer> GetTripEstimateForCustomer(int VehicleType, int VehicleGroup, decimal distance, int LdUdCharges, decimal duration)
         {
             return db.ExecuteSprocAccessor(DBRoutine.TRIPESTIMATEFORCUSTOMER, MapBuilder<TripEstimateForCustomer>.BuildAllProperties(), VehicleType, VehicleGroup, distance, LdUdCharges, duration).ToList();
