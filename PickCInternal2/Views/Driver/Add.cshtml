@@ -332,7 +332,10 @@
     <script src="@Url.Content("~/Scripts/Internal/DriverAddress.js")"></script>
     <script type="text/javascript">
         $(function () {
-            $('#driver.DateOfBirth').val('');
+             @if(Model.driver.DriverID==null)
+             {
+                 <text>  $('#driver_DateOfBirth').val('');</text>
+             }          
             $('#frmDriverAdd').validate({
                 rules: {
                     'driver.DriverName': {

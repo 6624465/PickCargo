@@ -73,7 +73,10 @@ namespace PickCApi.Areas.Master.Controllers
             try
             {
                 var result = new OperatorDriverBO().UpdateOperatorDriverTruckAttachment(operatorDriverTruckAttachment);
-                return Ok(result);
+                if (result == true)
+                    return Ok(new { Status = UTILITY.SUCCESSMESSAGE });
+                else
+                    return Ok(new { Status = UTILITY.FAILEDMESSAGE });
             }
             catch (Exception ex)
             {

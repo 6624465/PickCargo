@@ -71,7 +71,7 @@ namespace Operation.DataFactory
                 db.AddInParameter(savecommand, "PaidAmount", System.Data.DbType.Decimal, invoice.PaidAmount);
                 db.AddInParameter(savecommand, "IsMailSent", System.Data.DbType.Boolean, invoice.IsMailSent);
                 db.AddOutParameter(savecommand, "NewInvoiceNo", System.Data.DbType.String, 50);
-                
+
 
                 result = db.ExecuteNonQuery(savecommand, transaction);
 

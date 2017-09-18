@@ -158,19 +158,19 @@ namespace Master.Contract
             set;
         }
 
-        public string SalesTax
+        public string GSTTax
         {
             get;
             set;
         }
 
-        public string Tax1
-        {
-            get;
-            set;
-        }
+        //public string Tax1
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string Tax2
+        public string LoadingUnloading
         {
             get;
             set;
@@ -241,6 +241,5 @@ namespace Master.Contract
             get;
             set;
         }
-
     }
 }

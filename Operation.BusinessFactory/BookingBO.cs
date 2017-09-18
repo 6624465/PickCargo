@@ -17,6 +17,10 @@ namespace Operation.BusinessFactory
         {
             return bookingDAL.GetList();
         }
+        public List<BookingHistoryList> GetBookingHistoryList()
+        {
+            return bookingDAL.GetBookingHistoryList();
+        }
         public List<Booking> GetCustomerBySearch(int? status)
         {
             return (List<Booking>)bookingDAL.GetCustomerBySearch(status);
@@ -56,14 +60,14 @@ namespace Operation.BusinessFactory
             return bookingDAL.GetTrucksInRange(CustomerID, latitude, longitude, minDistance, vehicleGroup, vehicleType);
         }
 
-        public bool BookingCancelledByDriver(string tokenNo, string driverID, string vehicleNo, string bookingNo, string cancelRemarks, bool istripstarted)
+        public bool BookingCancelledByDriver(string tokenNo, string driverID, string vehicleNo, string bookingNo, string cancelRemarks, bool istripstarted,bool IsLoadingUnloading)
         {
-            return bookingDAL.BookingCancelledByDriver(tokenNo, driverID, vehicleNo, bookingNo, cancelRemarks, istripstarted);
+            return bookingDAL.BookingCancelledByDriver(tokenNo, driverID, vehicleNo, bookingNo, cancelRemarks, istripstarted, IsLoadingUnloading);
         }
 
-        public bool BookingConfirmByDriver(string driverID, string tokenNo, string vehicleNo, string bookingNo)
+        public bool BookingConfirmByDriver(string driverID, string tokenNo, string vehicleNo, string bookingNo,string CustomerOTP)
         {
-            return bookingDAL.BookingConfirmByDriver(driverID, tokenNo, vehicleNo, bookingNo);
+            return bookingDAL.BookingConfirmByDriver(driverID, tokenNo, vehicleNo, bookingNo, CustomerOTP);
         }
 
         public string GetCustomerDeviceIDByBookingNo(string bookingNo)

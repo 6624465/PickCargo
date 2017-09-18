@@ -87,7 +87,7 @@ namespace Operation.Contract
 
         public string LoadingUnLoadingDescription { get; set; }
 
-
+        public string OTP { get; set; }
     }
 }
 

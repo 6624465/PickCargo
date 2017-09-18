@@ -33,7 +33,23 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
         }
-
+        [HttpGet]
+        [Route("{VehicleType}/{VehicleCategory}")]
+        public IHttpActionResult GetRateCardValues(Int16 VehicleType, Int16 VehicleCategory)
+        {
+            try
+            {
+                var rateCardList = new RateCardBO().GetList().Where(x=>x.VehicleType== VehicleType && x.Category== VehicleCategory && x.RateType==1350);
+                if (rateCardList != null)
+                    return Ok(rateCardList);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
         [HttpPost]
         [ApiAuthFilter]
         [Route("save")]

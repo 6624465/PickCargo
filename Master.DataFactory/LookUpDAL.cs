@@ -33,9 +33,9 @@ namespace Master.DataFactory
             return db.ExecuteSprocAccessor(DBRoutine.VEHICLEGROUPLIST, MapBuilder<LookUp>.BuildAllProperties()).ToList();
         }
 
-        public List<LookUp> GetCargoTypeList()
+        public List<CargoTypeList> GetCargoTypeList()
         {
-            return db.ExecuteSprocAccessor(DBRoutine.CARGOTYPELIST, MapBuilder<LookUp>.BuildAllProperties()).ToList();
+            return db.ExecuteSprocAccessor(DBRoutine.CARGOTYPELIST, MapBuilder<CargoTypeList>.BuildAllProperties()).ToList();
         }
 
         public List<LookUp> GetLoadingUnLoadingList()

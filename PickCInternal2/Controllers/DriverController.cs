@@ -20,7 +20,7 @@ namespace PickC.Internal2.Controllers
         [HttpGet]
         public async Task<ActionResult> Driver()
         {
-            var driverList = await new DriverService(AUTHTOKEN, p_mobileNo).DriversListAsync();
+            var driverList = await new DriverService(AUTHTOKEN, p_mobileNo).DriverDetailListAsync();
             return View(driverList);
         }
 
@@ -35,13 +35,6 @@ namespace PickC.Internal2.Controllers
 
             return View(driverVm);
         }
-        [HttpGet]
-        public async Task<ActionResult> TotalDriverList()
-        {
-            var driverList = await new DriverService(AUTHTOKEN, p_mobileNo).DriversListAsync();
-            return View(driverList);
-        }
-
         [HttpGet]
         public async Task<ActionResult> Edit(string driverID)
         {

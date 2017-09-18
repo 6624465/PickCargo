@@ -58,7 +58,14 @@ namespace Master.BusinessFactory
         {
             return (TripInvoice)customerDAL.GetTripInvoice<TripInvoice>(tripInvoice);
         }
-
+        public CompanyTripInvoice GetCompanyTripInvoiceList(CompanyTripInvoice companyTripInvoice)
+        {
+            return (CompanyTripInvoice)customerDAL.GetCompanyTripInvoice<CompanyTripInvoice>(companyTripInvoice);
+        }
+        public IEnumerable<TripEstimateForCustomer> GetTripEstimateForCustomer(int VehicleType, int VehicleGroup, decimal distance, int LdUdCharges, decimal duration)
+        {
+            return customerDAL.GetTripEstimateForCustomer(VehicleType, VehicleGroup, distance, LdUdCharges, duration);
+        }
         public bool SaveCustomer(ContactUs contactUs)
         {
 

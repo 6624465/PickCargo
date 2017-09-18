@@ -38,9 +38,5 @@ namespace Operation.BusinessFactory
         {
             return (Invoice)invoiceDAL.GetInvoiceByBookingNo(bookingNo);
         }
-
-
-        
-
     }
 }

@@ -17,6 +17,10 @@ namespace Operation.BusinessFactory
         {
             return driveractivityDAL.GetList();
         }
+        public DriverMonitorInCustomer GetDriverMonitorInCustomer(DriverMonitorInCustomer item)
+        {
+            return (DriverMonitorInCustomer)driveractivityDAL.GetDriverMonitorInCustomer<DriverMonitorInCustomer>(item);
+        }
 
         public bool AuthenticateDriver(DriverActivity item)
         {

@@ -53,7 +53,7 @@ namespace Operation.DataFactory
 
         public const string SAVEPICKUPREACHDATETIME = "[Operation].[usp_SavePickupReachDateTime]";
         public const string SAVEDESTINATIONREACHDATETIME = "[Operation].[usp_SaveDestinationReachDateTime]";
-
+        public const string BOOKINGHISTORYLIST = "[Operation].[usp_BookingHistoryList]";
         public const string LISTOFBOOKINGHISTORYLISTBYMOBILENO = "[Operation].[usp_BookingHistoryListByMobileNo]";
 
         /// <summary>
@@ -80,6 +80,7 @@ namespace Operation.DataFactory
         public const string AUTHENTICATEUSER = "[Operation].[usp_AUTHENTICATE_USER]";
         public const string CUSTOMERLOGIN = "[Operation].[usp_DoCustomerLogIn]";
 
+        public const string SELECTDRIVERMONITORINCUSTOMER = "[Operation].[usp_DriverMonitorInCustomer]";
         /// <summary>
         /// [Operation].[OperatorLogin]
         /// </summary>

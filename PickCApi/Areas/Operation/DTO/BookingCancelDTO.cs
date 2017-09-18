@@ -12,5 +12,6 @@ namespace PickCApi.Areas.Operation.DTO
         public string bookingNo { get; set; }
         public string cancelRemarks { get; set; }
         public bool istripstarted { get; set; }
+        public bool IsLoadingUnloading { get; set; } 
     }
 }

@@ -41,18 +41,25 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="BankDetails.cs" />
+    <Compile Include="CargoTypeList.cs" />
+    <Compile Include="CompanyTripInvoice.cs" />
     <Compile Include="ContactUs.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerBillDetails.cs" />
     <Compile Include="CustomerPassword.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="DriverDetails.cs" />
     <Compile Include="DriverEarningPaymentType.cs" />
     <Compile Include="DriverImageRegister.cs" />
+    <Compile Include="DriverInvoice.cs" />
     <Compile Include="DriverPassword.cs" />
     <Compile Include="DriverRating.cs" />
     <Compile Include="DriverReferral.cs" />
     <Compile Include="DriverTodayTripList.cs" />
+    <Compile Include="DriverTripInvoice.cs" />
     <Compile Include="IContract.cs" />
+    <Compile Include="InvoiceDTO.cs" />
+    <Compile Include="Invoices.cs" />
     <Compile Include="LookUp.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="OperatorAttachment.cs" />
@@ -77,6 +84,8 @@
     <Compile Include="TripCount.cs" />
     <Compile Include="TripCountandEarnings.cs" />
     <Compile Include="TripCountList.cs" />
+    <Compile Include="TripEstimate.cs" />
+    <Compile Include="TripEstimateForCustomer.cs" />
     <Compile Include="TripInvoice.cs" />
     <Compile Include="TruckList.cs" />
     <Compile Include="VehicleCategory.cs" />

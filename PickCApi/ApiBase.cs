@@ -147,7 +147,10 @@ namespace PickCApi
             }
             return password;
         }
-
+        public bool SendDriverPassword(string To,string Password)
+        {
+            return new smsGenerator().ConfigSms(To, Password,"PickC Administrator");
+        }
         public bool SendOTP(string To, string OTP)
         {
             return new smsGenerator().ConfigSms(To, string.Format(UTILITY.SmsOTP, OTP));

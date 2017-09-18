@@ -42,8 +42,10 @@
     <Compile Include="Booking.cs" />
     <Compile Include="BookingHistory.cs" />
     <Compile Include="BookingHistoryDetails.cs" />
+    <Compile Include="BookingHistoryList.cs" />
     <Compile Include="CustomerLogin.cs" />
     <Compile Include="DriverActivity.cs" />
+    <Compile Include="DriverMonitorInCustomer.cs" />
     <Compile Include="DriverPayments.cs" />
     <Compile Include="IContract.cs" />
     <Compile Include="Invoice.cs" />

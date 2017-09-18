@@ -760,7 +760,7 @@ new { @class = "form-control" })
 
                     if (vehicles.length > 0) {
                         $.each(vehicles, function (index, item) {
-                            //OPerator_OperatorVehicle_-1__VehicleRegistrationNo 
+                            //OPerator_OperatorVehicle_-1__VehicleRegistrationNo
                             var vehicle = $('#OPerator_OperatorVehicle_' + index + '__VehicleRegistrationNo').val();
                             newVehicleArr.push(vehicle);
                         });
@@ -773,9 +773,9 @@ new { @class = "form-control" })
 
 
                 }
-        //function DeleteBankDetails(index) {
-        //    $('#trRow_Bank_' + index).remove();
-        //}
+                //function DeleteBankDetails(index) {
+                //    $('#trRow_Bank_' + index).remove();
+                //}
                 function bankDetails() {
                     $('#bankDetailsModal').modal('show');
                 }
@@ -843,8 +843,11 @@ new { @class = "form-control" })
                         }
                     });
                 }
-
                 $(function () {
+                    @if(Model.OPerator.OperatorID==null)
+                    {
+                        <text> $('#OPerator_DateOfBirth').val('');</text>
+                    }
                     $('#frmOperatorAdd').validate({
                         rules: {
                             'OPerator.OPeratorID': {
@@ -907,12 +910,12 @@ new { @class = "form-control" })
                         contentType: 'application/json',
                         success: function (data) {
                             $('#operatorVehicle_Model').removeAttr("disabled");
-                                $("#operatorVehicle_Model").html(""); // clear before appending new list 
-                                $("<option value='-1'>Select item</option>").appendTo("#operatorVehicle_Model");
-                                $.each(data, function (i, val) {
-                                    $("#operatorVehicle_Model").append(
-                                        $('<option></option>').val(val.Text).html(val.Value));
-                                });
+                            $("#operatorVehicle_Model").html(""); // clear before appending new list
+                            $("<option value='-1'>Select item</option>").appendTo("#operatorVehicle_Model");
+                            $.each(data, function (i, val) {
+                                $("#operatorVehicle_Model").append(
+                                    $('<option></option>').val(val.Text).html(val.Value));
+                            });
                         },
                         error: function (err) {
 

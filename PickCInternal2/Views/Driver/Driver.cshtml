@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Master.Contract.Driver>
+﻿@model IEnumerable<Master.Contract.DriverDetails>
 @using PickC.Internal2.HtmlHelpers
 @{
     ViewBag.Title = "Driver";
@@ -31,31 +31,33 @@
                             </div>
                         </div>
                     </div>
-                </div>               
-
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @grid.Table(
-                            tableStyle: "table table-hover",
-                            columns: grid.Columns(
-                                grid.Column("DriverID", "ID"),
-                                grid.Column("DriverName", "Name"),
-                                grid.Column("VehicleNo", "VehicleNo"),
-                                grid.Column("VehicleNo", "#Action", format: @<text><a href="@Url.Content("~/driver/edit?driverID=" + item.DriverID)">@item.DriverName</a></text>)
-                            ),
-                            htmlAttributes: new { id = "grid" })
-                        </div>
-                    </div>  
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="pull-right">@grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-sm")</div>
-                        </div>
-                    </div>                  
                 </div>
+                @if (Model != null)
+                {
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @grid.Table(
+         tableStyle: "table table-hover",
+         columns: grid.Columns(
+             grid.Column("DriverID", "ID"),
+             grid.Column("DriverName", "Name"),
+             //grid.Column("VehicleNo", "VehicleNo"),
+             grid.Column("DriverID", "#Action", format: @<text><a href="@Url.Content("~/driver/edit?driverID=" + item.DriverID)">@item.DriverName</a></text>)
+         ),
+         htmlAttributes: new { id = "grid" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="pull-right">@grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination pagination-sm")</div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
-    
+
 </section>
 

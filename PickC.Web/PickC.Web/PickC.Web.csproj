@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,22 +61,21 @@
       <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -101,7 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="companyinvoice.html" />
+    <Content Include="Views\Help\companyinvoice.html" />
     <Content Include="css\AdminLTE.min.css" />
     <Content Include="css\AjaxLoader.html" />
     <Content Include="css\animate.css" />
@@ -196,7 +196,7 @@
     <Content Include="css\revolution-slider.css" />
     <Content Include="css\ripple.css" />
     <Content Include="css\style.css" />
-    <Content Include="driverinvoice.html" />
+    <Content Include="Views\Help\driverinvoice.html" />
     <Content Include="fonts\fontawesome-webfont93e3.html" />
     <Content Include="fonts\fontawesome-webfont93e3.svg" />
     <Content Include="fonts\glyphicons-halflings-regular-2.html" />

@@ -25,7 +25,6 @@ namespace PickCApi.Areas.Master.Controllers
             try
             {
                 var driverList = new DriverBO().GetList();
-
                 if (driverList != null)
                     return Ok(driverList);
                 else
@@ -36,7 +35,23 @@ namespace PickCApi.Areas.Master.Controllers
                 return InternalServerError(ex);
             }
         }
-
+        [HttpGet]
+        [Route("DriverDetailList")]
+        public IHttpActionResult DriverDetailList()
+        {
+            try
+            {
+                var driverList = new DriverBO().GetDriversDetailList();
+                if (driverList != null)
+                    return Ok(driverList);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
         [HttpPost]
         [Route("save")]
         public IHttpActionResult SaveDriver(Driver driver)

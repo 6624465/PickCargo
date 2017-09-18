@@ -58,7 +58,7 @@ namespace Master.DataFactory
                 var savecommand = db.GetStoredProcCommand(DBRoutine.SAVEOPERATOR);
                 db.AddInParameter(savecommand, "OperatorID", System.Data.DbType.String, OPerator.OperatorID ?? "");
                 db.AddInParameter(savecommand, "OperatorName", System.Data.DbType.String, OPerator.OperatorName);
-                db.AddInParameter(savecommand, "Password", System.Data.DbType.String, OPerator.Password ?? "pickcoperator");
+                db.AddInParameter(savecommand, "Password", System.Data.DbType.String, OPerator.Password);
                 db.AddInParameter(savecommand, "FatherName", System.Data.DbType.String, OPerator.FatherName);
                 db.AddInParameter(savecommand, "DateOfBirth", System.Data.DbType.DateTime, OPerator.DateOfBirth);
                 db.AddInParameter(savecommand, "PlaceOfBirth", System.Data.DbType.String, OPerator.PlaceOfBirth);
@@ -303,7 +303,7 @@ namespace Master.DataFactory
 
             return result;
         }
-        public bool DeductOperatorwisedrivervehicleattachedlist<T>(T item) where T : IContract
+        public bool DetachOperatorwisedrivervehicleattachedlist<T>(T item) where T : IContract
         {
             var result = false;
             var operatorWiseDriverVehicleAttachedTodayList = (OperatorWiseDriverVehicleAttachedTodayList)(object)item;
@@ -316,10 +316,11 @@ namespace Master.DataFactory
 
             try
             {
-                var deleteCommand = db.GetStoredProcCommand(DBRoutine.DEDUCTOPERATORWISEDRIVERVEHICLEATTACHEDLIST);
+                var deleteCommand = db.GetStoredProcCommand(DBRoutine.DETACHOPERATORWISEDRIVERVEHICLEATTACHEDLIST);
                 db.AddInParameter(deleteCommand, "DriverName", System.Data.DbType.String, operatorWiseDriverVehicleAttachedTodayList.DriverName);
                 db.AddInParameter(deleteCommand, "VehicleattachedNo", System.Data.DbType.String, operatorWiseDriverVehicleAttachedTodayList.VehicleattachedNo);
                 db.AddInParameter(deleteCommand, "OperatorMobileNo", System.Data.DbType.String, operatorWiseDriverVehicleAttachedTodayList.OperatorMobileNo);
+                db.AddInParameter(deleteCommand, "DriverMobileNo", System.Data.DbType.String, operatorWiseDriverVehicleAttachedTodayList.DriverMobileNo);
                 result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
                 transaction.Commit();
 

@@ -372,17 +372,17 @@ namespace PickCApi.Areas.Master.Controllers
             }
         }
         [HttpPost]
-        [Route("DeductOperatorwisedrivervehicleattachedlist")]
+        [Route("DetachOperatorwisedrivervehicleattachedlist")]
         [OperatorAPIAuthFilter]
-        public IHttpActionResult DeductOperatorwisedrivervehicleattachedlist(OperatorWiseDriverVehicleAttachedTodayList operatorWiseDriverVehicleAttachedTodayList)
+        public IHttpActionResult DetachOperatorwisedrivervehicleattachedlist(OperatorWiseDriverVehicleAttachedTodayList operatorWiseDriverVehicleAttachedTodayList)
         {
             try
             {
-                var result = new OperatorBO().DeductOperatorwisedrivervehicleattachedlist(operatorWiseDriverVehicleAttachedTodayList);
-                if (result)
+                var result = new OperatorBO().DetachOperatorwisedrivervehicleattachedlist(operatorWiseDriverVehicleAttachedTodayList);
+                if (result==true)
                     return Ok(new { Status = UTILITY.SUCCESSMESSAGE});
                 else
-                    return NotFound();
+                    return Ok(new { Status = UTILITY.FAILEDMESSAGE });
             }
             catch (Exception ex)
             {

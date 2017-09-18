@@ -17,10 +17,13 @@ namespace PickCApi
         public static string DEFAULTUSER = "ADMIN";
         public static string FAILEDMSG = "Operation failed";
 
+        public static string NotifyCustomer = "Booking Cancelled by System";
+        public static string NotifyCustomerFail = "Booking Cancelled by System is Failed";
         public static string NotifySuccess = "Booking Confirmed";//done
         public static string NotifyFailed = "Booking Failed";
         public static string NotifyCancelledByDriver = "Booking Cancelled by driver";//done
         public static string NotifyDriverpaymentReceived = "DriverpaymentReceived";
+        public static string NotifyCustomerPickupStart = "Driver is Started to reach pickup location";
         public static string NotifyTripStart = "Trip Started";//pending
         public static string NotifyTripEnd = "Trip End";//pending
         public static string NotifyInvoiceGenerated = "Invoice Generated";//pending

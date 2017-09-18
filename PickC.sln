@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Master.BusinessFactory", "Master.BusinessFactory\Master.BusinessFactory.csproj", "{BA43B622-97B8-4856-AA07-7B138F46CB58}"
 EndProject
